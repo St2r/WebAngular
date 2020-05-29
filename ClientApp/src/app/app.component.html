@@ -29,7 +29,7 @@
       </div>
       <div nz-col class="gutter-row" nzSpan="4"></div>
       <div nz-col class="gutter-row" nzSpan="1">
-        <nz-avatar nzIcon="user" [nzSrc]="userIcon()">
+        <nz-avatar nz-popover [nzPopoverContent]="contentTemplate" nzIcon="user" [nzSrc]="userIcon()">
         </nz-avatar>
       </div>
       <div nz-col class="gutter-row" nzSpan="3">
@@ -51,3 +51,29 @@
   </nz-content>
   <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
 </nz-layout>
+
+<ng-template #contentTemplate>
+<!--  <div>-->
+<!--    <nz-rate [ngModel]="2" nzDisabled></nz-rate>-->
+<!--    <a>个人中心</a>-->
+<!--    <a>退出登陆</a>-->
+<!--  </div>-->
+  <nz-list>
+    <nz-list-item>
+      <p class="pop-list-item">你好，李昂</p>
+    </nz-list-item>
+    <nz-list-item>
+      <nz-button-group>
+        <button nz-button nzType="link">关注<p>10</p></button>
+        <button nz-button nzType="link">粉丝<p>1w+</p></button>
+        <button nz-button nzType="link">文章<p>3</p></button>
+      </nz-button-group>
+    </nz-list-item>
+    <nz-list-item>
+      <button nz-button nzType="link" class="pop-list-item">个人主页</button>
+    </nz-list-item>
+    <nz-list-item>
+      <button nz-button nzType="link" class="pop-list-item">退出登陆</button>
+    </nz-list-item>
+  </nz-list>
+</ng-template>

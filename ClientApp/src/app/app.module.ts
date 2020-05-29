@@ -20,8 +20,8 @@ import {
   NzBreadCrumbModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
-  NzInputModule,
-  NzPageHeaderModule, NzRateModule,
+  NzInputModule, NzListModule,
+  NzPageHeaderModule, NzPopoverModule, NzRateModule,
   NzToolTipModule,
   NzTypographyModule
 } from 'ng-zorro-antd';
@@ -63,7 +63,9 @@ import { ViewArticleComponent } from './pages/view-article/view-article.componen
     NzFormModule,
     ReactiveFormsModule,
     NzRateModule,
-    NzAvatarModule
+    NzAvatarModule,
+    NzPopoverModule,
+    NzListModule
   ],
   exports: [],
   providers: [],

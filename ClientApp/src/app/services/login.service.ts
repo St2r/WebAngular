@@ -51,6 +51,10 @@ export class LoginService {
     //   result => imgUrl = result, error => console.log(error));
     return '//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
   }
+
+  public getUserName(): string {
+    return '李昂';
+  }
 }
 
 interface LogModel {

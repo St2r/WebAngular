@@ -50,6 +50,10 @@ nz-footer {
   height: 64px;
 }
 
-.search-bar{
+.search-bar {
   margin: 16px;
+}
+
+.pop-list-item {
+  margin: 0 auto;
 }
