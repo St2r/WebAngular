@@ -1,0 +1,32 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="save()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Title</nz-form-label>
+    <nz-form-control [nzSpan]="6">
+      <input nz-input>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">Tags</nz-form-label>
+    <nz-form-control [nzSpan]="6">
+      <input nz-input>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div nz-row nzJustify="center">
+  <div nz-col nzSpan="20" nzOffset="2">
+<editor
+  apiKey="pzsbp1xb6j13dd4aduwebi7815hzj1upr7v42ojpcbc8c7pu"
+  [init]="editParam"
+  [(ngModel)]="content"
+>Loading...
+</editor>
+  </div>
+</div>
+
+<div [innerHTML]="content"></div>
+
+<div [innerText]="content"></div>
+
+<button nz-button nzType="primary">Save</button>

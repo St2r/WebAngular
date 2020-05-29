@@ -1,0 +1,53 @@
+<nz-layout class="layout">
+  <nz-header class="header">
+    <div nz-row nzGutter="16" class="header">
+      <div nz-col class="gutter-row" nzSpan="1">
+        <div class="logo">
+          <img src="favicon.ico"/>
+        </div>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="7">
+        <ul nz-menu nzTheme="light" nzMode="horizontal">
+          <li nz-menu-item>
+            <span>主页</span>
+            <a routerLink="/home"></a>
+          </li>
+          <li nz-menu-item>校园周边</li>
+          <li nz-menu-item nzMatchRouter>
+            <span>fetch-data</span>
+            <a routerLink="/fetch-data"></a>
+          </li>
+        </ul>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="8">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" class="search-bar">
+          <input nz-input type="text" [(ngModel)]="searchContent" placeholder="search something"/>
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+          <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="4"></div>
+      <div nz-col class="gutter-row" nzSpan="1">
+        <nz-avatar nzIcon="user" [nzSrc]="userIcon()">
+        </nz-avatar>
+      </div>
+      <div nz-col class="gutter-row" nzSpan="3">
+        <div nz-button nzType="primary" nzBlock="true" (click)="buttonPost()">登陆等其他组件</div>
+      </div>
+    </div>
+  </nz-header>
+
+  <nz-content>
+<!--    导航条功能还没有实现-->
+    <!--    <nz-breadcrumb>-->
+    <!--      <nz-breadcrumb-item>Home</nz-breadcrumb-item>-->
+    <!--      <nz-breadcrumb-item>List</nz-breadcrumb-item>-->
+    <!--      <nz-breadcrumb-item>App</nz-breadcrumb-item>-->
+    <!--    </nz-breadcrumb>-->
+    <div class="inner-content">
+      <router-outlet></router-outlet>
+    </div>
+  </nz-content>
+  <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+</nz-layout>
