@@ -233,3 +233,6 @@ _Pvt_Extensions
 /.vscode/
 /ClientApp/.idea/
 /ClientApp/.idea/
+
+/.DS_Store
+/ClientApp/.DS_Store
