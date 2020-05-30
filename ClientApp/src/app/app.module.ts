@@ -17,7 +17,7 @@ import { IconsProviderModule } from './modules/icons-provider.module';
 import {AntDesignModule} from './modules/ant-design.module';
 import {
   NzAvatarModule,
-  NzBreadCrumbModule,
+  NzBreadCrumbModule, NzCommentModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
   NzInputModule, NzListModule,
@@ -29,6 +29,8 @@ import {
 import {EditorModule} from '@tinymce/tinymce-angular';
 import { EditPassageComponent } from './pages/edit-passage/edit-passage.component';
 import { ViewArticleComponent } from './pages/view-article/view-article.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { PersonPageComponent } from './pages/person-page/person-page.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ViewArticleComponent } from './pages/view-article/view-article.componen
     CounterComponent,
     FetchDataComponent,
     EditPassageComponent,
-    ViewArticleComponent
+    ViewArticleComponent,
+    CommentComponent,
+    PersonPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -65,7 +69,8 @@ import { ViewArticleComponent } from './pages/view-article/view-article.componen
     NzRateModule,
     NzAvatarModule,
     NzPopoverModule,
-    NzListModule
+    NzListModule,
+    NzCommentModule
   ],
   exports: [],
   providers: [],

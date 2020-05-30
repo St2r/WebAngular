@@ -1,4 +1,4 @@
-<div nz-row nzJustify="center">
+<div nz-row nzJustify="center" class="header-box">
   <div nz-col nzSpan="12" class="title">
     <h1>标题：{{article.Title}}</h1>
   </div>
@@ -8,8 +8,9 @@
   </div>
 </div>
 
-<div [innerHTML]="article.Content">
-
+<div class="article-box" [innerHTML]="article.Content">
 </div>
 
-<nz-rate [ngModel]="5" nzDisabled></nz-rate>
+<div class="comments-box">
+  <app-comment [articleId]="123" [comments]="comments"></app-comment>
+</div>
