@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {LoginService} from './services/login.service';
 
 @Component({
@@ -19,5 +19,9 @@ export class AppComponent {
 
   userIcon(): string {
     return this.loginService.getUserImage();
+  }
+
+  toSpace() {
+
   }
 }

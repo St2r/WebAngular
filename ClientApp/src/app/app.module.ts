@@ -16,8 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './modules/icons-provider.module';
 import {AntDesignModule} from './modules/ant-design.module';
 import {
-  NzAvatarModule,
-  NzBreadCrumbModule, NzCommentModule,
+  NzAvatarModule, NzBadgeModule,
+  NzBreadCrumbModule, NzCommentModule, NzDescriptionsModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
   NzInputModule, NzListModule,
@@ -27,10 +27,16 @@ import {
 } from 'ng-zorro-antd';
 
 import {EditorModule} from '@tinymce/tinymce-angular';
-import { EditPassageComponent } from './pages/edit-passage/edit-passage.component';
+import { EditArticleComponent } from './pages/edit-article/edit-article.component';
 import { ViewArticleComponent } from './pages/view-article/view-article.component';
 import { CommentComponent } from './components/comment/comment.component';
-import { PersonPageComponent } from './pages/person-page/person-page.component';
+import { SpaceComponent } from './pages/space/space.component';
+import { FansComponent } from './pages/space/fans/fans.component';
+import { FansFansComponent } from './pages/space/fans/fans-fans/fans-fans.component';
+import { FansFollowsComponent } from './pages/space/fans/fans-follows/fans-follows.component';
+import { FallbackComponent } from './pages/fallback/fallback.component';
+import { PersonPageComponent } from './pages/space/person-page/person-page.component';
+import { ExerciseComponent } from './pages/exercise/exercise.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +44,17 @@ import { PersonPageComponent } from './pages/person-page/person-page.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    EditPassageComponent,
+    EditArticleComponent,
     ViewArticleComponent,
     CommentComponent,
-    PersonPageComponent
+    EditArticleComponent,
+    SpaceComponent,
+    FansComponent,
+    FansFansComponent,
+    FansFollowsComponent,
+    FallbackComponent,
+    PersonPageComponent,
+    ExerciseComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -70,7 +83,9 @@ import { PersonPageComponent } from './pages/person-page/person-page.component';
     NzAvatarModule,
     NzPopoverModule,
     NzListModule,
-    NzCommentModule
+    NzCommentModule,
+    NzDescriptionsModule,
+    NzBadgeModule
   ],
   exports: [],
   providers: [],

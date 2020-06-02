@@ -30,7 +30,9 @@ export class ViewArticleComponent implements OnInit {
 // 模拟从后端收到的文章
     this.article = new class implements Article {
       Author = '李昂';
-      Content = '<h1>TestH1</h1><p>TestP</p>';
+      Content = '<pre class="language-css"><code>.main {\n' +
+        'margin 0;\n' +
+        '}</code></pre>';
       Tag = ['测试', '标签'];
       Title = '标签测试';
     };

@@ -8,7 +8,14 @@
   </div>
 </div>
 
-<div class="article-box" [innerHTML]="article.Content">
+<nz-descriptions nzBordered nzColumn="1" nzLayout="horizontal">
+  <nz-descriptions-item nzTitle="标题">{{article.Title}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="作者">{{article.Author}}</nz-descriptions-item>
+</nz-descriptions>
+
+
+<div class="article-box">
+  <article nz-typography [innerHTML]="article.Content"></article>
 </div>
 
 <div class="comments-box">

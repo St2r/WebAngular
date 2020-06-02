@@ -1,12 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-edit-passage',
-  templateUrl: './edit-passage.component.html',
-  styleUrls: ['./edit-passage.component.css']
+  selector: 'app-edit-article',
+  templateUrl: './edit-article.component.html',
+  styleUrls: ['./edit-article.component.css']
 })
-export class EditPassageComponent implements OnInit {
+export class EditArticleComponent implements OnInit {
+  @Input()
+  articleId: string;
 
   editParam = {
     selector: 'textarea',
@@ -28,7 +30,6 @@ export class EditPassageComponent implements OnInit {
       {text: 'Java', value: 'java'}
     ]
   };
-
   validateForm!: FormGroup;
 
   title = 'Title';
@@ -41,10 +42,6 @@ export class EditPassageComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  save() {
-    console.log('save the form');
   }
 
 }
