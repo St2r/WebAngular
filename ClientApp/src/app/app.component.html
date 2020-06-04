@@ -8,14 +8,21 @@
       </div>
       <div nz-col class="gutter-row" nzSpan="7">
         <ul nz-menu nzTheme="light" nzMode="horizontal">
-          <li nz-menu-item>
+          <li nz-menu-item nzMatchRouter>
             <span>主页</span>
             <a routerLink="/home"></a>
           </li>
-          <li nz-menu-item>校园周边</li>
           <li nz-menu-item nzMatchRouter>
-            <span>fetch-data</span>
-            <a routerLink="/fetch-data"></a>
+            <span>刷题</span>
+            <a routerLink="/exercise"></a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <span>论坛</span>
+            <a routerLink="/forum"></a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <span>校园周边</span>
+            <a routerLink="/school"></a>
           </li>
         </ul>
       </div>
@@ -39,7 +46,7 @@
   </nz-header>
 
   <nz-content>
-<!--    导航条功能还没有实现-->
+    <!--    导航条功能还没有实现-->
     <!--    <nz-breadcrumb>-->
     <!--      <nz-breadcrumb-item>Home</nz-breadcrumb-item>-->
     <!--      <nz-breadcrumb-item>List</nz-breadcrumb-item>-->
@@ -53,11 +60,11 @@
 </nz-layout>
 
 <ng-template #contentTemplate>
-<!--  <div>-->
-<!--    <nz-rate [ngModel]="2" nzDisabled></nz-rate>-->
-<!--    <a>个人中心</a>-->
-<!--    <a>退出登陆</a>-->
-<!--  </div>-->
+  <!--  <div>-->
+  <!--    <nz-rate [ngModel]="2" nzDisabled></nz-rate>-->
+  <!--    <a>个人中心</a>-->
+  <!--    <a>退出登陆</a>-->
+  <!--  </div>-->
   <nz-list>
     <nz-list-item>
       <p class="pop-list-item">你好，李昂</p>
@@ -73,7 +80,10 @@
       <a class="pop-list-item" routerLink="/space">个人主页</a>
     </nz-list-item>
     <nz-list-item>
-      <button nz-button nzType="link" class="pop-list-item">退出登陆</button>
+      <button nz-button nzType="link" class="pop-list-item">
+        <i nz-icon nzType="logout" nzTheme="outline"></i>
+        退出登陆
+      </button>
     </nz-list-item>
   </nz-list>
 </ng-template>

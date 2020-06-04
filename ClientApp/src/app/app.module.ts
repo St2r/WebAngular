@@ -16,15 +16,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './modules/icons-provider.module';
 import {AntDesignModule} from './modules/ant-design.module';
 import {
-  NzAvatarModule, NzBadgeModule,
-  NzBreadCrumbModule, NzCommentModule, NzDescriptionsModule,
+  NzAvatarModule, NzBackTopModule, NzBadgeModule,
+  NzBreadCrumbModule, NzCardModule, NzCommentModule, NzDescriptionsModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
-  NzInputModule, NzListModule,
-  NzPageHeaderModule, NzPopoverModule, NzRateModule,
+  NzInputModule,
+  NzPageHeaderModule, NzPaginationModule, NzPopoverModule, NzProgressModule, NzRateModule, NzResultModule, NzSkeletonModule,
   NzToolTipModule,
-  NzTypographyModule
+  NzTypographyModule,
 } from 'ng-zorro-antd';
+
+import {NzListModule} from 'ng-zorro-antd/list';
+
 
 import {EditorModule} from '@tinymce/tinymce-angular';
 import { EditArticleComponent } from './pages/edit-article/edit-article.component';
@@ -37,6 +40,11 @@ import { FansFollowsComponent } from './pages/space/fans/fans-follows/fans-follo
 import { FallbackComponent } from './pages/fallback/fallback.component';
 import { PersonPageComponent } from './pages/space/person-page/person-page.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
+import { ForumComponent } from './pages/forum/forum.component';
+import { SchoolComponent } from './pages/school/school.component';
+import { QuestionComponent } from './components/question/question.component';
+import { DoExerciseComponent } from './pages/do-exercise/do-exercise.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -54,7 +62,11 @@ import { ExerciseComponent } from './pages/exercise/exercise.component';
     FansFollowsComponent,
     FallbackComponent,
     PersonPageComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    ForumComponent,
+    SchoolComponent,
+    QuestionComponent,
+    DoExerciseComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -85,7 +97,14 @@ import { ExerciseComponent } from './pages/exercise/exercise.component';
     NzListModule,
     NzCommentModule,
     NzDescriptionsModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzResultModule,
+    NzSkeletonModule,
+    NzCardModule,
+    NzProgressModule,
+    NzPaginationModule,
+    NzBackTopModule,
+    ScrollingModule
   ],
   exports: [],
   providers: [],

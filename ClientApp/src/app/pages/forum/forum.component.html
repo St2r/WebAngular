@@ -1,0 +1,53 @@
+<nz-layout>
+  <nz-sider class="sidebar" nzTheme="dark">
+    <nz-row>
+      <nz-avatar class="avatar" [nzSize]="64" nzShape="square" [nzSrc]="ImageUrl"></nz-avatar>
+    </nz-row>
+    <nz-divider></nz-divider>
+    >
+    <nz-row>
+      <div nz-button (click)="router.navigate(['edit-article/222'])">New</div>
+    </nz-row>
+  </nz-sider>
+  <nz-content class="content">
+    <nz-list nzItemLayout="vertical" [nzDataSource]="subData" [nzRenderItem]="Item" [nzPagination]="pagination">
+      <ng-template #Item let-item>
+        <nz-list-item [nzActions]="[Action1, Action2, Action3]"
+                      [nzExtra]="Extra">
+          <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle"
+                             [nzDescription]="templateDescription">
+            <ng-template #templateAvatar>
+              <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
+            </ng-template>
+            <ng-template #templateTitle>
+              <a [href]="item.href">{{item.title}}</a>
+            </ng-template>
+            <ng-template #templateDescription>
+              {{item.description}}
+            </ng-template>
+          </nz-list-item-meta>
+          {{ item.content }}
+          <ng-template #Action1>
+            <i nz-icon nzType="star-o" style="margin-right: 8px;"></i> 200
+          </ng-template>
+          <ng-template #Action2>
+            <i nz-icon nzType="star-o" style="margin-right: 8px;"></i> 100
+          </ng-template>
+          <ng-template #Action3>
+            <i nz-icon nzType="star-o" style="margin-right: 8px;"></i> 10
+          </ng-template>
+
+          <ng-template #Extra>
+            <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"/>
+          </ng-template>
+        </nz-list-item>
+      </ng-template>
+
+      <ng-template #pagination>
+        <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="getData($event)" [nzPageSize]="pageSize" [nzPageIndex]="firstIndex" [nzTotal]="data.length"></nz-pagination>
+      </ng-template>
+    </nz-list>
+  </nz-content>
+</nz-layout>
+
+<nz-back-top></nz-back-top>

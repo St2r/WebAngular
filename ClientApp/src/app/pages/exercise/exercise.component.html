@@ -1,1 +1,46 @@
-<p>exercise works!</p>
+<div class="exercise-blocks">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="6">
+      <nz-card [nzCover]="coverHg" [nzActions]="[actionStar, actionExercise]">
+        <nz-card-meta nzTitle="航空航天系统概论"></nz-card-meta>
+        <nz-progress [nzPercent]="90"></nz-progress>
+      </nz-card>
+    </div>
+    <div nz-col [nzSpan]="6">
+      <nz-card [nzCover]="coverHg" [nzActions]="[actionStar, actionExercise]">
+        <nz-card-meta nzTitle="C语言程序设计"></nz-card-meta>
+        <nz-progress [nzPercent]="100"></nz-progress>
+      </nz-card>
+    </div>
+    <div nz-col [nzSpan]="6">
+      <nz-card [nzCover]="coverHg" [nzActions]="[actionStar, actionExercise]">
+        <nz-card-meta nzTitle="面向对象程序设计"></nz-card-meta>
+        <nz-progress [nzPercent]="0"></nz-progress>
+      </nz-card>
+    </div>
+    <div nz-col [nzSpan]="6">
+      <nz-card [nzCover]="coverHg" [nzActions]="[actionStar, actionExercise]">
+        <nz-card-meta nzTitle="软件工程"></nz-card-meta>
+        <nz-progress [nzPercent]="50"></nz-progress>
+      </nz-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #coverHg>
+  <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+</ng-template>
+
+<ng-template #actionExercise>
+  <i nz-icon nzType="edit" (click)="this.router.navigate(['/do-exercise'])"></i>
+</ng-template>
+
+<ng-template #actionStar>
+  <i nz-icon nzType="star" nzTheme="outline" (click)="this.router.navigate(['star'])"></i>
+</ng-template>
+
+<ng-template #action>
+
+</ng-template>
+
+<!--<app-question [question]="question"></app-question>-->

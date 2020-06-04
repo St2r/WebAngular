@@ -1,0 +1,17 @@
+.sidebar {
+  min-height: 1300px;
+}
+
+.avatar {
+  margin: 16px;
+  border-style: solid;
+}
+
+.content {
+  margin-left: 20px;
+}
+
+.my-pagination {
+  margin-bottom: 18px;
+  margin-right: 36px;
+}

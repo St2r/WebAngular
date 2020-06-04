@@ -30,7 +30,6 @@ export class EditArticleComponent implements OnInit {
       {text: 'Java', value: 'java'}
     ]
   };
-  validateForm!: FormGroup;
 
   title = 'Title';
 
@@ -44,4 +43,7 @@ export class EditArticleComponent implements OnInit {
   ngOnInit() {
   }
 
+  save() {
+    console.log(1);
+  }
 }

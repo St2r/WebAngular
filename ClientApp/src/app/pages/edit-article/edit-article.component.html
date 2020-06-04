@@ -1,4 +1,4 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="save()">
+<form nz-form (ngSubmit)="save()">
   <nz-form-item>
     <nz-form-label [nzSpan]="6">Title</nz-form-label>
     <nz-form-control [nzSpan]="6">
@@ -20,8 +20,10 @@
       apiKey="pzsbp1xb6j13dd4aduwebi7815hzj1upr7v42ojpcbc8c7pu"
       [init]="editParam"
       [(ngModel)]="content"
-    >Loading...
-    </editor>
+      id="editor-html"
+    ></editor>
+<!--    控件又可能加载时间过长-->
+<!--    <nz-skeleton nzLoading="false"></nz-skeleton>-->
   </div>
 </div>
 
