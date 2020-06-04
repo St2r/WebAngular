@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
-import {min} from 'rxjs/operators';
 
 @Component({
   selector: 'app-forum',

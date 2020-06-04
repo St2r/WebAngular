@@ -17,7 +17,7 @@ import { IconsProviderModule } from './modules/icons-provider.module';
 import {AntDesignModule} from './modules/ant-design.module';
 import {
   NzAvatarModule, NzBackTopModule, NzBadgeModule,
-  NzBreadCrumbModule, NzCardModule, NzCommentModule, NzDescriptionsModule,
+  NzBreadCrumbModule, NzCardModule, NzCheckboxModule, NzCommentModule, NzDescriptionsModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
   NzInputModule,
@@ -45,6 +45,9 @@ import { SchoolComponent } from './pages/school/school.component';
 import { QuestionComponent } from './components/question/question.component';
 import { DoExerciseComponent } from './pages/do-exercise/do-exercise.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { LoginBarComponent } from './components/login-bar/login-bar.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     SchoolComponent,
     QuestionComponent,
     DoExerciseComponent,
+    LoginBarComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -104,7 +110,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     NzProgressModule,
     NzPaginationModule,
     NzBackTopModule,
-    ScrollingModule
+    ScrollingModule,
+    NzCheckboxModule
   ],
   exports: [],
   providers: [],

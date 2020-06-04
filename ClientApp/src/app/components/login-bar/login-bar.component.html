@@ -1,0 +1,74 @@
+<div *ngIf="loginStatus" nz-row nzGutter="16">
+  <div nz-col nzSpan="6">
+    <nz-avatar [nzSize]="AvatarSize" nz-popover [nzPopoverContent]="loginPopover" nzIcon="user" [nzSrc]="userIcon()">
+    </nz-avatar>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="buttonPost()">消息</div>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="buttonPost()">动态</div>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="buttonPost()">收藏</div>
+  </div>
+</div>
+
+<div *ngIf="!loginStatus" nz-row nzGutter="16">
+  <div nz-col nzSpan="6">
+    <nz-avatar [nzSize]="AvatarSize" nz-popover [nzPopoverContent]="notLoginPopover" nzIcon="user"></nz-avatar>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="TestLogin()">登陆</div>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="TestRegister()">注册</div>
+  </div>
+</div>
+
+<ng-template #loginPopover>
+  <nz-list>
+    <nz-list-item>
+      <p class="pop-list-item">你好，李昂</p>
+    </nz-list-item>
+    <nz-list-item>
+      <nz-button-group>
+        <button nz-button nzType="link">关注<p>10</p></button>
+        <button nz-button nzType="link">粉丝<p>1w+</p></button>
+        <button nz-button nzType="link">文章<p>3</p></button>
+      </nz-button-group>
+    </nz-list-item>
+    <nz-list-item>
+      <a class="pop-list-item" routerLink="/space">
+        <i nz-icon nzType="home" nzTheme="outline"></i>
+        个人主页
+      </a>
+    </nz-list-item>
+    <nz-list-item>
+      <button nz-button nzType="link" class="pop-list-item" (click)="TestLogout()">
+        <i nz-icon nzType="logout" nzTheme="outline"></i>
+        退出登陆
+      </button>
+    </nz-list-item>
+  </nz-list>
+</ng-template>
+
+<ng-template #notLoginPopover>
+  <nz-list class="not-login-popover-list">
+    <nz-list-item>
+      <p class="pop-list-item">登陆后👇享受全新体验</p>
+    </nz-list-item>
+    <nz-list-item>
+      <button nz-button nzType="link" class="pop-list-item">
+        <i nz-icon nzType="login" nzTheme="outline"></i>
+        登陆
+      </button>
+    </nz-list-item>
+    <nz-list-item>
+      <button nz-button nzType="link" class="pop-list-item">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        注册
+      </button>
+    </nz-list-item>
+  </nz-list>
+</ng-template>

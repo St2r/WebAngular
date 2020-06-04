@@ -49,7 +49,8 @@ export class LoginService {
     // let imgUrl: string = null;
     // this.http.post<string>(this.baseUrl + 'login', 'none', this.httpOptions).subscribe(
     //   result => imgUrl = result, error => console.log(error));
-    return '//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
+    // return '//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
+    return '/avatar.png';
   }
 
   public getUserName(): string {
