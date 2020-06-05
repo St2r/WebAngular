@@ -20,7 +20,7 @@ import {
   NzBreadCrumbModule, NzCardModule, NzCheckboxModule, NzCommentModule, NzDescriptionsModule,
   NzDividerModule, NzFormModule,
   NzGridModule,
-  NzInputModule,
+  NzInputModule, NzModalModule,
   NzPageHeaderModule, NzPaginationModule, NzPopoverModule, NzProgressModule, NzRateModule, NzResultModule, NzSkeletonModule,
   NzToolTipModule,
   NzTypographyModule,
@@ -111,7 +111,8 @@ import { RegisterComponent } from './pages/register/register.component';
     NzPaginationModule,
     NzBackTopModule,
     ScrollingModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzModalModule
   ],
   exports: [],
   providers: [],

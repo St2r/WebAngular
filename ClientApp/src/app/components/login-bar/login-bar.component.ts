@@ -34,7 +34,7 @@ export class LoginBarComponent implements OnInit {
 
   TestLogin(): void {
     console.log(10);
-    this.loginStatus = true;
+    // this.loginStatus = true;
     console.log(11);
     this.router.navigate(['/login']);
   }
