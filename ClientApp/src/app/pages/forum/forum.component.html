@@ -1,13 +1,22 @@
 <nz-layout>
-  <nz-sider class="sidebar" nzTheme="dark">
+  <nz-sider class="sidebar" nzTheme="light">
     <nz-row>
       <nz-avatar class="avatar" [nzSize]="64" nzShape="square" [nzSrc]="ImageUrl"></nz-avatar>
     </nz-row>
     <nz-divider></nz-divider>
-    >
-    <nz-row>
-      <div nz-button (click)="router.navigate(['edit-article/222'])">New</div>
+    <nz-row class="right-margin">
+      <div nz-button nzType="primary" nzBlock (click)="router.navigate(['edit-article/222'])">New</div>
     </nz-row>
+    <nz-divider></nz-divider>
+    <nz-row>
+      <span style="font-size: 18px">热点内容</span>
+    </nz-row>
+    <div *ngFor="let topic of hotTopics, let i = index">
+      <nz-row class="top-item">
+        <i nz-icon nzType="fire" nzTheme="outline"></i>
+        <span>{{i+1}} {{topic.title}}</span>
+      </nz-row>
+    </div>
   </nz-sider>
   <nz-content class="content">
     <nz-list nzItemLayout="vertical" [nzDataSource]="subData" [nzRenderItem]="Item" [nzPagination]="pagination">

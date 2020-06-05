@@ -13,6 +13,7 @@ export class ForumComponent implements OnInit {
   subData: ItemData[];
   pageSize = 8;
   firstIndex = 1;
+  hotTopics: HotTopic[];
 
   constructor(private router: Router, private loginService: LoginService) {
     this.ImageUrl = loginService.getUserImage();
@@ -21,6 +22,7 @@ export class ForumComponent implements OnInit {
   ngOnInit() {
     this.loadData(1);
     this.getData(1);
+    this.loadHotTopic();
   }
 
   loadData(pi: number): void {
@@ -40,6 +42,21 @@ export class ForumComponent implements OnInit {
   getData(s) {
     this.subData = this.data.slice((s - 1) * this.pageSize, Math.min(s * this.pageSize, this.data.length));
   }
+
+  loadHotTopic() {
+    // todo 后端请求数据
+    this.hotTopics = [
+      new class implements HotTopic {
+        articleId = 'article1';
+        title = '震惊！某大学生竟';
+      },
+      new class implements HotTopic {
+        articleId = 'article2';
+        title = '谷歌校招';
+      }
+    ];
+  }
+
 }
 
 
@@ -50,3 +67,9 @@ interface ItemData {
   description: string;
   content: string;
 }
+
+interface HotTopic {
+  title: string;
+  articleId: string;
+}
+
