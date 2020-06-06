@@ -1,11 +1,33 @@
-<nz-layout>
+<nz-layout *ngIf="blockInfo.accessRight==2">
   <nz-sider class="sidebar" nzTheme="light">
     <nz-row>
-      <nz-avatar class="avatar" [nzSize]="64" nzShape="square" [nzSrc]="ImageUrl"></nz-avatar>
+      <nz-col nzSpan="10">
+        <nz-avatar class="avatar" [nzSize]="72" nzShape="square" [nzSrc]="ImageUrl"></nz-avatar>
+      </nz-col>
+      <nz-col nzSpan="14">
+        <button *ngIf="!blockInfo.followed" nz-button nzSize="small" (click)="follow()">+关注</button>
+        <button *ngIf="blockInfo.followed" nz-button nzSize="small" nzType="dashed" (click)="disFollow()">取消关注</button>
+        <br/>
+        <span>{{blockInfo.contentTotal}}内容</span>
+        <br/>
+        <span>{{blockInfo.followTotal}}关注</span>
+        <br/>
+        <span>今日更新：{{blockInfo.todayTotal}}</span>
+      </nz-col>
     </nz-row>
     <nz-divider></nz-divider>
     <nz-row class="right-margin">
-      <div nz-button nzType="primary" nzBlock (click)="router.navigate(['edit-article/222'])">New</div>
+      <span>版主 & 管理员</span>
+      <br/>
+      <nz-row>
+        <nz-col *ngFor="let item of blockInfo.masters" nzSpan="4">
+          <nz-avatar nzSize="default" nzShape="circle" [nzSrc]="item.avatarUrl"></nz-avatar>
+        </nz-col>
+      </nz-row>
+    </nz-row>
+    <nz-divider></nz-divider>
+    <nz-row class="right-margin">
+      <div nz-button nzType="primary" nzBlock (click)="router.navigate(['edit-article/222'])">发布新帖</div>
     </nz-row>
     <nz-divider></nz-divider>
     <nz-row>
@@ -14,49 +36,87 @@
     <div *ngFor="let topic of hotTopics, let i = index">
       <nz-row class="top-item">
         <i nz-icon nzType="fire" nzTheme="outline"></i>
-        <span>{{i+1}} {{topic.title}}</span>
+        <span>{{i + 1}} {{topic.title}}</span>
       </nz-row>
     </div>
   </nz-sider>
-  <nz-content class="content">
-    <nz-list nzItemLayout="vertical" [nzDataSource]="subData" [nzRenderItem]="Item" [nzPagination]="pagination">
-      <ng-template #Item let-item>
-        <nz-list-item [nzActions]="[Action1, Action2, Action3]"
-                      [nzExtra]="Extra">
-          <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle"
-                             [nzDescription]="templateDescription">
-            <ng-template #templateAvatar>
-              <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
-            </ng-template>
-            <ng-template #templateTitle>
-              <a [href]="item.href">{{item.title}}</a>
-            </ng-template>
-            <ng-template #templateDescription>
-              {{item.description}}
-            </ng-template>
-          </nz-list-item-meta>
-          {{ item.content }}
-          <ng-template #Action1>
-            <i nz-icon nzType="star-o" style="margin-right: 8px;"></i> 200
-          </ng-template>
-          <ng-template #Action2>
-            <i nz-icon nzType="star-o" style="margin-right: 8px;"></i> 100
-          </ng-template>
-          <ng-template #Action3>
-            <i nz-icon nzType="star-o" style="margin-right: 8px;"></i> 10
-          </ng-template>
+  <nz-layout>
+    <nz-header class="header">
+      <nz-row>
+        <nz-col nzSpan="12">
+          <nz-radio-group [(ngModel)]="sort" nzButtonStyle="solid" (ngModelChange)="reloadData()">
+            <label nz-radio-button nzValue="latest">最新发帖</label>
+            <label nz-radio-button nzValue="review">最新回帖</label>
+            <label nz-radio-button nzValue="hottest">最热帖子</label>
+          </nz-radio-group>
+        </nz-col>
+        <nz-col nzSpan="12">
+          <nz-select [(ngModel)]="filter" (ngModelChange)="reloadData()">
+            <nz-option nzValue="all" nzLabel="全部帖子"></nz-option>
+            <nz-option nzValue="selected" nzLabel="精华贴"></nz-option>
+            <nz-option nzValue="reward" nzLabel="悬赏贴" nzDisabled></nz-option>
+          </nz-select>
+        </nz-col>
+      </nz-row>
+    </nz-header>
 
-          <ng-template #Extra>
-            <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"/>
-          </ng-template>
-        </nz-list-item>
-      </ng-template>
+    <nz-content class="content">
+      <nz-list nzItemLayout="vertical" [nzDataSource]="topicData" [nzRenderItem]="Item" [nzPagination]="pagination">
+        <ng-template #Item let-item>
+          <nz-list-item [nzActions]="[Action1, Action2, Action3, Action4]"
+                        [nzExtra]="Extra">
+            <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle"
+                               [nzDescription]="templateDescription">
+              <ng-template #templateAvatar>
+                <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
+              </ng-template>
+              <ng-template #templateTitle>
+                <a [href]="item.href">{{item.title}}</a>
+                <i *ngIf="item.isPinned" nz-icon nzType="pushpin" nzTheme="twotone"></i>
+              </ng-template>
+              <ng-template #templateDescription>
+                {{item.description}}
+              </ng-template>
+            </nz-list-item-meta>
+            {{ item.content }}
+            <ng-template #Action1>
+              <i nz-icon nzType="like" style="margin-right: 8px;"></i> 200
+            </ng-template>
+            <ng-template #Action2>
+              <i nz-icon nzType="message" style="margin-right: 8px;"></i> 100
+            </ng-template>
+            <ng-template #Action3>
+              <i nz-icon nzType="eye" style="margin-right: 8px;"></i> 10
+            </ng-template>
+            <ng-template #Action4>
+              <i nz-icon nzType="star" style="margin-right: 8px;"></i> 20
+            </ng-template>
 
-      <ng-template #pagination>
-        <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="getData($event)" [nzPageSize]="pageSize" [nzPageIndex]="firstIndex" [nzTotal]="data.length"></nz-pagination>
-      </ng-template>
-    </nz-list>
-  </nz-content>
+            <ng-template #Extra>
+              <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"/>
+            </ng-template>
+          </nz-list-item>
+        </ng-template>
+
+        <ng-template #pagination>
+          <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="loadData($event)"
+                         [nzPageSize]="pageSize" [(nzPageIndex)]="curIndex" [nzTotal]="articleNum"></nz-pagination>
+        </ng-template>
+      </nz-list>
+    </nz-content>
+  </nz-layout>
 </nz-layout>
 
-<nz-back-top></nz-back-top>
+<nz-back-top *ngIf="blockInfo.accessRight==2"></nz-back-top>
+
+<nz-result *ngIf="blockInfo.accessRight==0" nzStatus="warning" nzTitle="你要访问的板块不存在">
+  <div nz-result-extra>
+    <button nz-button nzType="primary">回到首页</button>
+  </div>
+</nz-result>
+
+<nz-result *ngIf="blockInfo.accessRight==1" nzStatus="warning" nzTitle="游客没有权限访问此板块">
+  <div nz-result-extra>
+    <button nz-button nzType="primary">登陆</button>
+  </div>
+</nz-result>

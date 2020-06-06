@@ -60,13 +60,13 @@
   </nz-form-item>
 </form>
 
-<<nz-result
+<nz-result
   nzStatus="success"
   nzTitle="注册成功"
   nzSubTitle="用你刚注册的账号享受全新体验"
   *ngIf="registerStatus==1"
 >
   <div nz-result-extra>
-    <button nz-button nzType="primary" (click)="this.route.navigate(['home'])">回到主页</button>
+    <button nz-button nzType="primary" (click)="this.router.navigate(['home'])">回到主页</button>
   </div>
-</nz-result>>
+</nz-result>

@@ -16,12 +16,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './modules/icons-provider.module';
 import {AntDesignModule} from './modules/ant-design.module';
 import {
-  NzAvatarModule, NzBackTopModule, NzBadgeModule,
-  NzBreadCrumbModule, NzCardModule, NzCheckboxModule, NzCommentModule, NzDescriptionsModule,
-  NzDividerModule, NzFormModule,
+  NzAvatarModule,
+  NzBackTopModule,
+  NzBadgeModule,
+  NzBreadCrumbModule,
+  NzCardModule,
+  NzCheckboxModule,
+  NzCommentModule,
+  NzDescriptionsModule,
+  NzDividerModule,
+  NzFormModule,
   NzGridModule,
-  NzInputModule, NzModalModule,
-  NzPageHeaderModule, NzPaginationModule, NzPopoverModule, NzProgressModule, NzRateModule, NzResultModule, NzSkeletonModule,
+  NzInputModule,
+  NzModalModule,
+  NzPageHeaderModule,
+  NzPaginationModule,
+  NzPopoverModule,
+  NzProgressModule,
+  NzRadioModule,
+  NzRateModule,
+  NzResultModule,
+  NzSelectModule,
+  NzSkeletonModule,
   NzToolTipModule,
   NzTypographyModule,
 } from 'ng-zorro-antd';
@@ -48,6 +64,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { LoginBarComponent } from './components/login-bar/login-bar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { BreadBarComponent } from './components/bread-bar/bread-bar.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +90,7 @@ import { RegisterComponent } from './pages/register/register.component';
     LoginBarComponent,
     LoginComponent,
     RegisterComponent,
+    BreadBarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -112,7 +130,9 @@ import { RegisterComponent } from './pages/register/register.component';
     NzBackTopModule,
     ScrollingModule,
     NzCheckboxModule,
-    NzModalModule
+    NzModalModule,
+    NzSelectModule,
+    NzRadioModule
   ],
   exports: [],
   providers: [],

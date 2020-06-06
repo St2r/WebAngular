@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'fetch-data', component: FetchDataComponent},
   {path: 'exercise', component: ExerciseComponent},
   {path: 'do-exercise', component: DoExerciseComponent},
-  {path: 'forum', component: ForumComponent},
+  {path: 'forum/:block', component: ForumComponent},
   {path: 'school', component: SchoolComponent},
   {path: 'edit-article/:articleId', component: EditArticleComponent},
   {path: 'view-article/:articleId', component: ViewArticleComponent},

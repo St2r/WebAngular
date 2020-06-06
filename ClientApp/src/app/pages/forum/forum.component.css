@@ -3,7 +3,8 @@
 }
 
 .avatar {
-  margin: 16px;
+  margin-left: auto;
+  margin-right: auto;
   border-style: solid;
 }
 
@@ -22,4 +23,12 @@
 
 .top-item {
   margin: 8px;
+}
+
+.header {
+  background-color: white;
+}
+
+nz-select {
+  width: 100px;
 }

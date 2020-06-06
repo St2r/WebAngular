@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   validateForm: FormGroup;
-  registerStatus = 0;
+  registerStatus: number;
 
   submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
     for (const key of Object.keys(this.validateForm.controls)) {
@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder, private loginService: LoginService,
-              private modal: NzModalService, private route: Router) {
+              private modal: NzModalService, private router: Router) {
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required], [this.userNameAsyncValidator]],
       email: ['', [Validators.email, Validators.required], [this.emailAsyncValidator]],
@@ -88,6 +88,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.registerStatus = 0;
   }
 
 }

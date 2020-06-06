@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
+import {NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-forum',
@@ -8,43 +9,79 @@ import {LoginService} from '../../services/login.service';
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
+  @Input()
+  block: string;
+
+  page: number;
+
   ImageUrl: string;
-  data: ItemData[] = [];
-  subData: ItemData[];
+
   pageSize = 8;
-  firstIndex = 1;
+  curIndex = 1;
+  articleNum: number;
+
+  // 板块信息
+  blockInfo: BlockInfo;
+
+  // 帖子
+  topicData: ItemData[];
+  // 热点数据
   hotTopics: HotTopic[];
 
-  constructor(private router: Router, private loginService: LoginService) {
+  // 排序方式
+  sort: string;
+
+  // 过滤方式
+  filter: string;
+
+  constructor(private router: Router, private loginService: LoginService,
+              private routerInfo: ActivatedRoute, private modal: NzModalService) {
     this.ImageUrl = loginService.getUserImage();
+    this.sort = this.routerInfo.snapshot.queryParams['sort'];
+    console.log(this.sort);
+    this.page = this.routerInfo.snapshot.queryParams['page'];
+    console.log(this.page);
+    this.block = this.routerInfo.snapshot.params['block'];
+    console.log(this.block);
   }
 
   ngOnInit() {
+    this.sort = 'latest';
+    this.filter = 'all';
+
+    this.loadBlockInfo();
+    this.loadArticleNum();
     this.loadData(1);
-    this.getData(1);
     this.loadHotTopic();
   }
 
-  loadData(pi: number): void {
-    this.data = new Array(55).fill({}).map((_, index) => {
+  // todo 请求后端-获取当前页的内容
+  loadData(page: number): void {
+    console.log(this.curIndex);
+    console.log(this.sort);
+    console.log(this.filter);
+
+    this.topicData = new Array(this.pageSize).fill({}).map((_, index) => {
       return {
         href: 'http://ant.design',
-        title: `ant design part ${index} (page: ${pi})`,
+        title: `ant design part ${index} (page: ${page})`,
         avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
         description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
         content:
           'We supply a series of design principles, practical patterns and high quality design resources ' +
-          '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.'
+          '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+        isPinned: true
       };
     });
   }
 
-  getData(s) {
-    this.subData = this.data.slice((s - 1) * this.pageSize, Math.min(s * this.pageSize, this.data.length));
+  // todo 请求后端-返回板块的总内容条数
+  loadArticleNum() {
+    this.articleNum = 50;
   }
 
+  // todo 请求后端-将今日的热点信息加载劲hotTopics中
   loadHotTopic() {
-    // todo 后端请求数据
     this.hotTopics = [
       new class implements HotTopic {
         articleId = 'article1';
@@ -57,6 +94,47 @@ export class ForumComponent implements OnInit {
     ];
   }
 
+  // 更新排序方式或者过滤器时，重新加载数据
+  reloadData() {
+    this.curIndex = 1;
+    this.loadArticleNum();
+    this.loadData(1);
+  }
+
+  // todo 请求后端-返回板块的当前信息
+  loadBlockInfo() {
+    this.blockInfo = new class implements BlockInfo {
+      todayTotal = '100';
+      accessRight = 2;
+      contentTotal = '10.3万';
+      followTotal = '1.2万';
+      followed = true;
+      masters = [new class implements Master {
+        avatarUrl = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
+        userId = 'testUser';
+      }, new class implements Master {
+        avatarUrl = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
+        userId = 'testUser';
+      }];
+    };
+  }
+
+  // todo 后端
+  follow() {
+    this.blockInfo.followed = true;
+  }
+
+  // todo 后端
+  disFollow() {
+    this.modal.info({
+      nzTitle: '你确定要取消关注么',
+      nzOnOk: () => {
+        console.log('Info OK');
+        this.blockInfo.followed = false;
+      },
+      nzOnCancel: null
+    });
+  }
 }
 
 
@@ -66,10 +144,28 @@ interface ItemData {
   avatar: string;
   description: string;
   content: string;
+  isPinned: boolean;
 }
 
 interface HotTopic {
   title: string;
   articleId: string;
+}
+
+interface Master {
+  userId: string;
+  avatarUrl: string;
+}
+
+interface BlockInfo {
+  // 0 - 板块不存在
+  // 1 - 板块无权限访问
+  // 2 - 正常访问
+  accessRight: number;
+  followed: boolean;
+  contentTotal: string;
+  followTotal: string;
+  todayTotal: string;
+  masters: Master[];
 }
 
