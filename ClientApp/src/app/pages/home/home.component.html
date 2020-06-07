@@ -1,1 +1,7 @@
 <h1 nz-typography>Home Page</h1>
+<nz-carousel nzAutoPlay>
+  <div nz-carousel-content *ngFor="let index of array">
+    <h3>{{ index }}</h3>
+  </div>
+</nz-carousel>
+

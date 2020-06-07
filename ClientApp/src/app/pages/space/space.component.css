@@ -12,3 +12,28 @@
   padding: 0 24px;
   min-height: 280px;
 }
+
+.user_image {
+  padding: 2px;;
+  text-align: center;
+  height: auto;
+}
+
+.user_name {
+  color: black;
+  font-size: 0;
+  margin: 20px 0 20px 0;
+  display: block;
+  text-align: center;
+}
+
+.name {
+  display: inline-block;
+  margin-right: 5px;
+  font-weight: 700;
+  line-height: auto;
+  font-size: 26px;
+  vertical-align: middle;
+}
+
+
