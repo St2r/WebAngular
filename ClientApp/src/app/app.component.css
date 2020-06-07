@@ -52,3 +52,13 @@ nz-footer {
 .search-bar {
   margin: 16px;
 }
+
+.certain-search-item-count {
+  position: absolute;
+  color: #999;
+  right: 16px;
+}
+
+.more-link {
+  float: right;
+}
