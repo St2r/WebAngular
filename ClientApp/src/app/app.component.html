@@ -14,23 +14,33 @@
           </li>
           <li nz-submenu nzTitle="全部板块">
             <ul>
+              <li nz-menu-item>
+                <span>综合论坛</span>
+                <a routerLink="/forum/comprehension"></a>
+              </li>
+              <li nz-menu-divider></li>
               <li nz-submenu nzTitle="学科交流">
                 <ul>
-                  <li nz-menu-item nzDisabled nzMatchRouter><span>离散数学</span><a routerLink="/home"></a></li>
-                  <li nz-menu-item>概率统计</li>
-                  <li nz-menu-item>面向对象程序设计</li>
+                  <li nz-menu-item *ngFor="let subject of Subjects" nzMatchRouter>
+                    <span>{{subject[0]}}</span>
+                    <a [routerLink]="'/forum/' + subject[1]"></a>
+                  </li>
                 </ul>
               </li>
               <li nz-submenu nzTitle="校园生活">
                 <ul>
-                  <li nz-menu-item>校卡招领</li>
-                  <li nz-menu-item>课程推荐</li>
+                  <li nz-menu-item *ngFor="let schoolLife of SchoolLife" nzMatchRouter>
+                    <span>{{schoolLife[0]}}</span>
+                    <a [routerLink]="'/forum/' + schoolLife[1]"></a>
+                  </li>
                 </ul>
               </li>
               <li nz-submenu nzTitle="校园周边">
                 <ul>
-                  <li nz-menu-item>美食</li>
-                  <li nz-menu-item>游玩</li>
+                  <li nz-menu-item *ngFor="let item of AroundCampus" nzMatchRouter>
+                    <span>{{item[0]}}</span>
+                    <a [routerLink]="'/forum/' + item[1]"></a>
+                  </li>
                 </ul>
               </li>
             </ul>
