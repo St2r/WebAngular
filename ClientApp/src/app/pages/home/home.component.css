@@ -11,3 +11,10 @@ h3 {
   color: #fff;
   margin-bottom: 0;
 }
+
+.cards {
+  width: 100%;
+  height: auto;
+  background: #ECECEC;
+  padding:30px;
+}

@@ -1,33 +1,54 @@
-
-<div class='user_image'>
-  <nz-avatar [nzSize]="100" nzIcon="user"></nz-avatar>
+<div>
+  <div class="profileWallWrap">
+    <div class="coverWrap">
+      <img class="cover" alt="cover" src="//assets.dxycdn.com/gitrepo/bbs-pc/dist/static/invalid-name@3x.35adc16a.png">
+    </div>
+    <div class="infoWrap">
+      <div class="left">
+        <div class="avatarWrap">
+          <div>
+            <nz-avatar [nzSize]="150" nzIcon="user"></nz-avatar>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="nameWrap">
+          <span class="name"> {{ user_name }} </span>
+        </div>
+        <div class="briefWrap">
+          <div class="briefBasic">
+            <span></span>
+          </div>
+          <p class="briefDescription">ta 比较懒还没有说明</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class='user_name'>
-  <span class="name"> {{ user_name }} </span>
+
+
+<div class="card-container">
+  <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab.title">
+      <div *ngIf="tab.no==1">
+        <nz-descriptions nzTitle="个人资料" nzBordered nzLayout="vertical">
+          <nz-descriptions-item nzTitle="用户名"> {{ user_name }} </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="性别"> {{ basic_info.gender }} </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="生日"> {{ basic_info.birthdate }} </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="最近登陆时间">
+            {{ last_login }}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="本次登陆时间" [nzSpan]="2">
+            {{ this_login }}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="邮箱"> {{ contact_info.mail }} </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="手机" [nzSpan]="2"> {{ contact_info.phone_number }} </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="个人简介">
+            {{ self_intro }}
+          </nz-descriptions-item>
+        </nz-descriptions>        
+      </div>
+    </nz-tab>
+  </nz-tabset>
 </div>
-
-<span>性别</span>
-
-<br>
-
-<span>年龄</span>
-
-<br>
-
-<span>出生日期</span>
-
-<br>
-
-<span>邮箱</span>
-
-<br>
-
-<span>联系方式</span>
-
-<br>
-
-<span>个人简介</span>
-
-<br>
-
