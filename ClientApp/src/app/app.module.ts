@@ -6,7 +6,6 @@ import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './pages/home/home.component';
-import {CounterComponent} from './counter/counter.component';
 import {FetchDataComponent} from './pages/fetch-data/fetch-data.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -70,7 +69,6 @@ import { BreadBarComponent } from './components/bread-bar/bread-bar.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    CounterComponent,
     FetchDataComponent,
     EditArticleComponent,
     ViewArticleComponent,
@@ -98,7 +96,6 @@ import { BreadBarComponent } from './components/bread-bar/bread-bar.component';
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'counter', component: CounterComponent},
     ]),
     BrowserAnimationsModule,
     NoopAnimationsModule,

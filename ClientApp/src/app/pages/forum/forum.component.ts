@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {NzModalService} from 'ng-zorro-antd';
 
@@ -9,10 +9,9 @@ import {NzModalService} from 'ng-zorro-antd';
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
+  // 板块的名称
   @Input()
   block: string;
-
-  page: number;
 
   ImageUrl: string;
 
@@ -37,15 +36,15 @@ export class ForumComponent implements OnInit {
   constructor(private router: Router, private loginService: LoginService,
               private routerInfo: ActivatedRoute, private modal: NzModalService) {
     this.ImageUrl = loginService.getUserImage();
-    this.sort = this.routerInfo.snapshot.queryParams['sort'];
-    console.log(this.sort);
-    this.page = this.routerInfo.snapshot.queryParams['page'];
-    console.log(this.page);
-    this.block = this.routerInfo.snapshot.params['block'];
-    console.log(this.block);
+
+    this.routerInfo.params.subscribe((params: Params) => {
+      this.block = params['block'];
+      this.ngOnInit();
+    });
   }
 
   ngOnInit() {
+    console.log('init ' + this.block);
     this.sort = 'latest';
     this.filter = 'all';
 
@@ -57,9 +56,7 @@ export class ForumComponent implements OnInit {
 
   // todo 请求后端-获取当前页的内容
   loadData(page: number): void {
-    console.log(this.curIndex);
-    console.log(this.sort);
-    console.log(this.filter);
+    console.log([this.curIndex, this.sort, this.filter]);
 
     this.topicData = new Array(this.pageSize).fill({}).map((_, index) => {
       return {
@@ -104,10 +101,10 @@ export class ForumComponent implements OnInit {
   // todo 请求后端-返回板块的当前信息
   loadBlockInfo() {
     this.blockInfo = new class implements BlockInfo {
-      todayTotal = '100';
+      todayTotal = 100;
       accessRight = 2;
-      contentTotal = '10.3万';
-      followTotal = '1.2万';
+      contentTotal = 106782;
+      followTotal = 12378;
       followed = true;
       masters = [new class implements Master {
         avatarUrl = 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
@@ -163,9 +160,9 @@ interface BlockInfo {
   // 2 - 正常访问
   accessRight: number;
   followed: boolean;
-  contentTotal: string;
-  followTotal: string;
-  todayTotal: string;
+  contentTotal: number;
+  followTotal: number;
+  todayTotal: number;
   masters: Master[];
 }
 

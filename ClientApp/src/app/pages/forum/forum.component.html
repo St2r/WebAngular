@@ -100,7 +100,7 @@
 
         <ng-template #pagination>
           <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="loadData($event)"
-                         [nzPageSize]="pageSize" [(nzPageIndex)]="curIndex" [nzTotal]="articleNum"></nz-pagination>
+                         [nzPageSize]="pageSize" [(nzPageIndex)]="curIndex" [nzTotal]="blockInfo.contentTotal"></nz-pagination>
         </ng-template>
       </nz-list>
     </nz-content>
