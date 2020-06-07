@@ -1,0 +1,9 @@
+.userInfo-box {
+  /*height: 350px;*/
+  border-style: solid;
+}
+
+nz-header {
+  border-style: solid;
+  border-color: gray;
+}

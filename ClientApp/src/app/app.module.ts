@@ -67,6 +67,13 @@ import { BreadBarComponent } from './components/bread-bar/bread-bar.component';
 
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { MyspaceComponent } from './pages/myspace/myspace.component';
+import { SideUserComponent } from './pages/myspace/side-user/side-user.component';
+import { TabPostComponent } from './pages/myspace/tab-post/tab-post.component';
+import { TabInvitationComponent } from './pages/myspace/tab-invitation/tab-invitation.component';
+import { TabStarComponent } from './pages/myspace/tab-star/tab-star.component';
+import { TabAttachmentComponent } from './pages/myspace/tab-attachment/tab-attachment.component';
+import { TabFollowComponent } from './pages/myspace/tab-follow/tab-follow.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +99,13 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     LoginComponent,
     RegisterComponent,
     BreadBarComponent,
+    MyspaceComponent,
+    SideUserComponent,
+    TabPostComponent,
+    TabInvitationComponent,
+    TabStarComponent,
+    TabAttachmentComponent,
+    TabFollowComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

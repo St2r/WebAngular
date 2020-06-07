@@ -16,6 +16,7 @@ import {SchoolComponent} from './pages/school/school.component';
 import {DoExerciseComponent} from './pages/do-exercise/do-exercise.component';
 import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from './pages/register/register.component';
+import {MyspaceComponent} from './pages/myspace/myspace.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/home'},
@@ -40,6 +41,7 @@ const routes: Routes = [
       }
     ]
   },
+  {path: 'my-space', component: MyspaceComponent},
   {path: '**', component: FallbackComponent}
 ];
 

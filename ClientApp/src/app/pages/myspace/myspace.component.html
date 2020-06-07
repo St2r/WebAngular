@@ -1,0 +1,35 @@
+<nz-layout>
+  <nz-header style="background-color: white">
+    个人简介 + 背景 + 头像等
+  </nz-header>
+  <nz-layout>
+
+    <nz-content style="background-color: white">
+      <nz-tabset>
+        <nz-tab nzTitle="动态">
+          <app-tab-post></app-tab-post>
+        </nz-tab>
+        <nz-tab nzTitle="帖子">
+          <app-tab-invitation></app-tab-invitation>
+        </nz-tab>
+        <nz-tab nzTitle="收藏">
+          <app-tab-star></app-tab-star>
+        </nz-tab>
+        <nz-tab nzTitle="附件">
+          <app-tab-attachment></app-tab-attachment>
+        </nz-tab>
+        <nz-tab nzTitle="关注">
+          <app-tab-follow></app-tab-follow>
+        </nz-tab>
+      </nz-tabset>
+    </nz-content>
+
+    <nz-sider nzWidth="350px" nzTheme="light">
+      <div class="userInfo-box">
+        <app-side-user [userInfo]="userInfo"></app-side-user>
+      </div>
+      <div class="userInfo-box">最近访客</div>
+      <div class="userInfo-box">喜爱的板块</div>
+    </nz-sider>
+  </nz-layout>
+</nz-layout>
