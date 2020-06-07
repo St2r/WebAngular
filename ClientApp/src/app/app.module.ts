@@ -66,6 +66,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { BreadBarComponent } from './components/bread-bar/bread-bar.component';
 
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
     NzModalModule,
     NzSelectModule,
     NzRadioModule,
-    NzCarouselModule
+    NzCarouselModule,
+    NzTabsModule
   ],
   exports: [],
   providers: [],
