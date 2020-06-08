@@ -1,4 +1,4 @@
-<div *ngIf="loginStatus" nz-row nzGutter="16">
+<div *ngIf="this.userService.status" nz-row nzGutter="16">
   <div nz-col nzSpan="6">
     <nz-avatar [nzSize]="AvatarSize" nz-popover [nzPopoverContent]="loginPopover" nzIcon="user" [nzSrc]="userIcon()">
     </nz-avatar>
@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<div *ngIf="!loginStatus" nz-row nzGutter="16">
+<div *ngIf="!this.userService.status" nz-row nzGutter="16">
   <div nz-col nzSpan="6">
     <nz-avatar [nzSize]="AvatarSize" nz-popover [nzPopoverContent]="notLoginPopover" nzIcon="user"></nz-avatar>
   </div>

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {LoginService} from '../../services/login.service';
 import {NzModalService} from 'ng-zorro-antd';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-forum',
@@ -33,9 +33,9 @@ export class ForumComponent implements OnInit {
   // 过滤方式
   filter: string;
 
-  constructor(private router: Router, private loginService: LoginService,
+  constructor(private router: Router, private userService: UserService,
               private routerInfo: ActivatedRoute, private modal: NzModalService) {
-    this.ImageUrl = loginService.getUserImage();
+    this.ImageUrl = userService.avatarUrl;
 
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];
@@ -49,7 +49,7 @@ export class ForumComponent implements OnInit {
     this.filter = 'all';
 
     this.loadBlockInfo();
-    this.loadArticleNum();
+    this.loadArticleNum(); // delete
     this.loadData(1);
     this.loadHotTopic();
   }

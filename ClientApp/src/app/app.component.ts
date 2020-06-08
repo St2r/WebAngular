@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {LoginService} from './services/login.service';
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +25,7 @@ export class AppComponent {
     ['游玩', 'amusement']
   ];
 
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   inputValue?: string;

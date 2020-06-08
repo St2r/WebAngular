@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Observable, Observer} from 'rxjs';
-import {LoginService} from '../../services/login.service';
 import {NzModalService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -14,50 +14,63 @@ export class RegisterComponent implements OnInit {
   validateForm: FormGroup;
   registerStatus: number;
 
-  submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
+  submitForm(value: { userName: string; email: string; password: string; confirm: string }): void {
     for (const key of Object.keys(this.validateForm.controls)) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    setTimeout(() => {
-      // todo http请求判断注册是否成功
-      // todo 注册成功之后自动登陆
-      console.log(value);
-      // this.fail();
-      this.registerStatus = 1;
-    }, 1000);
+    // todo 注册成功之后自动登陆
+    new Observable((observer: Observer<boolean>) => {
+      this.userService.register(value).subscribe(result => {
+        observer.next(result[0]);
+        observer.complete();
+      }, () => {
+        this.fail();
+        observer.complete();
+      });
+    }).subscribe(result => {
+      if (result) {
+        this.registerStatus = 1;
+        this.userService.login({username: value.userName, password: value.password});
+      } else {
+        this.fail();
+      }
+    }, error => this.fail());
   }
 
   validateConfirmPassword(): void {
     setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
   }
 
+  // 向后端请求验证用户名是否已被占用
   userNameAsyncValidator = (control: FormControl) =>
     new Observable((observer: Observer<ValidationErrors | null>) => {
-      // todo::向后端请求验证用户名是否已被占用
-      setTimeout(() => {
-        if (control.value === 'JasonWood') {
-          // you have to return `{error: true}` to mark it as an error event
-          observer.next({error: true, duplicated: true});
-        } else {
-          observer.next(null);
+      this.userService.checkUsername(control.value).subscribe(
+        result => {
+          if (result[0]) {
+            observer.next({error: true, duplicated: true});
+          } else {
+            observer.next(null);
+          }
+          observer.complete();
         }
-        observer.complete();
-      }, 1000);
-    })
+      );
+    });
 
+  // 向后端请求验证邮箱是否已被占用
   emailAsyncValidator = (control: FormControl) =>
     new Observable((observer: Observer<ValidationErrors | null>) => {
-      // todo::向后端请求验证邮箱是否已被占用
-      setTimeout(() => {
-        if (control.value === 'st2r@qq.com') {
-          observer.next({error: true, duplicated: true});
-        } else {
-          observer.next(null);
+      this.userService.checkEmail(control.value).subscribe(
+        result => {
+          if (result[0]) {
+            observer.next({error: true, duplicated: true});
+          } else {
+            observer.next(null);
+          }
+          observer.complete();
         }
-        observer.complete();
-      }, 1000);
-    })
+      );
+    });
 
   // 判断验证密码和密码是否相同
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
@@ -67,7 +80,7 @@ export class RegisterComponent implements OnInit {
       return {confirm: true, error: true};
     }
     return {};
-  }
+  };
 
   // 注册失败用于弹出modal
   fail(): void {
@@ -77,7 +90,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private loginService: LoginService,
+  constructor(private fb: FormBuilder, private userService: UserService,
               private modal: NzModalService, private router: Router) {
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required], [this.userNameAsyncValidator]],
