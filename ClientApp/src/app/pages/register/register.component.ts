@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Observable, Observer} from 'rxjs';
-import {LoginService} from '../../services/login.service';
 import {NzModalService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -14,18 +14,14 @@ export class RegisterComponent implements OnInit {
   validateForm: FormGroup;
   registerStatus: number;
 
-  submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
+  submitForm(value: { userName: string; email: string; password: string; confirm: string }): void {
     for (const key of Object.keys(this.validateForm.controls)) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    setTimeout(() => {
-      // todo http请求判断注册是否成功
-      // todo 注册成功之后自动登陆
-      console.log(value);
-      // this.fail();
-      this.registerStatus = 1;
-    }, 1000);
+    console.log(this.userService.register(value));
+    // todo http请求判断注册是否成功
+    // todo 注册成功之后自动登陆
   }
 
   validateConfirmPassword(): void {
@@ -77,7 +73,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private loginService: LoginService,
+  constructor(private fb: FormBuilder, private userService: UserService,
               private modal: NzModalService, private router: Router) {
     this.validateForm = this.fb.group({
       userName: ['', [Validators.required], [this.userNameAsyncValidator]],

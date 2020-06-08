@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LoginService} from '../../../services/login.service';
 
 @Component({
   selector: 'app-tab-follow',
@@ -12,10 +11,10 @@ export class TabFollowComponent implements OnInit {
 
   loginUser: string;
 
-  constructor(private loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.loginUser = this.loginService.getUserName();
+    this.loginUser = 'tab-user';
   }
 
 }

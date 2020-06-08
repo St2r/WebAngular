@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from '../../services/login.service';
 import {Router, RouterModule} from '@angular/router';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-login-bar',
@@ -12,7 +12,7 @@ export class LoginBarComponent implements OnInit {
   loginStatus = false;
   AvatarSize: 56;
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
@@ -20,16 +20,16 @@ export class LoginBarComponent implements OnInit {
   }
 
   buttonPost() {
-    this.loginService.login('1', '2');
+    this.userService.login({username: '1', password: '2'});
     console.log(1);
   }
 
   userIcon(): string {
-    return this.loginService.getUserImage();
+    return this.userService.avatarUrl;
   }
 
   checkLoginStatus() {
-    this.loginStatus = this.loginService.isLogged();
+    this.loginStatus = this.userService.status;
   }
 
   TestLogin(): void {
