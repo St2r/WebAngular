@@ -21,6 +21,7 @@ namespace WebAngular.Controllers
         {
             public string UserName { get; set; }
             public string Password { get; set; }
+            public bool Remember { get; set; }
         }
 
         [HttpPost("/controller/user/login")]
@@ -45,15 +46,22 @@ namespace WebAngular.Controllers
             return res.Append(!registerForm.Username.Equals("s")).ToArray();
         }
 
-        [HttpGet("/controller/user/load-user-info")]
-        public IEnumerable<UserInfo> LoadUserInfo()
+        [HttpPost("/controller/user/get-all-info")]
+        public IEnumerable<UserInfo> LoadUserInfo([FromBody] UsernameModel usernameMode)
         {
             var res = new UserInfo
-                {Nickname = "nick_test", Birthday = "1999", AvatarUrl = "/avatar.png", RegisterData = "2020"};
+            {
+                Nickname = "nick_" + usernameMode.Username, AvatarUrl = "/avatar.png",
+                Brief = usernameMode.Username + "的个人简介",
+
+                Follow = 6, Fans = 5, Point = 4, Browse = 3, Like = 2, Star = 1,
+
+                Birthday = "2000", RegisterData = "2020"
+            };
             return Enumerable.Empty<UserInfo>().Append(res).ToArray();
         }
 
-        [HttpPost("/controller/user/get-user-info")]
+        [HttpPost("/controller/user/get-base-info")]
         public IEnumerable<UserItem> GetUserInfo([FromBody] UsernameModel usernameModel)
         {
             var res = new UserItem() {Nickname = "nick_" + usernameModel.Username, AvatarUrl = "/avatar.png"};
@@ -76,6 +84,14 @@ namespace WebAngular.Controllers
         {
             public string Nickname { get; set; }
             public string AvatarUrl { get; set; }
+            public string Brief { get; set; }
+
+            public int Follow { get; set; }
+            public int Fans { get; set; }
+            public int Point { get; set; }
+            public int Browse { get; set; }
+            public int Like { get; set; }
+            public int Star { get; set; }
             public string Birthday { get; set; }
             public string RegisterData { get; set; }
         }

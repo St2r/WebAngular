@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,15 +13,14 @@ export class LoginComponent implements OnInit {
   loginStatus: number;
 
   submitForm(): void {
-    console.log(1);
     for (const i of Object.keys(this.validateForm.controls)) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.loginStatus = 1;
+    this.userService.login(this.validateForm.value);
   }
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, public router: Router, public userService: UserService) {
   }
 
   ngOnInit(): void {

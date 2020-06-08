@@ -1,0 +1,43 @@
+<div class="hover-box">
+  <nz-row>
+    <nz-col nzSpan="6">
+      <nz-avatar [nzSize]="48" nzShape="circle" [nzSrc]="this.userInfo.avatarUrl"></nz-avatar>
+    </nz-col>
+    <nz-col nzOffset="6" nzSpan="6">
+      <p>{{username}}</p>
+    </nz-col>
+  </nz-row>
+  <nz-row>
+    {{this.userInfo.brief}}
+  </nz-row>
+  <nz-divider></nz-divider>
+  <nz-row>
+    <nz-col nzSpan="8">
+      <a routerLink="/home">关注数<br>{{this.userInfo.follow}}</a>
+    </nz-col>
+    <nz-col nzSpan="8">
+      <a routerLink="/home">粉丝数<br>{{this.userInfo.fans}}</a>
+    </nz-col>
+    <nz-col nzSpan="8">
+      <a routerLink="/home">积分<br>{{this.userInfo.point}}</a>
+    </nz-col>
+  </nz-row>
+  <nz-row>
+    <nz-col nzSpan="8">帖子被浏览<br>{{this.userInfo.browse}}</nz-col>
+    <nz-col nzSpan="8">获赞数<br>{{this.userInfo.like}}</nz-col>
+    <nz-col nzSpan="8">被收藏<br>{{this.userInfo.star}}</nz-col>
+  </nz-row>
+  <nz-divider></nz-divider>
+  <nz-row>
+    <nz-col nzSpan="6">
+      <button nz-button nzType="primary">+关注</button>
+    </nz-col>
+    <nz-col nzSpan="6">
+      <button nz-button>发私信</button>
+    </nz-col>
+    <nz-col nzSpan="6">
+      <button nz-button>个人主页</button>
+    </nz-col>
+  </nz-row>
+
+</div>

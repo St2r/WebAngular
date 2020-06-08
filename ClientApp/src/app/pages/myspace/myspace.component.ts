@@ -28,6 +28,7 @@ export class MyspaceComponent implements OnInit {
   }
 }
 
+// todo:: 统一
 export interface UserInfo {
   follow: number;
   fans: number;

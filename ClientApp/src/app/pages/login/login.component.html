@@ -1,37 +1,47 @@
-<form nz-form *ngIf="loginStatus==0" [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+<form nz-form *ngIf="!this.userService.status" [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-control nzErrorTip="请输入用户名!">
+    <nz-form-label [nzSpan]="7">
+      用户名
+    </nz-form-label>
+    <nz-form-control [nzSpan]="12" nzErrorTip="请输入用户名!">
       <nz-input-group nzPrefixIcon="user">
-        <input type="text" nz-input formControlName="userName" placeholder="用户名" />
+        <input type="text" nz-input formControlName="userName" placeholder="用户名"/>
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control nzErrorTip="请输入密码!" >
+    <nz-form-label [nzSpan]="7">
+      密码
+    </nz-form-label>
+    <nz-form-control [nzSpan]="12" nzErrorTip="请输入密码!">
       <nz-input-group nzPrefixIcon="lock">
-        <input type="password" nz-input formControlName="password" placeholder="密码" />
+        <input type="password" nz-input formControlName="password" placeholder="密码"/>
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <div nz-row class="login-form-margin">
-    <div nz-col [nzSpan]="12">
+    <div nz-col [nzOffset]="6" [nzSpan]="12">
       <label nz-checkbox formControlName="remember">
         <span>记住我</span>
       </label>
     </div>
-    <div nz-col [nzSpan]="12">
+    <div nz-col [nzSpan]="3">
       <a class="login-form-forgot" routerLink="password">忘记密码？</a>
     </div>
   </div>
-  <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">登陆</button>
-  <a> 注册 </a>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzOffset]="6">
+      <button nz-button type="submit" nzBlock [nzType]="'primary'">登陆</button>
+      <a> 注册 </a>
+    </nz-form-control>
+  </nz-form-item>
 </form>
 
 <nz-result
   nzStatus="success"
   nzTitle="登陆成功"
   nzSubTitle="5s后自动跳转或点击下面按钮回到主页"
-  *ngIf="loginStatus==1"
+  *ngIf="this.userService.status"
 >
   <div nz-result-extra>
     <button nz-button nzType="primary" (click)="this.router.navigate(['home'])">回到主页</button>

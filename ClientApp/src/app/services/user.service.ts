@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
+import {UserInfo} from '../model/user-info';
 
 @Injectable({
   providedIn: 'root'
@@ -22,24 +23,33 @@ export class UserService {
 
   // 已登陆用户的ID
   public username: string;
-  public nickname: string;
-  public avatarUrl: string;
 
-  birthday: string;
-  registerData: string;
+  // 已登陆用户的信息
+  public userInfo: UserInfo;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.status = false;
     this.baseUrl = baseUrl;
+    this.userInfo = new class implements UserInfo {
+      avatarUrl: string;
+      birthday: string;
+      brief: string;
+      browse: number;
+      fans: number;
+      follow: number;
+      like: number;
+      nickname: string;
+      point: number;
+      registerData: string;
+      star: number;
+    };
   }
 
   // 登陆
-  // 异步调用
-  public login(value: { username: string, password: string }): void {
+  public login(value: { username: string, password: string, remember: boolean }): void {
     new Observable((observer: Observer<boolean>) => {
       this.http.post<boolean>(this.baseUrl + 'controller/user/login', value).subscribe(
         result => {
-          console.log(result);
           observer.next(result[0]);
           observer.complete();
         }
@@ -61,26 +71,26 @@ export class UserService {
 
   // 登陆后将登陆用户的信息加载进来
   loadUserInfo(): void {
-    this.http.get<{ nickname: string, avatarUrl: string, birthday: string, registerData: string }>
-    (this.baseUrl + 'controller/user/load-user-info').subscribe(
+    this.getUserAllInfo(this.username).subscribe(
       result => {
-        this.nickname = result[0].nickname;
-        this.avatarUrl = result[0].avatarUrl;
-        this.birthday = result[0].birthday;
-        this.registerData = result[0].registerData;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+        this.userInfo = result[0];
+      });
   }
 
-  // 获得某用户的昵称和头像信息
+  // 获得某用户的昵称和头像信息（轻量级）
   // 异步调用
-  public getUserInfo(username: string): Observable<{ nickname: string, avatarUrl: string }> {
+  public getUserBaseInfo(username: string): Observable<{ nickname: string, avatarUrl: string }> {
     const model = {username: username};
     return this.http.post<{ nickname: string, avatarUrl: string }>
-    (this.baseUrl + 'controller/user/get-user-info', model);
+    (this.baseUrl + 'controller/user/get-base-info', model);
+  }
+
+  // 获得某用户的全部信息
+  // 异步调用
+  public getUserAllInfo(username: string): Observable<UserInfo> {
+    const model = {username: username};
+    return this.http.post<UserInfo>
+    (this.baseUrl + 'controller/user/get-all-info', model);
   }
 
   // 检查用户名是否已被占用

@@ -1,6 +1,6 @@
 <div *ngIf="this.userService.status" nz-row nzGutter="16">
   <div nz-col nzSpan="6">
-    <nz-avatar [nzSize]="AvatarSize" nz-popover [nzPopoverContent]="loginPopover" nzIcon="user" [nzSrc]="userIcon()">
+    <nz-avatar [nzSize]="AvatarSize" nz-popover [nzPopoverContent]="loginPopover" nzIcon="user" [nzSrc]="this.userService.userInfo.avatarUrl">
     </nz-avatar>
   </div>
   <div nz-col nzSpan="6">
