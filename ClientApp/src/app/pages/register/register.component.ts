@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    // todo 注册成功之后自动登陆
+    // 注册成功之后自动登陆
     new Observable((observer: Observer<boolean>) => {
       this.userService.register(value).subscribe(result => {
         observer.next(result[0]);
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     }).subscribe(result => {
       if (result) {
         this.registerStatus = 1;
-        this.userService.login({username: value.userName, password: value.password});
+        this.userService.login({username: value.userName, password: value.password, remember: false});
       } else {
         this.fail();
       }

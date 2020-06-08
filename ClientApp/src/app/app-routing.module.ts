@@ -44,7 +44,8 @@ const routes: Routes = [
   {path: 'my-space', component: MyspaceComponent},
   {path: 'search', component: SearchComponent},
   {path: 'image', component: TestImageComponent},
-  {path: '**', component: FallbackComponent}
+  {path: '404', component: FallbackComponent},
+  {path: '**', pathMatch: 'full', redirectTo: '404'}
 ];
 
 @NgModule({

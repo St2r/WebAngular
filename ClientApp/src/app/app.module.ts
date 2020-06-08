@@ -76,6 +76,7 @@ import { SearchComponent } from './pages/search/search.component';
 
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { TestImageComponent } from './pages/test-image/test-image.component';
+import { UserHoverComponent } from './components/user-hover/user-hover.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { TestImageComponent } from './pages/test-image/test-image.component';
     TabFollowComponent,
     SearchComponent,
     TestImageComponent,
+    UserHoverComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

@@ -35,7 +35,7 @@ export class ForumComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService,
               private routerInfo: ActivatedRoute, private modal: NzModalService) {
-    this.ImageUrl = userService.avatarUrl;
+    this.ImageUrl = userService.userInfo.avatarUrl;
 
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];

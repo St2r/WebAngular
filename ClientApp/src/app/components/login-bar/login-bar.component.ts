@@ -20,12 +20,8 @@ export class LoginBarComponent implements OnInit {
   }
 
   buttonPost() {
-    this.userService.login({username: '1', password: '2'});
+    // this.userService.login({username: '1', password: '2'});
     console.log(1);
-  }
-
-  userIcon(): string {
-    return this.userService.avatarUrl;
   }
 
   checkLoginStatus() {

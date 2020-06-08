@@ -1,5 +1,5 @@
 .login-form {
-  max-width: 300px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
@@ -13,6 +13,7 @@
   float: right;
 }
 
-.login-form-button {
-  width: 100%;
+.test-box {
+  margin: 100px;
+  border-style: solid;
 }
