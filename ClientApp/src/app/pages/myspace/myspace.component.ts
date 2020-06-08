@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UserInfo} from '../../model/user-info'
 
 @Component({
   selector: 'app-myspace',
@@ -8,9 +9,7 @@ import {Component, OnInit} from '@angular/core';
 export class MyspaceComponent implements OnInit {
   userInfo: UserInfo;
 
-  userBasicInfo: UserBasicInfo;
-
-  recent_visiter: VisiterInfo[];
+  recent_visiter: UserInfo[];
 
   favor_block: BlockInfo[];
 
@@ -19,7 +18,6 @@ export class MyspaceComponent implements OnInit {
 
   ngOnInit() {
     this.loadUserInfo();
-    this.loadUserBasicInfo();
     this.modifyGreeting();
     this.loadVisiterInfo();
     this.loadFavorBlockInfo();
@@ -28,6 +26,9 @@ export class MyspaceComponent implements OnInit {
   // todo 请求后端
   loadUserInfo() {
     this.userInfo = new class implements UserInfo {
+      nickname = 'test_name';
+      avatarUrl = 'fack url';
+      brief = '';
       follow = 1;
       fans = 1000;
       point = 500;
@@ -35,35 +36,60 @@ export class MyspaceComponent implements OnInit {
       like = 100;
       star = 100;
       login = 2;
-    };
-  }
-
-  loadUserBasicInfo() {
-    this.userBasicInfo = new class implements UserBasicInfo {
-      name = 'test_name';
-      greeting = '';
+      birthday = '';
+      registerData = '';
     };
   }
 
   modifyGreeting() {
-    if (this.userBasicInfo.greeting=='') {
-      this.userBasicInfo.greeting = 'ta 比较懒还没有说明';
+    if (this.userInfo.brief=='') {
+      this.userInfo.brief = 'ta 比较懒还没有说明';
     }
   }
 
   loadVisiterInfo() {
     this.recent_visiter = [
-      new class implements VisiterInfo {
-        image = 'null';
-        name = 'visiter_1';
+      new class implements UserInfo {
+        nickname = 'test_name';
+        avatarUrl = 'fack url';
+        brief = '';
+        follow = 1;
+        fans = 1000;
+        point = 500;
+        browse = 20000;
+        like = 100;
+        star = 100;
+        login = 2;
+        birthday = '';
+        registerData = '';
       },
-      new class implements VisiterInfo {
-        image = 'null';
-        name = 'visiter_2';
+      new class implements UserInfo {
+        nickname = 'test_name';
+        avatarUrl = 'fack url';
+        brief = '';
+        follow = 1;
+        fans = 1000;
+        point = 500;
+        browse = 20000;
+        like = 100;
+        star = 100;
+        login = 2;
+        birthday = '';
+        registerData = '';
       },
-      new class implements VisiterInfo {
-        image = 'null';
-        name = 'visiter_3';
+      new class implements UserInfo {
+        nickname = 'test_name';
+        avatarUrl = 'fack url';
+        brief = '';
+        follow = 1;
+        fans = 1000;
+        point = 500;
+        browse = 20000;
+        like = 100;
+        star = 100;
+        login = 2;
+        birthday = '';
+        registerData = '';
       },
     ]
   }
@@ -87,27 +113,6 @@ export class MyspaceComponent implements OnInit {
       },
     ]
   }
-}
-
-// todo:: 统一
-export interface UserInfo {
-  follow: number;
-  fans: number;
-  point: number;
-  browse: number;
-  like: number;
-  star: number;
-  login: number;
-}
-
-export interface UserBasicInfo {
-  name: String;
-  greeting: String;
-}
-
-export interface VisiterInfo {
-  image: String;
-  name: String;
 }
 
 export interface BlockInfo {

@@ -14,13 +14,13 @@
         </div>
         <div class="right">
           <div class="nameWrap">
-            <span class="name"> {{ userBasicInfo.name }} </span>
+            <span class="name"> {{ userInfo.nickname }} </span>
           </div>
           <div class="briefWrap">
             <div class="briefBasic">
               <span></span>
             </div>
-            <p class="briefDescription"> {{ userBasicInfo.greeting }} </p>
+            <p class="briefDescription"> {{ userInfo.brief }} </p>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
         <span>最近访客</span>
         <nz-divider></nz-divider>
         <ul *ngFor="let item of recent_visiter">
-          <li> {{ item.image }} --- {{ item.name }} </li>
+          <li> {{ item.avatarUrl }} --- {{ item.nickname }} </li>
         </ul>
       </div>
       <div class="userInfo-box-bottom">

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserInfo} from '../myspace.component';
+import {UserInfo} from '../../../model/user-info';
 
 @Component({
   selector: 'app-side-user',
