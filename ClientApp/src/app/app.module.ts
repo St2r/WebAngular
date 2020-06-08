@@ -6,7 +6,6 @@ import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './pages/home/home.component';
-import {FetchDataComponent} from './pages/fetch-data/fetch-data.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -56,7 +55,6 @@ import { FallbackComponent } from './pages/fallback/fallback.component';
 import { PersonPageComponent } from './pages/space/person-page/person-page.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { ForumComponent } from './pages/forum/forum.component';
-import { SchoolComponent } from './pages/school/school.component';
 import { QuestionComponent } from './components/question/question.component';
 import { DoExerciseComponent } from './pages/do-exercise/do-exercise.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -77,12 +75,12 @@ import { TabFollowComponent } from './pages/myspace/tab-follow/tab-follow.compon
 import { SearchComponent } from './pages/search/search.component';
 
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { TestImageComponent } from './pages/test-image/test-image.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FetchDataComponent,
     EditArticleComponent,
     ViewArticleComponent,
     CommentComponent,
@@ -95,7 +93,6 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
     PersonPageComponent,
     ExerciseComponent,
     ForumComponent,
-    SchoolComponent,
     QuestionComponent,
     DoExerciseComponent,
     LoginBarComponent,
@@ -110,6 +107,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
     TabAttachmentComponent,
     TabFollowComponent,
     SearchComponent,
+    TestImageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
