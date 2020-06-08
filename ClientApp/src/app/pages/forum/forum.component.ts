@@ -49,7 +49,7 @@ export class ForumComponent implements OnInit {
     this.filter = 'all';
 
     this.loadBlockInfo();
-    this.loadArticleNum();
+    this.loadArticleNum(); // delete
     this.loadData(1);
     this.loadHotTopic();
   }
