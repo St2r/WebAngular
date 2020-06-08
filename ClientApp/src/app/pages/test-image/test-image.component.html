@@ -1,0 +1,5 @@
+<form>
+  <input type="file" accept="image/jpeg" (change)="fileChange($event.target.files)">
+  <img *ngIf="imgURL" [src]="imgURL" size="40px">
+  <button nz-button nzType="primary" (click)="upload()">上传</button>
+</form>

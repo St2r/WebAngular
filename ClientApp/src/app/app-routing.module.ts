@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {FetchDataComponent} from './pages/fetch-data/fetch-data.component';
 import {HomeComponent} from './pages/home/home.component';
 import {EditArticleComponent} from './pages/edit-article/edit-article.component';
 import {ViewArticleComponent} from './pages/view-article/view-article.component';
@@ -13,12 +12,12 @@ import {FallbackComponent} from './pages/fallback/fallback.component';
 import {PersonPageComponent} from './pages/space/person-page/person-page.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
 import {ForumComponent} from './pages/forum/forum.component';
-import {SchoolComponent} from './pages/school/school.component';
 import {DoExerciseComponent} from './pages/do-exercise/do-exercise.component';
 import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {MyspaceComponent} from './pages/myspace/myspace.component';
 import { SearchComponent } from './pages/search/search.component';
+import {TestImageComponent} from './pages/test-image/test-image.component';
 
 
 const routes: Routes = [
@@ -26,11 +25,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'fetch-data', component: FetchDataComponent},
   {path: 'exercise', component: ExerciseComponent},
   {path: 'do-exercise', component: DoExerciseComponent},
   {path: 'forum/:block', component: ForumComponent},
-  {path: 'school', component: SchoolComponent},
   {path: 'edit-article/:articleId', component: EditArticleComponent},
   {path: 'view-article/:articleId', component: ViewArticleComponent},
   {
@@ -46,6 +43,7 @@ const routes: Routes = [
   },
   {path: 'my-space', component: MyspaceComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'image', component: TestImageComponent},
   {path: '**', component: FallbackComponent}
 ];
 
