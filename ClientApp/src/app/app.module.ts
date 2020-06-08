@@ -11,7 +11,7 @@ import {FetchDataComponent} from './pages/fetch-data/fetch-data.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './modules/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './modules/icons-provider.module';
 import {AntDesignModule} from './modules/ant-design.module';
 import {
@@ -74,6 +74,9 @@ import { TabInvitationComponent } from './pages/myspace/tab-invitation/tab-invit
 import { TabStarComponent } from './pages/myspace/tab-star/tab-star.component';
 import { TabAttachmentComponent } from './pages/myspace/tab-attachment/tab-attachment.component';
 import { TabFollowComponent } from './pages/myspace/tab-follow/tab-follow.component';
+import { SearchComponent } from './pages/search/search.component';
+
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
 @NgModule({
   declarations: [
@@ -106,6 +109,7 @@ import { TabFollowComponent } from './pages/myspace/tab-follow/tab-follow.compon
     TabStarComponent,
     TabAttachmentComponent,
     TabFollowComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -148,7 +152,8 @@ import { TabFollowComponent } from './pages/myspace/tab-follow/tab-follow.compon
     NzSelectModule,
     NzRadioModule,
     NzCarouselModule,
-    NzTabsModule
+    NzTabsModule,
+    NzAutocompleteModule
   ],
   exports: [],
   providers: [],
