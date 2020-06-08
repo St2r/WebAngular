@@ -16,15 +16,15 @@ namespace WebAngular.Controllers
         {
             this._logger = logger;
         }
-        
+
         public class LogForm
         {
             public string UserName { get; set; }
             public string Password { get; set; }
         }
-        
+
         [HttpPost("/controller/user/login")]
-        public IEnumerable<bool> Login([FromBody]LogForm logForm)
+        public IEnumerable<bool> Login([FromBody] LogForm logForm)
         {
             var res = Enumerable.Empty<bool>();
             return res.Append(logForm.UserName.Equals(logForm.Password)).ToArray();
@@ -37,18 +37,19 @@ namespace WebAngular.Controllers
             public string Password { get; set; }
             public string Confirm { get; set; }
         }
-        
+
         [HttpPost("/controller/user/register")]
         public IEnumerable<bool> Register([FromBody] RegisterForm registerForm)
         {
             var res = Enumerable.Empty<bool>();
-            return res.Append(!registerForm.Username.Equals("test_fail")).ToArray();
+            return res.Append(!registerForm.Username.Equals("s")).ToArray();
         }
 
         [HttpGet("/controller/user/load-user-info")]
         public IEnumerable<UserInfo> LoadUserInfo()
         {
-            var res = new UserInfo {Nickname = "nick_test", Birthday = "1999", AvatarUrl = "/avatar.png", RegisterData = "2020"};
+            var res = new UserInfo
+                {Nickname = "nick_test", Birthday = "1999", AvatarUrl = "/avatar.png", RegisterData = "2020"};
             return Enumerable.Empty<UserInfo>().Append(res).ToArray();
         }
 
@@ -57,6 +58,18 @@ namespace WebAngular.Controllers
         {
             var res = new UserItem() {Nickname = "nick_" + usernameModel.Username, AvatarUrl = "/avatar.png"};
             return Enumerable.Empty<UserItem>().Append(res).ToArray();
+        }
+
+        [HttpPost("/controller/user/check-username")]
+        public IEnumerable<bool> CheckUsername([FromBody] UsernameModel usernameModel)
+        {
+            return Enumerable.Empty<bool>().Append(usernameModel.Username.ToCharArray()[0] != 's').ToArray();
+        }
+
+        [HttpPost("/controller/user/check-email")]
+        public IEnumerable<bool> CheckEmail([FromBody] EmailModel emailModel)
+        {
+            return Enumerable.Empty<bool>().Append(emailModel.Email.ToCharArray()[0] != 's').ToArray();
         }
 
         public class UserInfo
@@ -76,6 +89,11 @@ namespace WebAngular.Controllers
         public class UsernameModel
         {
             public string Username { get; set; }
+        }
+
+        public class EmailModel
+        {
+            public string Email { get; set; }
         }
     }
 }

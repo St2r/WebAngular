@@ -12,7 +12,7 @@ export class LoginBarComponent implements OnInit {
   loginStatus = false;
   AvatarSize: 56;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(public userService: UserService, private router: Router) {
   }
 
   ngOnInit() {

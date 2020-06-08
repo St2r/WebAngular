@@ -1,7 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Observable, Observer} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,48 +31,36 @@ export class UserService {
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.status = false;
     this.baseUrl = baseUrl;
-    this.getUserInfo('KaMui').subscribe(result => console.log(result[0]));
   }
 
   // 登陆
-  public login(value: { username: string, password: string }) {
-    this.http.post<boolean>(this.baseUrl + 'controller/user/login', value).subscribe(
-      result => {
-        if (result[0] === true) {
-          this.status = true;
-          this.username = value.username;
-          this.loadUserInfo();
-          return true;
+  // 异步调用
+  public login(value: { username: string, password: string }): void {
+    new Observable((observer: Observer<boolean>) => {
+      this.http.post<boolean>(this.baseUrl + 'controller/user/login', value).subscribe(
+        result => {
+          console.log(result);
+          observer.next(result[0]);
+          observer.complete();
         }
-      }, error => {
-        console.log(error);
-        return false;
-      });
-    return false;
+      );
+    }).subscribe(result => {
+      if (result) {
+        this.username = value.username;
+        this.status = true;
+        this.loadUserInfo();
+      }
+    });
   }
 
   // 注册
-  public register(value: { userName: string; email: string; password: string; confirm: string }) {
-    this.http.post<boolean>(this.baseUrl + 'controller/user/register', value).subscribe(
-      result => {
-        console.log(result[0]);
-        if (result[0]) {
-          this.login({username: value.userName, password: value.password});
-          console.log('没事吧');
-          return true;
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    setTimeout(() => {
-      return false;
-    }, 2000);
+  // 异步调用
+  public register(value: { userName: string; email: string; password: string; confirm: string }): Observable<boolean> {
+    return this.http.post<boolean>(this.baseUrl + 'controller/user/register', value);
   }
 
   // 登陆后将登陆用户的信息加载进来
-  loadUserInfo() {
+  loadUserInfo(): void {
     this.http.get<{ nickname: string, avatarUrl: string, birthday: string, registerData: string }>
     (this.baseUrl + 'controller/user/load-user-info').subscribe(
       result => {
@@ -88,10 +75,23 @@ export class UserService {
     );
   }
 
-  // 获得某用户的一些信息
+  // 获得某用户的昵称和头像信息
+  // 异步调用
   public getUserInfo(username: string): Observable<{ nickname: string, avatarUrl: string }> {
     const model = {username: username};
     return this.http.post<{ nickname: string, avatarUrl: string }>
     (this.baseUrl + 'controller/user/get-user-info', model);
+  }
+
+  // 检查用户名是否已被占用
+  public checkUsername(username: string): Observable<boolean> {
+    const model = {username: username};
+    return this.http.post<boolean>(this.baseUrl + 'controller/user/check-username', model);
+  }
+
+  // 检查邮箱是否已被占用
+  public checkEmail(email: string): Observable<boolean> {
+    const model = {email: email};
+    return this.http.post<boolean>(this.baseUrl + 'controller/user/check-email', model);
   }
 }
