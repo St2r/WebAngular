@@ -1,0 +1,25 @@
+<div class="blank">
+
+</div>
+<div class="search_pannel">
+  <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+    <input type="text" nz-input placeholder="input search text" />
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button nz-button nzType="primary" nzSize="large" nzSearch>Search</button>
+  </ng-template>
+</div>
+<div class="blank">
+
+</div>
+<div class="pr_info">
+  <div class="hot_search">
+    <h2>热门搜索</h2>
+    <div *ngFor="let item of hot_search">
+      <span> {{ item }} </span>
+    </div>
+  </div>
+  <div class="history">
+    <h2>历史搜索</h2>
+  </div>
+</div>
