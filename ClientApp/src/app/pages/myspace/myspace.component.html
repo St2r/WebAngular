@@ -1,10 +1,33 @@
-<nz-layout>
-  <nz-header style="background-color: white">
-    个人简介 + 背景 + 头像等
-  </nz-header>
-  <nz-layout>
-
-    <nz-content style="background-color: white">
+<nz-layout style="background-color: white;">
+  <div style="background-color: white;">
+    <div class="profileWallWrap">
+      <div class="coverWrap">
+        <img class="cover" alt="cover" src="//assets.dxycdn.com/gitrepo/bbs-pc/dist/static/invalid-name@3x.35adc16a.png">
+      </div>
+      <div class="infoWrap">
+        <div class="left">
+          <div class="avatarWrap">
+            <div>
+              <nz-avatar [nzSize]="150" nzIcon="user"></nz-avatar>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="nameWrap">
+            <span class="name"> {{ userBasicInfo.name }} </span>
+          </div>
+          <div class="briefWrap">
+            <div class="briefBasic">
+              <span></span>
+            </div>
+            <p class="briefDescription"> {{ userBasicInfo.greeting }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-layout class="main_part">
+    <nz-content>
       <nz-tabset>
         <nz-tab nzTitle="动态">
           <app-tab-post></app-tab-post>
@@ -25,11 +48,23 @@
     </nz-content>
 
     <nz-sider nzWidth="350px" nzTheme="light">
-      <div class="userInfo-box">
+      <div class="userInfo-box-top">
         <app-side-user [userInfo]="userInfo"></app-side-user>
       </div>
-      <div class="userInfo-box">最近访客</div>
-      <div class="userInfo-box">喜爱的板块</div>
+      <div class="userInfo-box-middle">
+        <span>最近访客</span>
+        <nz-divider></nz-divider>
+        <ul *ngFor="let item of recent_visiter">
+          <li> {{ item.image }} --- {{ item.name }} </li>
+        </ul>
+      </div>
+      <div class="userInfo-box-bottom">
+        <span>喜爱的板块</span>
+        <nz-divider></nz-divider>
+        <ul *ngFor="let item of favor_block">
+          <li [ngClass]="{'orange':item.have_news, 'black':!item.have_news}"> {{ item.image }} --- {{ item.name }} </li>
+        </ul>
+      </div>
     </nz-sider>
   </nz-layout>
 </nz-layout>
