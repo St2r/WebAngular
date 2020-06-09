@@ -31,6 +31,12 @@ namespace WebAngular.Controllers
             return res.Append(logForm.UserName.Equals(logForm.Password)).ToArray();
         }
 
+        [HttpGet("/controller/user/logout")]
+        public IEnumerable<bool> Logout()
+        {
+            return Enumerable.Empty<bool>().Append(true).ToArray();
+        }
+        
         public class RegisterForm
         {
             public string Username { get; set; }
