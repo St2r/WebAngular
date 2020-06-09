@@ -19,46 +19,46 @@ export class FollowMeComponent implements OnInit {
   loadFollowMe() {
     this.follow_me = [
       new class implements UserInfo {
-        nickname = 'my follow 1';
+        username = 'my login name';
+        nickname = 'test_name';
         avatarUrl = 'fack url';
-        brief = 'my_brief';
+        brief = '';
         follow = 1;
         fans = 1000;
         point = 500;
         browse = 20000;
         like = 100;
         star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
+        isFollowed = false;
+        isFan = false;
       },
       new class implements UserInfo {
-        nickname = 'my follow 2';
+        username = 'my login name';
+        nickname = 'test_name';
         avatarUrl = 'fack url';
-        brief = 'my_brief';
+        brief = '';
         follow = 1;
         fans = 1000;
         point = 500;
         browse = 20000;
         like = 100;
         star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
+        isFollowed = false;
+        isFan = false;
       },
       new class implements UserInfo {
-        nickname = 'my follow 3';
+        username = 'my login name';
+        nickname = 'test_name';
         avatarUrl = 'fack url';
-        brief = 'my_brief';
+        brief = '';
         follow = 1;
         fans = 1000;
         point = 500;
         browse = 20000;
         like = 100;
         star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
+        isFollowed = false;
+        isFan = false;
       },
     ]
   }

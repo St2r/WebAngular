@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo} from '../../model/user-info'
+import {UserInfo} from '../../model/user-info';
+import { UserPrivateInfo } from '../../model/user-private-info';
 
 @Component({
   selector: 'app-myspace',
@@ -8,6 +9,8 @@ import {UserInfo} from '../../model/user-info'
 })
 export class MyspaceComponent implements OnInit {
   userInfo: UserInfo;
+
+  userPrivateInfo: UserPrivateInfo;
 
   recent_visiter: UserInfo[];
 
@@ -19,6 +22,7 @@ export class MyspaceComponent implements OnInit {
   ngOnInit() {
     this.loadUserInfo();
     this.modifyGreeting();
+    this.loadUserPrivateInfo();
     this.loadVisiterInfo();
     this.loadFavorBlockInfo();
   }
@@ -26,6 +30,7 @@ export class MyspaceComponent implements OnInit {
   // todo 请求后端
   loadUserInfo() {
     this.userInfo = new class implements UserInfo {
+      username = 'my login name';
       nickname = 'test_name';
       avatarUrl = 'fack url';
       brief = '';
@@ -35,9 +40,8 @@ export class MyspaceComponent implements OnInit {
       browse = 20000;
       like = 100;
       star = 100;
-      loginCount = 2;
-      birthday = '';
-      registerData = '';
+      isFollowed = false;
+      isFan = false;
     };
   }
 
@@ -47,9 +51,19 @@ export class MyspaceComponent implements OnInit {
     }
   }
 
+  loadUserPrivateInfo() {
+    this.userPrivateInfo = new class implements UserPrivateInfo {
+      username = 'my login name';
+      loginCount = 20;
+      birthday = '1970-1-1';
+      registerData = '1970-1-1';
+    }
+  }
+
   loadVisiterInfo() {
     this.recent_visiter = [
       new class implements UserInfo {
+        username = 'login in name';
         nickname = 'test_name';
         avatarUrl = 'fack url';
         brief = '';
@@ -59,12 +73,12 @@ export class MyspaceComponent implements OnInit {
         browse = 20000;
         like = 100;
         star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
+        isFollowed = false;
+        isFan = false;
       },
       new class implements UserInfo {
-        nickname = 'test_name';
+        username = 'login in name';
+        nickname = 'test_name 2';
         avatarUrl = 'fack url';
         brief = '';
         follow = 1;
@@ -73,12 +87,12 @@ export class MyspaceComponent implements OnInit {
         browse = 20000;
         like = 100;
         star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
+        isFollowed = false;
+        isFan = false;
       },
       new class implements UserInfo {
-        nickname = 'test_name';
+        username = 'login in name';
+        nickname = 'test_name 3';
         avatarUrl = 'fack url';
         brief = '';
         follow = 1;
@@ -87,9 +101,8 @@ export class MyspaceComponent implements OnInit {
         browse = 20000;
         like = 100;
         star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
+        isFollowed = false;
+        isFan = false;
       },
     ]
   }
