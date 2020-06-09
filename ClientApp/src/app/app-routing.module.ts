@@ -18,6 +18,7 @@ import {RegisterComponent} from './pages/register/register.component';
 import {MyspaceComponent} from './pages/myspace/myspace.component';
 import { SearchComponent } from './pages/search/search.component';
 import {TestImageComponent} from './pages/test-image/test-image.component';
+import { EdituserinfoComponent } from './pages/edituserinfo/edituserinfo.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
     ]
   },
   {path: 'my-space/:visitor', component: MyspaceComponent},
+  {path: 'editinfo', component: EdituserinfoComponent},
   {path: 'search', component: SearchComponent},
   {path: 'image', component: TestImageComponent},
   {path: '404', component: FallbackComponent},

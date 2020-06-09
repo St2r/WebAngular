@@ -22,6 +22,9 @@
             </div>
             <p class="briefDescription"> {{ userInfo.brief }} </p>
           </div>
+          <div class="editbutton" *ngIf="viewing_own_page">
+            <a nz-button nzType="link">修改资料</a>
+          </div>
         </div>
       </div>
     </div>

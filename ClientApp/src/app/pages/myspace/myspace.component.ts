@@ -196,6 +196,11 @@ export class MyspaceComponent implements OnInit {
   }
 
   setViewMode() {
-    this.viewing_own_page = true;
+    if (this.visitor.localeCompare(this.userInfo.username)!=0) {
+      this.viewing_own_page = false;
+    }
+    else {
+      this.viewing_own_page = true;
+    }
   }
 }

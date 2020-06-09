@@ -1,0 +1,66 @@
+<nz-layout style="background-color: white;">
+  <div style="background-color: white;">
+    <div class="profileWallWrap">
+      <div class="coverWrap">
+        <img class="cover" alt="cover" src="//assets.dxycdn.com/gitrepo/bbs-pc/dist/static/invalid-name@3x.35adc16a.png">
+      </div>
+      <div class="infoWrap">
+        <div class="left">
+          <div class="avatarWrap">
+            <div>
+              <nz-avatar [nzSize]="150" nzIcon="user"></nz-avatar>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="nameWrap">
+            <span class="name"> {{ userInfo.nickname }} </span>
+          </div>
+          <div class="briefWrap">
+            <div class="briefBasic">
+              <span></span>
+            </div>
+            <p class="briefDescription"> {{ userInfo.brief }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-layout class="main_part">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>昵称</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+          <input nz-input formControlName="userName" placeholder="async validate try to write JasonWood" />
+          <ng-template #userErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please input your username!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">
+              The username is redundant!
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>个人简介</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="Please write something here!">
+          <textarea formControlName="comment" nz-input rows="2" placeholder="write any thing"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Comment</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzErrorTip="Please write something here!">
+          <textarea formControlName="comment" nz-input rows="2" placeholder="write any thing"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button>
+          <button nz-button (click)="resetForm($event)">Reset</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-layout>
+</nz-layout>
+  

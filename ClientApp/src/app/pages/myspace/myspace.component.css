@@ -85,3 +85,16 @@ nz-header {
 .black {
   color: black;
 }
+
+.editbutton {
+  width: auto;
+  height: auto;
+  float: right;
+  position: relative;
+  right: 260px;
+  top: -60px;
+}
+
+.briefWrap {
+  max-width: 60%;
+}

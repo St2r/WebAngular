@@ -81,6 +81,7 @@ import { ArticleItemComponent } from './components/article-item/article-item.com
 import { IFollowComponent } from './pages/myspace/tab-follow/i-follow/i-follow.component';
 import { FollowMeComponent } from './pages/myspace/tab-follow/follow-me/follow-me.component';
 import { FollowBlockComponent } from './pages/myspace/tab-follow/follow-block/follow-block.component';
+import { EdituserinfoComponent } from './pages/edituserinfo/edituserinfo.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { FollowBlockComponent } from './pages/myspace/tab-follow/follow-block/fo
     IFollowComponent,
     FollowMeComponent,
     FollowBlockComponent,
+    EdituserinfoComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
