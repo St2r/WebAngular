@@ -33,7 +33,7 @@ export class TabFollowComponent implements OnInit {
         browse = 20000;
         like = 100;
         star = 100;
-        login = 2;
+        loginCount = 2;
         birthday = '';
         registerData = '';
       },
@@ -47,7 +47,7 @@ export class TabFollowComponent implements OnInit {
         browse = 20000;
         like = 100;
         star = 100;
-        login = 2;
+        loginCount = 2;
         birthday = '';
         registerData = '';
       },
@@ -61,7 +61,7 @@ export class TabFollowComponent implements OnInit {
         browse = 20000;
         like = 100;
         star = 100;
-        login = 2;
+        loginCount = 2;
         birthday = '';
         registerData = '';
       },

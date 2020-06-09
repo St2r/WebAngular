@@ -15,6 +15,7 @@ export class UserHoverComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.userInfo = new class implements UserInfo {
+      loginCount: number;
       avatarUrl: string;
       birthday: string;
       brief: string;

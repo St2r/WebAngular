@@ -55,6 +55,8 @@ namespace WebAngular.Controllers
                 Brief = usernameMode.Username + "的个人简介",
 
                 Follow = 6, Fans = 5, Point = 4, Browse = 3, Like = 2, Star = 1,
+                
+                LoginCount = 7,
 
                 Birthday = "2000", RegisterData = "2020"
             };
@@ -92,6 +94,8 @@ namespace WebAngular.Controllers
             public int Browse { get; set; }
             public int Like { get; set; }
             public int Star { get; set; }
+            
+            public int LoginCount { get; set; }
             public string Birthday { get; set; }
             public string RegisterData { get; set; }
         }

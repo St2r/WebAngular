@@ -31,6 +31,7 @@ export class UserService {
     this.status = false;
     this.baseUrl = baseUrl;
     this.userInfo = new class implements UserInfo {
+      loginCount: number;
       avatarUrl: string;
       birthday: string;
       brief: string;
