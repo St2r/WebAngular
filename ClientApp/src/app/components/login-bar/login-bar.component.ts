@@ -9,37 +9,27 @@ import {UserService} from '../../services/user.service';
 })
 export class LoginBarComponent implements OnInit {
 
-  loginStatus = false;
   AvatarSize: 56;
 
   constructor(public userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
-    this.checkLoginStatus();
   }
 
-  buttonPost() {
-    // this.userService.login({username: '1', password: '2'});
-    console.log(1);
+  toLogin() {
+    this.router.navigate(['/login']).then();
   }
 
-  checkLoginStatus() {
-    this.loginStatus = this.userService.status;
+  toRegister() {
+    this.router.navigate(['/register']).then();
   }
 
-  TestLogin(): void {
-    console.log(10);
-    // this.loginStatus = true;
-    console.log(11);
-    this.router.navigate(['/login']);
+  toSpace() {
+    console.log(this.userService.status);
+    console.log(this.userService.username);
+    console.log(this.userService.userInfo);
+    this.router.navigate(['/my-space/' + this.userService.username]).then();
   }
 
-  TestLogout() {
-    this.loginStatus = false;
-  }
-
-  TestRegister() {
-    this.router.navigate(['/register']);
-  }
 }

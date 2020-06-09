@@ -55,21 +55,27 @@ export class UserService {
   }
 
   // 登陆
-  public login(value: { username: string, password: string, remember: boolean }): void {
-    new Observable((observer: Observer<boolean>) => {
-      this.http.post<boolean>(this.baseUrl + 'controller/user/login', value).subscribe(
-        result => {
-          observer.next(result[0]);
-          observer.complete();
+  public login(value: {username: string, password: string, remember: boolean}): void {
+    this.http.post<boolean>(this.baseUrl + 'controller/user/login', value).subscribe(
+      result => {
+        console.log(result);
+        if (result) {
+          this.username = value.username;
+          this.status = true;
+          this.loadUserInfo();
         }
-      );
-    }).subscribe(result => {
-      if (result) {
-        this.username = value.username;
-        this.status = true;
-        this.loadUserInfo();
       }
-    });
+    );
+  }
+
+  // 退出登录
+  public logout() {
+    this.http.get<boolean>(this.baseUrl + 'controller/user/logout').subscribe(
+      result => {
+        this.status = false;
+        this.username = '';
+      }
+    );
   }
 
   // 注册

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     // todo 对已登陆的用户来说，不应该让其再登陆
     this.loginStatus = 0;
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      username: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [false, null]
     });
