@@ -117,4 +117,16 @@ export class UserService {
     const model = {email: email};
     return this.http.post<boolean>(this.baseUrl + 'controller/user/check-email', model);
   }
+
+  // 获得关注列表
+  public getFollowList(username: string): Observable<UserInfo[]> {
+    const model = {username: username};
+    return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-follow-list', model);
+  }
+
+  // 获得粉丝列表
+  public getFanList(username: string): Observable<UserInfo[]> {
+    const model = {username: username};
+    return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-fan-list', model);
+  }
 }
