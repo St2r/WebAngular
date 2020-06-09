@@ -25,6 +25,8 @@ export class IFollowComponent implements OnInit {
         brief = '';
         follow = 1;
         fans = 1000;
+        level = 1;
+        articles = 1;
         point = 500;
         browse = 20000;
         like = 100;
@@ -40,6 +42,8 @@ export class IFollowComponent implements OnInit {
         follow = 1;
         fans = 1000;
         point = 500;
+        level = 1;
+        articles = 10;
         browse = 20000;
         like = 100;
         star = 100;
@@ -54,6 +58,8 @@ export class IFollowComponent implements OnInit {
         follow = 1;
         fans = 1000;
         point = 500;
+        level = 2;
+        articles = 10;
         browse = 20000;
         like = 100;
         star = 100;

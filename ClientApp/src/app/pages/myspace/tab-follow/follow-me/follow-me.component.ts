@@ -25,6 +25,8 @@ export class FollowMeComponent implements OnInit {
         brief = '';
         follow = 1;
         fans = 1000;
+        level = 1;
+        articles = 9;
         point = 500;
         browse = 20000;
         like = 100;
@@ -40,6 +42,8 @@ export class FollowMeComponent implements OnInit {
         follow = 1;
         fans = 1000;
         point = 500;
+        level = 10;
+        articles = 19;
         browse = 20000;
         like = 100;
         star = 100;
@@ -55,6 +59,8 @@ export class FollowMeComponent implements OnInit {
         fans = 1000;
         point = 500;
         browse = 20000;
+        level = 2;
+        articles = 5;
         like = 100;
         star = 100;
         isFollowed = false;

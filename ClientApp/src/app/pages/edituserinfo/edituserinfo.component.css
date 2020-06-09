@@ -69,11 +69,3 @@
   .briefWrap {
     max-width: 60%;
   }
-
-  [nz-form] {
-    max-width: 600px;
-  }
-
-  button {
-    margin-left: 8px;
-  }
