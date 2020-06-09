@@ -30,7 +30,7 @@ namespace WebAngular.Controllers
                     Title = form.Block + "_" + form.Sort + "_" + form.Filter + "_" + form.Page + "_" + i,
                     Header = "Header" + form.Page + "_" + i + "大概50个字大概50个字大概50个字大概50个字大概50个字大概50个字大概50个字大概50个字大概50个字",
                     CoverUrl = "https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png",
-                    Like = 100, Review = 99, Browser = 98, Star = 97,
+                    Like = 100, Review = 99, Browse = 98, Star = 97,
 
                     LastReviewTime = "2020-2-2",
 
@@ -54,7 +54,7 @@ namespace WebAngular.Controllers
 
         public int Like { get; set; }
         public int Review { get; set; }
-        public int Browser { get; set; }
+        public int Browse { get; set; }
         public int Star { get; set; }
 
         public string LastReviewTime { get; set; }

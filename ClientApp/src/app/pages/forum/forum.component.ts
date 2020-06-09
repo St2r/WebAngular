@@ -17,8 +17,6 @@ export class ForumComponent implements OnInit {
   @Input()
   block: string;
 
-  ImageUrl: string;
-
   pageSize = 8;
   page = 1;
 
@@ -40,9 +38,8 @@ export class ForumComponent implements OnInit {
   constructor(private router: Router, private userService: UserService,
               private fetchDataService: FetchDataService, private forumService: ForumService,
               private routerInfo: ActivatedRoute, private modal: NzModalService) {
-    this.ImageUrl = userService.userInfo.avatarUrl;
-
     this.blockInfo = new class implements BlockInfo {
+      avatarUrl: string;
       blockName: string;
       admins: AdminInfo[];
       accessRight: number;
@@ -54,12 +51,15 @@ export class ForumComponent implements OnInit {
 
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];
-      this.ngOnInit();
+      this.init();
     });
   }
 
   ngOnInit() {
-    console.log('init ' + this.block);
+    this.init();
+  }
+
+  init() {
     this.sort = 'latest';
     this.filter = 'all';
 

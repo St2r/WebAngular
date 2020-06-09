@@ -2,7 +2,7 @@
   <nz-sider class="sidebar" nzTheme="light">
     <nz-row>
       <nz-col nzSpan="10">
-        <nz-avatar class="avatar" [nzSize]="72" nzShape="square" [nzSrc]="ImageUrl"></nz-avatar>
+        <nz-avatar class="avatar" [nzSize]="72" nzShape="square" [nzSrc]="blockInfo.avatarUrl"></nz-avatar>
       </nz-col>
       <nz-col nzSpan="14">
         <button *ngIf="!blockInfo.isFollowed" nz-button nzSize="small" (click)="follow()">+关注</button>
@@ -84,13 +84,13 @@
             <i nz-icon nzType="like"></i>{{article.like}}
           </ng-template>
           <ng-template #actionReview>
-            <i nz-icon nzType="message"></i>{{article.like}}
+            <i nz-icon nzType="message"></i>{{article.review}}
           </ng-template>
           <ng-template #actionBrowse>
-            <i nz-icon nzType="read"></i>{{article.like}}
+            <i nz-icon nzType="read"></i>{{article.browse}}
           </ng-template>
           <ng-template #actionStar>
-            <i nz-icon nzType="star"></i>{{article.like}}
+            <i nz-icon nzType="star"></i>{{article.star}}
           </ng-template>
 
           <ng-template #templateContent>
