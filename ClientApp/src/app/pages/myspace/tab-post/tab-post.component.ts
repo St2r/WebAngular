@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Comment } from '../../../model/comment'
-import { Article } from '../../../model/article'
-import {distanceInWords, addDays} from 'date-fns';
+import { Comment } from '../../../model/comment';
+import { Article } from '../../../model/article';
+import {formatDistance, addDays} from 'date-fns';
 
 @Component({
   selector: 'app-tab-post',
@@ -22,9 +22,9 @@ export class TabPostComponent implements OnInit {
     this.my_post = [
       new class implements postInfo {
         comment = new class implements Comment {
-          AuthorID = 'comment_author'
-          AuthorName = 'comment author'
-          Content = 'comment content'
+          AuthorID = 'comment_author';
+          AuthorName = 'comment author';
+          Content = 'comment content';
           Likes = 0;
           Dislikes = 0;
           LikeStatus = 0;
@@ -35,9 +35,9 @@ export class TabPostComponent implements OnInit {
           Tag = ['tmp'];
           Author = 'article author';
           Content = 'tmp content';
-        }
+        };
       }
-    ]
+    ];
   }
 }
 

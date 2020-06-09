@@ -33,8 +33,6 @@ export class UserService {
     this.status = false;
     this.baseUrl = baseUrl;
     this.userInfo = new class implements UserInfo {
-      articles: number;
-      level: number;
       username: string;
       avatarUrl: string;
       brief: string;

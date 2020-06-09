@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from '../../model/comment';
-import {distanceInWords, addDays} from 'date-fns';
+import {formatDistance, addDays} from 'date-fns';
 
 @Component({
   selector: 'app-comment',
@@ -31,7 +31,7 @@ export class CommentComponent implements OnInit {
 
 
   getDateDistance(curDate: Date) {
-    return distanceInWords(curDate, new Date());
+    return formatDistance(curDate, new Date());
   }
 
   getAvatar(userId: string) {

@@ -4,7 +4,7 @@ import {Comment} from '../../model/comment';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CommentComponent} from '../../components/comment/comment.component';
-import {distanceInWords, addDays} from 'date-fns';
+import {formatDistance, addDays} from 'date-fns';
 
 @Component({
   selector: 'app-view-article',
