@@ -15,23 +15,23 @@ export class UserHoverComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.userInfo = new class implements UserInfo {
-      loginCount: number;
       avatarUrl: string;
-      birthday: string;
       brief: string;
       browse: number;
       fans: number;
       follow: number;
+      isFan: boolean;
+      isFollowed: boolean;
       like: number;
       nickname: string;
       point: number;
-      registerData: string;
       star: number;
+      username: string;
     };
   }
 
   ngOnInit() {
-    this.userService.getUserAllInfo(this.username).subscribe(
+    this.userService.getUserInfo(this.username).subscribe(
       result => {
         this.userInfo = result[0];
       }

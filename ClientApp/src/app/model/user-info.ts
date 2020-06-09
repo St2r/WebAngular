@@ -1,4 +1,6 @@
 export interface UserInfo {
+  // 用户名
+  username: string;
   // 昵称
   nickname: string;
   // 头像地址
@@ -19,11 +21,8 @@ export interface UserInfo {
   // 帖子被收藏数
   star: number;
 
-
-  // 签到次数
-  loginCount: number;
-
-  // 下两项可选
-  birthday: string;
-  registerData: string;
+  // 该用户被登陆用户关注
+  isFollowed: boolean;
+  // 该用户关注了登陆用户
+  isFan: boolean;
 }

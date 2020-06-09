@@ -2,6 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
 import {UserInfo} from '../model/user-info';
+import {UserPrivateInfo} from '../model/user-private-info';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +27,14 @@ export class UserService {
 
   // 已登陆用户的信息
   public userInfo: UserInfo;
+  public userPrivateInfo: UserPrivateInfo;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.status = false;
     this.baseUrl = baseUrl;
     this.userInfo = new class implements UserInfo {
-      loginCount: number;
+      username: string;
       avatarUrl: string;
-      birthday: string;
       brief: string;
       browse: number;
       fans: number;
@@ -41,8 +42,15 @@ export class UserService {
       like: number;
       nickname: string;
       point: number;
-      registerData: string;
       star: number;
+      isFan: boolean;
+      isFollowed: boolean;
+    };
+    this.userPrivateInfo = new class implements UserPrivateInfo {
+      birthday: string;
+      loginCount: number;
+      registerData: string;
+      username: string;
     };
   }
 
@@ -72,26 +80,30 @@ export class UserService {
 
   // 登陆后将登陆用户的信息加载进来
   loadUserInfo(): void {
-    this.getUserAllInfo(this.username).subscribe(
+    this.getUserInfo(this.username).subscribe(
       result => {
         this.userInfo = result[0];
       });
+    this.getUserPrivateInfo(this.username).subscribe(
+      result => {
+        this.userPrivateInfo = result[0];
+      });
   }
 
-  // 获得某用户的昵称和头像信息（轻量级）
+  // 获得某用户的信息
   // 异步调用
-  public getUserBaseInfo(username: string): Observable<{ nickname: string, avatarUrl: string }> {
-    const model = {username: username};
-    return this.http.post<{ nickname: string, avatarUrl: string }>
-    (this.baseUrl + 'controller/user/get-base-info', model);
-  }
-
-  // 获得某用户的全部信息
-  // 异步调用
-  public getUserAllInfo(username: string): Observable<UserInfo> {
+  public getUserInfo(username: string): Observable<UserInfo> {
     const model = {username: username};
     return this.http.post<UserInfo>
-    (this.baseUrl + 'controller/user/get-all-info', model);
+    (this.baseUrl + 'controller/user/get-info', model);
+  }
+
+  // 获得某用户的私人信息
+  // 异步调用
+  public getUserPrivateInfo(username: string): Observable<UserPrivateInfo> {
+    const model = {username: username};
+    return this.http.post<UserPrivateInfo>
+    (this.baseUrl + 'controller/user/get-private-info', model);
   }
 
   // 检查用户名是否已被占用

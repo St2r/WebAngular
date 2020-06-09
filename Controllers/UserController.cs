@@ -46,28 +46,31 @@ namespace WebAngular.Controllers
             return res.Append(!registerForm.Username.Equals("s")).ToArray();
         }
 
-        [HttpPost("/controller/user/get-all-info")]
+        [HttpPost("/controller/user/get-info")]
         public IEnumerable<UserInfo> LoadUserInfo([FromBody] UsernameModel usernameMode)
         {
             var res = new UserInfo
             {
+                Username = usernameMode.Username,
                 Nickname = "nick_" + usernameMode.Username, AvatarUrl = "/avatar.png",
                 Brief = usernameMode.Username + "的个人简介",
 
                 Follow = 6, Fans = 5, Point = 4, Browse = 3, Like = 2, Star = 1,
-                
-                LoginCount = 7,
-
-                Birthday = "2000", RegisterData = "2020"
+                IsFollowed = true, IsFan = false
             };
             return Enumerable.Empty<UserInfo>().Append(res).ToArray();
         }
-
-        [HttpPost("/controller/user/get-base-info")]
-        public IEnumerable<UserItem> GetUserInfo([FromBody] UsernameModel usernameModel)
+        
+        [HttpPost("/controller/user/get-private-info")]
+        public IEnumerable<UserPrivateInfo> LoadUserPrivateInfo([FromBody] UsernameModel usernameMode)
         {
-            var res = new UserItem() {Nickname = "nick_" + usernameModel.Username, AvatarUrl = "/avatar.png"};
-            return Enumerable.Empty<UserItem>().Append(res).ToArray();
+            var res = new UserPrivateInfo
+            {
+                Username = usernameMode.Username,
+                LoginCount = 10,
+                Birthday = "2000", RegisterData = "2020"
+            };
+            return Enumerable.Empty<UserPrivateInfo>().Append(res).ToArray();
         }
 
         [HttpPost("/controller/user/check-username")]
@@ -84,6 +87,7 @@ namespace WebAngular.Controllers
 
         public class UserInfo
         {
+            public string Username { get; set; }
             public string Nickname { get; set; }
             public string AvatarUrl { get; set; }
             public string Brief { get; set; }
@@ -95,11 +99,18 @@ namespace WebAngular.Controllers
             public int Like { get; set; }
             public int Star { get; set; }
             
+            public bool IsFollowed { get; set; }
+            public bool IsFan { get; set; }
+        }
+
+        public class UserPrivateInfo
+        {
+            public string Username { get; set; }
             public int LoginCount { get; set; }
             public string Birthday { get; set; }
             public string RegisterData { get; set; }
         }
-
+        
         public class UserItem
         {
             public string Nickname { get; set; }
