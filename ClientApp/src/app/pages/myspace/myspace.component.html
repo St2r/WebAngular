@@ -29,7 +29,7 @@
   <nz-layout class="main_part">
     <nz-content>
       <nz-tabset>
-        <nz-tab nzTitle="动态">
+        <nz-tab *ngIf="viewing_own_page" nzTitle="动态">
           <app-tab-post></app-tab-post>
         </nz-tab>
         <nz-tab nzTitle="帖子">
@@ -39,17 +39,17 @@
           <app-tab-star></app-tab-star>
         </nz-tab>
         <nz-tab nzTitle="附件">
-          <app-tab-attachment></app-tab-attachment>
+          <app-tab-attachment  [viewing_own_page]="viewing_own_page"></app-tab-attachment>
         </nz-tab>
         <nz-tab nzTitle="关注">
-          <app-tab-follow></app-tab-follow>
+          <app-tab-follow [viewing_own_page]="viewing_own_page"></app-tab-follow>
         </nz-tab>
       </nz-tabset>
     </nz-content>
 
     <nz-sider nzWidth="350px" nzTheme="light">
       <div class="userInfo-box-top">
-        <app-side-user [userInfo]="userInfo"></app-side-user>
+        <app-side-user [userInfo]="userInfo" [userPrivateInfo]="userPrivateInfo" [viewing_own_page]="viewing_own_page"></app-side-user>
       </div>
       <div class="userInfo-box-middle">
         <span>最近访客</span>
@@ -62,7 +62,7 @@
         <span>喜爱的板块</span>
         <nz-divider></nz-divider>
         <ul *ngFor="let item of favor_block">
-          <li [ngClass]="{'orange':item.have_news, 'black':!item.have_news}"> {{ item.image }} --- {{ item.name }} </li>
+          <li [ngClass]="{'orange':item.todayTotal>10, 'black':item.todayTotal<=10}"> {{ item.blockName }} --- {{ item.todayTotal }} </li>
         </ul>
       </div>
     </nz-sider>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInfo} from '../../model/user-info';
 import { UserPrivateInfo } from '../../model/user-private-info';
+import { BlockInfo, AdminInfo } from '../../model/block-info'
 
 @Component({
   selector: 'app-myspace',
@@ -16,6 +17,8 @@ export class MyspaceComponent implements OnInit {
 
   favor_block: BlockInfo[];
 
+  viewing_own_page: boolean;
+
   constructor() {
   }
 
@@ -25,6 +28,7 @@ export class MyspaceComponent implements OnInit {
     this.loadUserPrivateInfo();
     this.loadVisiterInfo();
     this.loadFavorBlockInfo();
+    this.setViewMode();
   }
 
   // todo 请求后端
@@ -110,26 +114,75 @@ export class MyspaceComponent implements OnInit {
   loadFavorBlockInfo() {
     this.favor_block = [
       new class implements BlockInfo {
-        image = 'null';
-        name = 'block_1';
-        have_news = true;
+        blockName = 'test name';
+        accessRight = 2;
+        isFollowed = true;
+        contentTotal = 100;
+        followTotal = 20;
+        todayTotal = 20;
+        admins = [
+          new class implements AdminInfo {
+            username = 'login name';
+            nickname = 'admin name';
+            avatarUrl = 'fake url';
+            identity = 0;
+          },
+          new class implements AdminInfo {
+            username = 'login name';
+            nickname = 'admin name';
+            avatarUrl = 'fake url';
+            identity = 1;
+          },
+        ]
       },
       new class implements BlockInfo {
-        image = 'null';
-        name = 'block_2';
-        have_news = false;
+        blockName = 'test name';
+        accessRight = 2;
+        isFollowed = true;
+        contentTotal = 100;
+        followTotal = 20;
+        todayTotal = 10;
+        admins = [
+          new class implements AdminInfo {
+            username = 'login name';
+            nickname = 'admin name';
+            avatarUrl = 'fake url';
+            identity = 0;
+          },
+          new class implements AdminInfo {
+            username = 'login name';
+            nickname = 'admin name';
+            avatarUrl = 'fake url';
+            identity = 1;
+          },
+        ]
       },
       new class implements BlockInfo {
-        image = 'null';
-        name = 'block_3';
-        have_news = true;
+        blockName = 'test name';
+        accessRight = 2;
+        isFollowed = true;
+        contentTotal = 100;
+        followTotal = 20;
+        todayTotal = 10;
+        admins = [
+          new class implements AdminInfo {
+            username = 'login name';
+            nickname = 'admin name';
+            avatarUrl = 'fake url';
+            identity = 0;
+          },
+          new class implements AdminInfo {
+            username = 'login name';
+            nickname = 'admin name';
+            avatarUrl = 'fake url';
+            identity = 1;
+          },
+        ]
       },
     ]
   }
-}
 
-export interface BlockInfo {
-  image: String;
-  name: String;
-  have_news: boolean;
+  setViewMode() {
+    this.viewing_own_page = true;
+  }
 }

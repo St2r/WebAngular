@@ -5,7 +5,8 @@
       <p> 文件大小：{{ item.filesize }}kB </p>
     </nz-card>
     <ng-template #extraTemplate>
-      <a>Delete</a>
+      <a>Download</a>
+      <a *ngIf="viewing_own_page">Delete</a>
     </ng-template>
   </div>
 </div>

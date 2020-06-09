@@ -1,12 +1,12 @@
-<div class="top_part">
+<div class="top_part" *ngIf="viewing_own_page">
   <div class="button_container">
     <button nz-button nzType="primary" nzSize="large">签到</button>
   </div>
   <div class="login_days">
-    <span>累计登录： {{ userInfo.loginCount }}天 </span>
+    <span>累计登录： {{ userPrivateInfo.loginCount }}天 </span>
   </div>
 </div>
-<nz-divider></nz-divider>
+<nz-divider *ngIf="viewing_own_page"></nz-divider>
 <nz-row>
   <nz-col nzSpan="8">
     <a routerLink="/home">关注数<br>{{userInfo.follow}}</a>

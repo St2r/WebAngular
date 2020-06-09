@@ -6,15 +6,34 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./tab-follow.component.css']
 })
 export class TabFollowComponent implements OnInit {
-  @Input()
-  targetUser: string;
+  @Input() viewing_own_page:boolean;
 
-  loginUser: string;
+  myfollow: String = '我关注的人';
+  followme: String = '关注我的人';
 
   constructor() { }
 
   ngOnInit() {
-    this.loginUser = 'tab-user';
+    this.setFollowMe();
+    this.setMyFollow();
+  }
+
+  setMyFollow() {
+    if (this.viewing_own_page) {
+      this.myfollow = '我关注的人';
+    }
+    else {
+      this.myfollow = 'TA关注的人';
+    }
+  }
+
+  setFollowMe() {
+    if (this.viewing_own_page) {
+      this.followme = '关注我的人';
+    }
+    else {
+      this.followme = '关注TA的人';
+    }
   }
 
 }

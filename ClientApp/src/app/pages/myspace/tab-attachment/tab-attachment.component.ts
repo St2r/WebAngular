@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {AttachmentInfo} from '../../../model/attachment'
 
 @Component({
@@ -7,6 +7,7 @@ import {AttachmentInfo} from '../../../model/attachment'
   styleUrls: ['./tab-attachment.component.css']
 })
 export class TabAttachmentComponent implements OnInit {
+  @Input() viewing_own_page: boolean;
 
   my_attachment: AttachmentInfo[];
 
