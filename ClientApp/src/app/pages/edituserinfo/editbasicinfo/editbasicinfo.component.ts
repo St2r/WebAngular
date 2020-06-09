@@ -10,12 +10,18 @@ export class EditbasicinfoComponent implements OnInit {
 
   validateForm: FormGroup;
 
+  dateFormat = 'yyyy/MM/dd';
+
+  selected_date: Date;
+
+  current_date: Date;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
+  submitForm(value: { userName: string; birthdate:Date; comment: string }): void {
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
@@ -31,6 +37,5 @@ export class EditbasicinfoComponent implements OnInit {
       this.validateForm.controls[key].updateValueAndValidity();
     }
   }
-
 
 }

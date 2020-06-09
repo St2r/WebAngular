@@ -41,6 +41,7 @@ import {
 } from 'ng-zorro-antd';
 
 import {NzListModule} from 'ng-zorro-antd/list';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 
 import {EditorModule} from '@tinymce/tinymce-angular';
@@ -167,7 +168,8 @@ import { EditpwdComponent } from './pages/edituserinfo/editpwd/editpwd.component
     NzRadioModule,
     NzCarouselModule,
     NzTabsModule,
-    NzAutocompleteModule
+    NzAutocompleteModule,
+    NzDatePickerModule
   ],
   exports: [],
   providers: [],
