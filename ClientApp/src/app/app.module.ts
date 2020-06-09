@@ -41,6 +41,7 @@ import {
 } from 'ng-zorro-antd';
 
 import {NzListModule} from 'ng-zorro-antd/list';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 
 import {EditorModule} from '@tinymce/tinymce-angular';
@@ -83,6 +84,8 @@ import { FollowMeComponent } from './pages/myspace/tab-follow/follow-me/follow-m
 import { FollowBlockComponent } from './pages/myspace/tab-follow/follow-block/follow-block.component';
 import { EdituserinfoComponent } from './pages/edituserinfo/edituserinfo.component';
 import { AvatarEditorComponent } from './components/avatar-editor/avatar-editor.component';
+import { EditbasicinfoComponent } from './pages/edituserinfo/editbasicinfo/editbasicinfo.component';
+import { EditpwdComponent } from './pages/edituserinfo/editpwd/editpwd.component';
 
 @NgModule({
   declarations: [
@@ -121,53 +124,11 @@ import { AvatarEditorComponent } from './components/avatar-editor/avatar-editor.
     FollowMeComponent,
     FollowBlockComponent,
     EdituserinfoComponent,
+    EditbasicinfoComponent,
+    EditpwdComponent,
     AvatarEditorComponent,
   ],
-    imports: [
-        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
-        HttpClientModule,
-        FormsModule,
-        RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full'},
-        ]),
-        BrowserAnimationsModule,
-        NoopAnimationsModule,
-        AppRoutingModule,
-        IconsProviderModule,
-        AntDesignModule,
-        NzToolTipModule,
-        NzTypographyModule,
-        NzBreadCrumbModule,
-        NzGridModule,
-        NzPageHeaderModule,
-        NzInputModule,
-        EditorModule,
-        NzDividerModule,
-        NzFormModule,
-        ReactiveFormsModule,
-        NzRateModule,
-        NzAvatarModule,
-        NzPopoverModule,
-        NzListModule,
-        NzCommentModule,
-        NzDescriptionsModule,
-        NzBadgeModule,
-        NzResultModule,
-        NzSkeletonModule,
-        NzCardModule,
-        NzProgressModule,
-        NzPaginationModule,
-        NzBackTopModule,
-        ScrollingModule,
-        NzCheckboxModule,
-        NzModalModule,
-        NzSelectModule,
-        NzRadioModule,
-        NzCarouselModule,
-        NzTabsModule,
-        NzAutocompleteModule,
-        NzUploadModule
-    ],
+
   exports: [],
   providers: [],
   bootstrap: [AppComponent]

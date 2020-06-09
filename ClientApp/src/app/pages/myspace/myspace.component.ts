@@ -50,7 +50,9 @@ export class MyspaceComponent implements OnInit {
       brief = '';
       follow = 1;
       fans = 1000;
+      level = 20;
       point = 500;
+      articles = 20;
       browse = 20000;
       like = 100;
       star = 100;
@@ -83,7 +85,9 @@ export class MyspaceComponent implements OnInit {
         brief = '';
         follow = 1;
         fans = 1000;
+        level = 100;
         point = 500;
+        articles = 1;
         browse = 20000;
         like = 100;
         star = 100;
@@ -97,7 +101,9 @@ export class MyspaceComponent implements OnInit {
         brief = '';
         follow = 1;
         fans = 1000;
+        level = 2;
         point = 500;
+        articles = 4;
         browse = 20000;
         like = 100;
         star = 100;
@@ -111,7 +117,9 @@ export class MyspaceComponent implements OnInit {
         brief = '';
         follow = 1;
         fans = 1000;
+        level = 10;
         point = 500;
+        articles = 6;
         browse = 20000;
         like = 100;
         star = 100;

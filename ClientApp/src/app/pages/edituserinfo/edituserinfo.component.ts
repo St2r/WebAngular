@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {UserInfo} from '../../model/user-info';
 import {UserPrivateInfo} from '../../model/user-private-info';
 
@@ -13,8 +12,6 @@ export class EdituserinfoComponent implements OnInit {
   userInfo: UserInfo;
 
   userPrivateInfo: UserPrivateInfo;
-
-  validateForm: FormGroup;
 
   constructor() {}
 
@@ -31,7 +28,9 @@ export class EdituserinfoComponent implements OnInit {
       brief = '';
       follow = 1;
       fans = 1000;
+      level = 5;
       point = 500;
+      articles = 20;
       browse = 20000;
       like = 100;
       star = 100;
@@ -53,23 +52,6 @@ export class EdituserinfoComponent implements OnInit {
       birthday = '1970-1-1';
       registerData = '1970-1-1';
     };
-  }
-
-  submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
-    console.log(value);
-  }
-
-  resetForm(e: MouseEvent): void {
-    e.preventDefault();
-    this.validateForm.reset();
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
   }
 
 }

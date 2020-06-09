@@ -40,6 +40,8 @@ export class UserService {
       brief: string;
       browse: number;
       fans: number;
+      level: number;
+      articles: number;
       follow: number;
       like: number;
       nickname: string;
