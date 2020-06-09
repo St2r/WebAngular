@@ -1,18 +1,20 @@
-<div class="test-box">
-  <form>
-    <input type="file" accept="image/jpeg" (change)="fileChange($event.target.files)">
-    <img *ngIf="imgURL" [src]="imgURL" size="40px">
-    <button nz-button nzType="primary" (click)="upload()">上传</button>
-  </form>
-</div>
+<!--<div class="test-box">-->
+<!--  <form>-->
+<!--    <input type="file" accept="image/jpeg" (change)="fileChange($event.target.files)">-->
+<!--    <img *ngIf="imgURL" [src]="imgURL" size="40px">-->
+<!--    <button nz-button nzType="primary" (click)="upload()">上传</button>-->
+<!--  </form>-->
+<!--</div>-->
 
-<div class="test-box">
-  <button nz-button nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottom">
-    测试user-hover组件
-  </button>
-  <ng-template #contentTemplate>
-    <app-user-hover username="李昂"></app-user-hover>
-  </ng-template>
-</div>
+<!--<div class="test-box">-->
+<!--  <button nz-button nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottom">-->
+<!--    测试user-hover组件-->
+<!--  </button>-->
+<!--  <ng-template #contentTemplate>-->
+<!--    <app-user-hover username="李昂"></app-user-hover>-->
+<!--  </ng-template>-->
+<!--</div>-->
+
+<app-avatar-editor [username]="'ss'"></app-avatar-editor>
 
 

@@ -5,6 +5,7 @@ using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 
 namespace WebAngular.Controllers
 {
@@ -20,14 +21,13 @@ namespace WebAngular.Controllers
         }
         
         [HttpPost("/controller/image")]
-        public IEnumerable<string> UploadImage([FromForm] IFormCollection form)
+        public IEnumerable<bool> UploadImage([FromForm] IFormCollection form)
         {
-            Console.WriteLine(form.Count);
-            Console.Write(form["t_string"]);
-            Console.Write(form.Files.Count);
-            IFormFile file = form.Files.GetFile("image");
-            Console.Write(file.ContentType);
-            return Enumerable.Empty<string>().Append("test").ToArray();
+            IFormFile file = form.Files[0];
+            form.TryGetValue("username", out var username);
+            Console.Write(username.ToString());
+            Console.Write(file);
+            return Enumerable.Empty<bool>().Append(true).ToArray();
         }
     }
 }
