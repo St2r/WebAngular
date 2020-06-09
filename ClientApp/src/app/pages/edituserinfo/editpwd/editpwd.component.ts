@@ -31,7 +31,12 @@ export class EditpwdComponent implements OnInit {
     setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
   }
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.validateForm = this.fb.group({
+      password: ['', [Validators.required]],
+      confirm: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }

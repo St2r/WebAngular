@@ -16,7 +16,14 @@ export class EditbasicinfoComponent implements OnInit {
 
   current_date: Date;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.validateForm = this.fb.group({
+      userName: ['', [Validators.required]],
+      birthdate: ['', [Validators.required]],
+      comment: ['', [Validators.required]],
+      datePicker: [null]
+    });
+  }
 
   ngOnInit() {
   }
