@@ -5,8 +5,9 @@
         <nz-avatar class="avatar" [nzSize]="72" nzShape="square" [nzSrc]="ImageUrl"></nz-avatar>
       </nz-col>
       <nz-col nzSpan="14">
-        <button *ngIf="!blockInfo.followed" nz-button nzSize="small" (click)="follow()">+关注</button>
-        <button *ngIf="blockInfo.followed" nz-button nzSize="small" nzType="dashed" (click)="disFollow()">取消关注</button>
+        <button *ngIf="!blockInfo.isFollowed" nz-button nzSize="small" (click)="follow()">+关注</button>
+        <button *ngIf="blockInfo.isFollowed" nz-button nzSize="small" nzType="dashed" (click)="disFollow()">取消关注
+        </button>
         <br/>
         <span>{{blockInfo.contentTotal}}内容</span>
         <br/>
@@ -20,8 +21,13 @@
       <span>版主 & 管理员</span>
       <br/>
       <nz-row>
-        <nz-col *ngFor="let item of blockInfo.masters" nzSpan="4">
-          <nz-avatar nzSize="default" nzShape="circle" [nzSrc]="item.avatarUrl"></nz-avatar>
+        <nz-col *ngFor="let item of blockInfo.admins" nzSpan="4">
+          <nz-avatar nzSize="default" nzShape="circle" [nzSrc]="item.avatarUrl"
+          nz-popover [nzPopoverContent]="userHover" nzPopoverPlacement="bottom">
+          </nz-avatar>
+          <ng-template #userHover>
+            <app-user-hover [username]="item.username"></app-user-hover>
+          </ng-template>
         </nz-col>
       </nz-row>
     </nz-row>
@@ -61,46 +67,44 @@
     </nz-header>
 
     <nz-content class="content">
-      <nz-list nzItemLayout="vertical" [nzDataSource]="topicData" [nzRenderItem]="Item" [nzPagination]="pagination">
-        <ng-template #Item let-item>
-          <nz-list-item [nzActions]="[Action1, Action2, Action3, Action4]"
-                        [nzExtra]="Extra">
-            <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle"
-                               [nzDescription]="templateDescription">
-              <ng-template #templateAvatar>
-                <nz-avatar [nzSrc]="item.avatar"></nz-avatar>
-              </ng-template>
-              <ng-template #templateTitle>
-                <a [href]="item.href">{{item.title}}</a>
-                <i *ngIf="item.isPinned" nz-icon nzType="pushpin" nzTheme="twotone"></i>
-              </ng-template>
-              <ng-template #templateDescription>
-                {{item.description}}
-              </ng-template>
-            </nz-list-item-meta>
-            {{ item.content }}
-            <ng-template #Action1>
-              <i nz-icon nzType="like" style="margin-right: 8px;"></i> 200
+      <nz-list nzItemLayout="vertical"  [nzPagination]="pagination">
+        <nz-list-item *ngFor="let article of articles"
+                      [nzActions]="[actionLike, actionReview, actionBrowse, actionStar]"
+                      [nzContent]="templateContent"
+                      [nzExtra]="article.coverUrl?templateExtra:null">
+          <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
+            <ng-template #templateAvatar>
+              <nz-avatar [nzSrc]="article.avatar"></nz-avatar>
             </ng-template>
-            <ng-template #Action2>
-              <i nz-icon nzType="message" style="margin-right: 8px;"></i> 100
+            <ng-template #templateTitle>
+              {{article.title}}
             </ng-template>
-            <ng-template #Action3>
-              <i nz-icon nzType="eye" style="margin-right: 8px;"></i> 10
-            </ng-template>
-            <ng-template #Action4>
-              <i nz-icon nzType="star" style="margin-right: 8px;"></i> 20
-            </ng-template>
+          </nz-list-item-meta>
+          <ng-template #actionLike>
+            <i nz-icon nzType="like"></i>{{article.like}}
+          </ng-template>
+          <ng-template #actionReview>
+            <i nz-icon nzType="message"></i>{{article.like}}
+          </ng-template>
+          <ng-template #actionBrowse>
+            <i nz-icon nzType="read"></i>{{article.like}}
+          </ng-template>
+          <ng-template #actionStar>
+            <i nz-icon nzType="star"></i>{{article.like}}
+          </ng-template>
 
-            <ng-template #Extra>
-              <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"/>
-            </ng-template>
-          </nz-list-item>
-        </ng-template>
+          <ng-template #templateContent>
+            {{article.header}}
+          </ng-template>
+          <ng-template #templateExtra>
+            <img width="272" [src]="article.coverUrl">
+          </ng-template>
+        </nz-list-item>
 
         <ng-template #pagination>
           <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="loadData($event)"
-                         [nzPageSize]="pageSize" [(nzPageIndex)]="curIndex" [nzTotal]="blockInfo.contentTotal"></nz-pagination>
+                         [nzPageSize]="pageSize" [(nzPageIndex)]="page"
+                         [nzTotal]="blockInfo.contentTotal"></nz-pagination>
         </ng-template>
       </nz-list>
     </nz-content>

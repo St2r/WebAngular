@@ -1,0 +1,20 @@
+<nz-row>
+  <nz-col [nzSpan]="18">
+    <nz-row>
+      <nz-avatar [nzSrc]="article.avatarUrl"></nz-avatar>
+      {{article.username}}
+    </nz-row>
+    <nz-row>
+      {{article.title}}
+    </nz-row>
+    <nz-row>
+      {{article.header}}
+    </nz-row>
+    <nz-row>
+      点赞等功能
+    </nz-row>
+  </nz-col>
+  <nz-col [nzSpan]="6">
+    <img [src]="article.coverUrl">
+  </nz-col>
+</nz-row>
