@@ -1,10 +1,15 @@
 <div>
-  <div *ngFor="let item of my_follow">
-    <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
-      <nz-card-meta [nzTitle]="item.nickname" [nzDescription]="item.brief"></nz-card-meta>
-    </nz-card>
-    <ng-template #coverTemplate>
-      <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-    </ng-template>
-  </div>
+  <nz-content>
+    <nz-tabset>
+      <nz-tab nzTitle="我关注的人">
+        <app-i-follow></app-i-follow>
+      </nz-tab>
+      <nz-tab nzTitle="关注我的人">
+        <app-follow-me></app-follow-me>
+      </nz-tab>
+      <nz-tab nzTitle="关注的板块">
+        <app-follow-block></app-follow-block>
+      </nz-tab>
+    </nz-tabset>
+  </nz-content>
 </div>

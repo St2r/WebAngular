@@ -78,6 +78,9 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { TestImageComponent } from './pages/test-image/test-image.component';
 import { UserHoverComponent } from './components/user-hover/user-hover.component';
 import { ArticleItemComponent } from './components/article-item/article-item.component';
+import { IFollowComponent } from './pages/myspace/tab-follow/i-follow/i-follow.component';
+import { FollowMeComponent } from './pages/myspace/tab-follow/follow-me/follow-me.component';
+import { FollowBlockComponent } from './pages/myspace/tab-follow/follow-block/follow-block.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +115,9 @@ import { ArticleItemComponent } from './components/article-item/article-item.com
     TestImageComponent,
     UserHoverComponent,
     ArticleItemComponent,
+    IFollowComponent,
+    FollowMeComponent,
+    FollowBlockComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
