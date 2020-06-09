@@ -1,4 +1,11 @@
-<button nz-button nzBlock nzType="primary">签到</button>
+<div class="top_part">
+  <div class="button_container">
+    <button nz-button nzType="primary" nzSize="large">签到</button>
+  </div>
+  <div class="login_days">
+    <span>累计登录： {{ userInfo.login }}天 </span>
+  </div>
+</div>
 <nz-divider></nz-divider>
 <nz-row>
   <nz-col nzSpan="8">

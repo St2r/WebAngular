@@ -1,1 +1,11 @@
-<p>tab-attachment works!</p>
+<h2>文件类型用于显示卡片的配图，配图为文件类型对应图标</h2>
+<div>
+  <div *ngFor="let item of my_attachment">
+    <nz-card style="width:300px;" [nzTitle]=item.filename [nzExtra]="extraTemplate">
+      <p> 文件大小：{{ item.filesize }}kB </p>
+    </nz-card>
+    <ng-template #extraTemplate>
+      <a>Delete</a>
+    </ng-template>
+  </div>
+</div>
