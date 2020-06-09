@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {UserInfo} from '../../model/user-info';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-hover',
@@ -13,8 +14,10 @@ export class UserHoverComponent implements OnInit {
 
   userInfo: UserInfo;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.userInfo = new class implements UserInfo {
+      level: number;
+      articles: number;
       avatarUrl: string;
       brief: string;
       browse: number;
@@ -38,4 +41,7 @@ export class UserHoverComponent implements OnInit {
     );
   }
 
+  toSpace() {
+    this.router.navigate(['/space/' + this.username]);
+  }
 }

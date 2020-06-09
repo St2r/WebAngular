@@ -60,8 +60,8 @@ namespace WebAngular.Controllers
                 Username = usernameMode.Username,
                 Nickname = "nick_" + usernameMode.Username, AvatarUrl = "/avatar.png",
                 Brief = usernameMode.Username + "的个人简介",
-
-                Follow = 6, Fans = 5, Point = 4, Browse = 3, Like = 2, Star = 1,
+                Level = 1,
+                Follow = 6, Fans = 5, Point = 4, Articles = 30, Browse = 3, Like = 2, Star = 1,
                 IsFollowed = true, IsFan = false
             };
             return Enumerable.Empty<UserInfo>().Append(res).ToArray();
@@ -142,7 +142,9 @@ namespace WebAngular.Controllers
 
             public int Follow { get; set; }
             public int Fans { get; set; }
+            public int Level { get; set; }
             public int Point { get; set; }
+            public int Articles { get; set; }
             public int Browse { get; set; }
             public int Like { get; set; }
             public int Star { get; set; }

@@ -4,7 +4,7 @@
       <nz-avatar [nzSize]="48" nzShape="circle" [nzSrc]="this.userInfo.avatarUrl"></nz-avatar>
     </nz-col>
     <nz-col nzOffset="6" nzSpan="6">
-      <p>{{username}}</p>
+      <p>{{userInfo.nickname}}</p>
     </nz-col>
   </nz-row>
   <nz-row>
@@ -30,13 +30,14 @@
   <nz-divider></nz-divider>
   <nz-row>
     <nz-col nzSpan="6">
-      <button nz-button nzType="primary">+关注</button>
+      <button nz-button nzType="primary" *ngIf="!userInfo.isFollowed">+关注</button>
+      <button nz-button nzType="dashed" *ngIf="userInfo.isFollowed">取消关注</button>
     </nz-col>
     <nz-col nzSpan="6">
-      <button nz-button>发私信</button>
+      <button nz-button disabled>发私信</button>
     </nz-col>
     <nz-col nzSpan="6">
-      <button nz-button>个人主页</button>
+      <button nz-button (click)="toSpace()">个人主页</button>
     </nz-col>
   </nz-row>
 
