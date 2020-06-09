@@ -27,6 +27,7 @@ namespace WebAngular.Controllers
         
         public class BlockInfo
         {
+            public string BlockName { get; set; }
             public int AccessRight { get; set; }
             
             public bool IsFollowed { get; set; }
@@ -49,6 +50,7 @@ namespace WebAngular.Controllers
             var res = Enumerable.Empty<BlockInfo>();
             var blockInfo = new BlockInfo()
             {
+                BlockName = form.Block,
                 AccessRight = 2, IsFollowed = false,
                 ContentTotal = 1000,FollowTotal = 100,TodayTotal = 10,
                 Admins = new[]

@@ -1,4 +1,6 @@
 export interface BlockInfo {
+  blockName: string;
+
   // 访问权限
   // 0 - 板块不存在
   // 1 - 板块无权限访问

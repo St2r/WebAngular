@@ -43,6 +43,7 @@ export class ForumComponent implements OnInit {
     this.ImageUrl = userService.userInfo.avatarUrl;
 
     this.blockInfo = new class implements BlockInfo {
+      blockName: string;
       admins: AdminInfo[];
       accessRight: number;
       contentTotal: number;
