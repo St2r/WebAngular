@@ -114,6 +114,7 @@ export class MyspaceComponent implements OnInit {
   loadFavorBlockInfo() {
     this.favor_block = [
       new class implements BlockInfo {
+        avatarUrl = '';
         blockName = 'test name';
         accessRight = 2;
         isFollowed = true;
@@ -136,6 +137,7 @@ export class MyspaceComponent implements OnInit {
         ]
       },
       new class implements BlockInfo {
+        avatarUrl = '';
         blockName = 'test name';
         accessRight = 2;
         isFollowed = true;
@@ -158,6 +160,7 @@ export class MyspaceComponent implements OnInit {
         ]
       },
       new class implements BlockInfo {
+        avatarUrl = '';
         blockName = 'test name';
         accessRight = 2;
         isFollowed = true;
