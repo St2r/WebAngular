@@ -1,5 +1,3 @@
-import { NumberValueAccessor } from "@angular/forms";
-
 export interface UserInfo {
   // 昵称
   nickname: string;
@@ -20,8 +18,10 @@ export interface UserInfo {
   like: number;
   // 帖子被收藏数
   star: number;
+
+
   // 签到次数
-  login: number;
+  loginCount: number;
 
   // 下两项可选
   birthday: string;
