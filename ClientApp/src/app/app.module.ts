@@ -44,7 +44,7 @@ import {NzListModule} from 'ng-zorro-antd/list';
 import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 
 
-import {EditorModule} from '@tinymce/tinymce-angular';
+import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
 import {EditArticleComponent} from './pages/edit-article/edit-article.component';
 import {ViewArticleComponent} from './pages/view-article/view-article.component';
 import {CommentComponent} from './components/comment/comment.component';
@@ -86,6 +86,7 @@ import {EdituserinfoComponent} from './pages/edituserinfo/edituserinfo.component
 import {AvatarEditorComponent} from './components/avatar-editor/avatar-editor.component';
 import {EditbasicinfoComponent} from './pages/edituserinfo/editbasicinfo/editbasicinfo.component';
 import {EditpwdComponent} from './pages/edituserinfo/editpwd/editpwd.component';
+import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import {EditpwdComponent} from './pages/edituserinfo/editpwd/editpwd.component';
     EditbasicinfoComponent,
     EditpwdComponent,
     AvatarEditorComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -175,7 +177,9 @@ import {EditpwdComponent} from './pages/edituserinfo/editpwd/editpwd.component';
     NzDatePickerModule
   ],
   exports: [],
-  providers: [],
+  providers: [
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
