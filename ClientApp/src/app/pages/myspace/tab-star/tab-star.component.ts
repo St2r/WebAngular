@@ -39,7 +39,7 @@ export class TabStarComponent implements OnInit {
     //     Content = 'tmp content';
     //   },
     // ]
-    this.fetchService.getStarArticleByUser(targetName).subscribe(
+    this.fetchService.getStarArticleByUser(this.targetName).subscribe(
       article => this.my_star_invitation=article
     );
   }
