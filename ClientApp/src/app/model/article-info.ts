@@ -1,4 +1,7 @@
 export interface ArticleInfo {
+  // 文章ID
+  articleID: string;
+
   // 文章标题
   title: string;
   // 文章头

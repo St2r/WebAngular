@@ -21,13 +21,13 @@ export class ForumComponent implements OnInit {
   page = 1;
 
   // 板块信息
-  blockInfo: BlockInfo;
+  blockInfo!: BlockInfo;
 
   // 帖子
-  articles: ArticleInfo;
+  articles!: ArticleInfo;
 
   // 热点数据
-  hotTopics: HotTopic[];
+  hotTopics!: HotTopic[];
 
   // 排序方式
   sort: string;
@@ -38,17 +38,6 @@ export class ForumComponent implements OnInit {
   constructor(private router: Router, private userService: UserService,
               private fetchDataService: FetchDataService, private forumService: ForumService,
               private routerInfo: ActivatedRoute, private modal: NzModalService) {
-    this.blockInfo = new class implements BlockInfo {
-      avatarUrl: string;
-      blockName: string;
-      admins: AdminInfo[];
-      accessRight: number;
-      contentTotal: number;
-      followTotal: number;
-      isFollowed: boolean;
-      todayTotal: number;
-    };
-
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];
       this.init();
@@ -98,12 +87,11 @@ export class ForumComponent implements OnInit {
     this.loadData(1);
   }
 
-  // todo 请求后端-返回板块的当前信息
+  // 请求后端-返回板块的当前信息
   loadBlockInfo() {
     this.forumService.GetBlockInfo(this.block).subscribe(
       result => {
         this.blockInfo = result[0];
-        console.log(result[0]);
       }
     );
   }
