@@ -42,7 +42,7 @@ const routes: Routes = [
       }
     ]
   },
-  {path: 'my-space/:visitor', component: MyspaceComponent},
+  {path: 'my-space/:target', component: MyspaceComponent},
   {path: 'editinfo', component: EdituserinfoComponent},
   {path: 'search', component: SearchComponent},
   {path: 'image', component: TestImageComponent},

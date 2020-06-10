@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
 import {UserInfo} from '../model/user-info';
 import {UserPrivateInfo} from '../model/user-private-info';
+import { BlockInfo } from '../model/block-info'
 
 @Injectable({
   providedIn: 'root'
@@ -134,5 +135,20 @@ export class UserService {
   public getFanList(username: string): Observable<UserInfo[]> {
     const model = {username: username};
     return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-fan-list', model);
+  }
+
+  // TODO 添加访问记录 username访问了targetName的主页
+  public addVisitRecord(targetName: string, username: string): Observable<boolean> {
+    return;
+  }
+
+  // TODO 获取最近访问者
+  public getRecentVisiter(username: string): Observable<UserInfo[]> {
+    return;
+  }
+
+  // TODO 获取收藏的板块
+  public getFavBlock(username: string): Observable<BlockInfo[]> {
+    return;
   }
 }

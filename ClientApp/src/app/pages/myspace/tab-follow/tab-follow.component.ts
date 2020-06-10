@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class TabFollowComponent implements OnInit {
   @Input() viewing_own_page:boolean;
+  @Input() targetName: String;
 
   myfollow: String = '我关注的人';
   followme: String = '关注我的人';

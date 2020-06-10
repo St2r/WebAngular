@@ -16,6 +16,7 @@ export class FollowBlockComponent implements OnInit {
     this.loadBlockInfo();
   }
 
+  // TODO 废止可能？
   loadBlockInfo() {
     this.follow_block = [
       new class implements BlockInfo {

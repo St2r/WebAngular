@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {AttachmentInfo} from '../../../model/attachment'
+import {AttachmentInfo} from '../../../model/attachment';
+import { UserService } from '../../../services/user.service';
+import { FetchDataService } from '../../../services/fetch-data.service'
 
 @Component({
   selector: 'app-tab-attachment',
@@ -8,33 +10,37 @@ import {AttachmentInfo} from '../../../model/attachment'
 })
 export class TabAttachmentComponent implements OnInit {
   @Input() viewing_own_page: boolean;
+  @Input() targetName: string;
 
   my_attachment: AttachmentInfo[];
 
-  constructor() { }
+  constructor(private userService: UserService, private fetchDataService: FetchDataService) { }
 
   ngOnInit() {
     this.loadAttachmentInfo();
   }
 
   loadAttachmentInfo() {
-    this.my_attachment = [
-      new class implements AttachmentInfo {
-        filename = 'file 1';
-        filesize = 1024;
-        filetype = '.zip';
-      },
-      new class implements AttachmentInfo {
-        filename = 'file 2';
-        filesize = 1024;
-        filetype = '.zip';
-      },
-      new class implements AttachmentInfo {
-        filename = 'file 3';
-        filesize = 1024;
-        filetype = '.zip';
-      },
-    ]
+    // this.my_attachment = [
+    //   new class implements AttachmentInfo {
+    //     filename = 'file 1';
+    //     filesize = 1024;
+    //     filetype = '.zip';
+    //   },
+    //   new class implements AttachmentInfo {
+    //     filename = 'file 2';
+    //     filesize = 1024;
+    //     filetype = '.zip';
+    //   },
+    //   new class implements AttachmentInfo {
+    //     filename = 'file 3';
+    //     filesize = 1024;
+    //     filetype = '.zip';
+    //   },
+    // ]
+    this.fetchDataService.getAttachmentByUser(this.targetName).subscribe(
+      attachmment => this.my_attachment = attachmment
+    );
   }
 
 }

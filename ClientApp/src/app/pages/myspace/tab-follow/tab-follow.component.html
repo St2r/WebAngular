@@ -2,10 +2,10 @@
   <nz-content>
     <nz-tabset>
       <nz-tab [nzTitle]=myfollow>
-        <app-i-follow></app-i-follow>
+        <app-i-follow [targetName]='targetName'></app-i-follow>
       </nz-tab>
       <nz-tab [nzTitle]=followme>
-        <app-follow-me></app-follow-me>
+        <app-follow-me [targetName]='targetName'></app-follow-me>
       </nz-tab>
       <nz-tab nzTitle="关注的板块">
         <app-follow-block></app-follow-block>
