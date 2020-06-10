@@ -3,7 +3,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="7" nzRequired>用户名</nz-form-label>
     <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="验证中..." [nzErrorTip]="userErrorTpl">
-      <input nz-input formControlName="userName" placeholder="username"/>
+      <input nz-input formControlName="username" placeholder="username"/>
       <ng-template #userErrorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">
           请输入用户名!

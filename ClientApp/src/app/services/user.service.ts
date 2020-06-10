@@ -57,17 +57,15 @@ export class UserService {
   }
 
   // 登陆
-  public login(value: {username: string, password: string, remember: boolean}): void {
-    this.http.post<boolean>(this.baseUrl + 'controller/user/login', value).subscribe(
-      result => {
-        console.log(result);
-        if (result) {
-          this.username = value.username;
-          this.status = true;
-          this.loadUserInfo();
-        }
-      }
-    );
+  public login(value: {username: string, password: string, remember: boolean}): Observable<boolean> {
+    return this.http.post<boolean>(this.baseUrl + 'controller/user/login', value);
+  }
+
+  // 登陆之后手动加载登陆数据到user-service
+  public afterLogin(username: string) {
+    this.username = username;
+    this.status = true;
+    this.loadUserInfo();
   }
 
   // 退出登录
@@ -82,7 +80,7 @@ export class UserService {
 
   // 注册
   // 异步调用
-  public register(value: { userName: string; email: string; password: string; confirm: string }): Observable<boolean> {
+  public register(value: { username: string; email: string; password: string; confirm: string }): Observable<boolean> {
     return this.http.post<boolean>(this.baseUrl + 'controller/user/register', value);
   }
 

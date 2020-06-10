@@ -18,7 +18,7 @@ export class EditbasicinfoComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.validateForm = this.fb.group({
-      userName: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
       comment: ['', [Validators.required]],
       datePicker: [null]

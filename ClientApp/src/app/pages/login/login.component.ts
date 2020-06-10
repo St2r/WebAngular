@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
+import {NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,20 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.userService.login(this.validateForm.value);
+    this.userService.login(this.validateForm.value).subscribe(
+      result => {
+        if (result[0]) {
+          this.userService.afterLogin(this.validateForm.value['username']);
+        } else {
+          this.fail();
+        }
+      }
+    );
+    this.validateForm.reset();
   }
 
-  constructor(private fb: FormBuilder, public router: Router, public userService: UserService) {
+  constructor(private fb: FormBuilder, public router: Router, public userService: UserService,
+              private modal: NzModalService) {
   }
 
   ngOnInit(): void {
@@ -30,6 +41,13 @@ export class LoginComponent implements OnInit {
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [false, null]
+    });
+  }
+
+  fail(): void {
+    this.modal.error({
+      nzTitle: '登陆失败',
+      nzContent: '请检查用户名和密码'
     });
   }
 }

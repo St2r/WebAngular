@@ -59,13 +59,13 @@
       <p class="pop-list-item">登陆后👇享受全新体验</p>
     </nz-list-item>
     <nz-list-item>
-      <button nz-button nzType="link" class="pop-list-item">
+      <button nz-button nzType="link" class="pop-list-item" (click)="this.router.navigate(['/login'])">
         <i nz-icon nzType="login" nzTheme="outline"></i>
         登陆
       </button>
     </nz-list-item>
     <nz-list-item>
-      <button nz-button nzType="link" class="pop-list-item">
+      <button nz-button nzType="link" class="pop-list-item" (click)="this.router.navigate(['/register'])">
         <i nz-icon nzType="user" nzTheme="outline"></i>
         注册
       </button>

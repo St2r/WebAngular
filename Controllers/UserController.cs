@@ -19,7 +19,7 @@ namespace WebAngular.Controllers
 
         public class LogForm
         {
-            public string UserName { get; set; }
+            public string Username { get; set; }
             public string Password { get; set; }
             public bool Remember { get; set; }
         }
@@ -28,7 +28,7 @@ namespace WebAngular.Controllers
         public IEnumerable<bool> Login([FromBody] LogForm logForm)
         {
             var res = Enumerable.Empty<bool>();
-            return res.Append(logForm.UserName.Equals(logForm.Password)).ToArray();
+            return res.Append(logForm.Username.Equals(logForm.Password)).ToArray();
         }
 
         [HttpGet("/controller/user/logout")]
