@@ -5,7 +5,7 @@ import {DomSanitizer} from '@angular/platform-browser';
   name: 'safeHtml'
 })
 export class SafeHtmlPipe implements PipeTransform {
-  // 用于将tinymce生成的html可信化
+  // 用于将tinyMce生成的html可信化
   constructor(private sanitized: DomSanitizer) {
   }
   transform(value: any, ...args: any[]): any {

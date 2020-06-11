@@ -1,5 +1,5 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {Article} from '../../model/article';
+import {ArticleContent} from '../../model/article-content';
 import {Comment} from '../../model/comment';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -14,12 +14,12 @@ import {formatDistance, addDays} from 'date-fns';
 export class ViewArticleComponent implements OnInit {
   articleId = this.router.snapshot.paramMap.get('articleId');
 
-  article: Article;
+  article: ArticleContent;
 
   comments: Comment[];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private router: ActivatedRoute, private route: Router) {
-    http.post<Article>(baseUrl + 'getArticle', this.articleId).subscribe(result => {
+    http.post<ArticleContent>(baseUrl + 'getArticle', this.articleId).subscribe(result => {
       this.article = result;
     }, error => console.error(error));
 
@@ -28,7 +28,13 @@ export class ViewArticleComponent implements OnInit {
     }, error => console.error(error));
 
 // 模拟从后端收到的文章
-    this.article = new class implements Article {
+    this.article = new class implements ArticleContent {
+      articleID: string;
+      content: string;
+      limit: number;
+      tags: string[];
+      title: string;
+      username: string;
       Author = '李昂';
       Content = '<pre class="language-css"><code>.main {\n' +
         'margin 0;\n' +
@@ -57,7 +63,7 @@ export class ViewArticleComponent implements OnInit {
         CommentTime = addDays(new Date(), -1);
       }
     ];
-    console.log(this.article.Title);
+    console.log(this.article.title);
 
     if (this.article == null) {
       this.route.navigate(['home']).then();

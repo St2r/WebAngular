@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlockInfo, Master } from '../../../../model/block'
+import { BlockInfo, AdminInfo} from '../../../../model/block-info';
 
 @Component({
   selector: 'app-follow-block',
@@ -20,24 +20,29 @@ export class FollowBlockComponent implements OnInit {
   loadBlockInfo() {
     this.follow_block = [
       new class implements BlockInfo {
-        block_name = 'test block'
+        blockName = 'test block'
         accessRight = 2;
-        followed = true;
+        avatarUrl = '/avatar.png';
+        isFollowed = true;
         contentTotal = 20;
         followTotal = 2;
         todayTotal = 20;
-        masters = [
-          new class implements Master {
-            userId = 'test master';
-            avatarUrl = 'fack url';
-          },
-          new class implements Master {
-            userId = 'test master';
-            avatarUrl = 'fack url';
-          },
-        ]
+        admins = [
+          // new class implements AdminInfo {
+          //   username = 'test master';
+          //   nickname = 'nick1';
+          //   avatarUrl = 'fack url';
+          //   identity = 1;
+          // },
+          // new class implements AdminInfo {
+          //   username = 'test master';
+          //   avatarUrl = 'fack url';
+          //   avatarUrl = 'fack url';
+          //   identity = 1;
+          // }
+        ];
       }
-    ]
+    ];
   }
 
 }

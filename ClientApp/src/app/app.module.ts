@@ -10,7 +10,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
-import {AppRoutingModule} from './app-routing.module';
+import {AppRoutingModule} from './modules/app-routing.module';
 import {IconsProviderModule} from './modules/icons-provider.module';
 import {AntDesignModule} from './modules/ant-design.module';
 import {
@@ -87,6 +87,7 @@ import {AvatarEditorComponent} from './components/avatar-editor/avatar-editor.co
 import {EditbasicinfoComponent} from './pages/edituserinfo/editbasicinfo/editbasicinfo.component';
 import {EditpwdComponent} from './pages/edituserinfo/editpwd/editpwd.component';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
+import { EditAvatarComponent } from './pages/edituserinfo/edit-avatar/edit-avatar.component';
 
 @NgModule({
   declarations: [
@@ -129,6 +130,7 @@ import { SafeHtmlPipe } from './pipe/safe-html.pipe';
     EditpwdComponent,
     AvatarEditorComponent,
     SafeHtmlPipe,
+    EditAvatarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
