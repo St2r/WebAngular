@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {NzModalService} from 'ng-zorro-antd';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -31,18 +32,21 @@ export class LoginComponent implements OnInit {
     );
   }
 
+
   constructor(private fb: FormBuilder, public router: Router, public userService: UserService,
-              private modal: NzModalService) {
+              private modal: NzModalService, private cookie: CookieService) {
+    if (this.userService.status) {
+      this.router.navigate(['/404']).then();
+    }
+    this.validateForm = this.fb.group({
+      username: [this.cookie.get('username'), [Validators.required]],
+      password: ['', [Validators.required]],
+      remember: [false, null]
+    });
   }
 
   ngOnInit(): void {
-    // todo 对已登陆的用户来说，不应该让其再登陆
     this.loginStatus = 0;
-    this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [false, null]
-    });
   }
 
   fail(): void {

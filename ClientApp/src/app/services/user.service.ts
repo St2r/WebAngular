@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {UserInfo} from '../model/user-info';
 import {UserPrivateInfo} from '../model/user-private-info';
 import {BlockInfo} from '../model/block-info';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class UserService {
   public userInfo: UserInfo;
   public userPrivateInfo: UserPrivateInfo;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private cookie: CookieService) {
     this.status = false;
     this.baseUrl = baseUrl;
     this.userInfo = new class implements UserInfo {
@@ -63,6 +64,11 @@ export class UserService {
 
   // 登陆
   public login(value: { username: string, password: string, remember: boolean }): Observable<boolean> {
+    if (value.remember) {
+      this.cookie.set('username', value.username);
+    } else {
+      this.cookie.delete('username');
+    }
     return this.http.post<boolean>(this.baseUrl + 'controller/user/login', value);
   }
 
@@ -71,7 +77,7 @@ export class UserService {
     this.username = username;
     this.status = true;
     this.loadUserInfo();
-    sessionStorage.setItem('username', username)
+    sessionStorage.setItem('username', username);
   }
 
   // 退出登录

@@ -4,6 +4,7 @@ import {Observable, Observer} from 'rxjs';
 import {NzModalService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-register',
@@ -64,7 +65,7 @@ export class RegisterComponent implements OnInit {
           observer.complete();
         }
       );
-    })
+    });
 
   // 向后端请求验证邮箱是否已被占用
   emailAsyncValidator = (control: FormControl) =>
@@ -79,7 +80,7 @@ export class RegisterComponent implements OnInit {
           observer.complete();
         }
       );
-    })
+    });
 
   // 判断验证密码和密码是否相同
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
@@ -89,7 +90,7 @@ export class RegisterComponent implements OnInit {
       return {confirm: true, error: true};
     }
     return {};
-  }
+  };
 
   // 注册失败用于弹出modal
   fail_register(): void {
@@ -108,7 +109,8 @@ export class RegisterComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder, private userService: UserService,
-              private modal: NzModalService, private router: Router) {
+              private modal: NzModalService, private router: Router,
+              private cookie: CookieService) {
     this.validateForm = this.fb.group({
       username: ['', [Validators.required], [this.userNameAsyncValidator]],
       email: ['', [Validators.email, Validators.required], [this.emailAsyncValidator]],
@@ -120,5 +122,4 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerStatus = 0;
   }
-
 }
