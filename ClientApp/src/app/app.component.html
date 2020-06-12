@@ -1,4 +1,4 @@
-<nz-layout class="layout" xmlns="http://www.w3.org/1999/html">
+<nz-layout class="layout">
   <nz-header class="header">
     <div nz-row nzGutter="16" class="header">
       <div nz-col class="gutter-row" nzSpan="1">
@@ -43,10 +43,16 @@
                   </li>
                 </ul>
               </li>
+
+              <li nz-menu-item>
+                <span>资源分享</span>
+<!--                <i nz-icon nzType="file-zip" nzTheme="outline"></i>-->
+                <a routerLink="/forum/resource"></a>
+              </li>
             </ul>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <span>实用工具</span>
+            <span>在线刷题</span>
             <a routerLink="/exercise"></a>
           </li>
         </ul>

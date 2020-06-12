@@ -50,10 +50,17 @@
     </nz-form-control>
   </nz-form-item>
 
+  <nz-form-item *ngIf="block=='resource'">
+    <nz-form-label [nzSpan]="1">附件</nz-form-label>
+    <nz-form-control>
+      <input type="file" formControlName="attachment" (change)="attachmentChange($event)">
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item>
     <nz-form-label [nzSpan]="1">封面</nz-form-label>
     <nz-form-control>
-      <input type="file" accept="image/jpeg" formControlName="cover" (change)="fileChange($event)">
+      <input type="file" accept="image/jpeg" formControlName="cover" (change)="coverChange($event)">
     </nz-form-control>
   </nz-form-item>
 

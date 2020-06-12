@@ -1,9 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, Observer} from 'rxjs';
+import {Observable} from 'rxjs';
 import {UserInfo} from '../model/user-info';
 import {UserPrivateInfo} from '../model/user-private-info';
-import { BlockInfo } from '../model/block-info'
+import {BlockInfo} from '../model/block-info';
 
 @Injectable({
   providedIn: 'root'
@@ -55,10 +55,14 @@ export class UserService {
       registerData: string;
       username: string;
     };
+
+    if (sessionStorage.getItem('username')) {
+      this.afterLogin(sessionStorage.getItem('username'));
+    }
   }
 
   // 登陆
-  public login(value: {username: string, password: string, remember: boolean}): Observable<boolean> {
+  public login(value: { username: string, password: string, remember: boolean }): Observable<boolean> {
     return this.http.post<boolean>(this.baseUrl + 'controller/user/login', value);
   }
 
@@ -67,6 +71,7 @@ export class UserService {
     this.username = username;
     this.status = true;
     this.loadUserInfo();
+    sessionStorage.setItem('username', username)
   }
 
   // 退出登录
@@ -77,6 +82,7 @@ export class UserService {
         this.username = '';
       }
     );
+    sessionStorage.clear();
   }
 
   // 注册

@@ -22,12 +22,13 @@ export class LoginComponent implements OnInit {
       result => {
         if (result[0]) {
           this.userService.afterLogin(this.validateForm.value['username']);
+          this.validateForm.reset();
         } else {
           this.fail();
+          this.validateForm.reset();
         }
       }
     );
-    this.validateForm.reset();
   }
 
   constructor(private fb: FormBuilder, public router: Router, public userService: UserService,

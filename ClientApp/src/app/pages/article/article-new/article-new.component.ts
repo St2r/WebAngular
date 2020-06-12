@@ -10,6 +10,9 @@ import {MetaDataService} from '../../../services/meta-data.service';
   styleUrls: ['./article-new.component.css']
 })
 export class ArticleNewComponent implements OnInit {
+  @Input()
+  block: string;
+
   // 暂存的封面图
   curCover;
 
@@ -20,15 +23,12 @@ export class ArticleNewComponent implements OnInit {
   editParam = {
     selector: 'textarea',
     // plugins是tinymce的各种插件
-    plugins: 'link lists image code table wordcount codesample',
-    // 语言包可以使用tinymce提供的网址,但是墙的原因,会连不上,所以还是自行下载,放到assets里面
-    // language_url: '../../../assets/tinymce/langs/zh_CN.js',
-    // language: 'zh_CN',
+    plugins: 'link lists code table wordcount codesample',
     // toolbar定义快捷栏的操作, | 用来分隔显示
     toolbar: 'codesample | bold italic underline strikethrough | fontsizeselect | forecolor backcolor | alignleft'
       + ' aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | undo redo '
       + '| link unlink image code | removeformat | h2 h3 h4',
-    height: 800,
+    height: 500,
     // 这里是代码块的一些语言选择,好像暂时还没支持typescript,所以博文都是js格式
     codesample_languages: [
       {text: 'HTML/XML', value: 'markup'},
@@ -56,7 +56,8 @@ export class ArticleNewComponent implements OnInit {
       tags: [['资源分享']],
       limit: ['0'],
       content: ['Write something here'],
-      cover: ['']
+      cover: [''],
+      attachment: ['']
     });
   }
 
@@ -76,7 +77,7 @@ export class ArticleNewComponent implements OnInit {
     }
   }
 
-  fileChange(e) {
+  coverChange(e) {
     if (e.target.files.length < 1) {
       return;
     }
@@ -86,5 +87,12 @@ export class ArticleNewComponent implements OnInit {
       this.curCover = reader.result;
     };
     this.validateForm.value['cover'] = e.target.files[0];
+  }
+
+  attachmentChange(e) {
+    if (e.target.files.length < 1) {
+      return;
+    }
+    this.validateForm.value['attachment'] = e.target.files[0];
   }
 }

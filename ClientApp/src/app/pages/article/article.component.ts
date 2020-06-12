@@ -14,12 +14,16 @@ export class ArticleComponent implements OnInit {
   @Input()
   articleID: string;
 
+  @Input()
+  block: string;
+
   constructor(private routerInfo: ActivatedRoute, private userService: UserService,
               private router: Router) {
     this.routerInfo.queryParams.subscribe(
       result => {
         this.operation = result['operation'];
         this.articleID = result['articleID'];
+        this.block = result['block'];
       }
     );
     if (this.operation !== 'new' && this.operation !== 'view' && this.operation !== 'edit') {

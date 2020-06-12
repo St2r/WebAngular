@@ -112,6 +112,10 @@ export class ForumComponent implements OnInit {
       nzOnCancel: null
     });
   }
+
+  newArticle() {
+    this.router.navigate(['/article'], {queryParams: {operation: 'new', block: this.blockInfo.blockName}}).then();
+  }
 }
 
 interface HotTopic {
