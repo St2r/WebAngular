@@ -112,7 +112,7 @@
   </nz-layout>
 </nz-layout>
 
-<nz-back-top *ngIf="blockInfo.accessRight==2"></nz-back-top>
+<app-back-top *ngIf="blockInfo.accessRight==2"></app-back-top>
 
 <nz-result *ngIf="blockInfo.accessRight==0" nzStatus="warning" nzTitle="你要访问的板块不存在">
   <div nz-result-extra>

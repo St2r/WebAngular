@@ -35,19 +35,15 @@
                   </li>
                 </ul>
               </li>
-              <li nz-submenu nzTitle="校园周边">
-                <ul>
-                  <li nz-menu-item *ngFor="let item of AroundCampus" nzMatchRouter>
-                    <span>{{item[0]}}</span>
-                    <a [routerLink]="'/forum/' + item[1]"></a>
-                  </li>
-                </ul>
+              <li nz-menu-item>
+                <span>校园周边</span>
+                <a [routerLink]="'/forum/around-school'"></a>
               </li>
 
               <li nz-menu-item>
                 <span>资源分享</span>
 <!--                <i nz-icon nzType="file-zip" nzTheme="outline"></i>-->
-                <a routerLink="/forum/resource"></a>
+                <a routerLink="/resource"></a>
               </li>
             </ul>
           </li>

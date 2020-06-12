@@ -20,10 +20,6 @@ export class AppComponent {
     ['课程推荐', 'course-recommend']
   ];
 
-  AroundCampus = [
-    ['美食', 'food'],
-    ['游玩', 'amusement']
-  ];
 
   constructor(private userService: UserService) {
   }

@@ -48,12 +48,7 @@ import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
 import {EditArticleComponent} from './pages/edit-article/edit-article.component';
 import {ViewArticleComponent} from './pages/view-article/view-article.component';
 import {CommentComponent} from './components/comment/comment.component';
-import {SpaceComponent} from './pages/space/space.component';
-import {FansComponent} from './pages/space/fans/fans.component';
-import {FansFansComponent} from './pages/space/fans/fans-fans/fans-fans.component';
-import {FansFollowsComponent} from './pages/space/fans/fans-follows/fans-follows.component';
 import {FallbackComponent} from './pages/fallback/fallback.component';
-import {PersonPageComponent} from './pages/space/person-page/person-page.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
 import {ForumComponent} from './pages/forum/forum.component';
 import {QuestionComponent} from './components/question/question.component';
@@ -92,6 +87,7 @@ import { ArticleComponent } from './pages/article/article.component';
 import { ArticleViewComponent } from './pages/article/article-view/article-view.component';
 import { ArticleNewComponent } from './pages/article/article-new/article-new.component';
 import { BackTopComponent } from './components/back-top/back-top.component';
+import { ResourceComponent } from './pages/resource/resource.component';
 
 @NgModule({
   declarations: [
@@ -101,12 +97,7 @@ import { BackTopComponent } from './components/back-top/back-top.component';
     ViewArticleComponent,
     CommentComponent,
     EditArticleComponent,
-    SpaceComponent,
-    FansComponent,
-    FansFansComponent,
-    FansFollowsComponent,
     FallbackComponent,
-    PersonPageComponent,
     ExerciseComponent,
     ForumComponent,
     QuestionComponent,
@@ -139,6 +130,7 @@ import { BackTopComponent } from './components/back-top/back-top.component';
     ArticleViewComponent,
     ArticleNewComponent,
     BackTopComponent,
+    ResourceComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
