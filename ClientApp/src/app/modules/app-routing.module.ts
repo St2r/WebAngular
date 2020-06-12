@@ -19,6 +19,7 @@ import {MyspaceComponent} from '../pages/myspace/myspace.component';
 import { SearchComponent } from '../pages/search/search.component';
 import {TestImageComponent} from '../pages/test-image/test-image.component';
 import { EdituserinfoComponent } from '../pages/edituserinfo/edituserinfo.component';
+import {ArticleComponent} from '../pages/article/article.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'do-exercise', component: DoExerciseComponent},
   {path: 'forum/:block', component: ForumComponent},
   {path: 'edit-article/:articleId', component: EditArticleComponent},
+  {path: 'article', component: ArticleComponent},
   {path: 'view-article/:articleId', component: ViewArticleComponent},
   {
     path: 'space/:userId', component: SpaceComponent, children: [

@@ -88,6 +88,10 @@ import {EditbasicinfoComponent} from './pages/edituserinfo/editbasicinfo/editbas
 import {EditpwdComponent} from './pages/edituserinfo/editpwd/editpwd.component';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 import { EditAvatarComponent } from './pages/edituserinfo/edit-avatar/edit-avatar.component';
+import { ArticleComponent } from './pages/article/article.component';
+import { ArticleViewComponent } from './pages/article/article-view/article-view.component';
+import { ArticleNewComponent } from './pages/article/article-new/article-new.component';
+import { BackTopComponent } from './components/back-top/back-top.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +135,10 @@ import { EditAvatarComponent } from './pages/edituserinfo/edit-avatar/edit-avata
     AvatarEditorComponent,
     SafeHtmlPipe,
     EditAvatarComponent,
+    ArticleComponent,
+    ArticleViewComponent,
+    ArticleNewComponent,
+    BackTopComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

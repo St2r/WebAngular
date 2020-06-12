@@ -20,6 +20,6 @@ export class MetaDataService {
 
   //
   private getLevels(): void {
-    this.levels = ['1', '2', '3', '4', '5', '6'];
+    this.levels = ['0', '1', '2', '3', '4', '5', '6'];
   }
 }
