@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from '../../model/comment';
 import {formatDistance, addDays} from 'date-fns';
+import {CommentService} from '../../services/comment.service';
+import {ValueConverter} from '@angular/compiler/src/render3/view/template';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-comment',
@@ -9,69 +12,63 @@ import {formatDistance, addDays} from 'date-fns';
 })
 export class CommentComponent implements OnInit {
   @Input()
-  articleId: string;
+  articleID: string;
 
-  @Input()
   comments: Comment[];
 
-  // like(): void {
-  //   this.likes = 1;
-  //   this.dislikes = 0;
-  // }
-  //
-  // dislike(): void {
-  //   this.likes = 0;
-  //   this.dislikes = 1;
-  // }
+  loading: boolean;
 
+  constructor(private commentService: CommentService, private router: Router) {
+    this.loading = true;
+  }
+
+  ngOnInit() {
+    this.loadComments().then(
+      () => this.loading = false
+    );
+  }
 
   jumpToPersonPage(userId: string) {
-    console.log('此处应跳转到个人界面: ' + userId);
+    this.router.navigate(['/my-space' + userId]).then();
   }
 
 
-  getDateDistance(curDate: Date) {
-    return formatDistance(curDate, new Date());
+  getDateDistance(curDate: string) {
+    const d = new Date();
+    const s = curDate.split('-');
+    d.setFullYear(+s[0], +s[1] - 1, +s[2]);
+    d.setHours(+s[3], +s[4]);
+    return formatDistance(d, new Date());
   }
 
-  getAvatar(userId: string) {
-    return 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png';
+  async loadComments() {
+    this.comments = await this.commentService.getComments(this.articleID);
+    console.log(this.comments);
   }
 
   Like(i: number) {
-    if (this.comments[i].LikeStatus === 0) {
-      this.comments[i].Likes += 1;
-      this.comments[i].LikeStatus = 1;
-    } else if (this.comments[i].LikeStatus === -1) {
-      this.comments[i].Likes += 1;
-      this.comments[i].Dislikes -= 1;
-      this.comments[i].LikeStatus = 1;
+    if (this.comments[i].likeStatus === 0) {
+      this.comments[i].likes += 1;
+      this.comments[i].likeStatus = 1;
+    } else if (this.comments[i].likeStatus === -1) {
+      this.comments[i].likes += 1;
+      this.comments[i].likeStatus = 1;
     } else {
-      this.comments[i].Likes -= 1;
-      this.comments[i].LikeStatus = 0;
+      this.comments[i].likes -= 1;
+      this.comments[i].likeStatus = 0;
     }
     // 数据传送回数据库
   }
 
   DisLike(i: number) {
-    if (this.comments[i].LikeStatus === 0) {
-      this.comments[i].Dislikes += 1;
-      this.comments[i].LikeStatus = -1;
-    } else if (this.comments[i].LikeStatus === 1) {
-      this.comments[i].Likes -= 1;
-      this.comments[i].Dislikes += 1;
-      this.comments[i].LikeStatus = -1;
+    if (this.comments[i].likeStatus === 0) {
+      this.comments[i].likeStatus = -1;
+    } else if (this.comments[i].likeStatus === 1) {
+      this.comments[i].likes -= 1;
+      this.comments[i].likeStatus = -1;
     } else {
-      this.comments[i].Dislikes -= 1;
-      this.comments[i].LikeStatus = 0;
+      this.comments[i].likeStatus = 0;
     }
     // 数据传送回数据库
   }
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
 }

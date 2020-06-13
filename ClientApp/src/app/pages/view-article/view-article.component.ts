@@ -43,26 +43,26 @@ export class ViewArticleComponent implements OnInit {
       Title = '标签测试';
     };
 // 模拟从后端收到的评论数据
-    this.comments = [
-      new class implements Comment {
-        AuthorID = '17374158';
-        AuthorName = '李昂';
-        Content = '我先评论一条';
-        Dislikes = 0;
-        LikeStatus = 0;
-        Likes = 0;
-        CommentTime = addDays(new Date(), -2);
-      },
-      new class implements Comment {
-        AuthorID = '17374158';
-        AuthorName = '李昂';
-        Content = '再来一条-测试Like和Dislike';
-        Dislikes = 10;
-        LikeStatus = 1;
-        Likes = 10;
-        CommentTime = addDays(new Date(), -1);
-      }
-    ];
+//     this.comments = [
+//       new class implements Comment {
+//         username = '17374158';
+//         AuthorName = '李昂';
+//         content = '我先评论一条';
+//         Dislikes = 0;
+//         likeStatus = 0;
+//         likes = 0;
+//         commentTime = addDays(new Date(), -2);
+//       },
+//       new class implements Comment {
+//         username = '17374158';
+//         AuthorName = '李昂';
+//         content = '再来一条-测试Like和Dislike';
+//         Dislikes = 10;
+//         likeStatus = 1;
+//         likes = 10;
+//         commentTime = addDays(new Date(), -1);
+//       }
+//     ];
     console.log(this.article.title);
 
     if (this.article == null) {

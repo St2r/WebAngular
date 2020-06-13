@@ -43,6 +43,33 @@ namespace WebAngular.Controllers
 
             return res.Append(articles).ToArray();
         }
+
+        public class ArticleIDModel
+        {
+            public string ArticleID { get; set; }
+        }
+        
+        [HttpPost("/controller/comment/get-comment")]
+        public IEnumerable<Comment[]> GetComments([FromBody] ArticleIDModel a)
+        {
+            var res = Enumerable.Empty<Comment[]>();
+            var list = new Comment[2];
+            list[0] = new Comment()
+            {
+                Username = "U1", Nickname = "N1", AvatarUrl = "/avatar.png",
+                Content = "评论测试",
+                Likes = 3, LikeStatus = 0,
+                CommentTime = "2020-10-10-23-59"
+            };
+            list[1] = new Comment()
+            {
+                Username = "U2", Nickname = "N2", AvatarUrl = "/avatar.png",
+                Content = "评论测试2",
+                Likes = 13, LikeStatus = 0,
+                CommentTime = "2020-6-13-16-00"
+            };
+            return res.Append(list).ToArray();
+        }
     }
 
 
@@ -74,5 +101,16 @@ namespace WebAngular.Controllers
         public string Filter { get; set; }
         public int PageSize { get; set; }
         public int Page { get; set; }
+    }
+
+    public class Comment
+    {
+        public string Username { get; set; }
+        public string Nickname { get; set; }
+        public string AvatarUrl { get; set; }
+        public string Content { get; set; }
+        public int Likes { get; set; }
+        public int LikeStatus { get; set; }
+        public string CommentTime { get; set; }
     }
 }
