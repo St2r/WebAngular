@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Model;
 using WebAngular.Model;
 
 namespace WebAngular.Controllers
@@ -29,7 +30,15 @@ namespace WebAngular.Controllers
         public IEnumerable<bool> Login([FromBody] LoginForm form)
         {
             var res = Enumerable.Empty<bool>();
-            return res.Append(form.Username.Equals(form.Password)).ToArray();
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+            bool ret = true;
+            if (user == null || user.PassWord != form.Password)
+                ret = false;
+            context.Users.Update(user);
+            user.LoginCount++;
+            context.SaveChanges();
+            return res.Append(ret).ToArray();
         }
 
         [HttpGet("/controller/user/logout")]
@@ -49,8 +58,28 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/register")]
         public IEnumerable<bool> Register([FromBody] RegisterForm registerForm)
         {
+            //System.Console.WriteLine("fuck");
             var res = Enumerable.Empty<bool>();
-            return res.Append(!registerForm.Username.Equals("s")).ToArray();
+            bool ret = true;
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.Email == registerForm.Email);
+            if (user != null)
+                ret = false;
+            else if (registerForm.Confirm != registerForm.Password)
+                ret = false;
+            else
+            {
+                User user1 = new User()
+                {
+                    Email = registerForm.Email,
+                    UserName = registerForm.Username,
+                    PassWord = registerForm.Password
+                };
+                context.Users.Add(user1);
+                context.SaveChanges();
+            }
+            //System.Console.WriteLine($"ret{ret}");
+            return res.Append(ret).ToArray();
         }
 
         public class LoadUserInfoForm
@@ -61,15 +90,35 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/get-info")]
         public IEnumerable<UserInfo> LoadUserInfo([FromBody] LoadUserInfoForm form)
         {
-            var res = new UserInfo
+            var res = new UserInfo();
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+            if (user != null)
             {
-                Username = form.Username,
-                Nickname = "nick_" + form.Username, AvatarUrl = "/avatar.png",
-                Brief = form.Username + "的个人简介",
-                Level = 1,
-                Follow = 6, Fans = 5, Point = 4, Articles = 30, Browse = 3, Like = 2, Star = 1,
-                IsFollowed = true, IsFan = false
-            };
+                res.Username = user.UserName;
+                res.Nickname = "nick_" + user.UserName;
+                res.AvatarUrl = user.AvatarUrl;
+                res.Brief = user.Brief;
+                res.Point = user.Point;
+                //res.LoginCount = user.LoginCount;
+                //res.Birthday = user.Birthday.ToString();
+                //res.RegisterData = user.CreateTime.ToString();
+                res.Browse = user.Browse;
+
+                res.Fans = context.Foci.Count(t => t.BeFocusd == user.Id);
+                res.Follow = context.Foci.Count(t => t.Follower == user.Id);
+                res.Articles = context.Articles.Count(t => t.AuthorId == user.Id);
+                var articles = context.Articles.Select(t => t).Where(t => t.AuthorId == user.Id).ToList();
+                res.Like = res.Star = 0;
+                
+                foreach (var article in articles)
+                {
+                    res.Like += context.LikeArticles.Count(t => t.ArticleId == article.Id);
+                    res.Star += context.Collections.Count(t => t.ArticleId == article.Id);
+                }
+                res.IsFollowed = res.Fans > 0;
+                res.IsFan = res.Follow > 0;
+            }
             return Enumerable.Empty<UserInfo>().Append(res).ToArray();
         }
 
@@ -81,12 +130,17 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/get-private-info")]
         public IEnumerable<UserPrivateInfo> LoadUserPrivateInfo([FromBody] LoadUserPrivateInfoForm form)
         {
-            var res = new UserPrivateInfo
+            var res = new UserPrivateInfo()
             {
                 Username = form.Username,
                 LoginCount = 10,
                 Birthday = "2000", RegisterData = "2020"
             };
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+            res.LoginCount = user.LoginCount;
+            res.Birthday = user.Birthday.ToString();
+            res.RegisterData = user.CreateTime.ToString();
             return Enumerable.Empty<UserPrivateInfo>().Append(res).ToArray();
         }
 
@@ -98,7 +152,10 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/check-username")]
         public IEnumerable<bool> CheckUsername([FromBody] CheckUsernameForm form)
         {
-            return Enumerable.Empty<bool>().Append(form.Username.ToCharArray()[0] != 's').ToArray();
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+
+            return Enumerable.Empty<bool>().Append(user!=null).ToArray();
         }
 
         public class CheckEmailForm
@@ -109,7 +166,7 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/check-email")]
         public IEnumerable<bool> CheckEmail([FromBody] CheckEmailForm form)
         {
-            return Enumerable.Empty<bool>().Append(form.Email.ToCharArray()[0] != 's').ToArray();
+            return Enumerable.Empty<bool>().Append(form.Email.Contains("@")).ToArray();
         }
 
         public class GetFollowListForm
@@ -121,15 +178,20 @@ namespace WebAngular.Controllers
         public IEnumerable<UserInfo[]> GetFollowList([FromBody] GetFollowListForm form)
         {
             var res = Enumerable.Empty<UserInfo[]>();
-            const int count = 10;
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+            int count = context.Foci.Count(t => t.BeFocusd == user.Id);
+            var users = context.Foci.Where(t => t.BeFocusd == user.Id).Select(t => t.Follower).ToList();
             var userList = new UserInfo[count];
             for (var i = 0; i < count; i++)
             {
+                var follow = context.Users.FirstOrDefault(t => t.Id == users[i]);
                 userList[i] = new UserInfo
                 {
-                    Username = form.Username + "Follow_" + i,
-                    AvatarUrl = "/avatar.png",
-                    Brief = "Follow_" + i + "的个人简介",
+
+                    Username = follow.UserName,
+                    AvatarUrl = follow.AvatarUrl,
+                    Brief = follow.Brief,
                     IsFollowed = true,
                     IsFan = i % 2 == 0 ? true : false
                 };
@@ -148,17 +210,21 @@ namespace WebAngular.Controllers
         public List<UserInfo> GetFanList([FromBody] GetFanListForm form)
         {
             var res = new List<UserInfo>();
-            const int count = 10;
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+            int count = context.Foci.Count(t => t.Follower == user.Id);
+            var fans = context.Foci.Where(t => t.Follower == user.Id).Select(t => t.BeFocusd).ToList();
             for (var i = 0; i < count; i++)
             {
+                var fan = context.Users.FirstOrDefault(t => t.Id == fans[i]);
                 res.Add(new UserInfo
                 {
-                    Username = form.Username + "_Fan_" + i,
-                    AvatarUrl = "/avatar.png",
-                    Brief = "Fan_" + i + "的个人简介",
+                    Username = fan.UserName,
+                    AvatarUrl = fan.AvatarUrl,
+                    Brief = fan.Brief,
                     IsFan = true,
                     IsFollowed = i % 2 == 0 ? true : false
-                });
+                }) ;
             }
 
             return res;
@@ -187,12 +253,19 @@ namespace WebAngular.Controllers
         public List<UserInfo> GetRecentVisitor([FromBody] GetRecentVisitorForm form)
         {
             var list = new List<UserInfo>();
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.username);
             list.Add(
                 new UserInfo()
                 {
-                    Username = "t"
+                    Username = user.UserName,
+                    AvatarUrl = user.AvatarUrl,
+                     Brief = user.Brief ,
+                      Browse = user.Browse,
+                       Point = user.Point,
+                        Nickname =user.UserName
                 }
-            );
+            ) ;
             return list;
         }
 
