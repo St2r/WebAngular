@@ -2,8 +2,9 @@ import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ArticleInfo} from '../model/article-info';
 import {HttpClient} from '@angular/common/http';
-import { AttachmentInfo } from '../model/attachment';
-import { PostInfo } from '../model/post-info';
+import {AttachmentInfo} from '../model/attachment';
+import {PostInfo} from '../model/post-info';
+import {HotTopic} from '../model/hot-topic';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ export class FetchDataService {
     const model = {username: username};
     return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/fetch/post-article', model);
   }
+
   // 获取用户发布的帖子
   public async getInvitationByUser(username: string): Promise<ArticleInfo[]> {
     return new Promise<ArticleInfo[]>(
@@ -45,6 +47,7 @@ export class FetchDataService {
     const model = {username: username};
     return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/fetch/star-article', model);
   }
+
   public getStarArticleByUser(username: string): Promise<ArticleInfo[]> {
     return new Promise<ArticleInfo[]>(
       resolve => this.requestStarArticleByUser(username).subscribe(
@@ -58,11 +61,18 @@ export class FetchDataService {
     const model = {username: username};
     return this.http.post<PostInfo[]>(this.baseUrl + 'controller/fetch/get-post', model);
   }
+
   public getPostByUser(username: string): Promise<PostInfo[]> {
     return new Promise<PostInfo[]>(
       resolve => this.requestPostByUser(username).subscribe(
         result => resolve(result)
       )
     );
+  }
+
+  // 获取今日热门内容
+  public getHotTopic(block: string): Observable<HotTopic[]> {
+    const model = {block: block};
+    return this.http.post<HotTopic[]>(this.baseUrl + 'controller/fetch/get-hot', model);
   }
 }
