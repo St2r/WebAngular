@@ -9,6 +9,7 @@ namespace WebAngular.Model
     {
         public int Id { get; set; }
         public string UserName { get; set; }
+        public string NickName { get; set; }
         public string PassWord { get; set; }
         public string Email { get; set; }
         public DateTime Birthday { get; set; } = DateTime.Today;
@@ -18,5 +19,6 @@ namespace WebAngular.Model
         public int Point { get; set; } = 0;
         public int Browse { get; set; } = 0;
         public int LoginCount { get; set; } = 0;
+        public int Level { get; set; } = 0;
     }
 }

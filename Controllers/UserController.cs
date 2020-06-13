@@ -95,7 +95,7 @@ namespace WebAngular.Controllers
             if (user != null)
             {
                 res.Username = user.UserName;
-                res.Nickname = "nick_" + user.UserName;
+                res.Nickname = "nick_" + user.NickName;
                 res.AvatarUrl = user.AvatarUrl;
                 res.Brief = user.Brief;
                 res.Point = user.Point;
@@ -262,7 +262,8 @@ namespace WebAngular.Controllers
                      Brief = user.Brief ,
                       Browse = user.Browse,
                        Point = user.Point,
-                        Nickname =user.UserName
+                        Nickname =user.NickName,
+                         Level = user.Level
                 }
             ) ;
             return list;

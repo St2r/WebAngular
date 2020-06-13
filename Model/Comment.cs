@@ -12,5 +12,6 @@ namespace WebAngular.Model
         public int ArticleId { get; set; }
         public DateTime CreateTime { get; set; }
         public string Content { get; set; }
+        public string AvatarUrl { get; set; }
     }
 }

@@ -76,20 +76,24 @@ namespace WebAngular.Controllers
             var res = Enumerable.Empty<WebAngular.Model.CommentInf[]>();
             var l = new List<WebAngular.Model.CommentInf>();
             MyContext context = new MyContext();
-            l.Add(new WebAngular.Model.CommentInf()
+            var article = context.Articles.FirstOrDefault(t => t.ArticleId == form.ArticleId);
+            var comments = context.Comments.Where(t => t.ArticleId == article.Id).ToList();
+
+
+            foreach(var comment in comments)
             {
-                Username = "U1", Nickname = "N1", AvatarUrl = "/avatar.png",
-                Content = "评论测试",
-                Likes = 3, LikeStatus = 0,
-                CommentTime = "2020-10-10-23-59"
-            });
-            l.Add(new WebAngular.Model.CommentInf()
-            {
-                Username = "U2", Nickname = "N2", AvatarUrl = "/avatar.png",
-                Content = "评论测试2",
-                Likes = 13, LikeStatus = 0,
-                CommentTime = "2020-6-13-16-00"
-            });
+                var author = context.Users.FirstOrDefault(t => t.Id == comment.AuthorId);
+                var commentinf = new CommentInf()
+                {
+                    Username = author.UserName,
+                    CommentTime = comment.CreateTime.ToString(),
+                    Content = comment.Content,
+                    AvatarUrl = comment.AvatarUrl,
+                    Nickname = author.NickName
+                };
+                commentinf.Likes = context.LikeComments.Count(t => t.CommentId == comment.Id);
+                l.Add(commentinf);
+            }
             return l;
         }
     }
