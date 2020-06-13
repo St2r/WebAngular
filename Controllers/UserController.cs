@@ -18,7 +18,7 @@ namespace WebAngular.Controllers
             this._logger = logger;
         }
 
-        public class LogForm
+        public class LoginForm
         {
             public string Username { get; set; }
             public string Password { get; set; }
@@ -26,10 +26,10 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/controller/user/login")]
-        public IEnumerable<bool> Login([FromBody] LogForm logForm)
+        public IEnumerable<bool> Login([FromBody] LoginForm form)
         {
             var res = Enumerable.Empty<bool>();
-            return res.Append(logForm.Username.Equals(logForm.Password)).ToArray();
+            return res.Append(form.Username.Equals(form.Password)).ToArray();
         }
 
         [HttpGet("/controller/user/logout")]
@@ -145,24 +145,23 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/controller/user/get-fan-list")]
-        public IEnumerable<UserInfo[]> GetFanList([FromBody] GetFanListForm form)
+        public List<UserInfo> GetFanList([FromBody] GetFanListForm form)
         {
-            var res = Enumerable.Empty<UserInfo[]>();
+            var res = new List<UserInfo>();
             const int count = 10;
-            var userList = new UserInfo[count];
             for (var i = 0; i < count; i++)
             {
-                userList[i] = new UserInfo
+                res.Add(new UserInfo
                 {
                     Username = form.Username + "_Fan_" + i,
                     AvatarUrl = "/avatar.png",
                     Brief = "Fan_" + i + "的个人简介",
                     IsFan = true,
                     IsFollowed = i % 2 == 0 ? true : false
-                };
+                });
             }
 
-            return res.Append(userList).ToArray();
+            return res;
         }
 
         // 添加访问记录
@@ -212,6 +211,5 @@ namespace WebAngular.Controllers
             });
             return list;
         }
-        
     }
 }

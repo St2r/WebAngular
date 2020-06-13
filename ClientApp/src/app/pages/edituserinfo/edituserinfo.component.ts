@@ -10,22 +10,28 @@ import {Router} from '@angular/router';
   styleUrls: ['./edituserinfo.component.css']
 })
 export class EdituserinfoComponent implements OnInit {
+  loading: boolean;
 
   userInfo: UserInfo;
 
   constructor(private userService: UserService, private router: Router) {
+    this.loading = false;
     if (!this.userService.logged) {
-      console.log('not login in');
-      // todo 为了调试方便
-      // this.router.navigate(['/404']).then();
+      this.router.navigate(['/404']).then();
     }
   }
 
   ngOnInit() {
-    this.loadUserInfo();
+    this.loadUserInfo().then(
+      () => {
+        this.loading = false;
+        this.modifyGreeting();
+      }
+    );
   }
 
-  loadUserInfo() {
+  async loadUserInfo() {
+    this.userInfo = await this.userService.getLoggedUserInfo();
   }
 
   modifyGreeting() {

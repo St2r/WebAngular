@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserInfo} from '../../../model/user-info';
-import { UserPrivateInfo } from 'src/app/model/user-private-info';
 
 @Component({
   selector: 'app-side-user',
@@ -8,12 +7,15 @@ import { UserPrivateInfo } from 'src/app/model/user-private-info';
   styleUrls: ['./side-user.component.css']
 })
 export class SideUserComponent implements OnInit {
-  @Input() userInfo;
-  @Input() viewing_own_page;
+  @Input()
+  userInfo: UserInfo;
 
-  constructor() { }
+  @Input()
+  ownPage: boolean;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }

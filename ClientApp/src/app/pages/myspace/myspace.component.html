@@ -1,4 +1,4 @@
-<nz-layout style="background-color: white;">
+<nz-layout *ngIf="!loading" style="background-color: white;">
   <div style="background-color: white;">
     <div class="profileWallWrap">
       <div class="coverWrap">
@@ -8,7 +8,7 @@
         <div class="left">
           <div class="avatarWrap">
             <div>
-              <nz-avatar [nzSize]="150" nzIcon="user" [nzSrc]="userInfo.avatarUrl"></nz-avatar>
+              <nz-avatar [nzSize]="150" nzIcon="user" [nzAlt]="" [nzSrc]="userInfo.avatarUrl"></nz-avatar>
             </div>
           </div>
         </div>
@@ -23,7 +23,7 @@
             <p class="briefDescription"> {{ userInfo.brief }} </p>
           </div>
           <div class="editbutton" *ngIf="ownPage">
-            <a nz-button nzType="link">修改资料</a>
+            <a nz-button nzType="link" routerLink="/editinfo">修改资料</a>
           </div>
         </div>
       </div>
@@ -33,26 +33,26 @@
     <nz-content>
       <nz-tabset>
         <nz-tab *ngIf="ownPage" nzTitle="动态">
-          <app-tab-post></app-tab-post>
+<!--          <app-tab-post></app-tab-post>-->
         </nz-tab>
         <nz-tab nzTitle="帖子">
           <app-tab-invitation [targetName]="targetName"></app-tab-invitation>
         </nz-tab>
         <nz-tab nzTitle="收藏">
-          <app-tab-star [targetName]="targetName"></app-tab-star>
+<!--          <app-tab-star [targetName]="targetName"></app-tab-star>-->
         </nz-tab>
         <nz-tab nzTitle="附件">
-          <app-tab-attachment [targetName]="targetName" [viewing_own_page]="ownPage"></app-tab-attachment>
+<!--          <app-tab-attachment [targetName]="targetName" [viewing_own_page]="ownPage"></app-tab-attachment>-->
         </nz-tab>
         <nz-tab nzTitle="关注">
-          <app-tab-follow [targetName]="targetName" [viewing_own_page]="ownPage"></app-tab-follow>
+<!--          <app-tab-follow [targetName]="targetName" [ownPage]="ownPage"></app-tab-follow>-->
         </nz-tab>
       </nz-tabset>
     </nz-content>
 
     <nz-sider nzWidth="350px" nzTheme="light">
       <div class="userInfo-box-top">
-        <app-side-user [userInfo]="userInfo" [viewing_own_page]="ownPage"></app-side-user>
+        <app-side-user [userInfo]="userInfo" [ownPage]="ownPage"></app-side-user>
       </div>
       <div class="userInfo-box-middle">
         <span>最近访客</span>

@@ -27,9 +27,17 @@ export class FetchDataService {
     return;
   }
 
-  // TODO 获取用户发布的帖子
-  public getInvitationByUser(username: string): Observable<ArticleInfo[]> {
-    return;
+  private requestArticleByUser(username: string): Observable<ArticleInfo[]> {
+    const model = {username: username};
+    return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/fetch/user-article', model);
+  }
+  // 获取用户发布的帖子
+  public async getInvitationByUser(username: string): Promise<ArticleInfo[]> {
+    return new Promise<ArticleInfo[]>(
+      resolve => this.requestArticleByUser(username).subscribe(
+        result => resolve(result)
+      )
+    );
   }
 
   // TODO 获取用户收藏的帖子

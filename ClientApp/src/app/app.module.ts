@@ -22,7 +22,7 @@ import {
   NzCheckboxModule,
   NzCommentModule,
   NzDescriptionsModule,
-  NzDividerModule,
+  NzDividerModule, NzEmptyModule,
   NzFormModule,
   NzGridModule, NzIconModule,
   NzInputModule,
@@ -193,6 +193,7 @@ import { UserBlockComponent } from './components/user-block/user-block.component
     NzDatePickerModule,
     NzTableModule,
     NzDropDownModule,
+    NzEmptyModule,
   ],
   exports: [],
   providers: [

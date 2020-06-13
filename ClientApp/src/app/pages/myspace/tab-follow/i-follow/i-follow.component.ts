@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {UserInfo} from '../../../../model/user-info'
+import {UserInfo} from '../../../../model/user-info';
 import { UserService } from '../../../../services/user.service';
 
 @Component({
@@ -10,67 +10,20 @@ import { UserService } from '../../../../services/user.service';
 export class IFollowComponent implements OnInit {
   @Input() targetName: string;
 
-  my_follow: UserInfo[];
+  loading: boolean;
+  myFollow: UserInfo[];
 
-  constructor(private userService: UserService) { }
-
-  ngOnInit() {
-    this.loadMyFollow();
+  constructor(private userService: UserService) {
+    this.loading = true;
   }
 
-  loadMyFollow() {
-  //   this.my_follow = [
-  //     new class implements UserInfo {
-  //       username = 'my login name';
-  //       nickname = 'test_name';
-  //       avatarUrl = 'fack url';
-  //       brief = '';
-  //       follow = 1;
-  //       fans = 1000;
-  //       level = 1;
-  //       articles = 1;
-  //       point = 500;
-  //       browse = 20000;
-  //       like = 100;
-  //       star = 100;
-  //       isFollowed = false;
-  //       isFan = false;
-  //     },
-  //     new class implements UserInfo {
-  //       username = 'my login name';
-  //       nickname = 'test_name';
-  //       avatarUrl = 'fack url';
-  //       brief = '';
-  //       follow = 1;
-  //       fans = 1000;
-  //       point = 500;
-  //       level = 1;
-  //       articles = 10;
-  //       browse = 20000;
-  //       like = 100;
-  //       star = 100;
-  //       isFollowed = false;
-  //       isFan = false;
-  //     },
-  //     new class implements UserInfo {
-  //       username = 'my login name';
-  //       nickname = 'test_name';
-  //       avatarUrl = 'fack url';
-  //       brief = '';
-  //       follow = 1;
-  //       fans = 1000;
-  //       point = 500;
-  //       level = 2;
-  //       articles = 10;
-  //       browse = 20000;
-  //       like = 100;
-  //       star = 100;
-  //       isFollowed = false;
-  //       isFan = false;
-  //     },
-  //   ]
-    this.userService.requestFollowList(this.targetName).subscribe(
-      follow => this.my_follow=follow
+  ngOnInit() {
+    this.loadMyFollow().then(
+      () => this.loading = false
     );
+  }
+
+  async loadMyFollow() {
+    this.myFollow = await this.userService.getFollowList(this.targetName);
   }
 }

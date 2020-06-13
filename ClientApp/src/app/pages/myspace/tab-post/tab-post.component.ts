@@ -15,7 +15,7 @@ export class TabPostComponent implements OnInit {
 
   my_post: PostInfo[];
 
-  constructor(private fetchService:FetchDataService) { }
+  constructor(private fetchService: FetchDataService) { }
 
   ngOnInit() {
     this.loadPostInfo();
