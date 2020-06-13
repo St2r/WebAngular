@@ -75,7 +75,7 @@
                       [nzExtra]="article.coverUrl?templateExtra:null">
           <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
             <ng-template #templateAvatar>
-              <nz-avatar [nzSrc]="article.avatar" [nz-popover]="userHover" nzPopoverPlacement="leftBottom"></nz-avatar>
+              <nz-avatar [nzSrc]="article.avatar" [nz-popover]="userHover" nzPopoverPlacement="bottom"></nz-avatar>
 
               <ng-template #userHover>
                 <app-user-hover [username]="article.username"></app-user-hover>
