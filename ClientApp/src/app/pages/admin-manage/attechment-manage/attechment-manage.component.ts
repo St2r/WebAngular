@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AttachmentInfo } from 'src/app/model/attachment';
+import {AdminService} from '../../../services/admin.service';
 
 @Component({
   selector: 'app-attechment-manage',
@@ -9,20 +10,14 @@ import { AttachmentInfo } from 'src/app/model/attachment';
 export class AttechmentManageComponent implements OnInit {
   attachment_list: AttachmentInfo[];
 
-  constructor() { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.loadAttachmentInfo();
+    this.loadAttachmentInfo().then();
   }
 
-// TODO 获取数据
-  loadAttachmentInfo() {
-    this.attachment_list = [
-      new class implements AttachmentInfo {
-        filename = 'filename';
-        filesize = 123;
-        filetype = '.doc';
-      }
-    ]
+  // 获取数据
+  async loadAttachmentInfo() {
+    this.attachment_list = await this.adminService.getAllAttachment();
   }
 }
