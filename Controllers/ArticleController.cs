@@ -130,5 +130,18 @@ namespace WebAngular.Controllers
             context.SaveChanges();
             return true;
         }
+
+
+        public class NewCommentForm
+        {
+            public string Username { get; set; }
+            public string Content { get; set; }
+        }
+
+        [HttpPost("/controller/comment/new")]
+        public bool NewComment([FromBody] NewCommentForm form)
+        {
+            return true;
+        }
     }
 }

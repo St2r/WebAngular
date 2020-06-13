@@ -4,6 +4,8 @@ export interface Comment {
   nickname: string;
   avatarUrl: string;
 
+  commentId: string;
+
   content: string;
   likes: number;
 

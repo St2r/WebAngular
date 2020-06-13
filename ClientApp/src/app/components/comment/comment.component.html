@@ -40,4 +40,17 @@
   </nz-list>
 </div>
 
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)" *ngIf="!this.userService.logged">
+  <nz-form-item>
+    <nz-form-control>
+      <editor
+        apiKey="pzsbp1xb6j13dd4aduwebi7815hzj1upr7v42ojpcbc8c7pu"
+        [init]="editParam"
+        formControlName="content"
+        id="tinyMce"
+      ></editor>
+    </nz-form-control>
+  </nz-form-item>
 
+  <button nz-button nzBlock nzType="primary" type="submit" [disabled]="!validateForm.valid">发布</button>
+</form>

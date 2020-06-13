@@ -21,4 +21,7 @@ export class ArticleService {
     this.http.post<boolean>(this.baseUrl + 'controller/article/new', form).subscribe();
   }
 
+  public newComment(value: { author: string, content: string }) {
+    this.http.post<boolean>(this.baseUrl + 'controller/comment/new', value).subscribe();
+  }
 }

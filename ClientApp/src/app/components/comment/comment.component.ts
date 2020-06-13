@@ -2,8 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from '../../model/comment';
 import {formatDistance, addDays} from 'date-fns';
 import {CommentService} from '../../services/comment.service';
-import {ValueConverter} from '@angular/compiler/src/render3/view/template';
 import {Router} from '@angular/router';
+import {OperationService} from '../../services/operation.service';
+import {UserService} from '../../services/user.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ArticleService} from '../../services/article.service';
 
 @Component({
   selector: 'app-comment',
@@ -14,6 +17,28 @@ export class CommentComponent implements OnInit {
   @Input()
   articleID: string;
 
+  validateForm!: FormGroup;
+
+  editParam = {
+    selector: 'textarea',
+    // plugins是tinymce的各种插件
+    plugins: 'link lists code table wordcount codesample',
+    // toolbar定义快捷栏的操作, | 用来分隔显示
+    toolbar: 'codesample | bold italic underline strikethrough | fontsizeselect | forecolor backcolor | alignleft'
+      + ' aligncenter alignright alignjustify | bullist numlist | outdent indent blockquote | undo redo '
+      + '| link unlink image code | removeformat | h2 h3 h4',
+    height: 300,
+    // 这里是代码块的一些语言选择,好像暂时还没支持typescript,所以博文都是js格式
+    codesample_languages: [
+      {text: 'HTML/XML', value: 'markup'},
+      {text: 'JavaScript', value: 'javascript'},
+      {text: 'CSS', value: 'css'},
+      {text: 'Java', value: 'java'},
+      {text: 'Cpp', value: 'cpp'}
+    ],
+    outputFormat: 'html'
+  };
+
   comments: Comment[];
 
   loading: boolean;
@@ -21,10 +46,17 @@ export class CommentComponent implements OnInit {
   sort: string;
   filter: string;
 
-  constructor(private commentService: CommentService, private router: Router) {
+  constructor(private fb: FormBuilder, private commentService: CommentService, private router: Router,
+              private operationService: OperationService, public userService: UserService,
+              private articleService: ArticleService) {
     this.loading = true;
     this.sort = 'latest';
     this.filter = 'all';
+
+    this.validateForm = fb.group({
+      username: [null],
+      content: ['init content']
+    });
   }
 
   ngOnInit() {
@@ -53,12 +85,16 @@ export class CommentComponent implements OnInit {
   Like(i: number) {
     if (this.comments[i].likeStatus === 0) {
       this.comments[i].likes += 1;
+      this.operationService.requestLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = 1;
     } else if (this.comments[i].likeStatus === -1) {
       this.comments[i].likes += 1;
+      this.operationService.requestLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
+      this.operationService.requestUndoDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = 1;
     } else {
       this.comments[i].likes -= 1;
+      this.operationService.requestUndoLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = 0;
     }
     // 数据传送回数据库
@@ -67,12 +103,22 @@ export class CommentComponent implements OnInit {
   DisLike(i: number) {
     if (this.comments[i].likeStatus === 0) {
       this.comments[i].likeStatus = -1;
+      this.operationService.requestDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
     } else if (this.comments[i].likeStatus === 1) {
       this.comments[i].likes -= 1;
+      this.operationService.requestUndoLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
+      this.operationService.requestDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = -1;
     } else {
       this.comments[i].likeStatus = 0;
+      this.operationService.requestUndoDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
     }
     // 数据传送回数据库
+  }
+
+  submitForm(value) {
+    value['username'] = this.userService.username;
+    console.log(value);
+    this.articleService.newComment(value);
   }
 }
