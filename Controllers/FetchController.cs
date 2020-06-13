@@ -8,7 +8,7 @@ namespace WebAngular.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class FetchController: ControllerBase
+    public class FetchController : ControllerBase
     {
         private readonly ILogger<FetchController> _logger;
 
@@ -22,6 +22,7 @@ namespace WebAngular.Controllers
         {
             public string Username { get; set; }
         }
+
         [HttpPost("/controller/fetch/post-article")]
         public List<ArticleInfo> GetUserArticle([FromBody] GetUserArticleForm form)
         {
@@ -33,7 +34,7 @@ namespace WebAngular.Controllers
             {
                 Title = "test"
             });
-            foreach(var article in articles)
+            foreach (var article in articles)
             {
                 var articleInfo = new ArticleInfo()
                 {
@@ -46,11 +47,11 @@ namespace WebAngular.Controllers
                     LastReviewTime = article.LastReviewTime.ToString(),
                     Username = user.UserName,
                     Nickname = user.UserName,
-
                 };
                 articleInfo.Like = context.LikeArticles.Count(t => t.ArticleId == article.Id);
                 list.Add(articleInfo);
             }
+
             return list;
         }
 
@@ -58,6 +59,7 @@ namespace WebAngular.Controllers
         {
             public string Username { get; set; }
         }
+
         [HttpPost("/controller/fetch/star-article")]
         public List<ArticleInfo> GetUserStarArticle([FromBody] GetUserStarArticleForm form)
         {
@@ -86,6 +88,32 @@ namespace WebAngular.Controllers
                 }
             });
             return list;
+        }
+
+        public class GetHotTopicForm
+        {
+            public string Block { get; set; }
+        }
+
+        public class HotTopic
+        {
+            public string Title { get; set; }
+            public string ArticleId { get; set; }
+        }
+
+        [HttpPost("controller/fetch/hot-topic")]
+        public List<HotTopic> GetHotTopic([FromBody] GetHotTopicForm form)
+        {
+            var l = new List<HotTopic>();
+            for (int i = 0; i < 3; i++)
+            {
+                l.Add(new HotTopic()
+                {
+                    ArticleId = "12"+i,
+                    Title = "hh" + i
+                });
+            }
+            return l;
         }
     }
 }

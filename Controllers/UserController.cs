@@ -104,16 +104,16 @@ namespace WebAngular.Controllers
                 //res.RegisterData = user.CreateTime.ToString();
                 res.Browse = user.Browse;
 
-                res.Fans = context.Foci.Count(t => t.BeFocusd == user.Id);
-                res.Follow = context.Foci.Count(t => t.Follower == user.Id);
-                res.Articles = context.Articles.Count(t => t.AuthorId == user.Id);
-                var articles = context.Articles.Select(t => t).Where(t => t.AuthorId == user.Id).ToList();
+                res.Fans = context.Foci.Count(t => t.BeFocusd == user.UserName);
+                res.Follow = context.Foci.Count(t => t.Follower == user.UserName);
+                res.Articles = context.Articles.Count(t => t.AuthorId == user.UserName);
+                var articles = context.Articles.Select(t => t).Where(t => t.AuthorId == user.UserName).ToList();
                 res.Like = res.Star = 0;
                 
                 foreach (var article in articles)
                 {
-                    res.Like += context.LikeArticles.Count(t => t.ArticleId == article.Id);
-                    res.Star += context.Collections.Count(t => t.ArticleId == article.Id);
+                    res.Like += context.LikeArticles.Count(t => t.ArticleId == article.ArticleId);
+                    res.Star += context.Collections.Count(t => t.ArticleId == article.ArticleId);
                 }
                 res.IsFollowed = res.Fans > 0;
                 res.IsFan = res.Follow > 0;
@@ -179,12 +179,12 @@ namespace WebAngular.Controllers
             var res = Enumerable.Empty<UserInfo[]>();
             MyContext context = new MyContext();
             var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
-            int count = context.Foci.Count(t => t.BeFocusd == user.Id);
-            var users = context.Foci.Where(t => t.BeFocusd == user.Id).Select(t => t.Follower).ToList();
+            int count = context.Foci.Count(t => t.BeFocusd == user.UserName);
+            var users = context.Foci.Where(t => t.BeFocusd == user.UserName).Select(t => t.Follower).ToList();
             var userList = new UserInfo[count];
             for (var i = 0; i < count; i++)
             {
-                var follow = context.Users.FirstOrDefault(t => t.Id == users[i]);
+                var follow = context.Users.FirstOrDefault(t => t.UserName == users[i]);
                 userList[i] = new UserInfo
                 {
 
@@ -211,11 +211,11 @@ namespace WebAngular.Controllers
             var res = new List<UserInfo>();
             MyContext context = new MyContext();
             var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
-            int count = context.Foci.Count(t => t.Follower == user.Id);
-            var fans = context.Foci.Where(t => t.Follower == user.Id).Select(t => t.BeFocusd).ToList();
+            int count = context.Foci.Count(t => t.Follower == user.UserName);
+            var fans = context.Foci.Where(t => t.Follower == user.UserName).Select(t => t.BeFocusd).ToList();
             for (var i = 0; i < count; i++)
             {
-                var fan = context.Users.FirstOrDefault(t => t.Id == fans[i]);
+                var fan = context.Users.FirstOrDefault(t => t.UserName == fans[i]);
                 res.Add(new UserInfo
                 {
                     Username = fan.UserName,

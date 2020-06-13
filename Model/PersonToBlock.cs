@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebAngular.Model
 {
-    public class Collection
+    public class PersonToBlock
     {
         [Key] public string Id { get; set; }
-        public string UserId { get; set; }
-        public string ArticleId { get; set; }
+        public string UserName { get; set; }
+        public string BlockName { get; set; }
     }
 }
