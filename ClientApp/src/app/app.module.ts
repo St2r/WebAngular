@@ -97,6 +97,10 @@ import { NzDropDownModule } from 'ng-zorro-antd';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { UserBlockComponent } from './components/user-block/user-block.component';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { ResultComponent } from './pages/result/result.component';
+import { ArticleResComponent } from './pages/result/article-res/article-res.component';
+import { UserResComponent } from './pages/result/user-res/user-res.component';
+import { AttachmentResComponent } from './pages/result/attachment-res/attachment-res.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +150,10 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     AttechmentManageComponent,
     SearchBarComponent,
     UserBlockComponent,
+    ResultComponent,
+    ArticleResComponent,
+    UserResComponent,
+    AttachmentResComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
