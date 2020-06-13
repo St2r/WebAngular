@@ -95,6 +95,8 @@ import { AttechmentManageComponent } from './pages/admin-manage/attechment-manag
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd';
 import { NzFilterTriggerComponent } from './pages/admin-manage/Addon/filter-trigger.component'
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { UserBlockComponent } from './components/user-block/user-block.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +144,8 @@ import { NzFilterTriggerComponent } from './pages/admin-manage/Addon/filter-trig
     ArticleManageComponent,
     UserManageComponent,
     AttechmentManageComponent,
+    SearchBarComponent,
+    UserBlockComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

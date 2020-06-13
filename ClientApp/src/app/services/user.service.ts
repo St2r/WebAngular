@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {Inject, Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {UserInfo} from '../model/user-info';
@@ -9,7 +9,7 @@ import {CookieService} from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements OnInit {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -22,7 +22,10 @@ export class UserService {
   // 当前登陆状态
   // false - 未登陆
   // true - 已登陆
-  public status: boolean;
+  public logged: boolean;
+
+  // 数据是否已获取
+  private fetched: boolean;
 
   // 已登陆用户的ID
   public username: string;
@@ -32,7 +35,7 @@ export class UserService {
   public userPrivateInfo: UserPrivateInfo;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private cookie: CookieService) {
-    this.status = false;
+    this.logged = false;
     this.baseUrl = baseUrl;
 
     this.userInfo = new class implements UserInfo {
@@ -62,19 +65,53 @@ export class UserService {
     if (sessionStorage.getItem('username')) {
       this.afterLogin(sessionStorage.getItem('username'));
     }
-
   }
 
-  public getUserInfo() {
-    return this.requestUserInfo(this.username);
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
-  public getUserPrivateInfo() {
-    return this.requestUserPrivateInfo(this.username);
+  public async getUserInfo(username: string): Promise<UserInfo> {
+    return new Promise<UserInfo>(
+      resolve => {
+        this.requestUserInfo(username).subscribe(
+          result => resolve(result[0])
+        );
+      }
+    );
+  }
+
+  public async getLoggedUserInfo(): Promise<UserInfo> {
+    return new Promise<UserInfo>(
+      resolve => {
+        if (this.fetched) {
+          resolve(this.userInfo);
+        } else {
+          this.requestUserInfo(this.username).subscribe(
+            result => resolve(result[0])
+          );
+        }
+      }
+    );
+  }
+
+  public getLoggedUserPrivateInfo(): Promise<UserPrivateInfo> {
+    return new Promise<UserPrivateInfo>(
+      resolve => {
+        if (this.fetched) {
+          resolve(this.userPrivateInfo);
+        } else {
+          this.requestUserInfo(this.username).subscribe(
+            result => resolve(result[0])
+          );
+        }
+      }
+    );
   }
 
   // 登陆
   public requestLogin(value: { username: string, password: string, remember: boolean }): Observable<boolean> {
+    // 利用cookie保存
     if (value.remember) {
       this.cookie.set('username', value.username);
     } else {
@@ -86,7 +123,7 @@ export class UserService {
   // 登陆之后手动加载登陆数据到user-service
   public afterLogin(username: string) {
     this.username = username;
-    this.status = true;
+    this.logged = true;
     this.loadUserInfo();
     sessionStorage.setItem('username', username);
   }
@@ -97,7 +134,7 @@ export class UserService {
   }
 
   public afterLogout() {
-    this.status = false;
+    this.logged = false;
     this.username = '';
     sessionStorage.clear();
   }
