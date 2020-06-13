@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 30px;
   height: fit-content;
+  margin-top: 30px;
 }
 
 button {
@@ -19,4 +20,32 @@ button {
   width: 60%;
   height: 100%;
   float: left;
+}
+
+.avatar {
+  height: auto;
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.avatar_inner {
+  height: auto;
+  width: auto;
+}
+
+.name {
+  height: auto;
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top: 10px;
+}
+
+.name_font {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+  font-weight: bolder;
 }

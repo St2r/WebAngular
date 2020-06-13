@@ -6,3 +6,11 @@
 nz-select {
   width: 100px;
 }
+
+.function_part {
+  margin-left: 24px;
+}
+
+.comment_part {
+  margin-left: 44px;
+}

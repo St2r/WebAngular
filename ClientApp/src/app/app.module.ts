@@ -96,6 +96,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { UserBlockComponent } from './components/user-block/user-block.component';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @NgModule({
   declarations: [
@@ -193,6 +194,7 @@ import { UserBlockComponent } from './components/user-block/user-block.component
     NzDatePickerModule,
     NzTableModule,
     NzDropDownModule,
+    NzTagModule,
     NzEmptyModule,
   ],
   exports: [],

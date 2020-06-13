@@ -1,13 +1,15 @@
-<div *ngIf="!loading">
-  <div class="top_part" *ngIf="ownPage">
-    <div class="button_container">
-      <button nz-button nzType="primary" nzSize="large">签到</button>
+<div *ngIf="!loading" style="margin-right: 24px;">
+  <div class="top_part">
+    <div class="avatar">
+      <div class="avatat_inner">
+        <nz-avatar [nzSize]="90" nzIcon="user" [nzSrc]="userInfo.avatarUrl"></nz-avatar>
+      </div>
     </div>
-    <div class="login_days">
-      <span>累计登录： 11 天 </span>
+    <div class="name">
+      <span class="name_font"> {{ userInfo.nickname }} </span>
     </div>
   </div>
-  <nz-divider *ngIf="ownPage"></nz-divider>
+  <nz-divider></nz-divider>
 
   <nz-row>
     <nz-col nzSpan="8">
