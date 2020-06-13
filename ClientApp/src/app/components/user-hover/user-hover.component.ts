@@ -30,6 +30,9 @@ export class UserHoverComponent implements OnInit {
       point: number;
       star: number;
       username: string;
+      loginCount: number;
+      birthday: string;
+      registerData: string;
     };
   }
 
