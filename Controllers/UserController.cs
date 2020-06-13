@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebAngular.Model;
 
 namespace WebAngular.Controllers
 {
@@ -52,47 +53,70 @@ namespace WebAngular.Controllers
             return res.Append(!registerForm.Username.Equals("s")).ToArray();
         }
 
+        public class LoadUserInfoForm
+        {
+            public string Username { get; set; }
+        }
+        
         [HttpPost("/controller/user/get-info")]
-        public IEnumerable<UserInfo> LoadUserInfo([FromBody] UsernameModel usernameMode)
+        public IEnumerable<UserInfo> LoadUserInfo([FromBody] LoadUserInfoForm form)
         {
             var res = new UserInfo
             {
-                Username = usernameMode.Username,
-                Nickname = "nick_" + usernameMode.Username, AvatarUrl = "/avatar.png",
-                Brief = usernameMode.Username + "的个人简介",
+                Username = form.Username,
+                Nickname = "nick_" + form.Username, AvatarUrl = "/avatar.png",
+                Brief = form.Username + "的个人简介",
                 Level = 1,
                 Follow = 6, Fans = 5, Point = 4, Articles = 30, Browse = 3, Like = 2, Star = 1,
                 IsFollowed = true, IsFan = false
             };
             return Enumerable.Empty<UserInfo>().Append(res).ToArray();
         }
+        
+        public class LoadUserPrivateInfoForm
+        {
+            public string Username { get; set; }
+        }
 
         [HttpPost("/controller/user/get-private-info")]
-        public IEnumerable<UserPrivateInfo> LoadUserPrivateInfo([FromBody] UsernameModel usernameMode)
+        public IEnumerable<UserPrivateInfo> LoadUserPrivateInfo([FromBody] LoadUserPrivateInfoForm form)
         {
             var res = new UserPrivateInfo
             {
-                Username = usernameMode.Username,
+                Username = form.Username,
                 LoginCount = 10,
                 Birthday = "2000", RegisterData = "2020"
             };
             return Enumerable.Empty<UserPrivateInfo>().Append(res).ToArray();
         }
 
+        public class CheckUsernameForm
+        {
+            public string Username { get; set; }
+        }
+        
         [HttpPost("/controller/user/check-username")]
-        public IEnumerable<bool> CheckUsername([FromBody] UsernameModel usernameModel)
+        public IEnumerable<bool> CheckUsername([FromBody] CheckUsernameForm form)
         {
-            return Enumerable.Empty<bool>().Append(usernameModel.Username.ToCharArray()[0] != 's').ToArray();
+            return Enumerable.Empty<bool>().Append(form.Username.ToCharArray()[0] != 's').ToArray();
         }
 
+        public class CheckEmailForm
+        {
+            public string Email { get; set; }
+        }
         [HttpPost("/controller/user/check-email")]
-        public IEnumerable<bool> CheckEmail([FromBody] EmailModel emailModel)
+        public IEnumerable<bool> CheckEmail([FromBody] CheckEmailForm form)
         {
-            return Enumerable.Empty<bool>().Append(emailModel.Email.ToCharArray()[0] != 's').ToArray();
+            return Enumerable.Empty<bool>().Append(form.Email.ToCharArray()[0] != 's').ToArray();
         }
 
+        public class GetFollowListForm
+        {
+            public string Username { get; set; }
+        }
         [HttpPost("/controller/user/get-follow-list")]
-        public IEnumerable<UserInfo[]> GetFollowList([FromBody] UsernameModel form)
+        public IEnumerable<UserInfo[]> GetFollowList([FromBody] GetFollowListForm form)
         {
             var res = Enumerable.Empty<UserInfo[]>();
             const int count = 10;
@@ -112,8 +136,13 @@ namespace WebAngular.Controllers
             return res.Append(userList).ToArray();
         }
 
+        
+        public class GetFanListForm
+        {
+            public string Username { get; set; }
+        }
         [HttpPost("/controller/user/get-fan-list")]
-        public IEnumerable<UserInfo[]> GetFanList([FromBody] UsernameModel form)
+        public IEnumerable<UserInfo[]> GetFanList([FromBody] GetFanListForm form)
         {
             var res = Enumerable.Empty<UserInfo[]>();
             const int count = 10;
@@ -131,44 +160,6 @@ namespace WebAngular.Controllers
             }
 
             return res.Append(userList).ToArray();
-        }
-
-        public class UserInfo
-        {
-            public string Username { get; set; }
-            public string Nickname { get; set; }
-            public string AvatarUrl { get; set; }
-            public string Brief { get; set; }
-
-            public int Follow { get; set; }
-            public int Fans { get; set; }
-            public int Level { get; set; }
-            public int Point { get; set; }
-            public int Articles { get; set; }
-            public int Browse { get; set; }
-            public int Like { get; set; }
-            public int Star { get; set; }
-
-            public bool IsFollowed { get; set; }
-            public bool IsFan { get; set; }
-        }
-
-        public class UserPrivateInfo
-        {
-            public string Username { get; set; }
-            public int LoginCount { get; set; }
-            public string Birthday { get; set; }
-            public string RegisterData { get; set; }
-        }
-
-        public class UsernameModel
-        {
-            public string Username { get; set; }
-        }
-
-        public class EmailModel
-        {
-            public string Email { get; set; }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebAngular.Model;
 
 namespace WebAngular.Controllers
 {
@@ -16,38 +17,15 @@ namespace WebAngular.Controllers
         {
             this._logger = logger;
         }
-
-        public class AdminInfo
-        {
-            public string Username { get; set; }
-            public string Nickname { get; set; }
-            public string AvatarUrl { get; set; }
-            public int Identity { get; set; }
-        }
         
-        public class BlockInfo
-        {
-            public string BlockName { get; set; }
-            
-            public string AvatarUrl { get; set; }
-            public int AccessRight { get; set; }
-            
-            public bool IsFollowed { get; set; }
-            
-            public int ContentTotal { get; set; }
-            public int FollowTotal { get; set; }
-            public int TodayTotal { get; set; }
-            
-            public AdminInfo[] Admins { get; set; }
-        }
 
-        public class BlockInfoForm
+        public class GetBlockInfoForm
         {
             public string Block { get; set; }
         }
 
         [HttpPost("/controller/forum/get-block-info")]
-        public IEnumerable<BlockInfo> GetBlockInfo([FromBody] BlockInfoForm form)
+        public IEnumerable<BlockInfo> GetBlockInfo([FromBody] GetBlockInfoForm form)
         {
             var res = Enumerable.Empty<BlockInfo>();
             var blockInfo = new BlockInfo()

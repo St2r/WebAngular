@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebAngular.Model;
 
 namespace WebAngular.Controllers
 {
@@ -18,6 +19,15 @@ namespace WebAngular.Controllers
             this._logger = logger;
         }
 
+        public class GetArticleForm
+        {
+            public string Block { get; set; }
+            public string Sort { get; set; }
+            public string Filter { get; set; }
+            public int PageSize { get; set; }
+            public int Page { get; set; }
+        }
+        
         [HttpPost("/controller/article/get-article")]
         public IEnumerable<ArticleInfo[]> GetArticle([FromBody] GetArticleForm form)
         {
@@ -44,13 +54,15 @@ namespace WebAngular.Controllers
             return res.Append(articles).ToArray();
         }
 
-        public class ArticleIDModel
+        public class GetCommentsForm
         {
-            public string ArticleID { get; set; }
+            public string ArticleId { get; set; }
+            public string Sort { get; set; }
+            public string Filter { get; set; }
         }
         
         [HttpPost("/controller/comment/get-comment")]
-        public IEnumerable<Comment[]> GetComments([FromBody] ArticleIDModel a)
+        public IEnumerable<Comment[]> GetComments([FromBody] GetCommentsForm form)
         {
             var res = Enumerable.Empty<Comment[]>();
             var list = new Comment[2];
@@ -70,47 +82,5 @@ namespace WebAngular.Controllers
             };
             return res.Append(list).ToArray();
         }
-    }
-
-
-    public class ArticleInfo
-    {
-        public string Title { get; set; }
-        public string Header { get; set; }
-        public string CoverUrl { get; set; }
-
-        public int Like { get; set; }
-        public int Review { get; set; }
-        public int Browse { get; set; }
-        public int Star { get; set; }
-
-        public string LastReviewTime { get; set; }
-
-        public string Username { get; set; }
-        public string Nickname { get; set; }
-        public string AvatarUrl { get; set; }
-
-        public bool IsPinned { get; set; }
-        public bool IsElite { get; set; }
-    }
-
-    public class GetArticleForm
-    {
-        public string Block { get; set; }
-        public string Sort { get; set; }
-        public string Filter { get; set; }
-        public int PageSize { get; set; }
-        public int Page { get; set; }
-    }
-
-    public class Comment
-    {
-        public string Username { get; set; }
-        public string Nickname { get; set; }
-        public string AvatarUrl { get; set; }
-        public string Content { get; set; }
-        public int Likes { get; set; }
-        public int LikeStatus { get; set; }
-        public string CommentTime { get; set; }
     }
 }

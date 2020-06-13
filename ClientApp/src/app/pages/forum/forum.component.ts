@@ -116,6 +116,12 @@ export class ForumComponent implements OnInit {
   newArticle() {
     this.router.navigate(['/article'], {queryParams: {operation: 'new', block: this.blockInfo.blockName}}).then();
   }
+
+  viewArticle(articleId: string) {
+    this.router.navigate(['/article'], {
+      queryParams: {operation: 'view', block: this.blockInfo.blockName, articleId: articleId}
+    }).then();
+  }
 }
 
 interface HotTopic {

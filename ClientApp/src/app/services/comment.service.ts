@@ -1,7 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Comment} from '../model/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +12,15 @@ export class CommentService {
     this.baseUrl = baseUrl;
   }
 
-  private requestComments(articleID: string): Observable<any> {
-    const model = {articleID: articleID};
+  private requestComments(articleId: string, sort: string, filter: string): Observable<any> {
+    const model = {articleId: articleId, sort: sort, filter: filter};
     return this.http.post<any>(this.baseUrl + 'controller/comment/get-comment', model);
   }
 
-  public getComments(articleID: string): Promise<any> {
+  public getComments(articleID: string, sort: string, filter: string): Promise<any> {
     return new Promise<any>(
       resolve => {
-        this.requestComments(articleID).subscribe(
+        this.requestComments(articleID, sort, filter).subscribe(
           result => {
             resolve(result[0]);
           }

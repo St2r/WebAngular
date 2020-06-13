@@ -62,8 +62,8 @@ export class UserService implements OnInit {
       username: string;
     };
 
-    if (sessionStorage.getItem('username')) {
-      this.afterLogin(sessionStorage.getItem('username'));
+    if (this.cookie.check('username')) {
+      this.afterLogin(this.cookie.get('username'));
     }
   }
 
@@ -113,9 +113,9 @@ export class UserService implements OnInit {
   public requestLogin(value: { username: string, password: string, remember: boolean }): Observable<boolean> {
     // 利用cookie保存
     if (value.remember) {
-      this.cookie.set('username', value.username);
+      this.cookie.set('backup_username', value.username);
     } else {
-      this.cookie.delete('username');
+      this.cookie.delete('backup_username');
     }
     return this.http.post<boolean>(this.baseUrl + 'controller/user/login', value);
   }
@@ -125,7 +125,7 @@ export class UserService implements OnInit {
     this.username = username;
     this.logged = true;
     this.loadUserInfo();
-    sessionStorage.setItem('username', username);
+    this.cookie.set('username', username);
   }
 
   // 退出登录
@@ -136,7 +136,7 @@ export class UserService implements OnInit {
   public afterLogout() {
     this.logged = false;
     this.username = '';
-    sessionStorage.clear();
+    this.cookie.delete('username');
   }
 
   // 注册

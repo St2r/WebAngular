@@ -33,10 +33,6 @@ export class CommentComponent implements OnInit {
     );
   }
 
-  reloadData() {
-    return;
-  }
-
   jumpToPersonPage(userId: string) {
     this.router.navigate(['/my-space' + userId]).then();
   }
@@ -51,7 +47,7 @@ export class CommentComponent implements OnInit {
   }
 
   async loadComments() {
-    this.comments = await this.commentService.getComments(this.articleID);
+    this.comments = await this.commentService.getComments(this.articleID, this.sort, this.filter);
   }
 
   Like(i: number) {

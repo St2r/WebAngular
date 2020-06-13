@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/404']).then();
     }
     this.validateForm = this.fb.group({
-      username: [this.cookie.get('username'), [Validators.required]],
+      username: [this.cookie.get('backup_username'), [Validators.required]],
       password: ['', [Validators.required]],
       remember: [false, null]
     });

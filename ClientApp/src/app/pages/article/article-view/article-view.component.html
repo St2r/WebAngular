@@ -4,5 +4,6 @@
   </nz-sider>
   <nz-content>
     <div [innerHTML]="articleContent.content | safeHtml"></div>
+    <app-comment [articleID]="articleID"></app-comment>
   </nz-content>
 </nz-layout>

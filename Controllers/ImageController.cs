@@ -20,6 +20,7 @@ namespace WebAngular.Controllers
             _logger = logger;
         }
         
+        // 测试上传图片用的，暂时别删
         [HttpPost("/controller/image")]
         public IEnumerable<bool> UploadImage([FromForm] IFormCollection form)
         {

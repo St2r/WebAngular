@@ -1,18 +1,18 @@
 <nz-row>
   <nz-col nzSpan="8">
-    <nz-radio-group [(ngModel)]="sort" nzButtonStyle="solid" (ngModelChange)="reloadData()">
+    <nz-radio-group [(ngModel)]="sort" nzButtonStyle="solid" (ngModelChange)="loadComments()">
       <label nz-radio-button nzValue="latest">最新评论</label>
       <label nz-radio-button nzValue="hottest">点赞最多</label>
     </nz-radio-group>
   </nz-col>
   <nz-col nzSpan="8">
-    <nz-select [(ngModel)]="filter" (ngModelChange)="reloadData()">
+    <nz-select [(ngModel)]="filter" (ngModelChange)="loadComments()">
       <nz-option nzValue="all" nzLabel="全部评论"></nz-option>
       <nz-option nzValue="author" nzLabel="只看楼主"></nz-option>
     </nz-select>
   </nz-col>
   <nz-col nzSpan="8">
-    <button nz-button nzType="primary">发布评论</button>
+    <button nz-button>发布评论</button>
   </nz-col>
 </nz-row>
 
