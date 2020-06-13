@@ -3,10 +3,10 @@
 </div>
 <div class="search_pannel">
   <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-    <input type="text" nz-input placeholder="input search text" />
+    <input type="text" nz-input placeholder="input search text" [(ngModel)]='search_content' />
   </nz-input-group>
   <ng-template #suffixButton>
-    <button nz-button nzType="primary" nzSize="large" nzSearch>Search</button>
+    <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">搜索</button>
   </ng-template>
 </div>
 <div class="blank">
@@ -15,11 +15,17 @@
 <div class="pr_info">
   <div class="hot_search">
     <h2>热门搜索</h2>
+    <nz-divider></nz-divider>
     <div *ngFor="let item of hot_search">
       <span> {{ item }} </span>
     </div>
   </div>
   <div class="history">
     <h2>历史搜索</h2>
+    <span style="float: right;" (click)='clear()'>清空</span>
+    <nz-divider></nz-divider>
+    <ul>
+      <li *ngFor="let item of history_search"> {{ item }} </li>
+    </ul>
   </div>
 </div>

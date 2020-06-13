@@ -6,6 +6,8 @@ import {FetchDataService} from '../../services/fetch-data.service';
 import {AdminInfo, BlockInfo} from '../../model/block-info';
 import {ForumService} from '../../services/forum.service';
 import {ArticleInfo} from '../../model/article-info';
+import {OperationService} from '../../services/operation.service';
+import {HotTopic} from '../../model/hot-topic';
 
 @Component({
   selector: 'app-forum',
@@ -37,7 +39,8 @@ export class ForumComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService,
               private fetchDataService: FetchDataService, private forumService: ForumService,
-              private routerInfo: ActivatedRoute, private modal: NzModalService) {
+              private routerInfo: ActivatedRoute, private modal: NzModalService,
+              private operationService: OperationService) {
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];
       this.init();
@@ -67,18 +70,11 @@ export class ForumComponent implements OnInit {
     );
   }
 
-  // todo 请求后端-将今日的热点信息加载到hotTopics中
+  // 请求后端-将今日的热点信息加载到hotTopics中
   loadHotTopic() {
-    this.hotTopics = [
-      new class implements HotTopic {
-        articleId = 'article1';
-        title = '震惊！某大学生竟';
-      },
-      new class implements HotTopic {
-        articleId = 'article2';
-        title = '谷歌校招';
-      }
-    ];
+    this.fetchDataService.getHotTopic(this.block).subscribe(
+      result => this.hotTopics = result
+    );
   }
 
   // 更新排序方式或者过滤器时，重新加载数据
@@ -96,18 +92,19 @@ export class ForumComponent implements OnInit {
     );
   }
 
-  // todo 后端
+  // 关注
   follow() {
     this.blockInfo.isFollowed = true;
+    this.operationService.requestFollowBlock(this.userService.username, this.block).subscribe();
   }
 
-  // todo 后端
+  // 取消关注
   disFollow() {
     this.modal.info({
       nzTitle: '你确定要取消关注么',
       nzOnOk: () => {
-        console.log('Info OK');
         this.blockInfo.isFollowed = false;
+        this.operationService.requestDisFollowBlock(this.userService.username, this.block).subscribe();
       },
       nzOnCancel: null
     });
@@ -124,8 +121,5 @@ export class ForumComponent implements OnInit {
   }
 }
 
-interface HotTopic {
-  title: string;
-  articleId: string;
-}
+
 

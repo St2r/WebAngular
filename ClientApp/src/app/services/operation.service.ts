@@ -41,4 +41,14 @@ export class OperationService {
     const model = {username: username, targetName: targetName};
     return this.http.post<boolean>(this.baseUrl + 'controller/operation/dis-follow', model);
   }
+
+  public requestFollowBlock(username: string, targetName: string): Observable<boolean> {
+    const model = {username: username, targetName: targetName};
+    return this.http.post<boolean>(this.baseUrl + 'controller/operation/follow', model);
+  }
+
+  public requestDisFollowBlock(username: string, targetName: string): Observable<boolean> {
+    const model = {username: username, targetName: targetName};
+    return this.http.post<boolean>(this.baseUrl + 'controller/operation/dis-follow', model);
+  }
 }

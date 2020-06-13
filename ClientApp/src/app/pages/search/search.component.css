@@ -19,7 +19,7 @@
     width: 60%;
     height: auto;
     padding: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     float: left;
 }
 
@@ -27,7 +27,7 @@
     width: 35%;
     height: auto;
     padding: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     float: left;
     margin-left: 20px;
 }

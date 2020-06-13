@@ -25,8 +25,8 @@ namespace WebAngular.Controllers
         // 点赞-取消点赞-踩-取消踩
         // 绕口令八级
         
-        [HttpPost("/controller/operation/like")]
-        public bool Like([FromBody] OperationForm form)
+        [HttpPost("/controller/operation/like-article")]
+        public bool LikeArticle([FromBody] OperationForm form)
         {
             MyContext context = new MyContext();
             var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
@@ -39,8 +39,8 @@ namespace WebAngular.Controllers
             return true;
         }
         
-        [HttpPost("/controller/operation/undo-like")]
-        public bool UndoLike([FromBody] OperationForm form)
+        [HttpPost("/controller/operation/undo-like-article")]
+        public bool UndoLikeArticle([FromBody] OperationForm form)
         {
             MyContext context = new MyContext();
             var like = context.LikeArticles.FirstOrDefault(t => t.status == 1 && t.ArticleId == form.TargetName && t.UserId == form.Username);
@@ -49,8 +49,8 @@ namespace WebAngular.Controllers
             return true;
         }
         
-        [HttpPost("/controller/operation/dislike")]
-        public bool Dislike([FromBody] OperationForm form)
+        [HttpPost("/controller/operation/dislike-article")]
+        public bool DislikeArticle([FromBody] OperationForm form)
         {
             MyContext context = new MyContext();
             var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
@@ -63,8 +63,32 @@ namespace WebAngular.Controllers
             return true;
         }
         
-        [HttpPost("/controller/operation/undo-dislike")]
-        public bool UndoDislike([FromBody] OperationForm form)
+        [HttpPost("/controller/operation/undo-dislike-article")]
+        public bool UndoDislikeArticle([FromBody] OperationForm form)
+        {
+            return false;
+        }
+        
+        [HttpPost("/controller/operation/like-comment")]
+        public bool LikeComment([FromBody] OperationForm form)
+        {
+            return false;
+        }
+        
+        [HttpPost("/controller/operation/undo-like-comment")]
+        public bool UndoLikeComment([FromBody] OperationForm form)
+        {
+            return false;
+        }
+        
+        [HttpPost("/controller/operation/dislike-comment")]
+        public bool DislikeComment([FromBody] OperationForm form)
+        {
+            return false;
+        }
+        
+        [HttpPost("/controller/operation/undo-dislike-comment")]
+        public bool UndoDislikeComment([FromBody] OperationForm form)
         {
             MyContext context = new MyContext();
             var like = context.LikeArticles.FirstOrDefault(t => t.status == -1 && t.ArticleId == form.TargetName && t.UserId == form.Username);
@@ -73,8 +97,20 @@ namespace WebAngular.Controllers
             return true;
         }
 
-        [HttpPost("controller/operation/follow")]
-        public bool Follow([FromBody] OperationForm form)
+        [HttpPost("controller/operation/follow-person")]
+        public bool FollowPerson([FromBody] OperationForm form)
+        {
+            return false;
+        }
+        
+        [HttpPost("controller/operation/dis-follow-person")]
+        public bool DisFollowPerson([FromBody] OperationForm form)
+        {
+            return false;
+        }
+        
+        [HttpPost("controller/operation/follow-block")]
+        public bool FollowBlock([FromBody] OperationForm form)
         {
             MyContext context = new MyContext();
             context.Foci.Add(new Focus() 
@@ -86,8 +122,8 @@ namespace WebAngular.Controllers
             return true;
         }
         
-        [HttpPost("controller/operation/dis-follow")]
-        public bool DisFollow([FromBody] OperationForm form)
+        [HttpPost("controller/operation/dis-follow-block")]
+        public bool DisFollowBlock([FromBody] OperationForm form)
         {
             MyContext context = new MyContext();
             var foci = context.Foci.FirstOrDefault(t => t.BeFocusd == form.TargetName && t.Follower == form.Username);
