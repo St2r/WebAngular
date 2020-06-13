@@ -14,37 +14,23 @@ export class UserHoverComponent implements OnInit {
 
   userInfo: UserInfo;
 
+  loading: boolean;
+
   constructor(private userService: UserService, private router: Router) {
-    this.userInfo = new class implements UserInfo {
-      level: number;
-      articles: number;
-      avatarUrl: string;
-      brief: string;
-      browse: number;
-      fans: number;
-      follow: number;
-      isFan: boolean;
-      isFollowed: boolean;
-      like: number;
-      nickname: string;
-      point: number;
-      star: number;
-      username: string;
-      loginCount: number;
-      birthday: string;
-      registerData: string;
-    };
+    this.loading = true;
   }
 
   ngOnInit() {
-    this.userService.requestUserInfo(this.username).subscribe(
-      result => {
-        this.userInfo = result[0];
-      }
+    this.loadUserInfo().then(
+      () => this.loading = false
     );
   }
 
+  async loadUserInfo() {
+    this.userInfo = await this.userService.getUserInfo(this.username);
+  }
+
   toSpace() {
-    this.router.navigate(['/space/' + this.username]);
+    this.router.navigate(['/space/' + this.username]).then();
   }
 }

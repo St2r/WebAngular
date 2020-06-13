@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -95,6 +96,19 @@ namespace WebAngular.Controllers
                 l.Add(commentinf);
             }
             return l;
+        }
+
+        
+        [HttpPost("/controller/article/new")]
+        public bool NewArticle([FromForm] IFormCollection form)
+        {
+            IFormFile i = form.Files.GetFile("cover");
+            string author = form["author"];
+            string title = form["title"];
+            string tags = form["tags"];
+            var tag = tags.Split("/");
+            string content = form["content"];
+            return false;
         }
     }
 }
