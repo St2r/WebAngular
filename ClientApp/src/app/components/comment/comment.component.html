@@ -1,17 +1,17 @@
 <nz-list [nzItemLayout]="'horizontal'">
   <ng-container *ngFor="let item of comments;let i = index">
-    <nz-comment [nzAuthor]="item.AuthorName" [nzDatetime]="getDateDistance(item.CommentTime)">
-      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="getAvatar(item.AuthorID)" (click)="jumpToPersonPage(item.AuthorID)"></nz-avatar>
+    <nz-comment [nzAuthor]="item.nickname" [nzDatetime]="getDateDistance(item.commentTime)">
+      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatarUrl" (click)="jumpToPersonPage(item.username)"></nz-avatar>
       <nz-comment-content>
-        <p>{{ item.Content }}</p>
+        <p>{{ item.content }}</p>
       </nz-comment-content>
       <nz-comment-action>
-        <i nz-tooltip nz-icon nzType="like" [nzTheme]="item.LikeStatus == 1 ? 'twotone' : 'outline'" (click)="Like(i)"></i>
-        <span class="count like">{{ item.Likes }}</span>
+        <i nz-tooltip nz-icon nzType="like" [nzTheme]="item.likeStatus == 1 ? 'twotone' : 'outline'" (click)="Like(i)"></i>
+        <span class="count like">{{ item.likes }}</span>
       </nz-comment-action>
       <nz-comment-action>
-        <i nz-tooltip nz-icon nzType="dislike" [nzTheme]="item.LikeStatus == -1 ? 'twotone' : 'outline'" (click)="DisLike(i)"></i>
-        <span class="count dislike">{{ item.Dislikes }}</span>
+        <i nz-tooltip nz-icon nzType="dislike" [nzTheme]="item.likeStatus == -1 ? 'twotone' : 'outline'" (click)="DisLike(i)"></i>
+        <span class="count dislike"></span>
       </nz-comment-action>
       <nz-comment-action>Reply to</nz-comment-action>
     </nz-comment>
