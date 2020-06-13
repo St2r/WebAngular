@@ -15,40 +15,31 @@ export class SearchBarComponent implements OnInit {
     setTimeout(() => {
       this.optionGroups = [
         {
-          title: '话题',
+          title: '热门搜索',
           children: [
             {
-              title: 'AntDesign',
-              count: 10000
+              title: '软工作业',
+              count: 39
             },
             {
-              title: 'AntDesign UI',
-              count: 10600
+              title: '前端杀人',
+              count: 56
             }
           ]
         },
         {
-          title: '问题',
+          title: '新鲜事',
           children: [
             {
-              title: 'AntDesign UI 有多好',
-              count: 60100
+              title: '期末考试宣布取消',
+              count: 114514
             },
             {
-              title: 'AntDesign 是啥',
+              title: '考试周延期',
               count: 30010
             }
           ]
         },
-        {
-          title: '文章',
-          children: [
-            {
-              title: 'AntDesign 是一个设计语言',
-              count: 100000
-            }
-          ]
-        }
       ];
     }, 1000);
   }
