@@ -21,16 +21,16 @@
   <div class="hot_search">
     <h2>热门搜索</h2>
     <nz-divider></nz-divider>
-    <div *ngFor="let item of hot_search">
-      <span> {{ item }} </span>
-    </div>
+    <ul>
+      <li *ngFor="let item of hot_search" (click)="search_content=item"> {{ item }} </li>
+    </ul>
   </div>
   <div class="history">
     <h2>历史搜索</h2>
     <span style="float: right;" (click)='clear()'>清空</span>
     <nz-divider></nz-divider>
     <ul>
-      <li *ngFor="let item of history_search"> {{ item }} </li>
+      <li *ngFor="let item of history_search" (click)="search_content=item"> {{ item }} </li>
     </ul>
   </div>
 </div>
