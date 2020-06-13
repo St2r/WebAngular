@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Model;
 using WebAngular.Model;
 
 namespace WebAngular.Controllers
@@ -33,6 +34,8 @@ namespace WebAngular.Controllers
         {
             var res = Enumerable.Empty<ArticleInfo[]>();
             var articles = new ArticleInfo[form.PageSize];
+            MyContext context = new MyContext();
+            var articleentity = context.Articles.ToList();
             for (var i = 0; i < form.PageSize; i++)
             {
                 var item = new ArticleInfo
@@ -48,6 +51,13 @@ namespace WebAngular.Controllers
 
                     IsPinned = false, IsElite = false
                 };
+                item.Title = articleentity[i].Title;
+                item.Header = articleentity[i].Header;
+                item.LastReviewTime = articleentity[i].LastReviewTime.ToString();
+                var author = context.Users.FirstOrDefault(t => t.Id == articleentity[i].AuthorId);
+                item.Username = author.UserName;
+                item.IsPinned = articleentity[i].IsPinned;
+                item.IsElite = articleentity[i].IsElite;
                 articles[i] = item;
             }
 
@@ -62,18 +72,19 @@ namespace WebAngular.Controllers
         }
         
         [HttpPost("/controller/comment/get-comment")]
-        public List<Comment> GetComments([FromBody] GetCommentsForm form)
+        public List<WebAngular.Model.Comment> GetComments([FromBody] GetCommentsForm form)
         {
-            var res = Enumerable.Empty<Comment[]>();
-            var l = new List<Comment>();
-            l.Add(new Comment()
+            var res = Enumerable.Empty<WebAngular.Model.Comment[]>();
+            var l = new List<WebAngular.Model.Comment>();
+            MyContext context = new MyContext();
+            l.Add(new WebAngular.Model.Comment()
             {
                 Username = "U1", Nickname = "N1", AvatarUrl = "/avatar.png",
                 Content = "评论测试",
                 Likes = 3, LikeStatus = 0,
                 CommentTime = "2020-10-10-23-59"
             });
-            l.Add(new Comment()
+            l.Add(new WebAngular.Model.Comment()
             {
                 Username = "U2", Nickname = "N2", AvatarUrl = "/avatar.png",
                 Content = "评论测试2",
