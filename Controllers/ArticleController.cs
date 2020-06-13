@@ -108,6 +108,26 @@ namespace WebAngular.Controllers
             string tags = form["tags"];
             var tag = tags.Split("/");
             string content = form["content"];
+
+            MyContext context = new MyContext();
+            foreach(var t in tag)
+            {
+                Tag ta = new Tag() { TagName = t };
+                context.Tags.Add(ta);
+            }
+            context.SaveChanges();
+            Article article = new Article() { Title = title, Content = content };
+            User user = context.Users.FirstOrDefault(t => t.UserName == author);
+            article.AuthorId = user.Id;
+            context.Add(article);
+            context.SaveChanges();
+            foreach(var ta in tag)
+            {
+                Tag t = context.Tags.FirstOrDefault(t => t.TagName == ta);
+                ArticleToTag articleToTag = new ArticleToTag() { ArticleId = article.Id, TagId = t.TagId };
+                context.ArticleToTags.Add(articleToTag);
+            }
+            context.SaveChanges();
             return false;
         }
     }

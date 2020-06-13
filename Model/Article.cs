@@ -9,13 +9,14 @@ namespace WebAngular.Model
     {
         public int Id { get; set; }
         public string Title { get; set; }
+		public string Block {get;set;} = "Discus";
         public string Header { get; set; }
         public string Content { get; set; }
         public int AuthorId { get; set; }
-        public string ArticleId { get; set; }
-        public bool IsPinned { get; set; }
-        public bool IsElite { get; set; }
-        public int Browse { get; set; }
+        public string ArticleId { get; set; } = "articleId";
+        public bool IsPinned { get; set; } = false;
+        public bool IsElite { get; set; } = false;
+        public int Browse { get; set; } = 0;
 
         public DateTime LastReviewTime { get; set; }
     }
