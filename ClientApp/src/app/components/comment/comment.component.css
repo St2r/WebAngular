@@ -2,3 +2,7 @@
   padding-left: 8px;
   cursor: auto;
 }
+
+nz-select {
+  width: 100px;
+}

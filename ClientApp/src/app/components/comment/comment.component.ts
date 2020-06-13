@@ -18,14 +18,23 @@ export class CommentComponent implements OnInit {
 
   loading: boolean;
 
+  sort: string;
+  filter: string;
+
   constructor(private commentService: CommentService, private router: Router) {
     this.loading = true;
+    this.sort = 'latest';
+    this.filter = 'all';
   }
 
   ngOnInit() {
     this.loadComments().then(
       () => this.loading = false
     );
+  }
+
+  reloadData() {
+    return;
   }
 
   jumpToPersonPage(userId: string) {
@@ -43,7 +52,6 @@ export class CommentComponent implements OnInit {
 
   async loadComments() {
     this.comments = await this.commentService.getComments(this.articleID);
-    console.log(this.comments);
   }
 
   Like(i: number) {
