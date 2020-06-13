@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAngular.Model;
-using Model;
 using System.Linq;
 
 namespace WebAngular.Controllers

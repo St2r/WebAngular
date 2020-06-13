@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Model;
 using WebAngular.Model;
 
 namespace WebAngular.Controllers
@@ -72,19 +71,19 @@ namespace WebAngular.Controllers
         }
         
         [HttpPost("/controller/comment/get-comment")]
-        public List<WebAngular.Model.Comment> GetComments([FromBody] GetCommentsForm form)
+        public List<WebAngular.Model.CommentInf> GetComments([FromBody] GetCommentsForm form)
         {
-            var res = Enumerable.Empty<WebAngular.Model.Comment[]>();
-            var l = new List<WebAngular.Model.Comment>();
+            var res = Enumerable.Empty<WebAngular.Model.CommentInf[]>();
+            var l = new List<WebAngular.Model.CommentInf>();
             MyContext context = new MyContext();
-            l.Add(new WebAngular.Model.Comment()
+            l.Add(new WebAngular.Model.CommentInf()
             {
                 Username = "U1", Nickname = "N1", AvatarUrl = "/avatar.png",
                 Content = "评论测试",
                 Likes = 3, LikeStatus = 0,
                 CommentTime = "2020-10-10-23-59"
             });
-            l.Add(new WebAngular.Model.Comment()
+            l.Add(new WebAngular.Model.CommentInf()
             {
                 Username = "U2", Nickname = "N2", AvatarUrl = "/avatar.png",
                 Content = "评论测试2",
