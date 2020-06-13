@@ -16,6 +16,7 @@ import {TestImageComponent} from '../pages/test-image/test-image.component';
 import { EdituserinfoComponent } from '../pages/edituserinfo/edituserinfo.component';
 import {ArticleComponent} from '../pages/article/article.component';
 import {ResourceComponent} from '../pages/resource/resource.component';
+import { AdminManageComponent } from '../pages/admin-manage/admin-manage.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'view-article/:articleId', component: ViewArticleComponent},
   {path: 'my-space/:target', component: MyspaceComponent},
   {path: 'editinfo', component: EdituserinfoComponent},
+  {path: 'admin-manage', component: AdminManageComponent},
   {path: 'search', component: SearchComponent},
   {path: 'image', component: TestImageComponent},
   {path: '404', component: FallbackComponent},

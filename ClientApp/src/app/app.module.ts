@@ -88,6 +88,13 @@ import { ArticleViewComponent } from './pages/article/article-view/article-view.
 import { ArticleNewComponent } from './pages/article/article-new/article-new.component';
 import { BackTopComponent } from './components/back-top/back-top.component';
 import { ResourceComponent } from './pages/resource/resource.component';
+import { AdminManageComponent } from './pages/admin-manage/admin-manage.component';
+import { ArticleManageComponent } from './pages/admin-manage/article-manage/article-manage.component';
+import { UserManageComponent } from './pages/admin-manage/user-manage/user-manage.component';
+import { AttechmentManageComponent } from './pages/admin-manage/attechment-manage/attechment-manage.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDropDownModule } from 'ng-zorro-antd';
+import { NzFilterTriggerComponent } from './pages/admin-manage/Addon/filter-trigger.component'
 
 @NgModule({
   declarations: [
@@ -131,6 +138,10 @@ import { ResourceComponent } from './pages/resource/resource.component';
     ArticleNewComponent,
     BackTopComponent,
     ResourceComponent,
+    AdminManageComponent,
+    ArticleManageComponent,
+    UserManageComponent,
+    AttechmentManageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -176,7 +187,10 @@ import { ResourceComponent } from './pages/resource/resource.component';
     NzTabsModule,
     NzAutocompleteModule,
     NzUploadModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzTableModule,
+    NzDropDownModule,
+    NzFilterTriggerComponent,
   ],
   exports: [],
   providers: [
