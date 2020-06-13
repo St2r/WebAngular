@@ -11,17 +11,20 @@ export class TabStarComponent implements OnInit {
   @Input() targetName;
 
   starArticle: ArticleInfo[];
+  loading: boolean;
 
-  constructor(private fetchService: FetchDataService) { }
-
-  ngOnInit() {
-    this.loadMyInvitation();
+  constructor(private fetchService: FetchDataService) {
+    this.loading = true;
   }
 
-  loadMyInvitation() {
-    this.fetchService.getStarArticleByUser(this.targetName).subscribe(
-      article => this.starArticle=article
+  ngOnInit() {
+    this.loadMyInvitation().then(
+      () => this.loading = true
     );
+  }
+
+  async loadMyInvitation() {
+    this.starArticle = await this.fetchService.getStarArticleByUser(this.targetName);
   }
 
 }
