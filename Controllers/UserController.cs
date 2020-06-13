@@ -37,7 +37,7 @@ namespace WebAngular.Controllers
         {
             return Enumerable.Empty<bool>().Append(true).ToArray();
         }
-        
+
         public class RegisterForm
         {
             public string Username { get; set; }
@@ -57,7 +57,7 @@ namespace WebAngular.Controllers
         {
             public string Username { get; set; }
         }
-        
+
         [HttpPost("/controller/user/get-info")]
         public IEnumerable<UserInfo> LoadUserInfo([FromBody] LoadUserInfoForm form)
         {
@@ -72,7 +72,7 @@ namespace WebAngular.Controllers
             };
             return Enumerable.Empty<UserInfo>().Append(res).ToArray();
         }
-        
+
         public class LoadUserPrivateInfoForm
         {
             public string Username { get; set; }
@@ -94,7 +94,7 @@ namespace WebAngular.Controllers
         {
             public string Username { get; set; }
         }
-        
+
         [HttpPost("/controller/user/check-username")]
         public IEnumerable<bool> CheckUsername([FromBody] CheckUsernameForm form)
         {
@@ -105,6 +105,7 @@ namespace WebAngular.Controllers
         {
             public string Email { get; set; }
         }
+
         [HttpPost("/controller/user/check-email")]
         public IEnumerable<bool> CheckEmail([FromBody] CheckEmailForm form)
         {
@@ -115,6 +116,7 @@ namespace WebAngular.Controllers
         {
             public string Username { get; set; }
         }
+
         [HttpPost("/controller/user/get-follow-list")]
         public IEnumerable<UserInfo[]> GetFollowList([FromBody] GetFollowListForm form)
         {
@@ -136,11 +138,12 @@ namespace WebAngular.Controllers
             return res.Append(userList).ToArray();
         }
 
-        
+
         public class GetFanListForm
         {
             public string Username { get; set; }
         }
+
         [HttpPost("/controller/user/get-fan-list")]
         public IEnumerable<UserInfo[]> GetFanList([FromBody] GetFanListForm form)
         {
@@ -161,5 +164,49 @@ namespace WebAngular.Controllers
 
             return res.Append(userList).ToArray();
         }
+
+        // 添加访问记录
+        public class AddVisitRecordForm
+        {
+            public string TargetName { get; set; }
+            public string Username { get; set; }
+        }
+
+        [HttpPost("/controller/user/add-visit-record")]
+        public bool AddVisitRecord([FromBody] AddVisitRecordForm form)
+        {
+            return true;
+        }
+
+        // 获取最近访问者
+        public class GetRecentVisitorForm
+        {
+            public string username { get; set; }
+        }
+
+        [HttpPost("/controller/user/get-recent-visitor")]
+        public List<UserInfo> GetRecentVisitor([FromBody] GetRecentVisitorForm form)
+        {
+            var list = new List<UserInfo>();
+            list.Add(
+                new UserInfo()
+                {
+                    Username = "t"
+                }
+            );
+            return list;
+        }
+
+        public class GetFavBlockForm
+        {
+            public string Username { get; set; }
+        }
+
+        [HttpPost("/controller/user/get-fav-block")]
+        public List<BlockInfo> GetFavBlock([FromBody] GetFavBlockForm form)
+        {
+            return new List<BlockInfo>();
+        }
+        
     }
 }

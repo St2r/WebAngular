@@ -22,7 +22,7 @@ export class FetchDataService {
     return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/article/get-article', form);
   }
 
-  //TODO 获取用户上传的附件信息
+  // TODO 获取用户上传的附件信息
   public getAttachmentByUser(username: string): Observable<AttachmentInfo[]> {
     return;
   }
@@ -32,7 +32,7 @@ export class FetchDataService {
     return;
   }
 
-  // TODO 获取用户star的帖子
+  // TODO 获取用户收藏的帖子
   public getStarArticleByUser(username:string): Observable<ArticleInfo[]> {
     return;
   }

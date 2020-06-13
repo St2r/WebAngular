@@ -196,18 +196,21 @@ export class UserService implements OnInit {
     return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-fan-list', model);
   }
 
-  // TODO 添加访问记录 username访问了targetName的主页
+  // 添加访问记录 username访问了targetName的主页
   public addVisitRecord(targetName: string, username: string): Observable<boolean> {
-    return;
+    const model = {targetName: targetName, username: username};
+    return this.http.post<boolean>(this.baseUrl + 'controller/user/add-visit-record', model);
   }
 
-  // TODO 获取最近访问者
-  public getRecentVisiter(username: string): Observable<UserInfo[]> {
-    return;
+  // 获取最近访问者
+  public getRecentVisitor(username: string): Observable<UserInfo[]> {
+    const model = {username: username};
+    return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-recent-visitor', model);
   }
 
-  // TODO 获取收藏的板块
+  // 获取收藏的板块
   public getFavBlock(username: string): Observable<BlockInfo[]> {
-    return;
+    const model = {username: username};
+    return this.http.post<BlockInfo[]>(this.baseUrl + 'controller/user/get-fav-block', model);
   }
 }

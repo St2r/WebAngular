@@ -62,25 +62,25 @@ namespace WebAngular.Controllers
         }
         
         [HttpPost("/controller/comment/get-comment")]
-        public IEnumerable<Comment[]> GetComments([FromBody] GetCommentsForm form)
+        public List<Comment> GetComments([FromBody] GetCommentsForm form)
         {
             var res = Enumerable.Empty<Comment[]>();
-            var list = new Comment[2];
-            list[0] = new Comment()
+            var l = new List<Comment>();
+            l.Add(new Comment()
             {
                 Username = "U1", Nickname = "N1", AvatarUrl = "/avatar.png",
                 Content = "评论测试",
                 Likes = 3, LikeStatus = 0,
                 CommentTime = "2020-10-10-23-59"
-            };
-            list[1] = new Comment()
+            });
+            l.Add(new Comment()
             {
                 Username = "U2", Nickname = "N2", AvatarUrl = "/avatar.png",
                 Content = "评论测试2",
                 Likes = 13, LikeStatus = 0,
                 CommentTime = "2020-6-13-16-00"
-            };
-            return res.Append(list).ToArray();
+            });
+            return l;
         }
     }
 }

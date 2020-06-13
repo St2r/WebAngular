@@ -22,7 +22,8 @@ export class CommentService {
       resolve => {
         this.requestComments(articleID, sort, filter).subscribe(
           result => {
-            resolve(result[0]);
+            console.log(result);
+            resolve(result);
           }
         );
       }

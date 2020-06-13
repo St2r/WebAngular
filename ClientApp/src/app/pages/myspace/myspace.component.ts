@@ -140,7 +140,7 @@ export class MyspaceComponent implements OnInit {
     //     isFan = false;
     //   },
     // ];
-    this.userService.getRecentVisiter(this.targetName).subscribe(
+    this.userService.getRecentVisitor(this.targetName).subscribe(
       visiter => this.recent_visiter=visiter
     );
   }
