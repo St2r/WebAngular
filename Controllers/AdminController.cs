@@ -16,19 +16,19 @@ namespace WebAngular.Controllers
             this._logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("/controller/admin/get-user")]
         public List<UserInfo> GetAllUser()
         {
             
         }
 
-        [HttpGet]
+        [HttpGet("/controller/admin/get-article")]
         public List<ArticleInfo> GetAllArticle()
         {
             
         }
 
-        [HttpGet]
+        [HttpGet("/controller/admin/get-attachment")]
         public List<Attachment> GetAllAttachment()
         {
             
