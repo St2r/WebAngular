@@ -193,6 +193,14 @@ export class UserService implements OnInit {
     return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-follow-list', model);
   }
 
+  public async getFollowList(username: string): Promise<UserInfo[]> {
+    return new Promise<UserInfo[]>(
+      resolve => this.requestFollowList(username).subscribe(
+        result => resolve(result)
+      )
+    );
+  }
+
   // 获得粉丝列表
   public requestFanList(username: string): Observable<UserInfo[]> {
     const model = {username: username};

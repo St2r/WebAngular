@@ -13,36 +13,21 @@ import { FetchDataService } from 'src/app/services/fetch-data.service';
 export class TabPostComponent implements OnInit {
   @Input() targetUser;
 
-  my_post: PostInfo[];
+  myPost: PostInfo[];
 
-  constructor(private fetchService:FetchDataService) { }
+  loading: boolean;
 
-  ngOnInit() {
-    this.loadPostInfo();
+  constructor(private fetchService: FetchDataService) {
+    this.loading = true;
   }
 
-  loadPostInfo() {
-    // this.my_post = [
-    //   new class implements PostInfo {
-    //     comment = new class implements Comment {
-    //       AuthorID = 'comment_author';
-    //       AuthorName = 'comment author';
-    //       Content = 'comment content';
-    //       Likes = 0;
-    //       Dislikes = 0;
-    //       LikeStatus = 0;
-    //       CommentTime = addDays(new Date(), -2);
-    //     };
-    //     article = new class implements ArticleInfo {
-    //       Title = 'title 1';
-    //       Tag = ['tmp'];
-    //       Author = 'article author';
-    //       Content = 'tmp content';
-    //     };
-    //   }
-    // ];
-    this.fetchService.getPostByUser(this.targetUser).subscribe(
-      posts => this.my_post=posts
+  ngOnInit() {
+    this.loadPostInfo().then(
+      () => this.loading = false
     );
+  }
+
+  async loadPostInfo() {
+    this.myPost = await this.fetchService.getPostByUser(this.targetUser);
   }
 }

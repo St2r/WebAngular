@@ -10,38 +10,21 @@ import { FetchDataService } from 'src/app/services/fetch-data.service';
 export class TabStarComponent implements OnInit {
   @Input() targetName;
 
-  my_star_invitation:ArticleInfo[];
+  starArticle: ArticleInfo[];
+  loading: boolean;
 
-  constructor(private fetchService:FetchDataService) { }
-
-  ngOnInit() {
-    this.loadMyInvitation();
+  constructor(private fetchService: FetchDataService) {
+    this.loading = true;
   }
 
-  loadMyInvitation() {
-    // this.my_invitation = [
-    //   new class implements Article {
-    //     Title = 'title 1';
-    //     Tag = ['tmp'];
-    //     Author = 'author_tmp';
-    //     Content = 'tmp content';
-    //   },
-    //   new class implements Article {
-    //     Title = 'title 2';
-    //     Tag = ['tmp'];
-    //     Author = 'author_tmp';
-    //     Content = 'tmp content';
-    //   },
-    //   new class implements Article {
-    //     Title = 'title 3';
-    //     Tag = ['tmp'];
-    //     Author = 'author_tmp';
-    //     Content = 'tmp content';
-    //   },
-    // ]
-    this.fetchService.getStarArticleByUser(this.targetName).subscribe(
-      article => this.my_star_invitation=article
+  ngOnInit() {
+    this.loadMyInvitation().then(
+      () => this.loading = true
     );
+  }
+
+  async loadMyInvitation() {
+    this.starArticle = await this.fetchService.getStarArticleByUser(this.targetName);
   }
 
 }

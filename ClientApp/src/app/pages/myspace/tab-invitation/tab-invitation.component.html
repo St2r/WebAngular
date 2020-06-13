@@ -1,6 +1,8 @@
+<div *ngIf="!loading">
 <h2>抽象表示，格式之后直接套用板块的帖子格式吧</h2>
 <div>
-  <ul *ngFor="let item of my_invitation">
+  <ul *ngFor="let item of myArticle">
     <li> {{ item.title }} </li>
   </ul>
+</div>
 </div>

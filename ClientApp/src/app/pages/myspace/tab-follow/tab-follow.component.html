@@ -1,14 +1,14 @@
 <div>
   <nz-content>
     <nz-tabset>
-      <nz-tab [nzTitle]=myfollow>
+      <nz-tab [nzTitle]="ownPage?'我的关注':'Ta的关注'">
         <app-i-follow [targetName]='targetName'></app-i-follow>
       </nz-tab>
-      <nz-tab [nzTitle]=followme>
+      <nz-tab [nzTitle]="ownPage?'我的粉丝':'Ta的粉丝'">
         <app-follow-me [targetName]='targetName'></app-follow-me>
       </nz-tab>
-      <nz-tab nzTitle="关注的板块">
-        <app-follow-block></app-follow-block>
+      <nz-tab nzTitle="关注板块">
+        <app-follow-block [targetName]="targetName"></app-follow-block>
       </nz-tab>
     </nz-tabset>
   </nz-content>

@@ -1,10 +1,11 @@
-<div>
-  <div *ngFor="let item of follow_me">
-    <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
-      <nz-card-meta [nzTitle]="item.nickname" [nzDescription]="item.brief"></nz-card-meta>
-    </nz-card>
-    <ng-template #coverTemplate>
-      <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />
-    </ng-template>
+<div *ngIf="!loading">
+  <nz-list nzItemLayout="horizontal">
+    <nz-list-item *ngFor="let item of myFan">
+      <nz-avatar [nzSrc]="item.avatarUrl"></nz-avatar>
+      {{item.nickname}}
+    </nz-list-item>
+  </nz-list>
+  <div *ngIf="myFan.length === 0">
+    暂无粉丝
   </div>
 </div>

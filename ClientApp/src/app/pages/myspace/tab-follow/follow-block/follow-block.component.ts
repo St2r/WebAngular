@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { BlockInfo, AdminInfo} from '../../../../model/block-info';
+import {UserService} from '../../../../services/user.service';
 
 @Component({
   selector: 'app-follow-block',
@@ -7,42 +8,26 @@ import { BlockInfo, AdminInfo} from '../../../../model/block-info';
   styleUrls: ['./follow-block.component.css']
 })
 export class FollowBlockComponent implements OnInit {
+  @Input()
+  targetName: string;
 
-  follow_block: BlockInfo[];
+  followBlock: BlockInfo[];
 
-  constructor() { }
+  loading: boolean;
 
-  ngOnInit() {
-    this.loadBlockInfo();
+  constructor(private userService: UserService) {
+    this.loading = true;
   }
 
-  // TODO 废止可能？
-  loadBlockInfo() {
-    this.follow_block = [
-      new class implements BlockInfo {
-        blockName = 'test block'
-        accessRight = 2;
-        avatarUrl = '/avatar.png';
-        isFollowed = true;
-        contentTotal = 20;
-        followTotal = 2;
-        todayTotal = 20;
-        admins = [
-          // new class implements AdminInfo {
-          //   username = 'test master';
-          //   nickname = 'nick1';
-          //   avatarUrl = 'fack url';
-          //   identity = 1;
-          // },
-          // new class implements AdminInfo {
-          //   username = 'test master';
-          //   avatarUrl = 'fack url';
-          //   avatarUrl = 'fack url';
-          //   identity = 1;
-          // }
-        ];
-      }
-    ];
+  ngOnInit() {
+    this.loadBlockInfo().then(
+      () => this.loading = false
+    );
+  }
+
+  async loadBlockInfo() {
+    this.followBlock = await this.userService.getFavBlock(this.targetName);
+    console.log(this.followBlock);
   }
 
 }

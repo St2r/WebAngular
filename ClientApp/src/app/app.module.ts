@@ -22,7 +22,7 @@ import {
   NzCheckboxModule,
   NzCommentModule,
   NzDescriptionsModule,
-  NzDividerModule,
+  NzDividerModule, NzEmptyModule,
   NzFormModule,
   NzGridModule, NzIconModule,
   NzInputModule,
@@ -195,6 +195,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzTableModule,
     NzDropDownModule,
     NzTagModule,
+    NzEmptyModule,
   ],
   exports: [],
   providers: [

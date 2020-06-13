@@ -1,10 +1,10 @@
 <div>
-  <ul *ngFor="let item of follow_block">
+  <ul *ngFor="let item of followBlock">
     <li>
-      <span> {{ item.block_name }} </span>
+      <span> {{ item.blockName }} </span>
       <nz-divider></nz-divider>
-      <ul *ngFor="let master of item.masters">
-        <li> {{ master.userId }} </li>
+      <ul *ngFor="let master of item.admins">
+        <li> {{ master.username }} </li>
       </ul>
     </li>
   </ul>

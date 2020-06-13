@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {ArticleInfo} from '../../../model/article-info';
-import { FetchDataService } from '../../../services/fetch-data.service';
+import {FetchDataService} from '../../../services/fetch-data.service';
 
 @Component({
   selector: 'app-tab-invitation',
@@ -8,40 +8,25 @@ import { FetchDataService } from '../../../services/fetch-data.service';
   styleUrls: ['./tab-invitation.component.css']
 })
 export class TabInvitationComponent implements OnInit {
-  @Input() targetName;
+  @Input()
+  targetName: string;
 
-  my_invitation:ArticleInfo[];
+  myArticle: ArticleInfo[];
 
-  constructor(private fetchService:FetchDataService) { }
+  loading: boolean;
 
-  ngOnInit() {
-    this.loadMyInvitation();
+  constructor(private fetchService: FetchDataService) {
+    this.loading = true;
   }
 
-  loadMyInvitation() {
-    // this.my_invitation = [
-    //   new class implements Article {
-    //     Title = 'title 1';
-    //     Tag = ['tmp'];
-    //     Author = 'author_tmp';
-    //     Content = 'tmp content';
-    //   },
-    //   new class implements Article {
-    //     Title = 'title 2';
-    //     Tag = ['tmp'];
-    //     Author = 'author_tmp';
-    //     Content = 'tmp content';
-    //   },
-    //   new class implements Article {
-    //     Title = 'title 3';
-    //     Tag = ['tmp'];
-    //     Author = 'author_tmp';
-    //     Content = 'tmp content';
-    //   },
-    // ]
-    this.fetchService.getInvitationByUser(this.targetName).subscribe(
-      article => this.my_invitation=article
+  ngOnInit() {
+    this.loadMyInvitation().then(
+      () => this.loading = false
     );
+  }
+
+  async loadMyInvitation() {
+    this.myArticle = await this.fetchService.getInvitationByUser(this.targetName);
   }
 
 }

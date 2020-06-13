@@ -27,18 +27,42 @@ export class FetchDataService {
     return;
   }
 
-  // TODO 获取用户发布的帖子
-  public getInvitationByUser(username: string): Observable<ArticleInfo[]> {
-    return;
+  private requestArticleByUser(username: string): Observable<ArticleInfo[]> {
+    const model = {username: username};
+    return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/fetch/post-article', model);
+  }
+  // 获取用户发布的帖子
+  public async getInvitationByUser(username: string): Promise<ArticleInfo[]> {
+    return new Promise<ArticleInfo[]>(
+      resolve => this.requestArticleByUser(username).subscribe(
+        result => resolve(result)
+      )
+    );
   }
 
-  // TODO 获取用户收藏的帖子
-  public getStarArticleByUser(username:string): Observable<ArticleInfo[]> {
-    return;
+  // 获取用户收藏的帖子
+  private requestStarArticleByUser(username: string): Observable<ArticleInfo[]> {
+    const model = {username: username};
+    return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/fetch/star-article', model);
+  }
+  public getStarArticleByUser(username: string): Promise<ArticleInfo[]> {
+    return new Promise<ArticleInfo[]>(
+      resolve => this.requestStarArticleByUser(username).subscribe(
+        result => resolve(result)
+      )
+    );
   }
 
-  // TODO 获取与用户相关的动态
-  public getPostByUser(username: string): Observable<PostInfo[]> {
-    return;
+  // 获取与用户相关的动态
+  public requestPostByUser(username: string): Observable<PostInfo[]> {
+    const model = {username: username};
+    return this.http.post<PostInfo[]>(this.baseUrl + 'controller/fetch/get-post', model);
+  }
+  public getPostByUser(username: string): Promise<PostInfo[]> {
+    return new Promise<PostInfo[]>(
+      resolve => this.requestPostByUser(username).subscribe(
+        result => resolve(result)
+      )
+    );
   }
 }
