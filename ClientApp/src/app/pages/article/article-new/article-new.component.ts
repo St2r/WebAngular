@@ -66,7 +66,11 @@ export class ArticleNewComponent implements OnInit {
 
   // todo 请求用户等级
   getUserInfo() {
-    this.userLevel = 3;
+    this.userService.requestUserInfo(this.userService.username).subscribe(
+      result => {
+        this.userLevel = result[0].level;
+      }
+    );
   }
 
   submitForm(value) {

@@ -17,7 +17,7 @@ export class EditAvatarComponent implements OnInit {
 
   constructor(@Inject('BASE_URL') baseUrl: string, private userService: UserService) {
     this.baseUrl = baseUrl;
-    this.userService.getUserInfo(this.username).subscribe(
+    this.userService.requestUserInfo(this.username).subscribe(
       result => this.username = result.avatarUrl
     );
   }

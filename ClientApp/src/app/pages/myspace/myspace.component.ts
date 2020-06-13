@@ -62,7 +62,7 @@ export class MyspaceComponent implements OnInit {
   //     isFollowed = false;
   //     isFan = false;
   //   };
-    this.userService.getUserInfo(this.targetName).subscribe(
+    this.userService.requestUserInfo(this.targetName).subscribe(
       userInfo => this.userInfo = userInfo
     );
   }
@@ -80,7 +80,7 @@ export class MyspaceComponent implements OnInit {
     //   birthday = '1970-1-1';
     //   registerData = '1970-1-1';
     // };
-    this.userService.getUserPrivateInfo(this.targetName).subscribe(
+    this.userService.requestUserPrivateInfo(this.targetName).subscribe(
       userPrivateInfo => this.userPrivateInfo = userPrivateInfo
     );
   }

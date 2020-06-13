@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {UserInfo} from '../model/user-info';
 import {UserPrivateInfo} from '../model/user-private-info';
 import {BlockInfo} from '../model/block-info';
@@ -34,22 +34,24 @@ export class UserService {
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private cookie: CookieService) {
     this.status = false;
     this.baseUrl = baseUrl;
+
     this.userInfo = new class implements UserInfo {
-      username: string;
+      articles: number;
       avatarUrl: string;
       brief: string;
       browse: number;
       fans: number;
-      level: number;
-      articles: number;
       follow: number;
+      isFan: boolean;
+      isFollowed: boolean;
+      level: number;
       like: number;
       nickname: string;
       point: number;
       star: number;
-      isFan: boolean;
-      isFollowed: boolean;
+      username: string;
     };
+
     this.userPrivateInfo = new class implements UserPrivateInfo {
       birthday: string;
       loginCount: number;
@@ -60,10 +62,19 @@ export class UserService {
     if (sessionStorage.getItem('username')) {
       this.afterLogin(sessionStorage.getItem('username'));
     }
+
+  }
+
+  public getUserInfo() {
+    return this.requestUserInfo(this.username);
+  }
+
+  public getUserPrivateInfo() {
+    return this.requestUserPrivateInfo(this.username);
   }
 
   // 登陆
-  public login(value: { username: string, password: string, remember: boolean }): Observable<boolean> {
+  public requestLogin(value: { username: string, password: string, remember: boolean }): Observable<boolean> {
     if (value.remember) {
       this.cookie.set('username', value.username);
     } else {
@@ -81,13 +92,13 @@ export class UserService {
   }
 
   // 退出登录
-  public logout() {
-    this.http.get<boolean>(this.baseUrl + 'controller/user/logout').subscribe(
-      result => {
-        this.status = false;
-        this.username = '';
-      }
-    );
+  public requestLogout() {
+    return this.http.get<boolean>(this.baseUrl + 'controller/user/logout');
+  }
+
+  public afterLogout() {
+    this.status = false;
+    this.username = '';
     sessionStorage.clear();
   }
 
@@ -99,11 +110,11 @@ export class UserService {
 
   // 登陆后将登陆用户的信息加载进来
   loadUserInfo(): void {
-    this.getUserInfo(this.username).subscribe(
+    this.requestUserInfo(this.username).subscribe(
       result => {
         this.userInfo = result[0];
       });
-    this.getUserPrivateInfo(this.username).subscribe(
+    this.requestUserPrivateInfo(this.username).subscribe(
       result => {
         this.userPrivateInfo = result[0];
       });
@@ -111,40 +122,39 @@ export class UserService {
 
   // 获得某用户的信息
   // 异步调用
-  public getUserInfo(username: string): Observable<UserInfo> {
+  public requestUserInfo(username: string): Observable<UserInfo> {
     const model = {username: username};
-    return this.http.post<UserInfo>
-    (this.baseUrl + 'controller/user/get-info', model);
+    return this.http.post<UserInfo>(this.baseUrl + 'controller/user/get-info', model);
   }
 
   // 获得某用户的私人信息
   // 异步调用
-  public getUserPrivateInfo(username: string): Observable<UserPrivateInfo> {
+  public requestUserPrivateInfo(username: string): Observable<UserPrivateInfo> {
     const model = {username: username};
     return this.http.post<UserPrivateInfo>
     (this.baseUrl + 'controller/user/get-private-info', model);
   }
 
   // 检查用户名是否已被占用
-  public checkUsername(username: string): Observable<boolean> {
+  public requestCheckUsername(username: string): Observable<boolean> {
     const model = {username: username};
     return this.http.post<boolean>(this.baseUrl + 'controller/user/check-username', model);
   }
 
   // 检查邮箱是否已被占用
-  public checkEmail(email: string): Observable<boolean> {
+  public requestCheckEmail(email: string): Observable<boolean> {
     const model = {email: email};
     return this.http.post<boolean>(this.baseUrl + 'controller/user/check-email', model);
   }
 
   // 获得关注列表
-  public getFollowList(username: string): Observable<UserInfo[]> {
+  public requestFollowList(username: string): Observable<UserInfo[]> {
     const model = {username: username};
     return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-follow-list', model);
   }
 
   // 获得粉丝列表
-  public getFanList(username: string): Observable<UserInfo[]> {
+  public requestFanList(username: string): Observable<UserInfo[]> {
     const model = {username: username};
     return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-fan-list', model);
   }

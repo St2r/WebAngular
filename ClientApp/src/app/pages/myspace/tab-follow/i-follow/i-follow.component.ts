@@ -69,7 +69,7 @@ export class IFollowComponent implements OnInit {
   //       isFan = false;
   //     },
   //   ]
-    this.userService.getFollowList(this.targetName).subscribe(
+    this.userService.requestFollowList(this.targetName).subscribe(
       follow => this.my_follow=follow
     );
   }

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    this.userService.login(this.validateForm.value).subscribe(
+    this.userService.requestLogin(this.validateForm.value).subscribe(
       result => {
         if (result[0]) {
           this.userService.afterLogin(this.validateForm.value['username']);

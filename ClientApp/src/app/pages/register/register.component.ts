@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       if (result) {
         this.registerStatus = 1;
         console.log(value);
-        this.userService.login({username: value.username, password: value.password, remember: false}).subscribe(
+        this.userService.requestLogin({username: value.username, password: value.password, remember: false}).subscribe(
           subResult => {
             if (subResult[0]) {
               this.userService.afterLogin(value.username);
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
   // 向后端请求验证用户名是否已被占用
   userNameAsyncValidator = (control: FormControl) =>
     new Observable((observer: Observer<ValidationErrors | null>) => {
-      this.userService.checkUsername(control.value).subscribe(
+      this.userService.requestCheckUsername(control.value).subscribe(
         result => {
           if (result[0]) {
             observer.next({error: true, duplicated: true});
@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
   // 向后端请求验证邮箱是否已被占用
   emailAsyncValidator = (control: FormControl) =>
     new Observable((observer: Observer<ValidationErrors | null>) => {
-      this.userService.checkEmail(control.value).subscribe(
+      this.userService.requestCheckEmail(control.value).subscribe(
         result => {
           if (result[0]) {
             observer.next({error: true, duplicated: true});

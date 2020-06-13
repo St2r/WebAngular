@@ -34,7 +34,7 @@ export class UserHoverComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUserInfo(this.username).subscribe(
+    this.userService.requestUserInfo(this.username).subscribe(
       result => {
         this.userInfo = result[0];
       }

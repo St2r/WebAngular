@@ -69,7 +69,7 @@ export class FollowMeComponent implements OnInit {
     //     isFan = false;
     //   },
     // ]
-    this.userService.getFanList(this.targetName).subscribe(
+    this.userService.requestFanList(this.targetName).subscribe(
       fan => this.follow_me=fan
     )
   }
