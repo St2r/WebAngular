@@ -94,7 +94,6 @@ import { UserManageComponent } from './pages/admin-manage/user-manage/user-manag
 import { AttechmentManageComponent } from './pages/admin-manage/attechment-manage/attechment-manage.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd';
-import { NzFilterTriggerComponent } from './pages/admin-manage/Addon/filter-trigger.component'
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { UserBlockComponent } from './components/user-block/user-block.component';
 
@@ -194,7 +193,6 @@ import { UserBlockComponent } from './components/user-block/user-block.component
     NzDatePickerModule,
     NzTableModule,
     NzDropDownModule,
-    NzFilterTriggerComponent,
   ],
   exports: [],
   providers: [
