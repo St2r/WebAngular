@@ -9,7 +9,6 @@ import { UserPrivateInfo } from 'src/app/model/user-private-info';
 })
 export class SideUserComponent implements OnInit {
   @Input() userInfo;
-  @Input() userPrivateInfo;
   @Input() viewing_own_page;
 
   constructor() { }

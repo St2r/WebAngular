@@ -205,7 +205,12 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/get-fav-block")]
         public List<BlockInfo> GetFavBlock([FromBody] GetFavBlockForm form)
         {
-            return new List<BlockInfo>();
+            var list = new List<BlockInfo>();
+            list.Add(new BlockInfo()
+            {
+                BlockName = "离散数学",
+            });
+            return list;
         }
         
     }

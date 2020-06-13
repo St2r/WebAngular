@@ -39,6 +39,9 @@ export class UserService implements OnInit {
     this.baseUrl = baseUrl;
 
     this.userInfo = new class implements UserInfo {
+      birthday: string;
+      loginCount: number;
+      registerData: string;
       articles: number;
       avatarUrl: string;
       brief: string;
@@ -196,21 +199,53 @@ export class UserService implements OnInit {
     return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-fan-list', model);
   }
 
+  public async getFanList(username: string): Promise<UserInfo[]> {
+    return new Promise<UserInfo[]>(
+      resolve => this.requestFanList(username).subscribe(
+        result => resolve(result)
+      )
+    );
+  }
+
   // 添加访问记录 username访问了targetName的主页
-  public addVisitRecord(targetName: string, username: string): Observable<boolean> {
+  public requestVisitRecord(targetName: string, username: string): Observable<boolean> {
     const model = {targetName: targetName, username: username};
     return this.http.post<boolean>(this.baseUrl + 'controller/user/add-visit-record', model);
   }
 
+  public async getVisitRecord(targetName: string, username: string): Promise<boolean> {
+    return new Promise<boolean>(
+      resolve => this.requestVisitRecord(targetName, username).subscribe(
+        result => resolve(result)
+      )
+    );
+  }
+
   // 获取最近访问者
-  public getRecentVisitor(username: string): Observable<UserInfo[]> {
+  public requestRecentVisitor(username: string): Observable<UserInfo[]> {
     const model = {username: username};
     return this.http.post<UserInfo[]>(this.baseUrl + 'controller/user/get-recent-visitor', model);
   }
 
+  public async getRecentVisitor(username: string): Promise<UserInfo[]> {
+    return new Promise<UserInfo[]>(
+      resolve => this.requestRecentVisitor(username).subscribe(
+        result => resolve(result)
+      )
+    );
+  }
+
   // 获取收藏的板块
-  public getFavBlock(username: string): Observable<BlockInfo[]> {
+  public requestFavBlock(username: string): Observable<BlockInfo[]> {
     const model = {username: username};
     return this.http.post<BlockInfo[]>(this.baseUrl + 'controller/user/get-fav-block', model);
+  }
+
+  public async getFavBlock(username: string): Promise<BlockInfo[]> {
+    return new Promise<BlockInfo[]>(
+      resolve => this.requestFavBlock(username).subscribe(
+        result => resolve(result)
+      )
+    );
   }
 }

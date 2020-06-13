@@ -29,4 +29,12 @@ export interface UserInfo {
   isFollowed: boolean;
   // 该用户关注了登陆用户
   isFan: boolean;
+
+  // 签到次数
+  loginCount: number;
+
+  // yyyy-mm-dd
+  birthday: string;
+  // yyyy-mm-dd
+  registerData: string;
 }

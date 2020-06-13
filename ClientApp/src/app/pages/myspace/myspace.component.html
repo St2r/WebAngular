@@ -8,7 +8,7 @@
         <div class="left">
           <div class="avatarWrap">
             <div>
-              <nz-avatar [nzSize]="150" nzIcon="user"></nz-avatar>
+              <nz-avatar [nzSize]="150" nzIcon="user" [nzSrc]="userInfo.avatarUrl"></nz-avatar>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
             </div>
             <p class="briefDescription"> {{ userInfo.brief }} </p>
           </div>
-          <div class="editbutton" *ngIf="viewing_own_page">
+          <div class="editbutton" *ngIf="ownPage">
             <a nz-button nzType="link">修改资料</a>
           </div>
         </div>
@@ -32,7 +32,7 @@
   <nz-layout class="main_part">
     <nz-content>
       <nz-tabset>
-        <nz-tab *ngIf="viewing_own_page" nzTitle="动态">
+        <nz-tab *ngIf="ownPage" nzTitle="动态">
           <app-tab-post></app-tab-post>
         </nz-tab>
         <nz-tab nzTitle="帖子">
@@ -42,29 +42,29 @@
           <app-tab-star [targetName]="targetName"></app-tab-star>
         </nz-tab>
         <nz-tab nzTitle="附件">
-          <app-tab-attachment [targetName]="targetName" [viewing_own_page]="viewing_own_page"></app-tab-attachment>
+          <app-tab-attachment [targetName]="targetName" [viewing_own_page]="ownPage"></app-tab-attachment>
         </nz-tab>
         <nz-tab nzTitle="关注">
-          <app-tab-follow [targetName]="targetName" [viewing_own_page]="viewing_own_page"></app-tab-follow>
+          <app-tab-follow [targetName]="targetName" [viewing_own_page]="ownPage"></app-tab-follow>
         </nz-tab>
       </nz-tabset>
     </nz-content>
 
     <nz-sider nzWidth="350px" nzTheme="light">
       <div class="userInfo-box-top">
-        <app-side-user [userInfo]="userInfo" [userPrivateInfo]="userPrivateInfo" [viewing_own_page]="viewing_own_page"></app-side-user>
+        <app-side-user [userInfo]="userInfo" [viewing_own_page]="ownPage"></app-side-user>
       </div>
       <div class="userInfo-box-middle">
         <span>最近访客</span>
         <nz-divider></nz-divider>
-        <ul *ngFor="let item of recent_visiter">
+        <ul *ngFor="let item of recentVisitor">
           <li> {{ item.avatarUrl }} --- {{ item.nickname }} </li>
         </ul>
       </div>
       <div class="userInfo-box-bottom">
         <span>喜爱的板块</span>
         <nz-divider></nz-divider>
-        <ul *ngFor="let item of favor_block">
+        <ul *ngFor="let item of favorBlock">
           <li [ngClass]="{'orange':item.todayTotal>10, 'black':item.todayTotal<=10}"> {{ item.blockName }} --- {{ item.todayTotal }} </li>
         </ul>
       </div>
