@@ -54,7 +54,7 @@ namespace WebAngular.Controllers
                 item.Title = articleentity[i].Title;
                 item.Header = articleentity[i].Header;
                 item.LastReviewTime = articleentity[i].LastReviewTime.ToString();
-                var author = context.Users.FirstOrDefault(t => t.Id == articleentity[i].AuthorId);
+                var author = context.Users.FirstOrDefault(t => t.UserName == articleentity[i].AuthorId);
                 item.Username = author.UserName;
                 item.IsPinned = articleentity[i].IsPinned;
                 item.IsElite = articleentity[i].IsElite;
@@ -78,12 +78,12 @@ namespace WebAngular.Controllers
             var l = new List<WebAngular.Model.CommentInf>();
             MyContext context = new MyContext();
             var article = context.Articles.FirstOrDefault(t => t.ArticleId == form.ArticleId);
-            var comments = context.Comments.Where(t => t.ArticleId == article.Id).ToList();
+            var comments = context.Comments.Where(t => t.ArticleId == article.ArticleId).ToList();
 
 
             foreach(var comment in comments)
             {
-                var author = context.Users.FirstOrDefault(t => t.Id == comment.AuthorId);
+                var author = context.Users.FirstOrDefault(t => t.UserName == comment.AuthorId);
                 var commentinf = new CommentInf()
                 {
                     Username = author.UserName,
@@ -118,17 +118,17 @@ namespace WebAngular.Controllers
             context.SaveChanges();
             Article article = new Article() { Title = title, Content = content };
             User user = context.Users.FirstOrDefault(t => t.UserName == author);
-            article.AuthorId = user.Id;
+            article.AuthorId = user.UserName;
             context.Add(article);
             context.SaveChanges();
             foreach(var ta in tag)
             {
                 Tag t = context.Tags.FirstOrDefault(t => t.TagName == ta);
-                ArticleToTag articleToTag = new ArticleToTag() { ArticleId = article.Id, TagId = t.TagId };
+                ArticleToTag articleToTag = new ArticleToTag() { ArticleId = article.ArticleId, TagId = t.TagId };
                 context.ArticleToTags.Add(articleToTag);
             }
             context.SaveChanges();
-            return false;
+            return true;
         }
     }
 }
