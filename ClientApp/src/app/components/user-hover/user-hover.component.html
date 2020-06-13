@@ -1,4 +1,4 @@
-<div class="hover-box">
+<div class="hover-box" *ngIf="!loading">
   <nz-row>
     <nz-col nzSpan="6">
       <nz-avatar [nzSize]="48" nzShape="circle" [nzSrc]="this.userInfo.avatarUrl"></nz-avatar>

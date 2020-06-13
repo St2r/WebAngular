@@ -30,6 +30,7 @@
     "core-js": "^3.6.5",
     "date-fns": "^2.14.0",
     "hammerjs": "^2.0.8",
+    "joiner": "^2.1.2",
     "jquery": "3.5.0",
     "ng-zorro-antd": "^8.5.2",
     "ngx-cookie-service": "^3.0.4",

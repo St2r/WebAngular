@@ -75,7 +75,12 @@
                       [nzExtra]="article.coverUrl?templateExtra:null">
           <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
             <ng-template #templateAvatar>
-              <nz-avatar [nzSrc]="article.avatar"></nz-avatar>
+              <nz-avatar [nzSrc]="article.avatar" [nz-popover]="userHover" nzPopoverPlacement="leftBottom"></nz-avatar>
+
+              <ng-template #userHover>
+                <app-user-hover [username]="article.username"></app-user-hover>
+              </ng-template>
+
             </ng-template>
             <ng-template #templateTitle>
               <a (click)="viewArticle(article.articleID)">{{article.title}}</a>

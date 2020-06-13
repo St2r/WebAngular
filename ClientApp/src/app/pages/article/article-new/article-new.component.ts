@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import {MetaDataService} from '../../../services/meta-data.service';
+import {ArticleService} from '../../../services/article.service';
 
 @Component({
   selector: 'app-article-new',
@@ -44,7 +45,7 @@ export class ArticleNewComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private routerInfo: ActivatedRoute,
               private userService: UserService, private router: Router,
-              private metaDataService: MetaDataService) {
+              private metaDataService: MetaDataService, private articleService: ArticleService) {
     if (!this.userService.logged) {
       console.log('not log in');
       // this.router.navigate(['/404']).then();
@@ -56,15 +57,14 @@ export class ArticleNewComponent implements OnInit {
       tags: [['资源分享']],
       limit: ['0'],
       content: ['Write something here'],
-      cover: [''],
-      attachment: ['']
+      cover: [null]
     });
   }
 
   ngOnInit() {
   }
 
-  // todo 请求用户等级
+  // 请求用户等级
   getUserInfo() {
     this.userService.requestUserInfo(this.userService.username).subscribe(
       result => {
@@ -75,10 +75,7 @@ export class ArticleNewComponent implements OnInit {
 
   submitForm(value) {
     console.log(value);
-    for (const key of Object.keys(this.validateForm.controls)) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
-    }
+    this.articleService.newArticle(this.validateForm.value);
   }
 
   coverChange(e) {
