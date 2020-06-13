@@ -1,1 +1,27 @@
-<p>user-manage works!</p>
+<div>
+    <nz-table #basicTable [nzData]="user_list">
+      <thead>
+        <tr>
+          <th>用户名</th>
+          <th>昵称</th>
+          <th>等级</th>
+          <th>简介</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.username }}</td>
+          <td>{{ data.nickname }}</td>
+          <td>{{ data.level }}</td>
+          <td>{{ data.brief }}</td>
+          <td>
+            <a>编辑资料</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>停止访问</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  
