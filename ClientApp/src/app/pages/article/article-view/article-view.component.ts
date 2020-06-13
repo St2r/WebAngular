@@ -34,7 +34,7 @@ export class ArticleViewComponent implements OnInit {
       console.log('未登陆');
       return;
     }
-    const userInfo = await this.userService.getUserInfo();
+    const userInfo = await this.userService.getLoggedUserInfo();
     if (userInfo.level < this.articleContent.limit) {
       console.log('权限不足');
     }

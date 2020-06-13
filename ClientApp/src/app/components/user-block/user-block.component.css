@@ -1,0 +1,22 @@
+.top_part {
+  width: 100%;
+  min-height: 30px;
+  height: fit-content;
+}
+
+button {
+  width: 60%;
+  height: 70%;
+}
+
+.button_container {
+  width: 40%;
+  height: 100%;
+  float: left;
+}
+
+.login_days {
+  width: 60%;
+  height: 100%;
+  float: left;
+}

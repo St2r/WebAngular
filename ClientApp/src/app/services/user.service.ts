@@ -71,15 +71,17 @@ export class UserService implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  public async test() {
-    console.log(1);
-    this.userInfo = await this.getUserInfo();
-    console.log(this.userInfo);
-    console.log(2);
+  public async getUserInfo(username: string): Promise<UserInfo> {
+    return new Promise<UserInfo>(
+      resolve => {
+        this.requestUserInfo(username).subscribe(
+          result => resolve(result[0])
+        );
+      }
+    );
   }
 
-
-  public async getUserInfo(): Promise<UserInfo> {
+  public async getLoggedUserInfo(): Promise<UserInfo> {
     return new Promise<UserInfo>(
       resolve => {
         if (this.fetched) {
@@ -93,7 +95,7 @@ export class UserService implements OnInit {
     );
   }
 
-  public getUserPrivateInfo(): Promise<UserPrivateInfo> {
+  public getLoggedUserPrivateInfo(): Promise<UserPrivateInfo> {
     return new Promise<UserPrivateInfo>(
       resolve => {
         if (this.fetched) {
