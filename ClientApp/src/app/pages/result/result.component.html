@@ -1,6 +1,3 @@
-<div class="blank">
-
-</div>
 <div class="search_pannel">
   <nz-select [(ngModel)]="search_type" nzSize="large">
     <nz-option [nzLabel]="'帖子'" [nzValue]="1"></nz-option>
@@ -14,23 +11,6 @@
     <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">搜索</button>
   </ng-template>
 </div>
-<div class="blank">
-
-</div>
-<div class="pr_info">
-  <div class="hot_search">
-    <h2>热门搜索</h2>
-    <nz-divider></nz-divider>
-    <div *ngFor="let item of hot_search">
-      <span> {{ item }} </span>
-    </div>
-  </div>
-  <div class="history">
-    <h2>历史搜索</h2>
-    <span style="float: right;" (click)='clear()'>清空</span>
-    <nz-divider></nz-divider>
-    <ul>
-      <li *ngFor="let item of history_search"> {{ item }} </li>
-    </ul>
-  </div>
-</div>
+<app-article-res *ngIf="search_type==1" [search_content]="search_content"></app-article-res>
+<app-user-res *ngIf="search_type==2" [search_content]="search_content"></app-user-res>
+<app-attachment-res *ngIf="search_type==3" [search_content]="search_content"></app-attachment-res>

@@ -17,6 +17,8 @@ export class SearchComponent implements OnInit {
 
   history_search: string[] = [];
 
+  search_type:any = 1;
+
   constructor(private storageService:StorageService) { }
 
   ngOnInit() {
@@ -37,13 +39,14 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    alert(this.search_content);
     this.history_search.push(this.search_content);
     this.storeHistorySearch();
+
   }
 
   clear() {
     this.history_search = [];
+    this.storageService.remove('history');
   }
 
 }
