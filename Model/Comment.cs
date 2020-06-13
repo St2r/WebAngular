@@ -8,7 +8,7 @@ namespace WebAngular.Model
 {
     public class Comment
     {
-        [Key] public int Id { get; set; }
+        [Key] public string Id { get; set; }
         public string AuthorId { get; set; }
         public string ArticleId { get; set; }
         public DateTime CreateTime { get; set; }

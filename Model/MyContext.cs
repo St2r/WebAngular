@@ -24,5 +24,7 @@ namespace WebAngular.Model
         public DbSet<Collection> Collections { get; set; }
         public DbSet<ArticleToTag> ArticleToTags { get;  set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Block> Blocks { get; set; }
+        public DbSet<PersonToBlock> PersonToBlocks { get; set; }
     }
 }

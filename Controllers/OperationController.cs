@@ -66,33 +66,61 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/operation/undo-dislike-article")]
         public bool UndoDislikeArticle([FromBody] OperationForm form)
         {
-            return false;
+            MyContext context = new MyContext();
+            var like = context.LikeArticles.FirstOrDefault(t => t.status == -1 && t.ArticleId == form.TargetName && t.UserId == form.Username);
+            if (like == null)
+                return false;
+            context.LikeArticles.Remove(like);
+            context.SaveChanges();
+            return true;
         }
         
         [HttpPost("/controller/operation/like-comment")]
         public bool LikeComment([FromBody] OperationForm form)
         {
-            return false;
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+            var comment = context.Comments.FirstOrDefault(t => t.Id == form.TargetName);
+            context.Users.Update(user);
+            user.Point += 3;
+            LikeComment like = new LikeComment() { status = 1,  CommentId = comment.Id, UserId = user.UserName };
+            context.LikeComments.Add(like);
+            context.SaveChanges();
+            return true;
         }
         
         [HttpPost("/controller/operation/undo-like-comment")]
         public bool UndoLikeComment([FromBody] OperationForm form)
         {
-            return false;
+            MyContext context = new MyContext();
+            var like = context.LikeComments.FirstOrDefault(t => t.status == 1 && t.UserId == form.Username && t.CommentId == form.TargetName);
+            if (like == null)
+                return false;
+            context.LikeComments.Remove(like);
+            context.SaveChanges();
+            return true;
         }
         
         [HttpPost("/controller/operation/dislike-comment")]
         public bool DislikeComment([FromBody] OperationForm form)
         {
-            return false;
+            MyContext context = new MyContext();
+            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
+            var comment = context.Comments.FirstOrDefault(t => t.Id == form.TargetName);
+            context.Users.Update(user);
+            user.Point += 3;
+            LikeComment like = new LikeComment() { status = -1, CommentId = comment.Id, UserId = user.UserName };
+            context.LikeComments.Add(like);
+            context.SaveChanges();
+            return true;
         }
         
         [HttpPost("/controller/operation/undo-dislike-comment")]
         public bool UndoDislikeComment([FromBody] OperationForm form)
         {
             MyContext context = new MyContext();
-            var like = context.LikeArticles.FirstOrDefault(t => t.status == -1 && t.ArticleId == form.TargetName && t.UserId == form.Username);
-            context.LikeArticles.Remove(like);
+            var like = context.LikeComments.FirstOrDefault(t => t.status == -1 && t.CommentId == form.TargetName && t.UserId == form.Username);
+            context.LikeComments.Remove(like);
             context.SaveChanges();
             return true;
         }
@@ -100,12 +128,23 @@ namespace WebAngular.Controllers
         [HttpPost("controller/operation/follow-person")]
         public bool FollowPerson([FromBody] OperationForm form)
         {
-            return false;
+            MyContext context = new MyContext();
+            context.PersonToBlocks.Add(new PersonToBlock()
+            {
+                BlockName = form.TargetName,
+                UserName = form.Username
+            });
+            context.SaveChanges();
+            return true;
         }
         
         [HttpPost("controller/operation/dis-follow-person")]
         public bool DisFollowPerson([FromBody] OperationForm form)
         {
+            MyContext context = new MyContext();
+            var pb = context.PersonToBlocks.FirstOrDefault(t => t.BlockName == form.TargetName && t.UserName == form.Username);
+            context.PersonToBlocks.Remove(pb);
+            context.SaveChanges();
             return false;
         }
         
