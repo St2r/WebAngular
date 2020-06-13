@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleInfo } from 'src/app/model/article-info';
+import { FetchDataService } from 'src/app/services/fetch-data.service';
 
 @Component({
   selector: 'app-article-manage',
@@ -9,7 +10,7 @@ import { ArticleInfo } from 'src/app/model/article-info';
 export class ArticleManageComponent implements OnInit {
   article_list: ArticleInfo[];
   
-  constructor() { }
+  constructor(private fetchService:FetchDataService) { }
 
   ngOnInit() {
     this.loadArticleInfo();
@@ -17,46 +18,48 @@ export class ArticleManageComponent implements OnInit {
 
 // TODO 请求数据
   loadArticleInfo() {
-    this.article_list = [
-      new class implements ArticleInfo {
-        // 文章ID
-        articleID: '111';
-        // 文章所属板块
-        block: '222';
+    // this.article_list = [
+    //   new class implements ArticleInfo {
+    //     // 文章ID
+    //     articleID = '111';
+    //     // 文章所属板块
+    //     block ='222';
 
-        // 文章标题
-        title: '114514';
-        // 文章头
-        header: '???';
-        // 封面 可选
-        coverUrl: 'fack';
+    //     // 文章标题
+    //     title = '114514';
+    //     // 文章头
+    //     header = '???';
+    //     // 封面 可选
+    //     coverUrl = 'fack';
 
-        // 点赞数
-        like: 10;
-        // 回复数
-        review: 1;
-        // 浏览数
-        browse: 1;
-        // 收藏数
-        star: 1;
+    //     // 点赞数
+    //     like = 10;
+    //     // 回复数
+    //     review = 1;
+    //     // 浏览数
+    //     browse = 1;
+    //     // 收藏数
+    //     star = 1;
 
-        // 最后回复时间
-        lastReviewTime: 'jintian';
+    //     // 最后回复时间
+    //     lastReviewTime = 'jintian';
 
-        // 楼主信息
-        // 用户名
-        username: 'name';
-        // 昵称
-        nickname: 'name';
-        // 头像
-        avatarUrl: 'fack';
+    //     // 楼主信息
+    //     // 用户名
+    //     username = 'name';
+    //     // 昵称
+    //     nickname = 'name';
+    //     // 头像
+    //     avatarUrl = 'fack';
 
-        // 是否为置顶文章
-        isPinned: true;
-        // 是否为精华文章
-        isElite: true;
-      }
-    ]
+    //     // 是否为置顶文章
+    //     isPinned = true;
+    //     // 是否为精华文章
+    //     isElite = true;
+    //   }
+    // ]
+    
+
   }
 
 }

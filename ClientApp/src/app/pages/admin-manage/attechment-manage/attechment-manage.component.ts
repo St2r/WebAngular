@@ -19,9 +19,9 @@ export class AttechmentManageComponent implements OnInit {
   loadAttachmentInfo() {
     this.attachment_list = [
       new class implements AttachmentInfo {
-        filename: 'filename';
-        filesize: 123;
-        filetype: '.doc';
+        filename = 'filename';
+        filesize = 123;
+        filetype = '.doc';
       }
     ]
   }
