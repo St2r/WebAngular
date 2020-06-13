@@ -18,7 +18,9 @@ namespace WebAngular.Model
         public bool IsPinned { get; set; } = false;
         public bool IsElite { get; set; } = false;
         public int Browse { get; set; } = 0;
+        public string AvatarUrl { get; set; } = "/avatar.png";
 
         public DateTime LastReviewTime { get; set; }
+        public string CoverUrl { get; internal set; }
     }
 }
