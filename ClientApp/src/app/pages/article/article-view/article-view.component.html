@@ -3,7 +3,22 @@
     <app-user-block></app-user-block>
   </nz-sider>
   <nz-content>
-    <div [innerHTML]="articleContent.content | safeHtml"></div>
+    <div class="artice_main">
+      <div class="title_div">
+        <span class="title"> {{ articleContent.title }} </span>
+      </div>
+      <!-- <nz-divider></nz-divider> -->
+      <div class="article_info">
+        <div *ngFor="let item of articleContent.tags">
+          <nz-tag style="float: left"> {{ item }} </nz-tag>
+        </div>
+      </div>
+      <!-- <nz-divider></nz-divider> -->
+      <div class="article_content">
+        <div class="content" [innerHTML]="articleContent.content | safeHtml"></div>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
     <app-comment [articleID]="articleID"></app-comment>
   </nz-content>
 </nz-layout>
