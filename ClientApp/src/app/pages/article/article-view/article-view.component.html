@@ -1,1 +1,8 @@
-<p>article-view works!</p>
+<nz-layout *ngIf="!loading">
+  <nz-sider>
+    <app-user-block></app-user-block>
+  </nz-sider>
+  <nz-content>
+    <div [innerHTML]="articleContent.content | safeHtml"></div>
+  </nz-content>
+</nz-layout>

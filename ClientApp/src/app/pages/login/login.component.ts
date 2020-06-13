@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public router: Router, public userService: UserService,
               private modal: NzModalService, private cookie: CookieService) {
-    if (this.userService.status) {
+    if (this.userService.logged) {
       this.router.navigate(['/404']).then();
     }
     this.validateForm = this.fb.group({

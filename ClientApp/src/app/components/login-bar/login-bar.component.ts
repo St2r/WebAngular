@@ -30,7 +30,7 @@ export class LoginBarComponent implements OnInit {
   }
 
   toSpace() {
-    console.log(this.userService.status);
+    console.log(this.userService.logged);
     console.log(this.userService.username);
     console.log(this.userService.userInfo);
     this.router.navigate(['/my-space/' + this.userService.username]).then();

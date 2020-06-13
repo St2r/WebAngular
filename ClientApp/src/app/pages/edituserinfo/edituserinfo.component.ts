@@ -16,7 +16,7 @@ export class EdituserinfoComponent implements OnInit {
   userPrivateInfo: UserPrivateInfo;
 
   constructor(private userService: UserService, private router: Router) {
-    if (!this.userService.status) {
+    if (!this.userService.logged) {
       console.log('not login in');
       this.router.navigate(['/404']).then();
     }

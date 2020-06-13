@@ -45,7 +45,7 @@ export class EditArticleComponent implements OnInit {
   constructor(private fb: FormBuilder, private routerInfo: ActivatedRoute,
               private userService: UserService, private router: Router,
               private metaDataService: MetaDataService) {
-    if (!this.userService.status) {
+    if (!this.userService.logged) {
       console.log('not log in');
       // this.router.navigate(['/404']).then();
     }

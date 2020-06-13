@@ -88,6 +88,8 @@ import { ArticleViewComponent } from './pages/article/article-view/article-view.
 import { ArticleNewComponent } from './pages/article/article-new/article-new.component';
 import { BackTopComponent } from './components/back-top/back-top.component';
 import { ResourceComponent } from './pages/resource/resource.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { UserBlockComponent } from './components/user-block/user-block.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +133,8 @@ import { ResourceComponent } from './pages/resource/resource.component';
     ArticleNewComponent,
     BackTopComponent,
     ResourceComponent,
+    SearchBarComponent,
+    UserBlockComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
