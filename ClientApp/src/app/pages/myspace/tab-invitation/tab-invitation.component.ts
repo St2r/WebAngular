@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ArticleInfo} from '../../../model/article-info';
 import {FetchDataService} from '../../../services/fetch-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab-invitation',
@@ -15,7 +16,7 @@ export class TabInvitationComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private fetchService: FetchDataService) {
+  constructor(private fetchService: FetchDataService, private router:Router) {
     this.loading = true;
   }
 
@@ -27,6 +28,12 @@ export class TabInvitationComponent implements OnInit {
 
   async loadMyInvitation() {
     this.myArticle = await this.fetchService.getInvitationByUser(this.targetName);
+  }
+
+  viewArticle(articleId: string, blockname: string) {
+    this.router.navigate(['/article'], {
+      queryParams: {operation: 'view', block: blockname, articleId: articleId}
+    }).then();
   }
 
 }
