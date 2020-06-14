@@ -8,18 +8,12 @@ import {UploadFile} from 'ng-zorro-antd';
   styleUrls: ['./edit-avatar.component.css']
 })
 export class EditAvatarComponent implements OnInit {
-  @Input()
-  username: string;
 
   baseUrl: string;
   avatarUrl?: string;
   loading = false;
 
-  constructor(@Inject('BASE_URL') baseUrl: string, private userService: UserService) {
-    this.baseUrl = baseUrl;
-    this.userService.requestUserInfo(this.username).subscribe(
-      result => this.username = result.avatarUrl
-    );
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
@@ -27,7 +21,7 @@ export class EditAvatarComponent implements OnInit {
 
   appendData = () => {
     return {
-      username: this.username
+      username: this.userService.username
     };
   }
 
