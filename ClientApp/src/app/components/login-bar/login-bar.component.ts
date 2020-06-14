@@ -14,7 +14,7 @@ export class LoginBarComponent implements OnInit {
 
   userInfo: UserInfo;
 
-  constructor(public userService: UserService, private router: Router) {
+  constructor(public userService: UserService, protected router: Router) {
   }
 
   ngOnInit() {
