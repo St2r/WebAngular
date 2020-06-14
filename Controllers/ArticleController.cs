@@ -66,27 +66,20 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/comment/get-comment")]
         public List<WebAngular.Model.CommentInf> GetComments([FromBody] GetCommentsForm form)
         {
-            var res = Enumerable.Empty<WebAngular.Model.CommentInf[]>();
-            var l = new List<WebAngular.Model.CommentInf>();
-            MyContext context = new MyContext();
-            var article = context.Articles.FirstOrDefault(t => t.ArticleId == form.ArticleId);
-            var comments = context.Comments.Where(t => t.ArticleId == article.ArticleId).ToList();
-
-
-            foreach(var comment in comments)
+            var l = new List<CommentInf>();
+            for (int i = 0; i < 5; i++)
             {
-                var author = context.Users.FirstOrDefault(t => t.UserName == comment.AuthorId);
-                var commentinf = new CommentInf()
+                l.Add(new CommentInf()
                 {
-                    Username = author.UserName,
-                    CommentTime = comment.CreateTime.ToString(),
-                    Content = comment.Content,
-                    AvatarUrl = comment.AvatarUrl,
-                    Nickname = author.NickName
-                };
-                commentinf.Likes = context.LikeComments.Count(t => t.CommentId == comment.Id);
-                l.Add(commentinf);
+                    Username = "User" + i,
+                    AvatarUrl = "/avatar.png",
+                    Nickname = "Nick" + i,
+                    CommentTime = "User" + i + "的评论",
+                    Likes = 10,
+                    LikeStatus = 0,
+                });
             }
+
             return l;
         }
 

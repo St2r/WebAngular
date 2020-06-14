@@ -43,7 +43,9 @@ export class ArticleViewComponent implements OnInit {
   async loadArticle() {
     this.articleContent = new class implements ArticleContent {
       articleID = '11';
-      content = 'asd';
+      content = '<pre class="language-cpp"><code>int main {\n' +
+        '\n' +
+        '}</code></pre>';
       limit = 1;
       tags = ['22', '2'];
       title = 't-title';

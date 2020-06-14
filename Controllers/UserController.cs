@@ -189,21 +189,16 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/get-follow-list")]
         public IEnumerable<UserInfo[]> GetFollowList([FromBody] GetFollowListForm form)
         {
-            var res = Enumerable.Empty<UserInfo[]>();
-            MyContext context = new MyContext();
-            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
-            int count = context.Foci.Count(t => t.BeFocusd == user.UserName);
-            var users = context.Foci.Where(t => t.BeFocusd == user.UserName).Select(t => t.Follower).ToList();
-            var userList = new UserInfo[count];
-            for (var i = 0; i < count; i++)
+            var res = Enumerable.Empty<UserInfo[]>(); 
+            var userList = new UserInfo[10];
+            for (var i = 0; i < 10; i++)
             {
-                var follow = context.Users.FirstOrDefault(t => t.UserName == users[i]);
                 userList[i] = new UserInfo
                 {
 
-                    Username = follow.UserName,
-                    AvatarUrl = follow.AvatarUrl,
-                    Brief = follow.Brief,
+                    Username = "Follow",
+                    AvatarUrl = "/avatar.png",
+                    Brief = "个人简介",
                     IsFollowed = true,
                     IsFan = i % 2 == 0 ? true : false
                 };
@@ -221,25 +216,21 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/get-fan-list")]
         public List<UserInfo> GetFanList([FromBody] GetFanListForm form)
         {
-            var res = new List<UserInfo>();
-            MyContext context = new MyContext();
-            var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
-            int count = context.Foci.Count(t => t.Follower == user.UserName);
-            var fans = context.Foci.Where(t => t.Follower == user.UserName).Select(t => t.BeFocusd).ToList();
-            for (var i = 0; i < count; i++)
+            var userList = new List<UserInfo>();
+            for (var i = 0; i < 10; i++)
             {
-                var fan = context.Users.FirstOrDefault(t => t.UserName == fans[i]);
-                res.Add(new UserInfo
+                userList.Add(new UserInfo
                 {
-                    Username = fan.UserName,
-                    AvatarUrl = fan.AvatarUrl,
-                    Brief = fan.Brief,
-                    IsFan = true,
-                    IsFollowed = i % 2 == 0 ? true : false
-                }) ;
+
+                    Username = "Follow",
+                    AvatarUrl = "/avatar.png",
+                    Brief = "个人简介",
+                    IsFollowed = true,
+                    IsFan = i % 2 == 0 ? true : false
+                });
             }
 
-            return res;
+            return userList;
         }
 
         // 添加访问记录
