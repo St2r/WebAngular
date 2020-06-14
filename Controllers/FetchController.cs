@@ -29,7 +29,7 @@ namespace WebAngular.Controllers
             var list = new List<ArticleInfo>();
             MyContext context = new MyContext();
             var user = context.Users.FirstOrDefault(t => t.UserName == form.Username);
-            var articles = context.Articles.Where(t => t.AuthorId == user.Id);
+            var articles = context.Articles.Where(t => t.AuthorId == user.UserName);
             list.Add(new ArticleInfo()
             {
                 Title = "test"
@@ -48,7 +48,7 @@ namespace WebAngular.Controllers
                     Username = user.UserName,
                     Nickname = user.UserName,
                 };
-                articleInfo.Like = context.LikeArticles.Count(t => t.ArticleId == article.Id);
+                articleInfo.Like = context.LikeArticles.Count(t => t.ArticleId == article.ArticleId);
                 list.Add(articleInfo);
             }
 

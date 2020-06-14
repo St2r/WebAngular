@@ -165,7 +165,7 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/user/check-email")]
         public IEnumerable<bool> CheckEmail([FromBody] CheckEmailForm form)
         {
-            return Enumerable.Empty<bool>().Append(form.Email.Contains("@")).ToArray();
+            return Enumerable.Empty<bool>().Append(!form.Email.Contains("@")).ToArray();
         }
 
         public class GetFollowListForm
