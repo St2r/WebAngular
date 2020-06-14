@@ -47,12 +47,11 @@ export class ArticleNewComponent implements OnInit {
               private userService: UserService, private router: Router,
               private metaDataService: MetaDataService, private articleService: ArticleService) {
     if (!this.userService.logged) {
-      console.log('not log in');
-      // this.router.navigate(['/404']).then();
+      this.router.navigate(['/404']).then();
     }
     this.getUserInfo();
     this.validateForm = this.fb.group({
-      author: ['用userService搞用户名'],
+      author: [this.userService.username],
       title: ['', [Validators.required]],
       tags: [['资源分享']],
       limit: ['0'],
