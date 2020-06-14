@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-result',
@@ -11,7 +12,14 @@ export class ResultComponent implements OnInit {
 
   search_content:string;
 
-  constructor() { }
+  constructor(private routerinfo:ActivatedRoute, private router:Router) {
+    this.routerinfo.queryParams.subscribe(
+      result => {
+        this.search_content = result['content'];
+        this.search_type = result['type'];
+      }
+    );
+  }
 
   ngOnInit() {
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -9,7 +10,7 @@ export class SearchBarComponent implements OnInit {
   public searchContent = '';
   optionGroups: any[] = [];
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -43,5 +44,15 @@ export class SearchBarComponent implements OnInit {
       ];
     }, 1000);
   }
-
+  
+  toresult() {
+    if (this.searchContent=='') {
+      this.router.navigate(['/search']);
+    }
+    else {
+      this.router.navigate(['/result'], {
+        queryParams: {content:this.searchContent, type:1}
+      }).then();
+    }
+  }
 }

@@ -17,6 +17,7 @@ import { EdituserinfoComponent } from '../pages/edituserinfo/edituserinfo.compon
 import {ArticleComponent} from '../pages/article/article.component';
 import {ResourceComponent} from '../pages/resource/resource.component';
 import { AdminManageComponent } from '../pages/admin-manage/admin-manage.component';
+import { ResultComponent } from '../pages/result/result.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'editinfo', component: EdituserinfoComponent},
   {path: 'admin-manage', component: AdminManageComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'result', component: ResultComponent},
   {path: 'image', component: TestImageComponent},
   {path: '404', component: FallbackComponent},
   {path: '**', pathMatch: 'full', redirectTo: '404'}

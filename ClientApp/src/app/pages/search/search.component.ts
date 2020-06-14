@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/app/services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -8,7 +9,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class SearchComponent implements OnInit {
 
-  search_content:string;
+  search_content:string = '';
   
   hot_search:string[] = [
     '期末考试取消',
@@ -19,7 +20,7 @@ export class SearchComponent implements OnInit {
 
   search_type:any = 1;
 
-  constructor(private storageService:StorageService) { }
+  constructor(private storageService:StorageService, private router:Router) { }
 
   ngOnInit() {
     this.loadHotSearch();
@@ -39,9 +40,16 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    this.history_search.push(this.search_content);
-    this.storeHistorySearch();
-
+    if (this.search_content=='') {
+      this.router.navigate(['/search']);
+    }
+    else {
+      this.history_search.push(this.search_content);
+      this.storeHistorySearch();
+      this.router.navigate(['/result'], {
+        queryParams: {content:this.search_content, type:1}
+      }).then();
+    }
   }
 
   clear() {
