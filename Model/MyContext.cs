@@ -10,7 +10,7 @@ namespace WebAngular.Model
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
-            optionBuilder.UseSqlServer("Server=localhost,1433;Database=BBSSystem;Trusted_Connection=False;MultipleActiveResultSets=true;User Id=SA;Password=");
+            optionBuilder.UseSqlServer("Server=39.96.47.215,1433;Database=BBSSystem;Trusted_Connection=False;MultipleActiveResultSets=true;User Id=SA;Password=123456_aA");
             base.OnConfiguring(optionBuilder);
         }
 

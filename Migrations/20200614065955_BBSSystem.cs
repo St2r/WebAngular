@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAngular.Migrations
 {
-    public partial class db : Migration
+    public partial class BBSSystem : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -10,8 +10,8 @@ using WebAngular.Model;
 namespace WebAngular.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200614031204_db")]
-    partial class db
+    [Migration("20200614065955_BBSSystem")]
+    partial class BBSSystem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
