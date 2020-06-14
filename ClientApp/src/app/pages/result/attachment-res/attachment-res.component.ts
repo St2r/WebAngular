@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserInfo } from 'src/app/model/user-info';
 import { AttachmentInfo } from 'src/app/model/attachment';
+import { FetchDataService } from 'src/app/services/fetch-data.service';
 
 @Component({
   selector: 'app-attachment-res',
@@ -12,15 +13,24 @@ export class AttachmentResComponent implements OnInit {
 
   attachment_list:AttachmentInfo[];
 
-  constructor() { }
+  got_res: boolean;
+
+  constructor(private fetchService:FetchDataService) { }
 
   ngOnInit() {
     this.loadAttachmentInfo();
+    if (this.attachment_list.length>0) {
+      this.got_res = true;
+    }
+    else {
+      this.got_res = false;
+    }
   }
 
-  // TODO 获取信息
   loadAttachmentInfo() {
-
+    this.fetchService.getAttachmentByKeyword(this.search_content).subscribe(
+      res => this.attachment_list=res
+    );
   }
 
 }

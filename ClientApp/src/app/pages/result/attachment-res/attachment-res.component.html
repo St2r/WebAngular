@@ -1,1 +1,28 @@
-<p>attachment-res works!</p>
+<div class="no_res" *ngIf="!got_res">
+  <div class="inner">
+    <span class="error">没有匹配的结果</span>
+  </div>
+</div>
+<div class="got_res" *ngIf="got_res">
+    <nz-table #basicTable [nzData]="attachment_list">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>大小</th>
+          <th>类型</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.filename }}</td>
+          <td>{{ data.filesize }}</td>
+          <td>{{ data.filetype }}</td>
+          <td>
+            <a>下载</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  

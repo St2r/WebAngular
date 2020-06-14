@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {AttachmentInfo} from '../model/attachment';
 import {PostInfo} from '../model/post-info';
 import {HotTopic} from '../model/hot-topic';
+import { UserInfo } from '../model/user-info';
 
 @Injectable({
   providedIn: 'root'
@@ -74,5 +75,20 @@ export class FetchDataService {
   public getHotTopic(block: string): Observable<HotTopic[]> {
     const model = {block: block};
     return this.http.post<HotTopic[]>(this.baseUrl + 'controller/fetch/get-hot', model);
+  }
+
+  // TODO 检索帖子
+  public getArticleByKeyword(keyword:string): Observable<ArticleInfo[]> {
+    return
+  }
+
+  // TODO 检索用户
+  public getUserByKeyword(keyword:string): Observable<UserInfo[]> {
+    return;
+  }
+
+  // TODO 检索附件
+  public getAttachmentByKeyword(keyword:string) : Observable<AttachmentInfo[]> {
+    return;
   }
 }

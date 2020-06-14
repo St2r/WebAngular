@@ -11,6 +11,6 @@
     <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">搜索</button>
   </ng-template>
 </div>
-<app-article-res *ngIf="search_type==1" [search_content]="search_content"></app-article-res>
-<app-user-res *ngIf="search_type==2" [search_content]="search_content"></app-user-res>
-<app-attachment-res *ngIf="search_type==3" [search_content]="search_content"></app-attachment-res>
+<app-article-res *ngIf="search_stable==1" [article_list]="article_res"></app-article-res>
+<app-user-res *ngIf="search_stable==2" [search_content]="search_content"></app-user-res>
+<app-attachment-res *ngIf="search_stable==3" [search_content]="search_content"></app-attachment-res>

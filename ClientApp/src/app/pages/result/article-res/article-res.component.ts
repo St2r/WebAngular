@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ArticleInfo } from 'src/app/model/article-info';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-res',
@@ -7,19 +8,25 @@ import { ArticleInfo } from 'src/app/model/article-info';
   styleUrls: ['./article-res.component.css']
 })
 export class ArticleResComponent implements OnInit {
-  @Input() search_content:string;
+  @Input() article_list:ArticleInfo[];
 
-  article_list:ArticleInfo[];
+  got_res: boolean;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
-    this.loadArticleInfo();
+    if (this.article_list.length>0) {
+      this.got_res = true;
+    }
+    else {
+      this.got_res = true;
+    }
   }
 
-  // TODO 获取数据
-  loadArticleInfo() {
-
+  viewArticle(articleId: string, blockname: string) {
+    this.router.navigate(['/article'], {
+      queryParams: {operation: 'view', block: blockname, articleId: articleId}
+    }).then();
   }
 
 }

@@ -47,7 +47,7 @@ export class SearchComponent implements OnInit {
       this.history_search.push(this.search_content);
       this.storeHistorySearch();
       this.router.navigate(['/result'], {
-        queryParams: {content:this.search_content, type:1}
+        queryParams: {content:this.search_content, type:this.search_type}
       }).then();
     }
   }

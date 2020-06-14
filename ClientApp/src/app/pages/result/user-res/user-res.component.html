@@ -1,1 +1,30 @@
-<p>user-res works!</p>
+<div class="no_res" *ngIf="!got_res">
+  <div class="inner">
+    <span class="error">没有匹配的结果</span>
+  </div>
+</div>
+<div class="got_res" *ngIf="got_res">
+  <nz-table #basicTable [nzData]="user_list">
+    <thead>
+      <tr>
+        <th>用户名</th>
+        <th>昵称</th>
+        <th>等级</th>
+        <th>简介</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>
+          <div class="avatat_inner">
+            <nz-avatar [nzSize]="16" nzIcon="user" [nzSrc]="data.avatarUrl"></nz-avatar>
+          </div>
+          <span (click)='toSpace()'> {{ data.username }} </span>
+        </td>
+        <td>{{ data.nickname }}</td>
+        <td>{{ data.level }}</td>
+        <td>{{ data.brief }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
