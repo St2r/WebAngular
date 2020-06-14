@@ -20,40 +20,52 @@ namespace WebAngular.Controllers
         [HttpGet("/controller/admin/get-user")]
         public List<UserInfo> GetAllUser()
         {
-            MyContext context = new MyContext();
-            var users = context.Users.ToList();
-            var ret = new List<UserInfo>();
-            foreach(var user in users)
+            // MyContext context = new MyContext();
+            // var users = context.Users.ToList();
+            // var ret = new List<UserInfo>();
+            // foreach(var user in users)
+            // {
+            //     var res = new UserInfo();
+            //     res.Username = user.UserName;
+            //     res.Nickname = "nick_" + user.NickName;
+            //     res.AvatarUrl = user.AvatarUrl;
+            //     res.Brief = user.Brief;
+            //     res.Point = user.Point;
+            //     //res.LoginCount = user.LoginCount;
+            //     //res.Birthday = user.Birthday.ToString();
+            //     //res.RegisterData = user.CreateTime.ToString();
+            //     res.Browse = user.Browse;
+            //
+            //     res.Fans = context.Foci.Count(t => t.BeFocusd == user.UserName);
+            //     res.Follow = context.Foci.Count(t => t.Follower == user.UserName);
+            //     res.Articles = context.Articles.Count(t => t.AuthorId == user.UserName);
+            //     var articles = context.Articles.Select(t => t).Where(t => t.AuthorId == user.UserName).ToList();
+            //     res.Like = res.Star = 0;
+            //
+            //     foreach (var article in articles)
+            //     {
+            //         res.Like += context.LikeArticles.Count(t => t.ArticleId == article.ArticleId);
+            //         res.Star += context.Collections.Count(t => t.ArticleId == article.ArticleId);
+            //     }
+            //     res.IsFollowed = res.Fans > 0;
+            //     res.IsFan = res.Follow > 0;
+            //
+            //     ret.Add(res);
+            // }
+            //
+            // return ret;
+            var i = new List<UserInfo>();
+            for (int j = 0; j < 10; j++)
             {
-                var res = new UserInfo();
-                res.Username = user.UserName;
-                res.Nickname = "nick_" + user.NickName;
-                res.AvatarUrl = user.AvatarUrl;
-                res.Brief = user.Brief;
-                res.Point = user.Point;
-                //res.LoginCount = user.LoginCount;
-                //res.Birthday = user.Birthday.ToString();
-                //res.RegisterData = user.CreateTime.ToString();
-                res.Browse = user.Browse;
-
-                res.Fans = context.Foci.Count(t => t.BeFocusd == user.UserName);
-                res.Follow = context.Foci.Count(t => t.Follower == user.UserName);
-                res.Articles = context.Articles.Count(t => t.AuthorId == user.UserName);
-                var articles = context.Articles.Select(t => t).Where(t => t.AuthorId == user.UserName).ToList();
-                res.Like = res.Star = 0;
-
-                foreach (var article in articles)
+                i.Add(new UserInfo()
                 {
-                    res.Like += context.LikeArticles.Count(t => t.ArticleId == article.ArticleId);
-                    res.Star += context.Collections.Count(t => t.ArticleId == article.ArticleId);
-                }
-                res.IsFollowed = res.Fans > 0;
-                res.IsFan = res.Follow > 0;
-
-                ret.Add(res);
+                    Username = "User" + i,
+                    Nickname = "Nick" + i,
+                    AvatarUrl = "avatar.png"
+                });
             }
 
-            return ret;
+            return i;
         }
 
         [HttpGet("/controller/admin/get-article")]

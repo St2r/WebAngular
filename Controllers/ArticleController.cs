@@ -33,9 +33,8 @@ namespace WebAngular.Controllers
         public IEnumerable<ArticleInfo[]> GetArticle([FromBody] GetArticleForm form)
         {
             var res = Enumerable.Empty<ArticleInfo[]>();
-            var articles = new ArticleInfo[form.PageSize];
-            MyContext context = new MyContext();
-            var articleentity = context.Articles.ToList();
+            
+            ArticleInfo[] a = new ArticleInfo[form.PageSize];
             for (var i = 0; i < form.PageSize; i++)
             {
                 var item = new ArticleInfo
@@ -51,17 +50,10 @@ namespace WebAngular.Controllers
 
                     IsPinned = false, IsElite = false
                 };
-                item.Title = articleentity[i].Title;
-                item.Header = articleentity[i].Header;
-                item.LastReviewTime = articleentity[i].LastReviewTime.ToString();
-                var author = context.Users.FirstOrDefault(t => t.UserName == articleentity[i].AuthorId);
-                item.Username = author.UserName;
-                item.IsPinned = articleentity[i].IsPinned;
-                item.IsElite = articleentity[i].IsElite;
-                articles[i] = item;
+                a[i] = item;
             }
 
-            return res.Append(articles).ToArray();
+            return res.Append(a).ToArray();
         }
 
         public class GetCommentsForm
@@ -102,32 +94,32 @@ namespace WebAngular.Controllers
         [HttpPost("/controller/article/new")]
         public bool NewArticle([FromForm] IFormCollection form)
         {
-            IFormFile i = form.Files.GetFile("cover");
-            string author = form["author"];
-            string title = form["title"];
-            string tags = form["tags"];
-            var tag = tags.Split("/");
-            string content = form["content"];
-
-            MyContext context = new MyContext();
-            foreach(var t in tag)
-            {
-                Tag ta = new Tag() { TagName = t };
-                context.Tags.Add(ta);
-            }
-            context.SaveChanges();
-            Article article = new Article() { Title = title, Content = content };
-            User user = context.Users.FirstOrDefault(t => t.UserName == author);
-            article.AuthorId = user.UserName;
-            context.Add(article);
-            context.SaveChanges();
-            foreach(var ta in tag)
-            {
-                Tag t = context.Tags.FirstOrDefault(t => t.TagName == ta);
-                ArticleToTag articleToTag = new ArticleToTag() { ArticleId = article.ArticleId, TagId = t.TagId };
-                context.ArticleToTags.Add(articleToTag);
-            }
-            context.SaveChanges();
+            // IFormFile i = form.Files.GetFile("cover");
+            // string author = form["author"];
+            // string title = form["title"];
+            // string tags = form["tags"];
+            // var tag = tags.Split("/");
+            // string content = form["content"];
+            //
+            // MyContext context = new MyContext();
+            // foreach(var t in tag)
+            // {
+            //     Tag ta = new Tag() { TagName = t };
+            //     context.Tags.Add(ta);
+            // }
+            // context.SaveChanges();
+            // Article article = new Article() { Title = title, Content = content };
+            // User user = context.Users.FirstOrDefault(t => t.UserName == author);
+            // article.AuthorId = user.UserName;
+            // context.Add(article);
+            // context.SaveChanges();
+            // foreach(var ta in tag)
+            // {
+            //     Tag t = context.Tags.FirstOrDefault(t => t.TagName == ta);
+            //     ArticleToTag articleToTag = new ArticleToTag() { ArticleId = article.ArticleId, TagId = t.TagId };
+            //     context.ArticleToTags.Add(articleToTag);
+            // }
+            // context.SaveChanges();
             return true;
         }
 
