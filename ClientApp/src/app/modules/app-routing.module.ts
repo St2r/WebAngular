@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {HomeComponent} from '../pages/home/home.component';
 import {EditArticleComponent} from '../pages/edit-article/edit-article.component';
-import {ViewArticleComponent} from '../pages/view-article/view-article.component';
 import {FallbackComponent} from '../pages/fallback/fallback.component';
 import {ExerciseComponent} from '../pages/exercise/exercise.component';
 import {ForumComponent} from '../pages/forum/forum.component';
@@ -31,7 +30,6 @@ const routes: Routes = [
   {path: 'resource', component: ResourceComponent},
   {path: 'edit-article/:articleId', component: EditArticleComponent},
   {path: 'article', component: ArticleComponent},
-  {path: 'view-article/:articleId', component: ViewArticleComponent},
   {path: 'my-space/:target', component: MyspaceComponent},
   {path: 'editinfo', component: EdituserinfoComponent},
   {path: 'admin-manage', component: AdminManageComponent},

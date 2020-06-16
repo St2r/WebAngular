@@ -85,16 +85,12 @@ export class CommentComponent implements OnInit {
   Like(i: number) {
     if (this.comments[i].likeStatus === 0) {
       this.comments[i].likes += 1;
-      this.operationService.requestLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = 1;
     } else if (this.comments[i].likeStatus === -1) {
       this.comments[i].likes += 1;
-      this.operationService.requestLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
-      this.operationService.requestUndoDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = 1;
     } else {
       this.comments[i].likes -= 1;
-      this.operationService.requestUndoLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = 0;
     }
     // 数据传送回数据库
@@ -103,15 +99,11 @@ export class CommentComponent implements OnInit {
   DisLike(i: number) {
     if (this.comments[i].likeStatus === 0) {
       this.comments[i].likeStatus = -1;
-      this.operationService.requestDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
     } else if (this.comments[i].likeStatus === 1) {
       this.comments[i].likes -= 1;
-      this.operationService.requestUndoLikeComment(this.userService.username, this.comments[i].commentId).subscribe();
-      this.operationService.requestDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
       this.comments[i].likeStatus = -1;
     } else {
       this.comments[i].likeStatus = 0;
-      this.operationService.requestUndoDislikeComment(this.userService.username, this.comments[i].commentId).subscribe();
     }
     // 数据传送回数据库
   }

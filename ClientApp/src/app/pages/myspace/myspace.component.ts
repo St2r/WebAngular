@@ -63,10 +63,12 @@ export class MyspaceComponent implements OnInit {
 
   async loadUserInfo() {
     this.userInfo = await this.userService.getUserInfo(this.targetName);
+    console.log(this.userInfo);
   }
 
   async loadVisitorInfo() {
     this.recentVisitor = await this.userService.getRecentVisitor(this.targetName);
+    console.log(this.recentVisitor);
   }
 
   async loadFavorBlockInfo() {

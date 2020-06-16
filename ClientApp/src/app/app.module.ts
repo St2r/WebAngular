@@ -46,7 +46,6 @@ import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 
 import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
 import {EditArticleComponent} from './pages/edit-article/edit-article.component';
-import {ViewArticleComponent} from './pages/view-article/view-article.component';
 import {CommentComponent} from './components/comment/comment.component';
 import {FallbackComponent} from './pages/fallback/fallback.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
@@ -107,7 +106,6 @@ import { AttachmentResComponent } from './pages/result/attachment-res/attachment
     AppComponent,
     HomeComponent,
     EditArticleComponent,
-    ViewArticleComponent,
     CommentComponent,
     EditArticleComponent,
     FallbackComponent,
@@ -153,7 +151,7 @@ import { AttachmentResComponent } from './pages/result/attachment-res/attachment
     ResultComponent,
     ArticleResComponent,
     UserResComponent,
-    AttachmentResComponent,
+    AttachmentResComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

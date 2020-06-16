@@ -1,7 +1,5 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {NzMessageService, UploadChangeParam, UploadFile} from 'ng-zorro-antd';
-import {Observable, Observer} from 'rxjs';
+import {UploadFile} from 'ng-zorro-antd';
 import {UserService} from '../../services/user.service';
 
 @Component({

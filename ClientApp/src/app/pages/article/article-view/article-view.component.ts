@@ -9,7 +9,7 @@ import {UserService} from '../../../services/user.service';
 })
 export class ArticleViewComponent implements OnInit {
   @Input()
-  articleID: string;
+  articleID: number;
 
   articleContent: ArticleContent;
 
@@ -20,8 +20,8 @@ export class ArticleViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadArticle().then(
-      () => this.checkLimit().then(
+    this.checkLimit().then(
+      () => this.loadArticle().then(
         () => this.loadComment().then(
           () => this.loading = false
         )
@@ -42,7 +42,7 @@ export class ArticleViewComponent implements OnInit {
 
   async loadArticle() {
     this.articleContent = new class implements ArticleContent {
-      articleID = '11';
+      articleID = 11;
       content = '<pre class="language-cpp"><code>int main {\n' +
         '\n' +
         '}</code></pre>';

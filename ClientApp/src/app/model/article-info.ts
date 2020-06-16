@@ -1,6 +1,6 @@
 export interface ArticleInfo {
   // 文章ID
-  articleID: string;
+  articleID: number;
   // 文章所属板块
   block: string;
 

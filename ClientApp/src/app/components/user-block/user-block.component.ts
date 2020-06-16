@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserInfo} from '../../model/user-info';
 import {UserService} from '../../services/user.service';
-import {UserPrivateInfo} from '../../model/user-private-info';
 
 @Component({
   selector: 'app-user-block',

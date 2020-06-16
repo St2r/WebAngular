@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInfo} from '../../model/user-info';
-import {UserPrivateInfo} from '../../model/user-private-info';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 

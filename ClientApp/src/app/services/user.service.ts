@@ -2,7 +2,6 @@ import {Inject, Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {UserInfo} from '../model/user-info';
-import {UserPrivateInfo} from '../model/user-private-info';
 import {BlockInfo} from '../model/block-info';
 import {CookieService} from 'ngx-cookie-service';
 
@@ -32,7 +31,6 @@ export class UserService implements OnInit {
 
   // 已登陆用户的信息
   public userInfo: UserInfo;
-  public userPrivateInfo: UserPrivateInfo;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private cookie: CookieService) {
     this.logged = false;
@@ -55,13 +53,6 @@ export class UserService implements OnInit {
       nickname: string;
       point: number;
       star: number;
-      username: string;
-    };
-
-    this.userPrivateInfo = new class implements UserPrivateInfo {
-      birthday: string;
-      loginCount: number;
-      registerData: string;
       username: string;
     };
 
@@ -89,20 +80,6 @@ export class UserService implements OnInit {
       resolve => {
         if (this.fetched) {
           resolve(this.userInfo);
-        } else {
-          this.requestUserInfo(this.username).subscribe(
-            result => resolve(result[0])
-          );
-        }
-      }
-    );
-  }
-
-  public getLoggedUserPrivateInfo(): Promise<UserPrivateInfo> {
-    return new Promise<UserPrivateInfo>(
-      resolve => {
-        if (this.fetched) {
-          resolve(this.userPrivateInfo);
         } else {
           this.requestUserInfo(this.username).subscribe(
             result => resolve(result[0])
@@ -154,10 +131,6 @@ export class UserService implements OnInit {
       result => {
         this.userInfo = result[0];
       });
-    this.requestUserPrivateInfo(this.username).subscribe(
-      result => {
-        this.userPrivateInfo = result[0];
-      });
   }
 
   // 获得某用户的信息
@@ -165,14 +138,6 @@ export class UserService implements OnInit {
   public requestUserInfo(username: string): Observable<UserInfo> {
     const model = {username: username};
     return this.http.post<UserInfo>(this.baseUrl + 'controller/user/get-info', model);
-  }
-
-  // 获得某用户的私人信息
-  // 异步调用
-  public requestUserPrivateInfo(username: string): Observable<UserPrivateInfo> {
-    const model = {username: username};
-    return this.http.post<UserPrivateInfo>
-    (this.baseUrl + 'controller/user/get-private-info', model);
   }
 
   // 检查用户名是否已被占用

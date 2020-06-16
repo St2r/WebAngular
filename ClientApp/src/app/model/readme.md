@@ -2,7 +2,6 @@
 
 1. user
     1. user-info
-    2. user-private-info
 2. block
     1. block-info
     2. admin-info

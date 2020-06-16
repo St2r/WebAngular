@@ -1,10 +1,10 @@
 export interface Comment {
+  commentId: number;
+
   // 作者信息
   username: string;
   nickname: string;
   avatarUrl: string;
-
-  commentId: string;
 
   content: string;
   likes: number;

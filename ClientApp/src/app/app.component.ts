@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {UserService} from './services/user.service';
+import {IdentityService} from './services/identity/identity.service';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +21,9 @@ export class AppComponent {
   ];
 
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private identityService: IdentityService) {
+    this.identityService.Login('test', 't');
   }
-
 
 
   onChange(value: string): void {
