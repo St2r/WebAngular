@@ -16,7 +16,32 @@ RUN dotnet build "WebAngular.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "WebAngular.csproj" -c Release -o /app/publish
 
+# Angular build
+FROM node AS nodebuilder
+
+# set working directory
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+
+# add to path
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
+# install
+COPY ClientApp/package-lock.json /usr/src/app/package.json
+RUN npm install
+RUN npm install -g @angular/cli
+
+# add app
+COPY ClientApp/. /usr/src/app
+
+RUN npm run build
+
+# End angular build
+
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+RUN mkdir -p /app/ClientApp/dist
+COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist
 ENTRYPOINT ["dotnet", "WebAngular.dll"]
