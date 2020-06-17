@@ -49,15 +49,15 @@
         <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
 
         <!-- Include the newly-built files in the publish output -->
-        <ItemGroup>
-            <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
-            <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
-            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-                <RelativePath>%(DistFiles.Identity)</RelativePath>
-                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-                <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-            </ResolvedFileToPublish>
-        </ItemGroup>
+<!--        <ItemGroup>-->
+<!--            <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />-->
+<!--            <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />-->
+<!--            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">-->
+<!--                <RelativePath>%(DistFiles.Identity)</RelativePath>-->
+<!--                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>-->
+<!--                <ExcludeFromSingleFile>true</ExcludeFromSingleFile>-->
+<!--            </ResolvedFileToPublish>-->
+<!--        </ItemGroup>-->
     </Target>
 
 </Project>
