@@ -27,7 +27,7 @@ WORKDIR /usr/src/app
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # install
-COPY ClientApp/package-lock.json /usr/src/app/package.json
+COPY ClientApp/package.json /usr/src/app/package.json
 RUN npm install
 RUN npm install -g @angular/cli
 
