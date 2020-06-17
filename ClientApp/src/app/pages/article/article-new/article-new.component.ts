@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../services/user.service';
+import {UserService} from '../../../services/user/user.service';
 import {MetaDataService} from '../../../services/meta-data.service';
 import {ArticleService} from '../../../services/article.service';
+import {IdentityService} from '../../../services/identity/identity.service';
 
 @Component({
   selector: 'app-article-new',
@@ -45,13 +46,13 @@ export class ArticleNewComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private routerInfo: ActivatedRoute,
               private userService: UserService, private router: Router,
-              private metaDataService: MetaDataService, private articleService: ArticleService) {
-    if (!this.userService.logged) {
+              private metaDataService: MetaDataService, private articleService: ArticleService, private identityService: IdentityService) {
+    if (!this.identityService.logged) {
       this.router.navigate(['/404']).then();
     }
     this.getUserInfo();
     this.validateForm = this.fb.group({
-      author: [this.userService.username],
+      author: [this.identityService.username],
       title: ['', [Validators.required]],
       tags: [['资源分享']],
       limit: ['0'],
@@ -65,7 +66,7 @@ export class ArticleNewComponent implements OnInit {
 
   // 请求用户等级
   getUserInfo() {
-    this.userService.requestUserInfo(this.userService.username).subscribe(
+    this.userService.requestUserInfo(this.identityService.username).subscribe(
       result => {
         this.userLevel = result[0].level;
       }

@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {HomeComponent} from '../pages/home/home.component';
-import {EditArticleComponent} from '../pages/edit-article/edit-article.component';
 import {FallbackComponent} from '../pages/fallback/fallback.component';
 import {ExerciseComponent} from '../pages/exercise/exercise.component';
 import {ForumComponent} from '../pages/forum/forum.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
   {path: 'do-exercise', component: DoExerciseComponent},
   {path: 'forum/:block', component: ForumComponent},
   {path: 'resource', component: ResourceComponent},
-  {path: 'edit-article/:articleId', component: EditArticleComponent},
   {path: 'article', component: ArticleComponent},
   {path: 'my-space/:target', component: MyspaceComponent},
   {path: 'editinfo', component: EdituserinfoComponent},

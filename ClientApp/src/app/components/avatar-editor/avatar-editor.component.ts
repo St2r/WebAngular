@@ -1,6 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {UploadFile} from 'ng-zorro-antd';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-avatar-editor',
@@ -30,7 +30,7 @@ export class AvatarEditorComponent implements OnInit {
     return {
       username: this.username
     };
-  };
+  }
 
   // 回调当前选择的图片
   private getBase64(img: File, callback: (img: string) => void): void {

@@ -8,8 +8,17 @@ import {CookieService} from 'ngx-cookie-service';
 export class IdentityService {
   private readonly baseUrl: string;
 
+  public logged: boolean;
+  public username: string;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private cookie: CookieService) {
     this.baseUrl = baseUrl;
+    this.logged = false;
+
+    if (cookie.check('username')) {
+      this.username = cookie.get('username');
+      this.logged = true;
+    }
   }
 
   public getAuthentication(): { headers: HttpHeaders } {
@@ -32,26 +41,118 @@ export class IdentityService {
     };
   }
 
+
+  public async login(username: string, password: string, remember: boolean): Promise<any> {
+    if (remember) {
+      this.cookie.set('backup_username', username);
+    } else {
+      this.cookie.delete('backup_username');
+    }
+
+    return new Promise<any>(
+      resolve => {
+        this.requestLogin(username, password).subscribe(
+          next => {
+            console.log(next);
+            if (next['result']) {
+              this.afterLogin(username, password);
+            }
+            resolve(next['result']);
+          }
+        );
+      }
+    );
+  }
+
+  public async logout() {
+    return new Promise<boolean>(
+      resolve => {
+        this.requestLogout().subscribe(
+          result => {
+            console.log(result);
+            if (result['result']) {
+              this.afterLogout();
+            }
+            resolve(result['result']);
+          }
+        );
+      }
+    );
+  }
+
+  public async register(username: string, password: string, email: string) {
+    return new Promise<boolean>(
+      resolve => {
+        this.requestRegister(username, password, email).subscribe(
+          result => resolve[result['result']]
+        );
+      }
+    );
+  }
+
+  public async checkEmail(email: string) {
+    return new Promise<boolean>(
+      resolve => {
+        this.requestCheckEmail(email).subscribe(
+          result => {
+            resolve(result['result']);
+          }
+        );
+      }
+    );
+  }
+
+  public async checkUsername(username: string) {
+    return new Promise<boolean>(
+      resolve => {
+        this.requestCheckUsername(username).subscribe(
+          result => {
+            resolve(result['result']);
+          }
+        );
+      }
+    );
+  }
+
   private requestLogin(username: string, password: string) {
     const i = new FormData();
     return this.http.post(this.baseUrl + 'api/identity/login', i, this.setAuthentication(username, password));
   }
 
+  private requestLogout() {
+    return this.http.post(this.baseUrl + 'api/identity/logout', new FormData(), this.getAuthentication());
+  }
+
   private requestRegister(username: string, password: string, email: string) {
     const i = new FormData();
-    i.append('username', username);
-    i.append('password', password);
     i.append('email', email);
-    return this.http.post(this.baseUrl + 'api/identity/register', i);
+    return this.http.post(this.baseUrl + 'api/identity/register', i, this.setAuthentication(username, password));
   }
 
-  public Login(username: string, password: string) {
-    this.requestLogin(username, password).subscribe();
+  public requestCheckEmail(email: string) {
+    const i = new FormData();
+    i.append('email', email);
+    return this.http.post(this.baseUrl + 'api/identity/check-email', i);
   }
 
-  public Register(username: string, password: string, email: string) {
-    this.requestRegister(username, password, email).subscribe(
-      result => console.log(result['result'])
-    );
+  public requestCheckUsername(username: string) {
+    const i = new FormData();
+    i.append('username', username);
+    return this.http.post(this.baseUrl + 'api/identity/check-username', i);
+  }
+
+  private afterLogin(username: string, password: string) {
+    console.log(1);
+    this.username = username;
+    this.logged = true;
+    this.cookie.set('username', username);
+    this.cookie.set('password', password);
+  }
+
+  private afterLogout() {
+    this.logged = false;
+    this.username = '';
+    this.cookie.delete('username');
+    this.cookie.delete('password');
   }
 }

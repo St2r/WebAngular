@@ -45,7 +45,6 @@ import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
 
 
 import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
-import {EditArticleComponent} from './pages/edit-article/edit-article.component';
 import {CommentComponent} from './components/comment/comment.component';
 import {FallbackComponent} from './pages/fallback/fallback.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
@@ -72,7 +71,6 @@ import {SearchComponent} from './pages/search/search.component';
 import {NzAutocompleteModule} from 'ng-zorro-antd/auto-complete';
 import {TestImageComponent} from './pages/test-image/test-image.component';
 import {UserHoverComponent} from './components/user-hover/user-hover.component';
-import {ArticleItemComponent} from './components/article-item/article-item.component';
 import {IFollowComponent} from './pages/myspace/tab-follow/i-follow/i-follow.component';
 import {FollowMeComponent} from './pages/myspace/tab-follow/follow-me/follow-me.component';
 import {FollowBlockComponent} from './pages/myspace/tab-follow/follow-block/follow-block.component';
@@ -100,14 +98,13 @@ import { ResultComponent } from './pages/result/result.component';
 import { ArticleResComponent } from './pages/result/article-res/article-res.component';
 import { UserResComponent } from './pages/result/user-res/user-res.component';
 import { AttachmentResComponent } from './pages/result/attachment-res/attachment-res.component';
+import { LoggedBarComponent } from './components/login-bar/logged-bar/logged-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    EditArticleComponent,
     CommentComponent,
-    EditArticleComponent,
     FallbackComponent,
     ExerciseComponent,
     ForumComponent,
@@ -127,7 +124,6 @@ import { AttachmentResComponent } from './pages/result/attachment-res/attachment
     SearchComponent,
     TestImageComponent,
     UserHoverComponent,
-    ArticleItemComponent,
     IFollowComponent,
     FollowMeComponent,
     FollowBlockComponent,
@@ -151,7 +147,8 @@ import { AttachmentResComponent } from './pages/result/attachment-res/attachment
     ResultComponent,
     ArticleResComponent,
     UserResComponent,
-    AttachmentResComponent
+    AttachmentResComponent,
+    LoggedBarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  webangular:
+    image: ${DOCKER_REGISTRY-}webangular
+    build:
+      context: .
+      dockerfile: ./Dockerfile

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {UserService} from './services/user.service';
+import {UserService} from './services/user/user.service';
 import {IdentityService} from './services/identity/identity.service';
 
 @Component({
@@ -22,7 +22,6 @@ export class AppComponent {
 
 
   constructor(private userService: UserService, private identityService: IdentityService) {
-    this.identityService.Login('test', 't');
   }
 
 

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { StorageService } from 'src/app/services/storage.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {StorageService} from 'src/app/services/storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -9,22 +9,23 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  search_content:string = '';
-  
-  hot_search:string[] = [
+  search_content = '';
+
+  hot_search: string[] = [
     '期末考试取消',
     '软工作业延期'
   ];
 
   history_search: string[] = [];
 
-  search_type:any = 1;
+  search_type: any = 1;
 
-  constructor(private storageService:StorageService, private router:Router) { }
+  constructor(private storageService: StorageService, private router: Router) {
+  }
 
   ngOnInit() {
     this.loadHotSearch();
-    var search_list = this.storageService.get('history');
+    const search_list = this.storageService.get('history');
     if (search_list) {
       this.history_search = search_list;
     }
@@ -40,14 +41,13 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    if (this.search_content=='') {
+    if (this.search_content === '') {
       this.router.navigate(['/search']);
-    }
-    else {
+    } else {
       this.history_search.push(this.search_content);
       this.storeHistorySearch();
       this.router.navigate(['/result'], {
-        queryParams: {content:this.search_content, type:this.search_type}
+        queryParams: {content: this.search_content, type: this.search_type}
       }).then();
     }
   }

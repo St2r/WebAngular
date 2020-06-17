@@ -46,7 +46,7 @@ export class SearchBarComponent implements OnInit {
     }, 1000);
   }
 
-  toresult() {
+  toResult() {
     if (this.searchContent === '') {
       this.router.navigate(['/search']);
     } else {

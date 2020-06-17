@@ -4,9 +4,10 @@ import {formatDistance, addDays} from 'date-fns';
 import {CommentService} from '../../services/comment.service';
 import {Router} from '@angular/router';
 import {OperationService} from '../../services/operation.service';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/user/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ArticleService} from '../../services/article.service';
+import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
   selector: 'app-comment',
@@ -48,7 +49,7 @@ export class CommentComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private commentService: CommentService, private router: Router,
               private operationService: OperationService, public userService: UserService,
-              private articleService: ArticleService) {
+              private articleService: ArticleService, private identityService: IdentityService) {
     this.loading = true;
     this.sort = 'latest';
     this.filter = 'all';
@@ -109,7 +110,7 @@ export class CommentComponent implements OnInit {
   }
 
   submitForm(value) {
-    value['username'] = this.userService.username;
+    value['username'] = this.identityService.username;
     console.log(value);
     this.articleService.newComment(value);
   }

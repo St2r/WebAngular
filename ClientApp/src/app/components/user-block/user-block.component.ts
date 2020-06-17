@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserInfo} from '../../model/user-info';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/user/user.service';
+import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
   selector: 'app-user-block',
@@ -17,7 +18,7 @@ export class UserBlockComponent implements OnInit {
 
   userInfo: UserInfo;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private identityService: IdentityService) {
     this.loading = true;
     this.ownPage = false;
   }
@@ -31,8 +32,8 @@ export class UserBlockComponent implements OnInit {
   }
 
   async checkOwnPage() {
-    if (this.userService.logged) {
-      if (this.userService.username === this.username) {
+    if (this.identityService.logged) {
+      if (this.identityService.username === this.username) {
         this.ownPage = true;
       }
     }

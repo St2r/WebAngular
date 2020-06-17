@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {AttachmentInfo} from '../../../model/attachment';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../services/user/user.service';
 import { FetchDataService } from '../../../services/fetch-data.service'
 
 @Component({

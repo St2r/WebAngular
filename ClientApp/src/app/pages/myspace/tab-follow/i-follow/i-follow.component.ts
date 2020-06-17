@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {UserInfo} from '../../../../model/user-info';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from '../../../../services/user/user.service';
 
 @Component({
   selector: 'app-i-follow',

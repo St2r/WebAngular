@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NzModalService} from 'ng-zorro-antd';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/user/user.service';
 import {FetchDataService} from '../../services/fetch-data.service';
 import {AdminInfo, BlockInfo} from '../../model/block-info';
 import {ForumService} from '../../services/forum.service';
 import {ArticleInfo} from '../../model/article-info';
 import {OperationService} from '../../services/operation.service';
 import {HotTopic} from '../../model/hot-topic';
+import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
   selector: 'app-forum',
@@ -40,7 +41,7 @@ export class ForumComponent implements OnInit {
   constructor(private router: Router, private userService: UserService,
               private fetchDataService: FetchDataService, private forumService: ForumService,
               private routerInfo: ActivatedRoute, private modal: NzModalService,
-              private operationService: OperationService) {
+              private operationService: OperationService, private identityService: IdentityService) {
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];
       this.init();
@@ -95,7 +96,7 @@ export class ForumComponent implements OnInit {
   // 关注
   follow() {
     this.blockInfo.isFollowed = true;
-    this.operationService.requestFollowBlock(this.userService.username, this.block).subscribe();
+    this.operationService.requestFollowBlock(this.identityService.username, this.block).subscribe();
   }
 
   // 取消关注
@@ -104,7 +105,7 @@ export class ForumComponent implements OnInit {
       nzTitle: '你确定要取消关注么',
       nzOnOk: () => {
         this.blockInfo.isFollowed = false;
-        this.operationService.requestDisFollowBlock(this.userService.username, this.block).subscribe();
+        this.operationService.requestDisFollowBlock(this.identityService.username, this.block).subscribe();
       },
       nzOnCancel: null
     });

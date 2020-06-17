@@ -1,0 +1,42 @@
+<div *ngIf="!loading" nz-row nzGutter="16">
+  <div nz-col nzSpan="6">
+    <nz-avatar [nzSize]="AvatarSize" nz-popover [nzPopoverContent]="loginPopover" nzIcon="user" [nzSrc]="userBaseInfo.avatarUrl">
+    </nz-avatar>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="toSpace()">消息</div>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="toSpace()">动态</div>
+  </div>
+  <div nz-col nzSpan="6">
+    <div nz-button nzBlock="true" nzType="link" (click)="toSpace()">收藏</div>
+  </div>
+</div>
+
+<ng-template #loginPopover>
+  <nz-list>
+    <nz-list-item>
+      <p class="pop-list-item">你好，{{userBaseInfo.nickname}}</p>
+    </nz-list-item>
+    <nz-list-item>
+      <nz-button-group>
+        <button nz-button nzType="link">关注<p>{{userDetailInfo.follow}}</p></button>
+        <button nz-button nzType="link">粉丝<p>{{userDetailInfo.fans}}</p></button>
+        <button nz-button nzType="link">帖子<p>{{userDetailInfo.articles}}</p></button>
+      </nz-button-group>
+    </nz-list-item>
+    <nz-list-item>
+      <a class="pop-list-item" [routerLink]="'/my-space/' + username">
+        <i nz-icon nzType="home" nzTheme="outline"></i>
+        个人主页
+      </a>
+    </nz-list-item>
+    <nz-list-item>
+      <button nz-button nzType="link" class="pop-list-item" (click)="logout()">
+        <i nz-icon nzType="logout" nzTheme="outline"></i>
+        退出登陆
+      </button>
+    </nz-list-item>
+  </nz-list>
+</ng-template>

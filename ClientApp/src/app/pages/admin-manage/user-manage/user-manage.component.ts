@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from 'src/app/model/user-info';
 import {AdminService} from '../../../services/admin.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
+import {IdentityService} from '../../../services/identity/identity.service';
 
 @Component({
   selector: 'app-user-manage',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class UserManageComponent implements OnInit {
   user_list: UserInfo[];
 
-  constructor(private adminService: AdminService, private userService:UserService, private router:Router) { }
+  constructor(private adminService: AdminService, private userService: UserService, private router: Router, private identityService: IdentityService) { }
 
   ngOnInit() {
     this.loadUserInfo().then();
@@ -24,10 +25,7 @@ export class UserManageComponent implements OnInit {
   }
 
   toSpace() {
-    console.log(this.userService.logged);
-    console.log(this.userService.username);
-    console.log(this.userService.userInfo);
-    this.router.navigate(['/my-space/' + this.userService.username]).then();
+    this.router.navigate(['/my-space/' + this.identityService.username]).then();
   }
 
 }

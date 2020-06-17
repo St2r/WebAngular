@@ -25,12 +25,17 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/base-info")]
-        public IActionResult LoadUserInfo([FromQuery] Identity identity, [FromForm] string username)
+        public IActionResult UserBaseInfo([FromQuery] Identity identity, [FromForm] string username)
         {
 
             return Ok(new UserBaseInfo()
             {
-                Username = "test"
+                Username = identity.Username,
+                Nickname = "Nick_"+identity.Username,
+                AvatarUrl = "/avatar.png",
+                Brief = "hello",
+                IsFan = false,
+                IsFollowed = false
             });
         }
 
@@ -45,7 +50,15 @@ namespace WebAngular.Controllers
         {
             return Ok(new UserDetailInfo()
             {
-                Username = "test"
+                Username = username,
+                Articles = 10,
+                Browse =  5,
+                Fans = 6,
+                Follow = 7,
+                Level = 1,
+                Like = 6,
+                Point = 1000,
+                Star = 6
             });
         }
         

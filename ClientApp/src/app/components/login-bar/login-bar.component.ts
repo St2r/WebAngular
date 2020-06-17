@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/user/user.service';
 import {UserInfo} from '../../model/user-info';
+import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
   selector: 'app-login-bar',
@@ -12,9 +13,8 @@ export class LoginBarComponent implements OnInit {
 
   AvatarSize: 56;
 
-  userInfo: UserInfo;
 
-  constructor(public userService: UserService, protected router: Router) {
+  constructor(public userService: UserService, protected router: Router, public identityService: IdentityService) {
   }
 
   ngOnInit() {
@@ -29,22 +29,5 @@ export class LoginBarComponent implements OnInit {
     this.router.navigate(['/register']).then();
   }
 
-  toSpace() {
-    console.log(this.userService.logged);
-    console.log(this.userService.username);
-    console.log(this.userService.userInfo);
-    this.router.navigate(['/my-space/' + this.userService.username]).then();
-  }
-
-  logout() {
-    this.userService.requestLogout().subscribe(
-      result => {
-        if (result[0]) {
-          this.userService.afterLogout();
-          this.router.navigate(['/home']).then();
-        }
-      }
-    );
-  }
 
 }

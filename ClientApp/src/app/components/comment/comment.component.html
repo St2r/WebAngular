@@ -40,7 +40,7 @@
   </nz-list>
 </div>
 
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)" *ngIf="!this.userService.logged">
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)" *ngIf="!this.identityService.logged">
   <nz-form-item>
     <nz-form-control>
       <editor

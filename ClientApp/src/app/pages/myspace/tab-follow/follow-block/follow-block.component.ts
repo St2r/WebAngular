@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { BlockInfo, AdminInfo} from '../../../../model/block-info';
-import {UserService} from '../../../../services/user.service';
+import {UserService} from '../../../../services/user/user.service';
 
 @Component({
   selector: 'app-follow-block',

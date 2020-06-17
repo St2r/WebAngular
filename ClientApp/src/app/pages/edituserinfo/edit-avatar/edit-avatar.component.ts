@@ -1,6 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {UserService} from '../../../services/user.service';
+import {UserService} from '../../../services/user/user.service';
 import {UploadFile} from 'ng-zorro-antd';
+import {IdentityService} from '../../../services/identity/identity.service';
 
 @Component({
   selector: 'app-edit-avatar',
@@ -13,7 +14,7 @@ export class EditAvatarComponent implements OnInit {
   avatarUrl?: string;
   loading = false;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private identityService: IdentityService) {
   }
 
   ngOnInit() {
@@ -21,7 +22,7 @@ export class EditAvatarComponent implements OnInit {
 
   appendData = () => {
     return {
-      username: this.userService.username
+      username: this.identityService.username
     };
   }
 

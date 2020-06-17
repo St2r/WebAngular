@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserInfo} from '../../model/user-info';
 import {BlockInfo} from '../../model/block-info';
 import {ActivatedRoute, Params} from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-myspace',

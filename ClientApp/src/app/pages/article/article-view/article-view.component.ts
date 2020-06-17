@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArticleContent} from '../../../model/article-content';
-import {UserService} from '../../../services/user.service';
+import {UserService} from '../../../services/user/user.service';
+import {IdentityService} from '../../../services/identity/identity.service';
 
 @Component({
   selector: 'app-article-view',
@@ -15,7 +16,7 @@ export class ArticleViewComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private identityService: IdentityService) {
     this.loading = true;
   }
 
@@ -30,11 +31,11 @@ export class ArticleViewComponent implements OnInit {
   }
 
   async checkLimit() {
-    if (!this.userService.logged) {
+    if (!this.identityService.logged) {
       console.log('未登陆');
       return;
     }
-    const userInfo = await this.userService.getLoggedUserInfo();
+    const userInfo = await this.userService.getUserInfo(this.identityService.username);
     if (userInfo.level < this.articleContent.limit) {
       console.log('权限不足');
     }
