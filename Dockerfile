@@ -12,7 +12,7 @@ RUN apt-get update -yq \
     && apt-get install curl gnupg -yq \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash \
     && apt-get install nodejs -yq
-RUN dotnet publish "WebAngular.csproj" -c Release -o /app/publish
+
 
 
 WORKDIR /src
@@ -23,7 +23,7 @@ WORKDIR "/src/."
 RUN dotnet build "WebAngular.csproj" -c Release -o /app/build
 
 FROM build AS publish
-
+RUN dotnet publish "WebAngular.csproj" -c Release -o /app/publish
 
 ## Angular build
 #FROM node AS nodebuilder
@@ -51,6 +51,6 @@ FROM build AS publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN mkdir -p /app/ClientApp/dist
-COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist
+#RUN mkdir -p /app/ClientApp/dist
+#COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist
 ENTRYPOINT ["dotnet", "WebAngular.dll"]
