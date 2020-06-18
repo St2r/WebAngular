@@ -46,7 +46,7 @@ export class ArticleNewComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private routerInfo: ActivatedRoute,
               private userService: UserService, private router: Router,
-              private metaDataService: MetaDataService, private articleService: ArticleService, private identityService: IdentityService) {
+              public metaDataService: MetaDataService, private articleService: ArticleService, private identityService: IdentityService) {
     if (!this.identityService.logged) {
       this.router.navigate(['/404']).then();
     }
