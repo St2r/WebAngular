@@ -6,6 +6,15 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+
+# docker中安装npm
+RUN apt-get update -yq \
+    && apt-get install curl gnupg -yq \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
+    && apt-get install nodejs -yq
+RUN dotnet publish "WebAngular.csproj" -c Release -o /app/publish
+
+
 WORKDIR /src
 COPY WebAngular.csproj ./
 RUN dotnet restore "./WebAngular.csproj"
@@ -15,12 +24,6 @@ RUN dotnet build "WebAngular.csproj" -c Release -o /app/build
 
 FROM build AS publish
 
-# docker中安装npm
-RUN apt-get update -yq \
-    && apt-get install curl gnupg -yq \
-    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
-    && apt-get install nodejs -yq
-RUN dotnet publish "WebAngular.csproj" -c Release -o /app/publish
 
 ## Angular build
 #FROM node AS nodebuilder
