@@ -49,7 +49,7 @@ export class CommentComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private commentService: CommentService, private router: Router,
               private operationService: OperationService, public userService: UserService,
-              private articleService: ArticleService, private identityService: IdentityService) {
+              private articleService: ArticleService, public identityService: IdentityService) {
     this.loading = true;
     this.sort = 'latest';
     this.filter = 'all';
