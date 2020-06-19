@@ -237,3 +237,4 @@ _Pvt_Extensions
 /.DS_Store
 /ClientApp/.DS_Store
 /ClientApp/dist/
+/Secret.cs
