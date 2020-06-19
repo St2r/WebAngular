@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user/user.service';
 import {MetaDataService} from '../../../services/meta-data.service';
-import {ArticleService} from '../../../services/article.service';
+import {ArticleService} from '../../../services/article/article.service';
 import {IdentityService} from '../../../services/identity/identity.service';
 
 @Component({
@@ -75,7 +75,7 @@ export class ArticleNewComponent implements OnInit {
 
   submitForm(value) {
     console.log(value);
-    this.articleService.newArticle(this.validateForm.value);
+    this.articleService.newArticle(this.validateForm.value).then();
   }
 
   coverChange(e) {

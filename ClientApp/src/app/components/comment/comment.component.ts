@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from '../../model/comment';
 import {formatDistance, addDays} from 'date-fns';
-import {CommentService} from '../../services/comment.service';
+import {CommentService} from '../../services/comment/comment.service';
 import {Router} from '@angular/router';
 import {OperationService} from '../../services/operation.service';
 import {UserService} from '../../services/user/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ArticleService} from '../../services/article.service';
+import {ArticleService} from '../../services/article/article.service';
 import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
@@ -112,6 +112,6 @@ export class CommentComponent implements OnInit {
   submitForm(value) {
     value['username'] = this.identityService.username;
     console.log(value);
-    this.articleService.newComment(value);
+    // this.articleService.newComment(value);
   }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebAngular.Interface;
 
 namespace WebAngular.Controllers
 {
@@ -25,10 +24,10 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/base-info")]
-        public IActionResult UserBaseInfo([FromQuery] Identity identity, [FromForm] string username)
+        public IActionResult UserBaseInfo([FromQuery] Interface.Identity identity, [FromForm] string username)
         {
 
-            return Ok(new UserBaseInfo()
+            return Ok(new Interface.UserBaseInfo()
             {
                 Username = identity.Username,
                 Nickname = "Nick_"+identity.Username,
@@ -46,9 +45,9 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/detail-info")]
-        public IActionResult UserDetailInfo([FromQuery] Identity identity, [FromForm] string username)
+        public IActionResult UserDetailInfo([FromQuery] Interface.Identity identity, [FromForm] string username)
         {
-            return Ok(new UserDetailInfo()
+            return Ok(new Interface.UserDetailInfo()
             {
                 Username = username,
                 Articles = 10,
@@ -69,11 +68,11 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/follow-list")]
-        public IActionResult GetFollowList([FromQuery] Identity identity, [FromForm] string username)
+        public IActionResult GetFollowList([FromQuery] Interface.Identity identity, [FromForm] string username)
         {
-            var list = new List<UserBaseInfo>();
-            list.Add(new UserBaseInfo());
-            list.Add(new UserBaseInfo());
+            var list = new List<Interface.UserBaseInfo>();
+            list.Add(new Interface.UserBaseInfo());
+            list.Add(new Interface.UserBaseInfo());
             return Ok(new
             {
                 followList = list
@@ -88,11 +87,11 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/controller/api/fan-list")]
-        public IActionResult GetFanList([FromQuery] Identity identity, [FromForm] string username)
+        public IActionResult GetFanList([FromQuery] Interface.Identity identity, [FromForm] string username)
         {
-            var list = new List<UserBaseInfo>();
-            list.Add(new UserBaseInfo());
-            list.Add(new UserBaseInfo());
+            var list = new List<Interface.UserBaseInfo>();
+            list.Add(new Interface.UserBaseInfo());
+            list.Add(new Interface.UserBaseInfo());
             return Ok(new
             {
                 followList = list
@@ -101,7 +100,7 @@ namespace WebAngular.Controllers
 
         // 添加访问记录
         [HttpPost("/controller/user/add-visit-record")]
-        public bool AddVisitRecord([FromQuery] Identity identity)
+        public bool AddVisitRecord([FromQuery] Interface.Identity identity)
         {
             return true;
         }
@@ -113,9 +112,9 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/controller/user/get-recent-visitor")]
-        public List<UserBaseInfo> GetRecentVisitor([FromBody] GetRecentVisitorForm form)
+        public List<Interface.UserBaseInfo> GetRecentVisitor([FromBody] GetRecentVisitorForm form)
         {
-            var list = new List<UserBaseInfo>();
+            var list = new List<Interface.UserBaseInfo>();
             
             return list;
         }
@@ -126,10 +125,10 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/controller/user/get-fav-block")]
-        public List<BlockInfo> GetFavBlock([FromBody] GetFavBlockForm form)
+        public List<Interface.BlockInfo> GetFavBlock([FromBody] GetFavBlockForm form)
         {
-            var list = new List<BlockInfo>();
-            list.Add(new BlockInfo()
+            var list = new List<Interface.BlockInfo>();
+            list.Add(new Interface.BlockInfo()
             {
                 BlockName = "离散数学",
             });

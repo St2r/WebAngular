@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAngular.Interface;
@@ -15,16 +16,23 @@ namespace WebAngular.Controllers
             this._logger = logger;
         }
 
-        [HttpPost]
-        public IActionResult NewArticle([FromQuery] Identity identity)
+        [HttpPost("/api/article/new")]
+        public IActionResult NewArticle([FromQuery] Identity identity, [FromForm] IFormCollection form)
         {
-            return Ok();
+            return Ok(new
+            {
+                result = true
+            });
         }
 
-        [HttpPost]
+        [HttpPost("/api/article/view")]
         public IActionResult ViewArticle([FromQuery] Identity identity, [FromBody] int articleId)
         {
-            return Ok();
+            return Ok(new
+            {
+                info = new Interface.ArticleInfo(),
+                content = new Interface.ArticleContent()
+            });
         }
     }
 }
