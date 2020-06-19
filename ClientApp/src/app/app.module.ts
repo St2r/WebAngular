@@ -202,7 +202,8 @@ import { LoggedBarComponent } from './components/login-bar/logged-bar/logged-bar
   ],
   exports: [],
   providers: [
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
