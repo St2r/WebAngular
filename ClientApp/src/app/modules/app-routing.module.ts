@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {HomeComponent} from '../pages/home/home.component';
 import {FallbackComponent} from '../pages/fallback/fallback.component';
-import {ExerciseComponent} from '../pages/exercise/exercise.component';
+// import {ExerciseComponent} from '../pages/exercise/exercise.component';
 import {ForumComponent} from '../pages/forum/forum.component';
 import {DoExerciseComponent} from '../pages/do-exercise/do-exercise.component';
 import {LoginComponent} from '../pages/login/login.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'exercise', component: ExerciseComponent},
+  // {path: 'exercise', component: ExerciseComponent},
   {path: 'do-exercise', component: DoExerciseComponent},
   {path: 'forum/:block', component: ForumComponent},
   {path: 'resource', component: ResourceComponent},

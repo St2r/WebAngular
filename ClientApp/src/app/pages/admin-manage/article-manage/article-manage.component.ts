@@ -22,4 +22,23 @@ export class ArticleManageComponent implements OnInit {
   async loadArticleInfo() {
     this.article_list = await this.adminService.getAllArticle();
   }
+
+  // TODO 设为置顶
+  setAsTop() {
+    alert("设为置顶");
+  }
+
+  // TODO 设为精华
+  setAsValued() {
+    alert("设为精华");
+  }
+
+  // TODO 删除
+  delete() {
+    alert("删除");
+  }
+
+  cancel() {
+    ;
+  }
 }

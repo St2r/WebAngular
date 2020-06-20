@@ -16,11 +16,26 @@
         <td>{{ data.nickname }}</td>
         <td>{{ data.lastReviewTime }}</td>
         <td>
-          <a>设为置顶</a>
+          <a nz-popconfirm
+          nzPopconfirmTitle="设为置顶?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="setAsTop()"
+          (nzOnCancel)="cancel()"
+          >设为置顶</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>设为精华</a>
+          <a nz-popconfirm
+          nzPopconfirmTitle="设为精华?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="setAsValued()"
+          (nzOnCancel)="cancel()"
+          >设为精华</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>删除</a>
+          <a nz-popconfirm
+          nzPopconfirmTitle="删除此帖子?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="delete()"
+          (nzOnCancel)="cancel()"
+          >删除</a>
         </td>
       </tr>
     </tbody>

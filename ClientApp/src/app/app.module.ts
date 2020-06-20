@@ -42,12 +42,13 @@ import {
 
 import {NzListModule} from 'ng-zorro-antd/list';
 import {NzDatePickerModule} from 'ng-zorro-antd/date-picker';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 
 import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
 import {CommentComponent} from './components/comment/comment.component';
 import {FallbackComponent} from './pages/fallback/fallback.component';
-import {ExerciseComponent} from './pages/exercise/exercise.component';
+// import {ExerciseComponent} from './pages/exercise/exercise.component';
 import {ForumComponent} from './pages/forum/forum.component';
 import {QuestionComponent} from './components/question/question.component';
 import {DoExerciseComponent} from './pages/do-exercise/do-exercise.component';
@@ -106,7 +107,7 @@ import { LoggedBarComponent } from './components/login-bar/logged-bar/logged-bar
     HomeComponent,
     CommentComponent,
     FallbackComponent,
-    ExerciseComponent,
+    // ExerciseComponent,
     ForumComponent,
     QuestionComponent,
     DoExerciseComponent,
@@ -199,6 +200,7 @@ import { LoggedBarComponent } from './components/login-bar/logged-bar/logged-bar
     NzDropDownModule,
     NzTagModule,
     NzEmptyModule,
+    NzPopconfirmModule,
   ],
   exports: [],
   providers: [

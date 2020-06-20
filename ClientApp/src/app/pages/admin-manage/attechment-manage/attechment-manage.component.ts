@@ -19,5 +19,26 @@ export class AttechmentManageComponent implements OnInit {
   // 获取数据
   async loadAttachmentInfo() {
     this.attachment_list = await this.adminService.getAllAttachment();
+    // this.attachment_list = [
+      // new class implements AttachmentInfo {
+      //   filename = "TestName";
+      //   filesize = 100;
+      //   filetype = ".doc";
+      // }
+    // ]
+  }
+
+  // TODO 下载目标附件
+  download() {
+    alert("申请下载");
+  }
+
+  // TODO 删除目标附件
+  delete() {
+    alert("删除附件");
+  }
+
+  cancel() {
+    ;
   }
 }
