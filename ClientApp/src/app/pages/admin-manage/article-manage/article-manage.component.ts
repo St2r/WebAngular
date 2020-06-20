@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleInfo} from 'src/app/model/article-info';
 import {FetchDataService} from 'src/app/services/fetch-data.service';
 import {AdminService} from '../../../services/admin.service';
+import { ArticleService } from 'src/app/services/article/article.service';
 
 @Component({
   selector: 'app-article-manage',
@@ -13,7 +14,7 @@ export class ArticleManageComponent implements OnInit {
 
   searchContent: string = "";
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService, private articleService:ArticleService, private fetchService:FetchDataService) {
   }
 
   ngOnInit() {
@@ -25,27 +26,51 @@ export class ArticleManageComponent implements OnInit {
     this.article_list = await this.adminService.getAllArticle();
   }
 
-  // TODO 设为置顶
-  setAsTop() {
-    alert("设为置顶");
+  setAsTop(articleid:number) {
+    let res:boolean;
+    res = this.articleService.setTop(articleid);
+    if (res) {
+      alert("成功设置置顶");
+    }
+    else {
+      alert("已经是置顶状态");
+    }
   }
 
-  // TODO 设为精华
-  setAsValued() {
-    alert("设为精华");
+  setAsValued(articleid: number) {
+    let res:boolean;
+    res = this.articleService.setValued(articleid);
+    if (res) {
+      alert("成功设为精华");
+    }
+    else {
+      alert("已经是精华帖子");
+    }
   }
 
-  // TODO 删除
-  delete() {
-    alert("删除");
+  delete(articleid: number) {
+    let res:boolean;
+    res = this.articleService.deleteTarget(articleid);
+    if (res) {
+      alert("成功删除");
+    }
+    else {
+      alert("帖子不存在");
+    }
   }
 
   cancel() {
     ;
   }
 
-  // TODO 搜索功能
   search() {
-    alert("搜索：" + this.searchContent);
+    if (this.searchContent!="") {
+      this.fetchService.getArticleByKeyword(this.searchContent).subscribe(
+        res => this.article_list=res
+      );
+    }
+    else {
+      this.loadArticleInfo();
+    }
   }
 }

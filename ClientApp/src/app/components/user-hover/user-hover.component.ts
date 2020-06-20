@@ -35,8 +35,14 @@ export class UserHoverComponent implements OnInit {
     this.router.navigate(['/space/' + this.username]).then();
   }
 
-  // TODO 封禁用户
-  banUser() {
-    ;
+  banUser(targetname:string) {
+    let res:boolean;
+    res = this.userService.banUser(targetname);
+    if (res) {
+      alert("禁言成功");
+    }
+    else {
+      alert("禁言失败");
+    }
   }
 }

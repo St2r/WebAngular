@@ -8,8 +8,8 @@ export interface UserInfo {
   // 个人简介
   brief: string;
 
-  // 用户为管理员
-  isAdmin: boolean;
+  // // 用户为管理员
+  // isAdmin: boolean;
   // 用户状态（正常访问/被封禁）
   account_status: boolean;
 

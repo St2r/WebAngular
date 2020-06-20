@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AttachmentInfo } from 'src/app/model/attachment';
 import {AdminService} from '../../../services/admin.service';
+import { AttachmentService } from 'src/app/services/attachment.service';
 
 @Component({
   selector: 'app-attechment-manage',
@@ -12,7 +13,7 @@ export class AttechmentManageComponent implements OnInit {
 
   searchContent: string = "";
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private attachService:AttachmentService) { }
 
   ngOnInit() {
     this.loadAttachmentInfo().then();
@@ -30,14 +31,21 @@ export class AttechmentManageComponent implements OnInit {
     // ]
   }
 
-  // TODO 下载目标附件
-  download() {
-    alert("申请下载");
+  // TODO 下载目标附件 具体待修改
+  download(attachid:number) {
+    this.attachService.getAttachment(attachid);
   }
 
-  // TODO 删除目标附件
-  delete() {
-    alert("删除附件");
+  delete(attachid:number) {
+    let res:boolean;
+    res = this.attachService.deleteAttachment(attachid);
+    if (res) {
+      alert("资源删除成功");
+    }
+    else {
+      alert("资源不存在")
+    }
+
   }
 
   cancel() {

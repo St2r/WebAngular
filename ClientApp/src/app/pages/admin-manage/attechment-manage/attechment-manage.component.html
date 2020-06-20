@@ -25,12 +25,12 @@
         <td>{{ data.filesize }}</td>
         <td>{{ data.filetype }}</td>
         <td>
-          <a (click)="download()">下载</a>
+          <a (click)="download(data.fileID)">下载</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a nz-popconfirm
           nzPopconfirmTitle="删除此资源?"
           nzPopconfirmPlacement="bottom"
-          (nzOnConfirm)="delete()"
+          (nzOnConfirm)="delete(data.fileID)"
           (nzOnCancel)="cancel()">删除</a>
         </td>
       </tr>

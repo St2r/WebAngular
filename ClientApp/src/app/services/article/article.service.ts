@@ -51,4 +51,19 @@ export class ArticleService {
     return this.http.post<{ info: ArticleInfo, content: ArticleContent }>
     (this.baseUrl + 'api/article/view', form, this.identityService.getAuthentication());
   }
+
+  // TODO 设置置顶
+  setTop(articleid: number): boolean {
+    return ;
+  }
+
+  // TODO 设置精华
+  setValued(aeticleid: number): boolean {
+    return;
+  }
+
+  // TODO 删除文章
+  deleteTarget(articleid: number): boolean {
+    return;
+  }
 }

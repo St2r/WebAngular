@@ -24,17 +24,17 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadHotSearch();
+    // this.loadHotSearch();
     const search_list = this.storageService.get('history');
     if (search_list) {
       this.history_search = search_list;
     }
   }
 
-// TODO 获取数据
-  loadHotSearch() {
+  // 手动维护
+  // loadHotSearch() {
 
-  }
+  // }
 
   storeHistorySearch() {
     this.storageService.set('history', this.history_search);

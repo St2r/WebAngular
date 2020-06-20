@@ -30,21 +30,21 @@
           <a nz-popconfirm
           nzPopconfirmTitle="设为置顶?"
           nzPopconfirmPlacement="bottom"
-          (nzOnConfirm)="setAsTop()"
+          (nzOnConfirm)="setAsTop(data.articleID)"
           (nzOnCancel)="cancel()"
           >设为置顶</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a nz-popconfirm
           nzPopconfirmTitle="设为精华?"
           nzPopconfirmPlacement="bottom"
-          (nzOnConfirm)="setAsValued()"
+          (nzOnConfirm)="setAsValued(data.articleID)"
           (nzOnCancel)="cancel()"
           >设为精华</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a nz-popconfirm
           nzPopconfirmTitle="删除此帖子?"
           nzPopconfirmPlacement="bottom"
-          (nzOnConfirm)="delete()"
+          (nzOnConfirm)="delete(data.articleID)"
           (nzOnCancel)="cancel()"
           >删除</a>
         </td>
