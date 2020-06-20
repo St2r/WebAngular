@@ -101,6 +101,8 @@ import { UserResComponent } from './pages/result/user-res/user-res.component';
 import { AttachmentResComponent } from './pages/result/attachment-res/attachment-res.component';
 import { LoggedBarComponent } from './components/login-bar/logged-bar/logged-bar.component';
 
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -201,6 +203,7 @@ import { LoggedBarComponent } from './components/login-bar/logged-bar/logged-bar
     NzTagModule,
     NzEmptyModule,
     NzPopconfirmModule,
+    NzSwitchModule,
   ],
   exports: [],
   providers: [

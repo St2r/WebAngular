@@ -143,4 +143,9 @@ export class UserService implements OnInit {
       )
     );
   }
+
+  // TODO 封禁用户的方法
+  public banUser(username: string): boolean {
+    return;
+  }
 }

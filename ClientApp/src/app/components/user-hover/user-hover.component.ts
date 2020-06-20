@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../services/user/user.service';
 import {UserInfo} from '../../model/user-info';
 import {Router} from '@angular/router';
+import { IdentityService } from 'src/app/services/identity/identity.service';
 
 @Component({
   selector: 'app-user-hover',
@@ -16,7 +17,7 @@ export class UserHoverComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, protected identityService: IdentityService) {
     this.loading = true;
   }
 
@@ -32,5 +33,10 @@ export class UserHoverComponent implements OnInit {
 
   toSpace() {
     this.router.navigate(['/space/' + this.username]).then();
+  }
+
+  // TODO 封禁用户
+  banUser() {
+    ;
   }
 }

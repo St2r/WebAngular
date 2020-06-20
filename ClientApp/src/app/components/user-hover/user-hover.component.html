@@ -50,6 +50,9 @@
       <button nz-button (click)="toSpace()">个人主页</button>
     </nz-col>
   </nz-row>
+  <nz-row *ngIf="this.identityService.visitAsAdmin">
+    <button nz-button nzType="default" nzDanger (click)="banUser()">封禁用户</button>
+  </nz-row>
   <!-- <div nz-row>
     <div nz-col [nzXs]="{ span: 4, offset: 1 }" [nzLg]="{ span: 6, offset: 2 }">
       <button nz-button nzType="primary" *ngIf="!userInfo.isFollowed">+关注</button>
