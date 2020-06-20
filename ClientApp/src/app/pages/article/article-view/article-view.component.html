@@ -22,3 +22,6 @@
     <app-comment [articleID]="articleID"></app-comment>
   </nz-content>
 </nz-layout>
+<nz-layout *ngIf="!loading">
+  <i nz-icon nzType="loading" nzTheme="outline"></i>
+</nz-layout>
