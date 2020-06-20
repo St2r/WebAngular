@@ -1,4 +1,4 @@
-<nz-layout class="layout">
+<nz-layout [ngClass]="{'layout':!this.identityService.visitAsAdmin, 'admin-layout':this.identityService.visitAsAdmin}">
   <nz-header class="header">
     <div nz-row nzGutter="16" class="header">
       <div nz-col class="gutter-row" nzSpan="1">
@@ -53,7 +53,15 @@
       <div nz-col class="gutter-row" nzSpan="8">
         <app-search-bar></app-search-bar>
       </div>
-      <div nz-col class="gutter-row" nzSpan="3"></div>
+      <!-- TODO 身份切换还有些问题，待调试 -->
+      <div nz-col class="gutter-row" nzSpan="3" *ngIf="this.identityService.isAdmin">
+        <nz-select [(ngModel)]="this.identityService.visitAsAdmin" (ngModelChange)="changeMode($event)">
+          <nz-option nzValue=false nzLabel="用户"></nz-option>
+          <nz-option nzValue=true nzLabel="管理员"></nz-option>
+        </nz-select>
+        <!-- {{this.identityService.visitAsAdmin }} -->
+      </div>
+      <div nz-col class="gutter-row" nzSpan="3" *ngIf="!this.identityService.isAdmin"></div>
       <div nz-col class="gutter-row" nzSpan="5">
         <app-login-bar></app-login-bar>
       </div>

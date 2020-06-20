@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {UserService} from './services/user/user.service';
 import {IdentityService} from './services/identity/identity.service';
+import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,9 @@ import {IdentityService} from './services/identity/identity.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  isAdmin: boolean = true;
+  visitAsAdmin: boolean = false;
 
   Subjects = [
     ['离散数学', 'discrete-math'],
@@ -21,11 +25,17 @@ export class AppComponent {
   ];
 
 
-  constructor(private userService: UserService, private identityService: IdentityService) {
+  constructor(private userService: UserService, protected identityService: IdentityService) {
   }
 
 
   onChange(value: string): void {
     console.log(value);
+  }
+
+  // TODO 切换身份的实现
+  changeMode(value:boolean) {
+    alert("change");
+    // location.reload();
   }
 }

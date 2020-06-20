@@ -27,6 +27,7 @@ export class UserManageComponent implements OnInit {
     this.user_list = await this.adminService.getAllUser();
   }
 
+  // TODO 访问目标用户主页的逻辑
   toSpace() {
     this.router.navigate(['/my-space/' + this.identityService.username]).then();
   }

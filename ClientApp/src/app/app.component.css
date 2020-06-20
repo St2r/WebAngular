@@ -1,5 +1,11 @@
 .layout {
   min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.admin-layout {
+  min-height: 100vh;
+  background-color: aquamarine;
 }
 
 .logo {
@@ -48,4 +54,9 @@ nz-footer {
 .header {
   height: 56px;
   background-color: white;
+}
+
+nz-select {
+  margin: 0 8px 10px 0;
+  width: 120px;
 }

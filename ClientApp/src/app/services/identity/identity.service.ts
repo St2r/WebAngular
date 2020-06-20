@@ -11,6 +11,10 @@ export class IdentityService {
   public logged: boolean;
   public username: string;
 
+  // TODO 根据登录用户的实际信息更新 isAdmin, 以及持久化
+  public visitAsAdmin: boolean = false;
+  public isAdmin: boolean = true;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private cookie: CookieService) {
     this.baseUrl = baseUrl;
     this.logged = false;

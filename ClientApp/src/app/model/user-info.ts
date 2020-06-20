@@ -8,6 +8,9 @@ export interface UserInfo {
   // 个人简介
   brief: string;
 
+  // 用户为管理员
+  isAdmin: boolean;
+
   // 我的关注数
   follow: number;
   // 我的粉丝数

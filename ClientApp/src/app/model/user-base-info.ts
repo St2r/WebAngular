@@ -8,6 +8,9 @@ export interface UserBaseInfo {
   // 个人简介
   brief: string;
 
+  // 用户为管理员
+  isAdmin: boolean;
+
   // 该用户被登陆用户关注
   isFollowed: boolean;
   // 该用户关注了登陆用户
