@@ -16,11 +16,12 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/block/block-info")]
-        public IActionResult GetBlockInfo([FromQuery] InterfaceIdentity identity, [FromForm] string blockName)
+        public ActionResult<InterfaceBlockInfo> GetBlockInfo([FromQuery] InterfaceIdentity identity, [FromForm] string blockName)
         {
             return Ok(new InterfaceBlockInfo()
             {
-                BlockName = "test"
+                BlockName = "test",
+                AccessRight = 2
             });
         }
 

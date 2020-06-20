@@ -3,12 +3,12 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {NzModalService} from 'ng-zorro-antd';
 import {UserService} from '../../services/user/user.service';
 import {FetchDataService} from '../../services/fetch-data.service';
-import {AdminInfo, BlockInfo} from '../../model/block-info';
-import {ForumService} from '../../services/forum.service';
+import {BlockInfo} from '../../model/block-info';
 import {ArticleInfo} from '../../model/article-info';
 import {OperationService} from '../../services/operation.service';
 import {HotTopic} from '../../model/hot-topic';
 import {IdentityService} from '../../services/identity/identity.service';
+import {BlockService} from '../../services/block/block.service';
 
 @Component({
   selector: 'app-forum',
@@ -39,7 +39,7 @@ export class ForumComponent implements OnInit {
   filter: string;
 
   constructor(private router: Router, private userService: UserService,
-              private fetchDataService: FetchDataService, private forumService: ForumService,
+              private fetchDataService: FetchDataService, private blockService: BlockService,
               private routerInfo: ActivatedRoute, private modal: NzModalService,
               private operationService: OperationService, private identityService: IdentityService) {
     this.routerInfo.params.subscribe((params: Params) => {
@@ -56,7 +56,7 @@ export class ForumComponent implements OnInit {
     this.sort = 'latest';
     this.filter = 'all';
 
-    this.loadBlockInfo();
+    this.loadBlockInfo().then();
     this.loadData(1);
     this.loadHotTopic();
   }
@@ -85,12 +85,8 @@ export class ForumComponent implements OnInit {
   }
 
   // 请求后端-返回板块的当前信息
-  loadBlockInfo() {
-    this.forumService.GetBlockInfo(this.block).subscribe(
-      result => {
-        this.blockInfo = result[0];
-      }
-    );
+  async loadBlockInfo() {
+    this.blockInfo = await this.blockService.getBlockInfo(this.block);
   }
 
   // 关注
