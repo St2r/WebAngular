@@ -12,4 +12,8 @@ export class HomeComponent {
 
   array: any = ['top image 1', 'top image 2', 'top image 3'];
 
+  test() {
+    alert("test");
+  }
+
 }
