@@ -10,6 +10,8 @@ export interface UserBaseInfo {
 
   // 用户为管理员
   isAdmin: boolean;
+  // 用户状态（正常访问/被封禁）
+  account_status: boolean;
 
   // 该用户被登陆用户关注
   isFollowed: boolean;
