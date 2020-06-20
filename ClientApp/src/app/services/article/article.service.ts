@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {IdentityService} from '../identity/identity.service';
 import {ArticleInfo} from '../../model/article-info';
 import {ArticleContent} from '../../model/article-content';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,16 @@ export class ArticleService {
         );
       }
     );
+  }
+
+  public GetArticle(Block: string, Sort: string, Filter: string, PageSize: number, Page: number): Promise<ArticleInfo[]> {
+    const i = new FormData();
+    i.append('block', Block);
+    i.append('sort', Sort);
+    i.append('filter', Filter);
+    i.append('pageSize', PageSize + '');
+    i.append('page', Page + '');
+    return this.http.post<ArticleInfo[]>(this.baseUrl + 'api/article/get', i, this.identityService.getAuthentication()).toPromise();
   }
 
   private requestNewArticle(value: { author: string, title: string, tags: [...string[]], limit: string, content: string, cover: File }) {
