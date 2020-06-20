@@ -1,29 +1,40 @@
-<div>
-    <nz-table #basicTable [nzData]="attachment_list">
-      <thead>
-        <tr>
-          <th>名称</th>
-          <th>大小</th>
-          <th>类型</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.filename }}</td>
-          <td>{{ data.filesize }}</td>
-          <td>{{ data.filetype }}</td>
-          <td>
-            <a (click)="download()">下载</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a nz-popconfirm
-            nzPopconfirmTitle="删除此资源?"
-            nzPopconfirmPlacement="bottom"
-            (nzOnConfirm)="delete()"
-            (nzOnCancel)="cancel()">删除</a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
+<div class="search-bar">
+  <div style="width: 30%;">
+    <nz-input-group nzSearch [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="searchContent" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon (click)="search()" nzType="search"></i>
+    </ng-template>
   </div>
+</div>
+
+<div>
+  <nz-table #basicTable [nzData]="attachment_list">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>大小</th>
+        <th>类型</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.filename }}</td>
+        <td>{{ data.filesize }}</td>
+        <td>{{ data.filetype }}</td>
+        <td>
+          <a (click)="download()">下载</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-popconfirm
+          nzPopconfirmTitle="删除此资源?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="delete()"
+          (nzOnCancel)="cancel()">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
   

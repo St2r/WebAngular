@@ -11,6 +11,8 @@ import {AdminService} from '../../../services/admin.service';
 export class ArticleManageComponent implements OnInit {
   article_list: ArticleInfo[];
 
+  searchContent: string = "";
+
   constructor(private adminService: AdminService) {
   }
 
@@ -40,5 +42,10 @@ export class ArticleManageComponent implements OnInit {
 
   cancel() {
     ;
+  }
+
+  // TODO 搜索功能
+  search() {
+    alert("搜索：" + this.searchContent);
   }
 }

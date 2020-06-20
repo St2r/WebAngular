@@ -1,3 +1,14 @@
+<div class="search-bar">
+  <div style="width: 30%;">
+    <nz-input-group nzSearch [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="searchContent" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon (click)="search()" nzType="search"></i>
+    </ng-template>
+  </div>
+</div>
+
 <div>
   <nz-table #basicTable [nzData]="user_list">
     <thead>

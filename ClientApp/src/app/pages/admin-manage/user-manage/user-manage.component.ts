@@ -14,6 +14,8 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 export class UserManageComponent implements OnInit {
   user_list: UserInfo[];
 
+  searchContent: string = "";
+
   constructor(private adminService: AdminService, private userService: UserService, private router: Router, private identityService: IdentityService) { }
 
   ngOnInit() {
@@ -41,6 +43,11 @@ export class UserManageComponent implements OnInit {
 
   cancel() {
     ;
+  }
+
+  // TODO 搜索功能
+  search() {
+    alert("搜索：" + this.searchContent);
   }
 
 }

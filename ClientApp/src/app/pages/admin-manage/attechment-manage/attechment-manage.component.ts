@@ -10,6 +10,8 @@ import {AdminService} from '../../../services/admin.service';
 export class AttechmentManageComponent implements OnInit {
   attachment_list: AttachmentInfo[];
 
+  searchContent: string = "";
+
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
@@ -40,5 +42,10 @@ export class AttechmentManageComponent implements OnInit {
 
   cancel() {
     ;
+  }
+
+  // TODO 搜索功能
+  search() {
+    alert("搜索：" + this.searchContent);
   }
 }

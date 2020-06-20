@@ -15,3 +15,21 @@
 .search-button {
   margin-right: 8px;
 }
+
+.search {
+  width: auto;
+  height: auto;
+  float: left;
+}
+
+/* .search-inner {
+  width: 30%;
+  height: auto;
+  float: right;
+} */
+
+/* .blank{
+  width: 60%;
+  height: auto;
+  float: left;
+} */
