@@ -33,9 +33,4 @@ export class AppComponent {
     console.log(value);
   }
 
-  // TODO 切换身份的实现
-  changeMode(value:boolean) {
-    alert("change");
-    // location.reload();
-  }
 }
