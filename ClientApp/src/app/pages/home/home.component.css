@@ -18,3 +18,15 @@ h3 {
   background: #ECECEC;
   padding:30px;
 }
+
+.entry {
+  height: auto;
+  width: auto;
+  float: right;
+  margin-right: 5px;
+  margin-bottom: 3px;
+}
+
+.entry-font {
+  
+}
