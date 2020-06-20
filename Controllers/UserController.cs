@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebAngular.Interface;
 
 namespace WebAngular.Controllers
 {
@@ -45,9 +46,9 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/detail-info")]
-        public IActionResult UserDetailInfo([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
+        public ActionResult<InterfaceUserDetailInfo> UserDetailInfo([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
         {
-            return Ok(new Interface.InterfaceUserDetailInfo()
+            return Ok(new InterfaceUserDetailInfo()
             {
                 Username = username,
                 Articles = 10,

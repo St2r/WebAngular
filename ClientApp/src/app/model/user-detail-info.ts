@@ -17,4 +17,6 @@ export interface UserDetailInfo {
   like: number;
   // 帖子被收藏数
   star: number;
+
+  loginCount: number;
 }

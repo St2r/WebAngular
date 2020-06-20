@@ -12,7 +12,7 @@ export class ArticleComponent implements OnInit {
   operation: string;
 
   @Input()
-  articleId: string;
+  articleId: number;
 
   @Input()
   block: string;
@@ -22,7 +22,7 @@ export class ArticleComponent implements OnInit {
     this.routerInfo.queryParams.subscribe(
       result => {
         this.operation = result['operation'];
-        this.articleId = result['articleID'];
+        this.articleId = result['articleId'];
         this.block = result['block'];
       }
     );

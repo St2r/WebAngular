@@ -1,9 +1,9 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {UserInfo} from 'src/app/model/user-info';
 import {Router} from '@angular/router';
 import {FetchDataService} from 'src/app/services/fetch-data.service';
 import {UserService} from 'src/app/services/user/user.service';
 import {IdentityService} from '../../../services/identity/identity.service';
+import {UserBaseInfo} from '../../../model/user-base-info';
 
 @Component({
   selector: 'app-user-res',
@@ -13,7 +13,7 @@ import {IdentityService} from '../../../services/identity/identity.service';
 export class UserResComponent implements OnInit {
   @Input() search_content: string;
 
-  user_list: UserInfo[];
+  user_list: UserBaseInfo[];
 
   got_res: boolean;
 

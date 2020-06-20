@@ -2,11 +2,11 @@
   <div class="top_part">
     <div class="avatar">
       <div class="avatat_inner">
-        <nz-avatar [nzSize]="48" nzIcon="user" [nzSrc]="userInfo.avatarUrl"></nz-avatar>
+        <nz-avatar [nzSize]="48" nzIcon="user" [nzSrc]="userBaseInfo.avatarUrl"></nz-avatar>
       </div>
     </div>
     <div class="name">
-      <span class="name_font"> {{ userInfo.nickname }} </span>
+      <span class="name_font"> {{ userBaseInfo.nickname }} </span>
     </div>
   </div>
   <!-- <nz-row>
@@ -18,30 +18,30 @@
     </nz-col>
   </nz-row> -->
   <div class="user_brief">
-    {{this.userInfo.brief}}
+    {{this.userBaseInfo.brief}}
   </div>
   <nz-divider></nz-divider>
   <nz-row>
     <nz-col nzSpan="8">
-      <a routerLink="/home">关注数<br>{{this.userInfo.follow}}</a>
+      <a routerLink="/home">关注数<br>{{this.userDetailInfo.follow}}</a>
     </nz-col>
     <nz-col nzSpan="8">
-      <a routerLink="/home">粉丝数<br>{{this.userInfo.fans}}</a>
+      <a routerLink="/home">粉丝数<br>{{this.userDetailInfo.fans}}</a>
     </nz-col>
     <nz-col nzSpan="8">
-      <a routerLink="/home">积分<br>{{this.userInfo.point}}</a>
+      <a routerLink="/home">积分<br>{{this.userDetailInfo.point}}</a>
     </nz-col>
   </nz-row>
   <nz-row>
-    <nz-col nzSpan="8">帖子被浏览<br>{{this.userInfo.browse}}</nz-col>
-    <nz-col nzSpan="8">获赞数<br>{{this.userInfo.like}}</nz-col>
-    <nz-col nzSpan="8">被收藏<br>{{this.userInfo.star}}</nz-col>
+    <nz-col nzSpan="8">帖子被浏览<br>{{this.userDetailInfo.browse}}</nz-col>
+    <nz-col nzSpan="8">获赞数<br>{{this.userDetailInfo.like}}</nz-col>
+    <nz-col nzSpan="8">被收藏<br>{{this.userDetailInfo.star}}</nz-col>
   </nz-row>
   <nz-divider></nz-divider>
   <nz-row>
     <nz-col nzSpan="6" nzOffset="1">
-      <button nz-button nzType="primary" *ngIf="!userInfo.isFollowed">+关注</button>
-      <button nz-button nzType="dashed" *ngIf="userInfo.isFollowed">取消关注</button>
+      <button nz-button nzType="primary" *ngIf="!userBaseInfo.isFollowed">+关注</button>
+      <button nz-button nzType="dashed" *ngIf="userBaseInfo.isFollowed">取消关注</button>
     </nz-col>
     <nz-col nzSpan="6" nzOffset="1">
       <button nz-button disabled>发私信</button>
@@ -51,7 +51,7 @@
     </nz-col>
   </nz-row>
   <nz-row *ngIf="this.identityService.visitAsAdmin">
-    <button nz-button nzType="default" nzDanger (click)="banUser(this.userInfo.username)">封禁用户</button>
+    <button nz-button nzType="default" nzDanger (click)="banUser(this.userBaseInfo.username)">封禁用户</button>
   </nz-row>
   <!-- <div nz-row>
     <div nz-col [nzXs]="{ span: 4, offset: 1 }" [nzLg]="{ span: 6, offset: 2 }">

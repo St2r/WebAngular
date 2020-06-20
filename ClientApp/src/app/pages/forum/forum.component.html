@@ -1,4 +1,4 @@
-<div *ngIf="!loading" >
+<div *ngIf="!loadingBlock" >
 <nz-layout *ngIf="blockInfo.accessRight==2">
   <nz-sider class="sidebar" nzTheme="light">
     <nz-row>
@@ -51,14 +51,14 @@
     <nz-header class="header">
       <nz-row>
         <nz-col nzSpan="12">
-          <nz-radio-group [(ngModel)]="sort" nzButtonStyle="solid" (ngModelChange)="reloadData()">
+          <nz-radio-group [(ngModel)]="sort" nzButtonStyle="solid" (ngModelChange)="reloadArticle()">
             <label nz-radio-button nzValue="latest">最新发帖</label>
             <label nz-radio-button nzValue="review">最新回帖</label>
             <label nz-radio-button nzValue="hottest">最热帖子</label>
           </nz-radio-group>
         </nz-col>
         <nz-col nzSpan="12">
-          <nz-select [(ngModel)]="filter" (ngModelChange)="reloadData()">
+          <nz-select [(ngModel)]="filter" (ngModelChange)="reloadArticle()">
             <nz-option nzValue="all" nzLabel="全部帖子"></nz-option>
             <nz-option nzValue="selected" nzLabel="精华贴"></nz-option>
             <nz-option nzValue="reward" nzLabel="悬赏贴" nzDisabled></nz-option>
@@ -75,7 +75,7 @@
                       [nzExtra]="article.coverUrl?templateExtra:null">
           <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
             <ng-template #templateAvatar>
-              <nz-avatar [nzSrc]="article.avatar" [nz-popover]="userHover" nzPopoverPlacement="bottom"></nz-avatar>
+              <nz-avatar [nzSrc]="article.avatarUrl" [nz-popover]="userHover" nzPopoverPlacement="bottom"></nz-avatar>
 
               <ng-template #userHover>
                 <app-user-hover [username]="article.username"></app-user-hover>
@@ -83,7 +83,7 @@
 
             </ng-template>
             <ng-template #templateTitle>
-              <a (click)="viewArticle(article.articleID)">{{article.title}}</a>
+              <a (click)="viewArticle(article.articleId)">{{article.title}}</a>
             </ng-template>
           </nz-list-item-meta>
           <ng-template #actionLike>
@@ -108,7 +108,7 @@
         </nz-list-item>
 
         <ng-template #pagination>
-          <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="loadData($event)"
+          <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="loadArticle($event)"
                          [nzPageSize]="pageSize" [(nzPageIndex)]="page"
                          [nzTotal]="blockInfo.contentTotal"></nz-pagination>
         </ng-template>

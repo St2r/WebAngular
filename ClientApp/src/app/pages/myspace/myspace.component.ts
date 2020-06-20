@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserInfo} from '../../model/user-info';
 import {BlockInfo} from '../../model/block-info';
 import {ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../../services/user/user.service';
+import {UserBaseInfo} from '../../model/user-base-info';
+import {UserDetailInfo} from '../../model/user-detail-info';
 
 @Component({
   selector: 'app-myspace',
@@ -13,9 +14,10 @@ export class MyspaceComponent implements OnInit {
   @Input()
   targetName: string;
 
-  userInfo: UserInfo;
+  userBaseInfo: UserBaseInfo;
+  userDetailInfo: UserDetailInfo;
 
-  recentVisitor: UserInfo[];
+  recentVisitor: UserBaseInfo[];
 
   favorBlock: BlockInfo[];
 
@@ -52,18 +54,18 @@ export class MyspaceComponent implements OnInit {
   }
 
   modifyBrief() {
-    if (this.userInfo.brief === '') {
-      this.userInfo.brief = 'ta 比较懒还没有说明';
+    if (this.userBaseInfo.brief === '') {
+      this.userBaseInfo.brief = 'ta 比较懒还没有说明';
     }
   }
 
   addNewVisit() {
-    this.userService.requestVisitRecord(this.targetName, this.userInfo.username).subscribe();
+    this.userService.requestVisitRecord(this.targetName, this.userBaseInfo.username).subscribe();
   }
 
   async loadUserInfo() {
-    this.userInfo = await this.userService.getUserInfo(this.targetName);
-    console.log(this.userInfo);
+    this.userBaseInfo = await this.userService.getBaseInfo(this.targetName);
+    this.userDetailInfo = await this.userService.getDetailInfo(this.targetName);
   }
 
   async loadVisitorInfo() {
@@ -76,6 +78,6 @@ export class MyspaceComponent implements OnInit {
   }
 
   setViewMode() {
-    this.ownPage = this.targetName.localeCompare(this.userInfo.username) === 0;
+    this.ownPage = this.targetName.localeCompare(this.userBaseInfo.username) === 0;
   }
 }

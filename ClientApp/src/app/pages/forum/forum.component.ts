@@ -21,7 +21,8 @@ export class ForumComponent implements OnInit {
   @Input()
   block: string;
 
-  loading: boolean;
+  loadingBlock: boolean;
+  loadingArticle: boolean;
 
   pageSize = 8;
   page = 1;
@@ -48,33 +49,35 @@ export class ForumComponent implements OnInit {
               private operationService: OperationService, private identityService: IdentityService) {
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];
-      this.loading = true;
-      this.init().then(
-        () => this.loading = false
-      );
+      this.loadingBlock = true;
+      this.loadingArticle = true;
+      this.sort = 'latest';
+      this.filter = 'all';
+
+      this.loadData();
     });
   }
 
   ngOnInit() {
-    this.init().then(
-      () => this.loading = false
-    );
   }
 
-  async init() {
-    this.sort = 'latest';
-    this.filter = 'all';
-
-    await this.loadBlockInfo();
-    await this.loadData(1);
+  loadData() {
+    this.loadBlockInfo().then(
+      () => {
+        this.loadingBlock = false;
+        this.loadArticle(1).then(
+          () => this.loadingArticle = false
+        );
+      }
+    );
     // this.loadHotTopic();
   }
 
   // 获取当前页的帖子
-  async loadData(page: number) {
+  async loadArticle(page: number) {
+    this.loadingArticle = true;
     this.page = page;
     this.articles = await this.articleService.GetArticle(this.block, this.sort, this.filter, this.pageSize, this.page);
-    console.log(this.articles);
   }
 
   // 请求后端-将今日的热点信息加载到hotTopics中
@@ -85,13 +88,18 @@ export class ForumComponent implements OnInit {
   }
 
   // 更新排序方式或者过滤器时，重新加载数据
-  reloadData() {
+  reloadArticle() {
     this.page = 1;
-    this.loadData(1);
+    this.loadArticle(1).then(
+      () => {
+        this.loadingArticle = false;
+      }
+    );
   }
 
   // 请求后端-返回板块的当前信息
   async loadBlockInfo() {
+    this.loadingBlock = true;
     this.blockInfo = await this.blockService.getBlockInfo(this.block);
   }
 
@@ -117,7 +125,7 @@ export class ForumComponent implements OnInit {
     this.router.navigate(['/article'], {queryParams: {operation: 'new', block: this.blockInfo.blockName}}).then();
   }
 
-  viewArticle(articleId: string) {
+  viewArticle(articleId: number) {
     this.router.navigate(['/article'], {
       queryParams: {operation: 'view', block: this.blockInfo.blockName, articleId: articleId}
     }).then();

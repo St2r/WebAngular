@@ -18,12 +18,15 @@ export class AvatarEditorComponent implements OnInit {
 
   constructor(@Inject('BASE_URL') baseUrl: string, private userService: UserService) {
     this.baseUrl = baseUrl;
-    this.userService.requestUserInfo(this.username).subscribe(
-      result => this.username = result.avatarUrl
-    );
   }
 
   ngOnInit() {
+    this.init().then();
+  }
+
+  async init() {
+    const i = await this.userService.getBaseInfo(this.username);
+    this.avatarUrl = i.avatarUrl;
   }
 
   appendData = () => {

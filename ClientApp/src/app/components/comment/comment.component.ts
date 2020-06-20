@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Comment} from '../../model/comment';
+import {CommentInfo} from '../../model/commentInfo';
 import {formatDistance, addDays} from 'date-fns';
 import {CommentService} from '../../services/comment/comment.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {OperationService} from '../../services/operation.service';
 import {UserService} from '../../services/user/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -16,7 +16,7 @@ import {IdentityService} from '../../services/identity/identity.service';
 })
 export class CommentComponent implements OnInit {
   @Input()
-  articleID: string;
+  articleId: number;
 
   validateForm!: FormGroup;
 
@@ -40,7 +40,7 @@ export class CommentComponent implements OnInit {
     outputFormat: 'html'
   };
 
-  comments: Comment[];
+  comments: CommentInfo[];
 
   loading: boolean;
 
@@ -49,7 +49,8 @@ export class CommentComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private commentService: CommentService, private router: Router,
               private operationService: OperationService, public userService: UserService,
-              private articleService: ArticleService, public identityService: IdentityService) {
+              private articleService: ArticleService, public identityService: IdentityService,
+              private routerInfo: ActivatedRoute) {
     this.loading = true;
     this.sort = 'latest';
     this.filter = 'all';
@@ -80,7 +81,7 @@ export class CommentComponent implements OnInit {
   }
 
   async loadComments() {
-    this.comments = await this.commentService.getComments(this.articleID, this.sort, this.filter);
+    this.comments = await this.commentService.getComments(this.articleId, this.sort, this.filter);
   }
 
   Like(i: number) {

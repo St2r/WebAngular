@@ -1,6 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {IdentityService} from '../identity/identity.service';
+import {CommentInfo} from '../../model/commentInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -8,25 +10,17 @@ import {Observable} from 'rxjs';
 export class CommentService {
   private readonly baseUrl: string;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string,
+              private identityService: IdentityService) {
     this.baseUrl = baseUrl;
   }
 
-  private requestComments(articleId: string, sort: string, filter: string): Observable<any> {
-    const model = {articleId: articleId, sort: sort, filter: filter};
-    return this.http.post<any>(this.baseUrl + 'controller/comment/get-comment', model);
-  }
-
-  public getComments(articleID: string, sort: string, filter: string): Promise<any> {
-    return new Promise<any>(
-      resolve => {
-        this.requestComments(articleID, sort, filter).subscribe(
-          result => {
-            console.log(result);
-            resolve(result);
-          }
-        );
-      }
-    );
+  public getComments(articleId: number, sort: string, filter: string): Promise<CommentInfo[]> {
+    const i = new FormData();
+    i.append('articleId', articleId + '');
+    i.append('sort', sort);
+    i.append('filter', filter);
+    return this.http.post<CommentInfo[]>(this.baseUrl + 'api/comment/get-comment-list', i,
+      this.identityService.getAuthentication()).toPromise();
   }
 }
