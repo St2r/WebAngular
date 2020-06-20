@@ -18,7 +18,7 @@ namespace WebAngular.Controllers
         }
         
         [HttpPost("/api/identity/login")]
-        public IActionResult Login([FromQuery]Identity identity)
+        public IActionResult Login([FromQuery]InterfaceIdentity identity)
         {
             return Ok(new
             {
@@ -27,7 +27,7 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/identity/logout")]
-        public IActionResult Logout([FromQuery]Identity identity)
+        public IActionResult Logout([FromQuery]InterfaceIdentity identity)
         {
             if (identity == null)
                 return BadRequest();

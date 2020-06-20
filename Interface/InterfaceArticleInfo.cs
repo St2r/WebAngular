@@ -1,6 +1,6 @@
 namespace WebAngular.Interface
 {
-    public class ArticleInfo
+    public class InterfaceArticleInfo
     {
         
     }

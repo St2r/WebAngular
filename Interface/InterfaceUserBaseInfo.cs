@@ -1,6 +1,6 @@
 namespace WebAngular.Interface
 {
-    public class UserBaseInfo
+    public class InterfaceUserBaseInfo
     {
         public string Username { get; set; }
         public string Nickname { get; set; }

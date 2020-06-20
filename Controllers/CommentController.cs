@@ -17,14 +17,14 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/comment/get-comment-list")]
-        public IActionResult GetCommentList([FromQuery] Identity identity,
+        public IActionResult GetCommentList([FromQuery] InterfaceIdentity identity,
                                         [FromForm] int articleId,
                                         [FromForm] string sort,
                                         [FromForm] string filter)
         {
-            var list = new List<Comment>();
-            list.Add(new Comment());
-            list.Add(new Comment());
+            var list = new List<InterfaceComment>();
+            list.Add(new InterfaceComment());
+            list.Add(new InterfaceComment());
             return Ok(new
             {
                 commentList = list
@@ -32,11 +32,11 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/comment/get-comment")]
-        public IActionResult GetComment([FromQuery] Identity identity, 
+        public IActionResult GetComment([FromQuery] InterfaceIdentity identity, 
                                         [FromForm] int articleId,
                                         [FromForm] int commentId)
         {
-            return Ok(new Comment()
+            return Ok(new InterfaceComment()
             {
                 Content = "test"
             });

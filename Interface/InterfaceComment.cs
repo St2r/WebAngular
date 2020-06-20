@@ -1,6 +1,6 @@
 namespace WebAngular.Interface
 {
-    public class Comment
+    public class InterfaceComment
     {
         public int ArticleId { get; set; }
         public int CommentId { get; set; }

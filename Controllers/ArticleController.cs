@@ -17,7 +17,7 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/article/new")]
-        public IActionResult NewArticle([FromQuery] Identity identity, [FromForm] IFormCollection form)
+        public IActionResult NewArticle([FromQuery] InterfaceIdentity identity, [FromForm] IFormCollection form)
         {
             return Ok(new
             {
@@ -26,12 +26,12 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/article/view")]
-        public IActionResult ViewArticle([FromQuery] Identity identity, [FromBody] int articleId)
+        public IActionResult ViewArticle([FromQuery] InterfaceIdentity identity, [FromBody] int articleId)
         {
             return Ok(new
             {
-                info = new Interface.ArticleInfo(),
-                content = new Interface.ArticleContent()
+                info = new Interface.InterfaceArticleInfo(),
+                content = new Interface.InterfaceArticleContent()
             });
         }
     }

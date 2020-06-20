@@ -16,22 +16,22 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/block/block-info")]
-        public IActionResult GetBlockInfo([FromQuery] Identity identity, [FromForm] string blockName)
+        public IActionResult GetBlockInfo([FromQuery] InterfaceIdentity identity, [FromForm] string blockName)
         {
-            return Ok(new BlockInfo()
+            return Ok(new InterfaceBlockInfo()
             {
                 BlockName = "test"
             });
         }
 
         [HttpPost("/api/block/follow")]
-        public IActionResult FollowBlock([FromQuery] Identity identity, [FromForm] string blockName)
+        public IActionResult FollowBlock([FromQuery] InterfaceIdentity identity, [FromForm] string blockName)
         {
             return Ok();
         }
         
         [HttpPost("/api/block/unfollow")]
-        public IActionResult UnfollowBlock([FromQuery] Identity identity, [FromForm] string blockName)
+        public IActionResult UnfollowBlock([FromQuery] InterfaceIdentity identity, [FromForm] string blockName)
         {
             return Ok();
         }

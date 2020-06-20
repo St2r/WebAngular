@@ -1,6 +1,6 @@
 namespace WebAngular.Interface
 {
-    public class ArticleContent
+    public class InterfaceAttachment
     {
         
     }

@@ -1,6 +1,6 @@
 namespace WebAngular.Interface
 {
-    public class BlockInfo
+    public class InterfaceBlockInfo
     {
         public string BlockName { get; set; }
             
@@ -13,6 +13,6 @@ namespace WebAngular.Interface
         public int FollowTotal { get; set; }
         public int TodayTotal { get; set; }
             
-        public UserBaseInfo[] Admins { get; set; }
+        public InterfaceUserBaseInfo[] Admins { get; set; }
     }
 }
