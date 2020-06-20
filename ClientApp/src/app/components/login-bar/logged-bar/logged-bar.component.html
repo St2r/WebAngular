@@ -32,11 +32,15 @@
         个人主页
       </a>
     </nz-list-item>
-    <nz-list-item  *ngIf="this.identityService.visitAsAdmin">
+    <nz-list-item  *ngIf="this.identityService.isAdmin">
       <a class="pop-list-item" [routerLink]="'/admin-manage/'">
         <i nz-icon nzType="tool" nzTheme="outline"></i>
         管理员主页
       </a>
+    </nz-list-item>
+    <nz-list-item  *ngIf="this.identityService.isAdmin">
+      <span style="padding-right: 15px;">以管理员身份访问</span>
+      <nz-switch [(ngModel)]="this.identityService.visitAsAdmin"></nz-switch>
     </nz-list-item>
     <nz-list-item>
       <button nz-button nzType="link" class="pop-list-item" (click)="logout()">

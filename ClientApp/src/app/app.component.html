@@ -53,15 +53,7 @@
       <div nz-col class="gutter-row" nzSpan="8">
         <app-search-bar></app-search-bar>
       </div>
-      <div nz-col class="gutter-row" nzSpan="3" *ngIf="this.identityService.isAdmin">
-        <nz-switch [(ngModel)]="this.identityService.visitAsAdmin" nz-tooltip nzTooltipTitle="以管理员身份访问"></nz-switch>
-        <!-- <nz-select [(ngModel)]="this.identityService.visitAsAdmin" (ngModelChange)="changeMode($event)">
-          <nz-option nzValue=false nzLabel="用户"></nz-option>
-          <nz-option nzValue=true nzLabel="管理员"></nz-option>
-        </nz-select> -->
-        <!-- {{this.identityService.visitAsAdmin }} -->
-      </div>
-      <div nz-col class="gutter-row" nzSpan="3" *ngIf="!this.identityService.isAdmin"></div>
+      <div nz-col class="gutter-row" nzSpan="3"></div>
       <div nz-col class="gutter-row" nzSpan="5">
         <app-login-bar></app-login-bar>
       </div>
