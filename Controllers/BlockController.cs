@@ -20,7 +20,8 @@ namespace WebAngular.Controllers
         {
             return Ok(new InterfaceBlockInfo()
             {
-                BlockName = "test"
+                BlockName = "test",
+                AccessRight = 2
             });
         }
 
