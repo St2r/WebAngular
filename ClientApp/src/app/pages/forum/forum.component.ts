@@ -9,6 +9,7 @@ import {OperationService} from '../../services/operation.service';
 import {HotTopic} from '../../model/hot-topic';
 import {IdentityService} from '../../services/identity/identity.service';
 import {BlockService} from '../../services/block/block.service';
+import {ArticleService} from '../../services/article/article.service';
 
 @Component({
   selector: 'app-forum',
@@ -20,6 +21,8 @@ export class ForumComponent implements OnInit {
   @Input()
   block: string;
 
+  loading: boolean;
+
   pageSize = 8;
   page = 1;
 
@@ -27,7 +30,7 @@ export class ForumComponent implements OnInit {
   blockInfo!: BlockInfo;
 
   // 帖子
-  articles!: ArticleInfo;
+  articles!: ArticleInfo[];
 
   // 热点数据
   hotTopics!: HotTopic[];
@@ -40,35 +43,38 @@ export class ForumComponent implements OnInit {
 
   constructor(private router: Router, private userService: UserService,
               private fetchDataService: FetchDataService, private blockService: BlockService,
+              private articleService: ArticleService,
               private routerInfo: ActivatedRoute, private modal: NzModalService,
               private operationService: OperationService, private identityService: IdentityService) {
     this.routerInfo.params.subscribe((params: Params) => {
       this.block = params['block'];
-      this.init();
+      this.loading = true;
+      this.init().then(
+        () => this.loading = false
+      );
     });
   }
 
   ngOnInit() {
-    this.init();
+    this.init().then(
+      () => this.loading = false
+    );
   }
 
-  init() {
+  async init() {
     this.sort = 'latest';
     this.filter = 'all';
 
-    this.loadBlockInfo().then();
-    this.loadData(1);
-    this.loadHotTopic();
+    await this.loadBlockInfo();
+    await this.loadData(1);
+    // this.loadHotTopic();
   }
 
   // 获取当前页的帖子
-  loadData(page: number): void {
+  async loadData(page: number) {
     this.page = page;
-    this.fetchDataService.GetArticle(this.block, this.sort, this.filter, this.pageSize, this.page).subscribe(
-      result => {
-        this.articles = result[0];
-      }
-    );
+    this.articles = await this.articleService.GetArticle(this.block, this.sort, this.filter, this.pageSize, this.page);
+    console.log(this.articles);
   }
 
   // 请求后端-将今日的热点信息加载到hotTopics中
