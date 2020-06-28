@@ -26,7 +26,7 @@
           <div class="avatat_inner">
             <nz-avatar [nzSize]="16" nzIcon="user" [nzSrc]="data.avatarUrl"></nz-avatar>
           </div>
-          <span (click)='toSpace()'> {{ data.username }} </span>
+          <span (click)='toSpace(data.username)'> {{ data.username }} </span>
         </td>
         <td>{{ data.nickname }}</td>
         <td>{{ data.level }}</td>
@@ -37,7 +37,7 @@
           <a nz-popconfirm
           nzPopconfirmTitle="禁言此用户?"
           nzPopconfirmPlacement="bottom"
-          (nzOnConfirm)="banTargetUser()"
+          (nzOnConfirm)="banTargetUser(data.username)"
           (nzOnCancel)="cancel()"
           >停止访问</a>
         </td>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AttachmentInfo } from 'src/app/model/attachment';
 import {AdminService} from '../../../services/admin.service';
 import { AttachmentService } from 'src/app/services/attachment.service';
+import { FetchDataService } from 'src/app/services/fetch-data.service';
 
 @Component({
   selector: 'app-attechment-manage',
@@ -13,7 +14,7 @@ export class AttechmentManageComponent implements OnInit {
 
   searchContent: string = "";
 
-  constructor(private adminService: AdminService, private attachService:AttachmentService) { }
+  constructor(private adminService: AdminService, private attachService:AttachmentService, private fetchService:FetchDataService) { }
 
   ngOnInit() {
     this.loadAttachmentInfo().then();
@@ -52,8 +53,14 @@ export class AttechmentManageComponent implements OnInit {
     ;
   }
 
-  // TODO 搜索功能
   search() {
-    alert("搜索：" + this.searchContent);
+    if (this.searchContent!="") {
+      this.fetchService.getAttachmentByKeyword(this.searchContent).subscribe(
+        res => this.attachment_list=res
+      );
+    }
+    else {
+      this.loadAttachmentInfo();
+    }
   }
 }
