@@ -12,5 +12,7 @@ namespace WebAngular.Interface
         public int Browse { get; set; }
         public int Like { get; set; }
         public int Star { get; set; }
+        
+        public int LoginCount { get; set; }
     }
 }

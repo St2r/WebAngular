@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Comment } from '../../../model/comment';
+import { CommentInfo } from '../../../model/commentInfo';
 import { ArticleInfo } from '../../../model/article-info';
 import {formatDistance, addDays} from 'date-fns';
 import { PostInfo } from '../../../model/post-info';

@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {AttachmentInfo} from '../model/attachment';
 import {PostInfo} from '../model/post-info';
 import {HotTopic} from '../model/hot-topic';
-import { UserInfo } from '../model/user-info';
+import {UserBaseInfo} from '../model/user-base-info';
 
 @Injectable({
   providedIn: 'root'
@@ -78,17 +78,17 @@ export class FetchDataService {
   }
 
   // TODO 检索帖子
-  public getArticleByKeyword(keyword:string): Observable<ArticleInfo[]> {
-    return
+  public getArticleByKeyword(keyword: string): Observable<ArticleInfo[]> {
+    return;
   }
 
   // TODO 检索用户
-  public getUserByKeyword(keyword:string): Observable<UserInfo[]> {
+  public getUserByKeyword(keyword: string): Observable<UserBaseInfo[]> {
     return;
   }
 
   // TODO 检索附件
-  public getAttachmentByKeyword(keyword:string) : Observable<AttachmentInfo[]> {
+  public getAttachmentByKeyword(keyword: string): Observable<AttachmentInfo[]> {
     return;
   }
 }

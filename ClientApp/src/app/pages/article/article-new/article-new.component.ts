@@ -50,7 +50,7 @@ export class ArticleNewComponent implements OnInit {
     if (!this.identityService.logged) {
       this.router.navigate(['/404']).then();
     }
-    this.getUserInfo();
+    this.getUserInfo().then();
     this.validateForm = this.fb.group({
       author: [this.identityService.username],
       title: ['', [Validators.required]],
@@ -65,12 +65,9 @@ export class ArticleNewComponent implements OnInit {
   }
 
   // 请求用户等级
-  getUserInfo() {
-    this.userService.requestUserInfo(this.identityService.username).subscribe(
-      result => {
-        this.userLevel = result[0].level;
-      }
-    );
+  async getUserInfo() {
+    const i = await this.userService.getDetailInfo(this.identityService.username);
+    this.userLevel = i.level;
   }
 
   submitForm(value) {

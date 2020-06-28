@@ -8,19 +8,19 @@
         <div class="left">
           <div class="avatarWrap">
             <div>
-              <nz-avatar [nzSize]="150" nzIcon="user" [nzAlt]="" [nzSrc]="userInfo.avatarUrl"></nz-avatar>
+              <nz-avatar [nzSize]="150" nzIcon="user" [nzAlt]="" [nzSrc]="userBaseInfo.avatarUrl"></nz-avatar>
             </div>
           </div>
         </div>
         <div class="right">
           <div class="nameWrap">
-            <span class="name"> {{ userInfo.nickname }} </span>
+            <span class="name"> {{ userBaseInfo.nickname }} </span>
           </div>
           <div class="briefWrap">
             <div class="briefBasic">
               <span></span>
             </div>
-            <p class="briefDescription"> {{ userInfo.brief }} </p>
+            <p class="briefDescription"> {{ userBaseInfo.brief }} </p>
           </div>
           <div class="editbutton" *ngIf="ownPage">
             <a nz-button nzType="link" routerLink="/editinfo">修改资料</a>
@@ -52,7 +52,7 @@
 
     <nz-sider nzWidth="350px" nzTheme="light">
       <div class="userInfo-box-top">
-        <app-side-user [userInfo]="userInfo" [ownPage]="ownPage"></app-side-user>
+        <app-side-user [userBaseInfo]="userBaseInfo" [userDetailInfo]="userDetailInfo" [ownPage]="ownPage"></app-side-user>
       </div>
       <div class="userInfo-box-middle">
         <span>最近访客</span>

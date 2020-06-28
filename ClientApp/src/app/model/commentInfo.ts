@@ -1,5 +1,6 @@
-export interface Comment {
+export interface CommentInfo {
   commentId: number;
+  referenceId: number;
 
   // 作者信息
   username: string;

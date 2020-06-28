@@ -93,7 +93,6 @@ import { AttechmentManageComponent } from './pages/admin-manage/attechment-manag
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { UserBlockComponent } from './components/user-block/user-block.component';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { ResultComponent } from './pages/result/result.component';
 import { ArticleResComponent } from './pages/result/article-res/article-res.component';
@@ -146,7 +145,6 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     UserManageComponent,
     AttechmentManageComponent,
     SearchBarComponent,
-    UserBlockComponent,
     ResultComponent,
     ArticleResComponent,
     UserResComponent,

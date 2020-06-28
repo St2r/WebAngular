@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { UserInfo } from 'src/app/model/user-info';
+import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
-import { UserService } from 'src/app/services/user/user.service';
-import { Router } from '@angular/router';
+import {UserService} from 'src/app/services/user/user.service';
+import {Router} from '@angular/router';
 import {IdentityService} from '../../../services/identity/identity.service';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { FetchDataService } from 'src/app/services/fetch-data.service';
+import {UserBaseInfo} from '../../../model/user-base-info';
 
 @Component({
   selector: 'app-user-manage',
@@ -13,9 +13,9 @@ import { FetchDataService } from 'src/app/services/fetch-data.service';
   styleUrls: ['./user-manage.component.css']
 })
 export class UserManageComponent implements OnInit {
-  user_list: UserInfo[];
+  user_list: UserBaseInfo[];
 
-  searchContent: string = "";
+  searchContent = '';
 
   constructor(private adminService: AdminService, private userService: UserService, private router: Router, 
     private identityService: IdentityService, private fetchService:FetchDataService) { }
@@ -35,7 +35,7 @@ export class UserManageComponent implements OnInit {
 
   // TODO 编辑用户信息 使用router?
   editTargetInfo() {
-    
+
   }
 
   banTargetUser(username:string) {
@@ -50,7 +50,7 @@ export class UserManageComponent implements OnInit {
   }
 
   cancel() {
-    ;
+    return;
   }
 
   search() {

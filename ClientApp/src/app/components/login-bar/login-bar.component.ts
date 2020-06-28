@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {UserService} from '../../services/user/user.service';
-import {UserInfo} from '../../model/user-info';
 import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class LoginBarComponent implements OnInit {
   AvatarSize: 56;
 
 
-  constructor(public userService: UserService, protected router: Router, public identityService: IdentityService) {
+  constructor(public userService: UserService, public router: Router, public identityService: IdentityService) {
   }
 
   ngOnInit() {

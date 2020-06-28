@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInfo} from '../../model/user-info';
 import {UserService} from '../../services/user/user.service';
 import {Router} from '@angular/router';
 import {IdentityService} from '../../services/identity/identity.service';
+import {UserBaseInfo} from '../../model/user-base-info';
 
 @Component({
   selector: 'app-edituserinfo',
@@ -12,7 +12,7 @@ import {IdentityService} from '../../services/identity/identity.service';
 export class EdituserinfoComponent implements OnInit {
   loading: boolean;
 
-  userInfo: UserInfo;
+  userInfo: UserBaseInfo;
 
   constructor(private userService: UserService, private router: Router, private identityService: IdentityService) {
     this.loading = false;
@@ -31,7 +31,7 @@ export class EdituserinfoComponent implements OnInit {
   }
 
   async loadUserInfo() {
-    this.userInfo = await this.userService.getUserInfo(this.identityService.username);
+    this.userInfo = await this.userService.getBaseInfo(this.identityService.username);
   }
 
   modifyGreeting() {

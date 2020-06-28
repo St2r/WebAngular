@@ -10,7 +10,7 @@ import {IdentityService} from '../../../services/identity/identity.service';
 })
 export class ArticleViewComponent implements OnInit {
   @Input()
-  articleID: number;
+  articleId: number;
 
   articleContent: ArticleContent;
 
@@ -21,8 +21,8 @@ export class ArticleViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkLimit().then(
-      () => this.loadArticle().then(
+    this.loadArticle().then(
+      () => this.checkLimit().then(
         () => this.loadComment().then(
           () => this.loading = false
         )
@@ -35,8 +35,8 @@ export class ArticleViewComponent implements OnInit {
       console.log('未登陆');
       return;
     }
-    const userInfo = await this.userService.getUserInfo(this.identityService.username);
-    if (userInfo.level < this.articleContent.limit) {
+    const userDetailInfo = await this.userService.getDetailInfo(this.identityService.username);
+    if (userDetailInfo.level < this.articleContent.limit) {
       console.log('权限不足');
     }
   }

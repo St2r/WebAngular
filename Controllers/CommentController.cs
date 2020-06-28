@@ -17,18 +17,28 @@ namespace WebAngular.Controllers
         }
 
         [HttpPost("/api/comment/get-comment-list")]
-        public IActionResult GetCommentList([FromQuery] InterfaceIdentity identity,
+        public ActionResult<List<InterfaceComment>> GetCommentList([FromQuery] InterfaceIdentity identity,
                                         [FromForm] int articleId,
                                         [FromForm] string sort,
                                         [FromForm] string filter)
         {
             var list = new List<InterfaceComment>();
-            list.Add(new InterfaceComment());
-            list.Add(new InterfaceComment());
-            return Ok(new
+            for (int i = 0; i < 10; i++)
             {
-                commentList = list
-            });
+                list.Add(new InterfaceComment()
+                {
+                    CommentId = 1,
+                    ReferenceId = 2,
+                    AvatarUrl = "/avatar.png",
+                    Content = "test",
+                    CommentTime = "2020-02-02-23-59",
+                    Likes = 10,
+                    LikeStatus = 1,
+                    NickName = "nick_author",
+                    Username = "author"
+                });
+            }
+            return Ok(list);
         }
 
         [HttpPost("/api/comment/get-comment")]

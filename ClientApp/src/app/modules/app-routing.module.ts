@@ -23,7 +23,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
-  // {path: 'exercise', component: ExerciseComponent},
   {path: 'do-exercise', component: DoExerciseComponent},
   {path: 'forum/:block', component: ForumComponent},
   {path: 'resource', component: ResourceComponent},

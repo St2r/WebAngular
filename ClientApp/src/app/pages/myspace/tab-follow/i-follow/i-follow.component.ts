@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {UserInfo} from '../../../../model/user-info';
 import { UserService } from '../../../../services/user/user.service';
+import {UserBaseInfo} from '../../../../model/user-base-info';
 
 @Component({
   selector: 'app-i-follow',
@@ -11,7 +11,7 @@ export class IFollowComponent implements OnInit {
   @Input() targetName: string;
 
   loading: boolean;
-  myFollow: UserInfo[];
+  myFollow: UserBaseInfo[];
 
   constructor(private userService: UserService) {
     this.loading = true;

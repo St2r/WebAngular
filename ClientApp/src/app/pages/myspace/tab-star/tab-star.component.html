@@ -10,14 +10,14 @@
           <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
             <ng-template #templateAvatar>
               <!-- <nz-avatar [nzSrc]="article.avatar" [nz-popover]="userHover" nzPopoverPlacement="bottom"></nz-avatar> -->
-  
+
               <ng-template #userHover>
                 <app-user-hover [username]="article.username"></app-user-hover>
               </ng-template>
-  
+
             </ng-template>
             <ng-template #templateTitle>
-              <a (click)="viewArticle(article.articleID, article.block)">{{article.title}}</a>
+              <a (click)="viewArticle(article.articleId, article.block)">{{article.title}}</a>
             </ng-template>
           </nz-list-item-meta>
           <ng-template #actionLike>
@@ -32,7 +32,7 @@
           <ng-template #actionStar>
             <i nz-icon nzType="star"></i>{{article.star}}
           </ng-template>
-  
+
           <ng-template #templateContent>
             {{article.header}}
           </ng-template>

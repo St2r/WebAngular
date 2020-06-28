@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserInfo} from 'src/app/model/user-info';
 import {ArticleInfo} from 'src/app/model/article-info';
 import {AttachmentInfo} from 'src/app/model/attachment';
 import {FetchDataService} from 'src/app/services/fetch-data.service';
+import {UserBaseInfo} from '../../model/user-base-info';
 
 @Component({
   selector: 'app-result',
@@ -17,7 +17,7 @@ export class ResultComponent implements OnInit {
 
   search_content: string;
 
-  user_res: UserInfo[];
+  user_res: UserBaseInfo[];
   article_res: ArticleInfo[];
   attachment_res: AttachmentInfo[];
 

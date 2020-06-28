@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from '../../services/user/user.service';
-import {UserInfo} from '../../model/user-info';
 import {Router} from '@angular/router';
-import { IdentityService } from 'src/app/services/identity/identity.service';
+import {IdentityService} from 'src/app/services/identity/identity.service';
+import {UserBaseInfo} from '../../model/user-base-info';
+import {UserDetailInfo} from '../../model/user-detail-info';
 
 @Component({
   selector: 'app-user-hover',
@@ -13,7 +14,8 @@ export class UserHoverComponent implements OnInit {
   @Input()
   username: string;
 
-  userInfo: UserInfo;
+  userBaseInfo: UserBaseInfo;
+  userDetailInfo: UserDetailInfo;
 
   loading: boolean;
 
@@ -28,21 +30,21 @@ export class UserHoverComponent implements OnInit {
   }
 
   async loadUserInfo() {
-    this.userInfo = await this.userService.getUserInfo(this.username);
+    this.userBaseInfo = await this.userService.getBaseInfo(this.username);
+    this.userDetailInfo = await this.userService.getDetailInfo(this.username);
   }
 
   toSpace() {
     this.router.navigate(['/space/' + this.username]).then();
   }
 
-  banUser(targetname:string) {
-    let res:boolean;
-    res = this.userService.banUser(targetname);
+  banUser(username: string) {
+    let res: boolean;
+    res = this.userService.banUser(username);
     if (res) {
-      alert("禁言成功");
-    }
-    else {
-      alert("禁言失败");
+      alert('禁言成功');
+    } else {
+      alert('禁言失败');
     }
   }
 }
