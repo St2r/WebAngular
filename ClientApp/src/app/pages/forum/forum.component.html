@@ -69,10 +69,13 @@
 
     <nz-content class="content">
       <nz-list nzItemLayout="vertical"  [nzPagination]="pagination">
-        <nz-list-item *ngFor="let article of articles"
+        <!-- <nz-list-item *ngFor="let article of articles"
                       [nzActions]="[actionLike, actionReview, actionBrowse, actionStar]"
                       [nzContent]="templateContent"
-                      [nzExtra]="article.coverUrl?templateExtra:null">
+                      [nzExtra]="article.coverUrl?templateExtra:null"> -->
+        <nz-list-item *ngFor="let article of articles"
+                      [nzActions]="[actionLike, actionReview, actionBrowse, actionStar]"
+                      [nzContent]="templateContent">
           <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
             <ng-template #templateAvatar>
               <nz-avatar [nzSrc]="article.avatarUrl" [nz-popover]="userHover" nzPopoverPlacement="bottom"></nz-avatar>
@@ -98,12 +101,11 @@
           <ng-template #actionStar>
             <i nz-icon nzType="star"></i>{{article.star}}
           </ng-template>
-
           <ng-template #templateContent>
             {{article.header}}
           </ng-template>
           <ng-template #templateExtra>
-            <img width="272" [src]="article.coverUrl">
+            <!-- <img width="272" [src]="article.coverUrl"> -->
           </ng-template>
         </nz-list-item>
 
