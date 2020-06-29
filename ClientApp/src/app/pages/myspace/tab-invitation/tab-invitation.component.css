@@ -1,0 +1,35 @@
+.sidebar {
+    min-height: 1300px;
+  }
+  
+  .avatar {
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+  }
+  
+  .content {
+    margin-left: 20px;
+  }
+  
+  .my-pagination {
+    margin-bottom: 18px;
+    margin-right: 36px;
+  }
+  
+  .right-margin{
+    margin-right: 18px;
+  }
+  
+  .top-item {
+    margin: 8px;
+  }
+  
+  .header {
+    background-color: white;
+  }
+  
+  nz-select {
+    width: 100px;
+  }
+  
