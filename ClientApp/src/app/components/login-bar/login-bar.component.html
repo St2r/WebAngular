@@ -1,5 +1,5 @@
 <div *ngIf="this.identityService.logged">
-  <app-logged-bar></app-logged-bar>
+  <app-logged-bar [username]="identityService.username"></app-logged-bar>
 </div>
 
 <div *ngIf="!this.identityService.logged" nz-row nzGutter="16">

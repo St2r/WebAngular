@@ -6,6 +6,7 @@ import {AttachmentInfo} from '../model/attachment';
 import {PostInfo} from '../model/post-info';
 import {HotTopic} from '../model/hot-topic';
 import {UserBaseInfo} from '../model/user-base-info';
+import {IdentityService} from './identity/identity.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import {UserBaseInfo} from '../model/user-base-info';
 export class FetchDataService {
   private readonly baseUrl: string;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private identityService: IdentityService) {
     this.baseUrl = baseUrl;
   }
 
@@ -59,8 +60,8 @@ export class FetchDataService {
 
   // 获取与用户相关的动态
   public requestPostByUser(username: string): Observable<PostInfo[]> {
-    const model = {username: username};
-    return this.http.post<PostInfo[]>(this.baseUrl + 'controller/fetch/get-post', model);
+    return this.http.post<PostInfo[]>(this.baseUrl + 'api/post/get-post', null,
+      this.identityService.getAuthentication());
   }
 
   public getPostByUser(username: string): Promise<PostInfo[]> {
