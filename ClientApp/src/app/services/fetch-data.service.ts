@@ -31,7 +31,7 @@ export class FetchDataService {
 
   private requestArticleByUser(username: string): Observable<ArticleInfo[]> {
     const model = {username: username};
-    return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/fetch/post-article', model);
+    return this.http.post<ArticleInfo[]>(this.baseUrl + 'api/article/get-post-article', model);
   }
 
   // 获取用户发布的帖子
@@ -46,7 +46,7 @@ export class FetchDataService {
   // 获取用户收藏的帖子
   private requestStarArticleByUser(username: string): Observable<ArticleInfo[]> {
     const model = {username: username};
-    return this.http.post<ArticleInfo[]>(this.baseUrl + 'controller/fetch/star-article', model);
+    return this.http.post<ArticleInfo[]>(this.baseUrl + 'api/article/get-star-article', model);
   }
 
   public getStarArticleByUser(username: string): Promise<ArticleInfo[]> {

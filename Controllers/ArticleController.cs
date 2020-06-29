@@ -128,5 +128,61 @@ namespace WebAngular.Controllers
         {
             return Ok(true);
         }
+
+        [HttpPost("/api/article/get-post-article")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetPostArticle([FromQuery] InterfaceIdentity identity)
+        {
+            var res = new List<InterfaceArticleInfo>();
+            for (var i = 0; i < 10; i++)
+            {
+                res.Add(new InterfaceArticleInfo()
+                {
+                    ArticleId = i,
+                    Title = "我的文章" + i,
+                    Header = "50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字",
+                    CoverUrl = "/avatar.png",
+                    Like = 10,
+                    Review = 9,
+                    Browse = 100,
+                    Star = 1,
+                    LastReviewTime = "2020-02-02",
+                    Username = "author" + i,
+                    Nickname = "author_nick" + i,
+                    AvatarUrl = "/avatar.png",
+                    IsPinned = true,
+                    IsElite = true
+                });
+            }
+
+            return Ok(res);
+        }
+
+        [HttpPost("/api/article/get-star-article")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetStarArticle([FromQuery] InterfaceIdentity identity)
+        {
+            var res = new List<InterfaceArticleInfo>();
+            for (var i = 0; i < 10; i++)
+            {
+                res.Add(new InterfaceArticleInfo()
+                {
+                    ArticleId = i,
+                    Title = "我的收藏" + i,
+                    Header = "50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字",
+                    CoverUrl = "/avatar.png",
+                    Like = 10,
+                    Review = 9,
+                    Browse = 100,
+                    Star = 1,
+                    LastReviewTime = "2020-02-02",
+                    Username = "author" + i,
+                    Nickname = "author_nick" + i,
+                    AvatarUrl = "/avatar.png",
+                    IsPinned = true,
+                    IsElite = true
+                });
+            }
+
+            return Ok(res);
+        }
     }
 }

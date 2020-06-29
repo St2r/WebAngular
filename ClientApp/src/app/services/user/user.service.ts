@@ -66,7 +66,7 @@ export class UserService implements OnInit {
   public async getFanList(username: string): Promise<UserBaseInfo[]> {
     const i = new FormData();
     i.append('username', username);
-    return this.http.post<UserBaseInfo[]>(this.baseUrl + 'controller/user/get-fan-list', i,
+    return this.http.post<UserBaseInfo[]>(this.baseUrl + 'api/user/get-fan-list', i,
       this.identityService.getAuthentication()).toPromise();
   }
 

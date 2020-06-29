@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebAngular.Interface;
@@ -27,11 +26,10 @@ namespace WebAngular.Controllers
         [HttpPost("/api/user/base-info")]
         public IActionResult UserBaseInfo([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
         {
-
             return Ok(new Interface.InterfaceUserBaseInfo()
             {
                 Username = identity.Username,
-                Nickname = "Nick_"+identity.Username,
+                Nickname = "Nick_" + identity.Username,
                 AvatarUrl = "/avatar.png",
                 Brief = "hello",
                 IsFan = false,
@@ -46,13 +44,14 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/detail-info")]
-        public ActionResult<InterfaceUserDetailInfo> UserDetailInfo([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
+        public ActionResult<InterfaceUserDetailInfo> UserDetailInfo([FromQuery] Interface.InterfaceIdentity identity,
+            [FromForm] string username)
         {
             return Ok(new InterfaceUserDetailInfo()
             {
                 Username = username,
                 Articles = 10,
-                Browse =  5,
+                Browse = 5,
                 Fans = 6,
                 Follow = 7,
                 Level = 1,
@@ -61,25 +60,22 @@ namespace WebAngular.Controllers
                 Star = 6
             });
         }
-        
+
         /// <summary>
         /// 获得username的关注列表
         /// </summary>
         /// <param name="identity"></param>
         /// <param name="username"></param>
         /// <returns></returns>
-        [HttpPost("/api/user/follow-list")]
-        public IActionResult GetFollowList([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
+        [HttpPost("/api/user/get-follow-list")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetFollowList([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
         {
             var list = new List<Interface.InterfaceUserBaseInfo>();
             list.Add(new Interface.InterfaceUserBaseInfo());
             list.Add(new Interface.InterfaceUserBaseInfo());
-            return Ok(new
-            {
-                followList = list
-            });
+            return Ok(list);
         }
-        
+
 
         /// <summary>
         /// 获得username的粉丝列表
@@ -87,48 +83,58 @@ namespace WebAngular.Controllers
         /// <param name="identity"></param>
         /// <param name="username"></param>
         /// <returns></returns>
-        [HttpPost("/controller/api/fan-list")]
-        public IActionResult GetFanList([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
+        [HttpPost("/api/user/get-fan-list")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetFanList([FromQuery] InterfaceIdentity identity, [FromForm] string username)
         {
-            var list = new List<Interface.InterfaceUserBaseInfo>();
-            list.Add(new Interface.InterfaceUserBaseInfo());
-            list.Add(new Interface.InterfaceUserBaseInfo());
-            return Ok(new
+            var list = new List<InterfaceUserBaseInfo>();
+            list.Add(new InterfaceUserBaseInfo()
             {
-                followList = list
+                Username = "Fan_1",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = true,
+                IsFollowed = true,
+                Nickname = "Nick_Fan_1"
             });
+            list.Add(new InterfaceUserBaseInfo()
+            {
+                Username = "Fan_2",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = true,
+                IsFollowed = false,
+                Nickname = "Nick_Fan_2"
+            });
+            return Ok(list);
         }
 
         // 添加访问记录
         [HttpPost("/controller/user/add-visit-record")]
-        public bool AddVisitRecord([FromQuery] Interface.InterfaceIdentity identity)
+        public bool AddVisitRecord([FromQuery] InterfaceIdentity identity)
         {
             return true;
         }
 
         // 获取最近访问者
         [HttpPost("/api/user/get-recent-visitor")]
-        public ActionResult<List<InterfaceUserBaseInfo>> GetRecentVisitor([FromQuery] InterfaceIdentity identity, [FromForm] string username)
+        public ActionResult<List<InterfaceUserBaseInfo>> GetRecentVisitor([FromQuery] InterfaceIdentity identity,
+            [FromForm] string username)
         {
             var list = new List<InterfaceUserBaseInfo>();
-            
+
             return Ok(list);
         }
 
-        public class GetFavBlockForm
+        [HttpPost("/api/user/get-fav-block")]
+        public ActionResult<List<InterfaceBlockInfo>> GetFavBlock([FromQuery] InterfaceIdentity identity,
+            [FromForm] string username)
         {
-            public string Username { get; set; }
-        }
-
-        [HttpPost("/controller/user/get-fav-block")]
-        public List<Interface.InterfaceBlockInfo> GetFavBlock([FromBody] GetFavBlockForm form)
-        {
-            var list = new List<Interface.InterfaceBlockInfo>();
-            list.Add(new Interface.InterfaceBlockInfo()
+            var list = new List<InterfaceBlockInfo>();
+            list.Add(new InterfaceBlockInfo()
             {
                 BlockName = "离散数学",
             });
-            return list;
+            return Ok(list);
         }
     }
 }
