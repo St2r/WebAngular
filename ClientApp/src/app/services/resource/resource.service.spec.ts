@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AttachmentService } from './attachment.service';
+import { ResourceService } from './resource.service';
 
-describe('AttachmentService', () => {
+describe('ResourceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AttachmentService = TestBed.get(AttachmentService);
+    const service: ResourceService = TestBed.get(ResourceService);
     expect(service).toBeTruthy();
   });
 });
