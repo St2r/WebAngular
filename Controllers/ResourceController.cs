@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -102,11 +103,33 @@ namespace WebAngular.Controllers
         {
             return Ok("test");
         }
-        
+
         [HttpPost("/api/resource/delete")]
         public ActionResult<bool> DeleteResource([FromQuery] InterfaceIdentity identity, [FromForm] int resourceId)
         {
             return Ok(true);
+        }
+
+        [HttpPost("/api/resource/search")]
+        public ActionResult<List<InterfaceAttachment>> SearchResource([FromQuery] InterfaceIdentity identity,
+            [FromForm] string search)
+        {
+            var res = new List<InterfaceAttachment>();
+            res.Add(new InterfaceAttachment()
+            {
+                FileId = 1,
+                Filename = search + 1,
+                Filesize = 1024,
+                Filetype = ".zip"
+            });
+            res.Add(new InterfaceAttachment()
+            {
+                FileId = 2,
+                Filename = search + 2,
+                Filesize = 1024,
+                Filetype = ".jpg"
+            });
+            return Ok(res);
         }
     }
 }

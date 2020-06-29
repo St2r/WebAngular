@@ -60,13 +60,11 @@ export class ArticleManageComponent implements OnInit {
     return;
   }
 
-  search() {
+  async search() {
     if (this.searchContent !== '') {
-      this.fetchService.getArticleByKeyword(this.searchContent).subscribe(
-        res => this.article_list = res
-      );
+      this.article_list = await this.fetchService.getArticleByKeyword(this.searchContent);
     } else {
-      this.loadArticleInfo();
+      await this.loadArticleInfo();
     }
   }
 }

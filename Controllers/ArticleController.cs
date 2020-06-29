@@ -184,5 +184,33 @@ namespace WebAngular.Controllers
 
             return Ok(res);
         }
+
+        [HttpPost("/api/article/search")]
+        public ActionResult<List<InterfaceUserBaseInfo>> SearchArticle([FromQuery] InterfaceIdentity identity, [FromForm] string search)
+        {
+            var res = new List<InterfaceArticleInfo>();
+            for (var i = 0; i < 10; i++)
+            {
+                res.Add(new InterfaceArticleInfo()
+                {
+                    ArticleId = i,
+                    Title = search + i,
+                    Header = "50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字50个字",
+                    CoverUrl = "/avatar.png",
+                    Like = 10,
+                    Review = 9,
+                    Browse = 100,
+                    Star = 1,
+                    LastReviewTime = "2020-02-02",
+                    Username = "author" + i,
+                    Nickname = "author_nick" + i,
+                    AvatarUrl = "/avatar.png",
+                    IsPinned = true,
+                    IsElite = true
+                });
+            }
+
+            return Ok(res);
+        }
     }
 }

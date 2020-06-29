@@ -1,8 +1,8 @@
 <div class="search_pannel">
-  <nz-select [(ngModel)]="search_type" nzSize="large">
-    <nz-option [nzLabel]="'帖子'" [nzValue]="1"></nz-option>
-    <nz-option [nzLabel]="'用户'" [nzValue]="2"></nz-option>
-    <nz-option [nzLabel]="'附件'" [nzValue]="3"></nz-option>
+  <nz-select [(ngModel)]="search_type" (ngModelChange)="search()" nzSize="large">
+    <nz-option nzLabel="帖子" nzValue="1"></nz-option>
+    <nz-option nzLabel="用户" nzValue="2"></nz-option>
+    <nz-option nzLabel="附件" nzValue="3"></nz-option>
   </nz-select>
   <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
     <input type="text" nz-input placeholder="input search text" [(ngModel)]='search_content' />
@@ -12,5 +12,5 @@
   </ng-template>
 </div>
 <app-article-res *ngIf="search_stable==1" [article_list]="article_res"></app-article-res>
-<app-user-res *ngIf="search_stable==2" [search_content]="search_content"></app-user-res>
-<app-attachment-res *ngIf="search_stable==3" [search_content]="search_content"></app-attachment-res>
+<app-user-res *ngIf="search_stable==2" [user_list]="user_res"></app-user-res>
+<app-attachment-res *ngIf="search_stable==3" [attachment_list]="attachment_res"></app-attachment-res>

@@ -78,18 +78,27 @@ export class FetchDataService {
     return this.http.post<HotTopic[]>(this.baseUrl + 'controller/fetch/get-hot', model);
   }
 
-  // TODO 检索帖子
-  public getArticleByKeyword(keyword: string): Observable<ArticleInfo[]> {
-    return;
+  // 检索帖子
+  public getArticleByKeyword(keyword: string): Promise<ArticleInfo[]> {
+    const i = new FormData();
+    i.append('search', keyword);
+    return this.http.post<ArticleInfo[]>(this.baseUrl + 'api/article/search', i,
+      this.identityService.getAuthentication()).toPromise();
   }
 
-  // TODO 检索用户
-  public getUserByKeyword(keyword: string): Observable<UserBaseInfo[]> {
-    return;
+  // 检索用户
+  public getUserByKeyword(keyword: string): Promise<UserBaseInfo[]> {
+    const i = new FormData();
+    i.append('search', keyword);
+    return this.http.post<UserBaseInfo[]>(this.baseUrl + 'api/user/search', i,
+      this.identityService.getAuthentication()).toPromise();
   }
 
-  // TODO 检索附件
-  public getAttachmentByKeyword(keyword: string): Observable<AttachmentInfo[]> {
-    return;
+  // 检索附件
+  public getAttachmentByKeyword(keyword: string): Promise<AttachmentInfo[]> {
+    const i = new FormData();
+    i.append('search', keyword);
+    return this.http.post<AttachmentInfo[]>(this.baseUrl + 'api/resource/search', i,
+      this.identityService.getAuthentication()).toPromise();
   }
 }

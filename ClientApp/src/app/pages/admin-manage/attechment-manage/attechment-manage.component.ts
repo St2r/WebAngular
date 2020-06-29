@@ -53,13 +53,11 @@ export class AttechmentManageComponent implements OnInit {
   cancel() {
   }
 
-  search() {
+  async search() {
     if (this.searchContent !== '') {
-      this.fetchService.getAttachmentByKeyword(this.searchContent).subscribe(
-        res => this.attachment_list = res
-      );
+      this.attachment_list = await this.fetchService.getAttachmentByKeyword(this.searchContent);
     } else {
-      this.loadAttachmentInfo();
+      await this.loadAttachmentInfo();
     }
   }
 }

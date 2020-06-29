@@ -68,7 +68,8 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/get-follow-list")]
-        public ActionResult<List<InterfaceUserBaseInfo>> GetFollowList([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
+        public ActionResult<List<InterfaceUserBaseInfo>> GetFollowList([FromQuery] Interface.InterfaceIdentity identity,
+            [FromForm] string username)
         {
             var list = new List<Interface.InterfaceUserBaseInfo>();
             list.Add(new Interface.InterfaceUserBaseInfo());
@@ -84,7 +85,8 @@ namespace WebAngular.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpPost("/api/user/get-fan-list")]
-        public ActionResult<List<InterfaceUserBaseInfo>> GetFanList([FromQuery] InterfaceIdentity identity, [FromForm] string username)
+        public ActionResult<List<InterfaceUserBaseInfo>> GetFanList([FromQuery] InterfaceIdentity identity,
+            [FromForm] string username)
         {
             var list = new List<InterfaceUserBaseInfo>();
             list.Add(new InterfaceUserBaseInfo()
@@ -133,6 +135,33 @@ namespace WebAngular.Controllers
             list.Add(new InterfaceBlockInfo()
             {
                 BlockName = "离散数学",
+            });
+            return Ok(list);
+        }
+
+
+        [HttpPost("/api/user/search")]
+        public ActionResult<List<InterfaceUserBaseInfo>> SearchUser([FromQuery] InterfaceIdentity identity,
+            [FromForm] string search)
+        {
+            var list = new List<InterfaceUserBaseInfo>();
+            list.Add(new InterfaceUserBaseInfo()
+            {
+                Username = "Fan_1",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = false,
+                IsFollowed = true,
+                Nickname = search + "1"
+            });
+            list.Add(new InterfaceUserBaseInfo()
+            {
+                Username = "Fan_2",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = true,
+                IsFollowed = false,
+                Nickname = search + "2"
             });
             return Ok(list);
         }

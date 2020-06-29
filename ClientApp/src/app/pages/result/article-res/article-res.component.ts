@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ArticleInfo } from 'src/app/model/article-info';
-import { Router } from '@angular/router';
+import {Component, OnInit, Input} from '@angular/core';
+import {ArticleInfo} from 'src/app/model/article-info';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-article-res',
@@ -8,17 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./article-res.component.css']
 })
 export class ArticleResComponent implements OnInit {
-  @Input() article_list:ArticleInfo[];
+  @Input() article_list: ArticleInfo[];
 
   got_res: boolean;
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
-    if (this.article_list.length>0) {
+    if (this.article_list != null && this.article_list.length > 0) {
       this.got_res = true;
-    }
-    else {
+    } else {
       this.got_res = true;
     }
   }

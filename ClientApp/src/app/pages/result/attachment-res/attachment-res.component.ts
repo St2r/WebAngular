@@ -8,8 +8,7 @@ import {FetchDataService} from 'src/app/services/fetch-data.service';
   styleUrls: ['./attachment-res.component.css']
 })
 export class AttachmentResComponent implements OnInit {
-  @Input() search_content: string;
-
+  @Input()
   attachment_list: AttachmentInfo[];
 
   got_res: boolean;
@@ -18,18 +17,10 @@ export class AttachmentResComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAttachmentInfo();
-    if (this.attachment_list.length > 0) {
+    if (this.attachment_list != null && this.attachment_list.length > 0) {
       this.got_res = true;
     } else {
       this.got_res = false;
     }
   }
-
-  loadAttachmentInfo() {
-    this.fetchService.getAttachmentByKeyword(this.search_content).subscribe(
-      res => this.attachment_list = res
-    );
-  }
-
 }

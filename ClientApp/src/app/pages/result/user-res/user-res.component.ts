@@ -11,8 +11,7 @@ import {UserBaseInfo} from '../../../model/user-base-info';
   styleUrls: ['./user-res.component.css']
 })
 export class UserResComponent implements OnInit {
-  @Input() search_content: string;
-
+  @Input()
   user_list: UserBaseInfo[];
 
   got_res: boolean;
@@ -22,18 +21,11 @@ export class UserResComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadUserInfo();
-    if (this.user_list.length > 0) {
+    if (this.user_list != null && this.user_list.length > 0) {
       this.got_res = true;
     } else {
       this.got_res = false;
     }
-  }
-
-  loadUserInfo() {
-    this.fetchService.getUserByKeyword(this.search_content).subscribe(
-      res => this.user_list = res
-    );
   }
 
   toSpace() {

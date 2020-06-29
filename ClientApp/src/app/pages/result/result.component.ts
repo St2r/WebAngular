@@ -12,7 +12,7 @@ import {UserBaseInfo} from '../../model/user-base-info';
 })
 export class ResultComponent implements OnInit {
 
-  search_type: any;
+  search_type: number;
   search_stable: any;
 
   search_content: string;
@@ -34,22 +34,16 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
   }
 
-  search() {
+  async search() {
     if (this.search_content === '') {
-      this.router.navigate(['/search']);
+      this.router.navigate(['/search']).then();
     }
-    if (this.search_type === 1) {
-      this.fetchservice.getArticleByKeyword(this.search_content).subscribe(
-        res => this.article_res = res
-      );
-    } else if (this.search_type === 2) {
-      this.fetchservice.getUserByKeyword(this.search_content).subscribe(
-        res => this.user_res = res
-      );
-    } else if (this.search_type === 3) {
-      this.fetchservice.getAttachmentByKeyword(this.search_content).subscribe(
-        res => this.attachment_res = res
-      );
+    if (this.search_type == 1) {
+      this.article_res = await this.fetchservice.getArticleByKeyword(this.search_content);
+    } else if (this.search_type == 2) {
+      this.user_res = await this.fetchservice.getUserByKeyword(this.search_content);
+    } else if (this.search_type == 3) {
+      this.attachment_res = await this.fetchservice.getAttachmentByKeyword(this.search_content);
     }
     this.refresh_type();
   }
