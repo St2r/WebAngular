@@ -22,7 +22,7 @@ export class AppComponent {
   ];
 
 
-  constructor(private userService: UserService, protected identityService: IdentityService) {
+  constructor(private userService: UserService, public identityService: IdentityService) {
   }
 
 
