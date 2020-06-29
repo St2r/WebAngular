@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./article-res.component.css']
 })
 export class ArticleResComponent implements OnInit {
-  @Input() article_list:ArticleInfo[];
+  @Input() search_content: string;
+
+  article_list:ArticleInfo[];
 
   got_res: boolean;
 
