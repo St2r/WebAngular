@@ -17,17 +17,17 @@ export class AdminService {
   }
 
   public async getAllUser(): Promise<UserBaseInfo[]> {
-    return this.http.get<UserBaseInfo[]>(this.baseUrl + 'controller/admin/get-user',
+    return this.http.get<UserBaseInfo[]>(this.baseUrl + 'api/admin/user/get-user',
       this.identityService.getAuthentication()).toPromise();
   }
 
   public async getAllAttachment(): Promise<AttachmentInfo[]> {
-    return this.http.get<AttachmentInfo[]>(this.baseUrl + 'controller/admin/get-attachment',
+    return this.http.get<AttachmentInfo[]>(this.baseUrl + 'api/admin/attachment/get-all',
       this.identityService.getAuthentication()).toPromise();
   }
 
   public async getAllArticle(): Promise<ArticleInfo[]> {
-    return this.http.get<ArticleInfo[]>(this.baseUrl + 'controller/admin/get-article',
+    return this.http.get<ArticleInfo[]>(this.baseUrl + 'api/admin/article/get-all',
       this.identityService.getAuthentication()).toPromise();
   }
 }

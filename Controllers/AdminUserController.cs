@@ -17,7 +17,7 @@ namespace WebAngular.Controllers
             this._logger = logger;
         }
 
-        [HttpGet("/controller/admin/user/get-user")]
+        [HttpGet("/api/admin/user/get-user")]
         public ActionResult<List<InterfaceUserBaseInfo>> GetAllUser([FromQuery] InterfaceIdentity identity)
         {
             var i = new List<InterfaceUserBaseInfo>();
@@ -25,8 +25,8 @@ namespace WebAngular.Controllers
             {
                 i.Add(new InterfaceUserBaseInfo()
                 {
-                    Username = "User" + i,
-                    Nickname = "Nick" + i,
+                    Username = "User" + j,
+                    Nickname = "Nick" + j,
                     AvatarUrl = "avatar.png"
                 });
             }

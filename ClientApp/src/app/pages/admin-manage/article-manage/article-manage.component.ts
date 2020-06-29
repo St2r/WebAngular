@@ -12,7 +12,7 @@ import {ArticleService} from 'src/app/services/article/article.service';
 export class ArticleManageComponent implements OnInit {
   article_list: ArticleInfo[];
 
-  searchContent: string = '';
+  searchContent = '';
 
   constructor(private adminService: AdminService, private articleService: ArticleService, private fetchService: FetchDataService) {
   }
@@ -28,7 +28,7 @@ export class ArticleManageComponent implements OnInit {
 
   async setAsTop(articleid: number) {
     let res: boolean;
-    res = await this.articleService.setTop(articleid,1);
+    res = await this.articleService.setTop(articleid, 1);
     if (res) {
       alert('成功设置置顶');
     } else {
