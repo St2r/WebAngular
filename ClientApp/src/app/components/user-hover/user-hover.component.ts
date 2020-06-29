@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {IdentityService} from 'src/app/services/identity/identity.service';
 import {UserBaseInfo} from '../../model/user-base-info';
 import {UserDetailInfo} from '../../model/user-detail-info';
+import {AdminUserService} from '../../services/admin/admin-user/admin-user.service';
 
 @Component({
   selector: 'app-user-hover',
@@ -19,7 +20,8 @@ export class UserHoverComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private userService: UserService, private router: Router, protected identityService: IdentityService) {
+  constructor(private adminUserService: AdminUserService, private router: Router,
+              public identityService: IdentityService, private userService: UserService) {
     this.loading = true;
   }
 
@@ -38,9 +40,9 @@ export class UserHoverComponent implements OnInit {
     this.router.navigate(['/space/' + this.username]).then();
   }
 
-  banUser(username: string) {
+  async banUser(username: string) {
     let res: boolean;
-    res = this.userService.banUser(username);
+    res = await this.adminUserService.banUser(username, 1);
     if (res) {
       alert('禁言成功');
     } else {

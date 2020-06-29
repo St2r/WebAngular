@@ -3,9 +3,10 @@ import {AdminService} from '../../../services/admin.service';
 import {UserService} from 'src/app/services/user/user.service';
 import {Router} from '@angular/router';
 import {IdentityService} from '../../../services/identity/identity.service';
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import { FetchDataService } from 'src/app/services/fetch-data.service';
+import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
+import {FetchDataService} from 'src/app/services/fetch-data.service';
 import {UserBaseInfo} from '../../../model/user-base-info';
+import {AdminUserService} from '../../../services/admin/admin-user/admin-user.service';
 
 @Component({
   selector: 'app-user-manage',
@@ -17,8 +18,9 @@ export class UserManageComponent implements OnInit {
 
   searchContent = '';
 
-  constructor(private adminService: AdminService, private userService: UserService, private router: Router, 
-    private identityService: IdentityService, private fetchService:FetchDataService) { }
+  constructor(private adminService: AdminService, private userService: UserService, private router: Router,
+              private identityService: IdentityService, private adminUserService: AdminUserService) {
+  }
 
   ngOnInit() {
     this.loadUserInfo().then();
@@ -29,7 +31,7 @@ export class UserManageComponent implements OnInit {
     this.user_list = await this.adminService.getAllUser();
   }
 
-  toSpace(username:string) {
+  toSpace(username: string) {
     this.router.navigate(['/my-space/' + username]).then();
   }
 
@@ -38,14 +40,13 @@ export class UserManageComponent implements OnInit {
 
   }
 
-  banTargetUser(username:string) {
-    let res:boolean;
-    res = this.userService.banUser(username);
+  async banTargetUser(username: string) {
+    let res: boolean;
+    res = await this.adminUserService.banUser(username, 1);
     if (res) {
-      alert("成功禁言用户");
-    }
-    else {
-      alert("用户已被禁言");
+      alert('成功禁言用户');
+    } else {
+      alert('用户已被禁言');
     }
   }
 
@@ -54,16 +55,14 @@ export class UserManageComponent implements OnInit {
   }
 
   search() {
-    if (this.searchContent!="") {
-      this.fetchService.getUserByKeyword(this.searchContent).subscribe(
-        res => this.user_list=res
-      );
-    }
-    else {
+    if (this.searchContent !== '') {
+      // this.fetchService.getUserByKeyword(this.searchContent).subscribe(
+      //   res => this.user_list = res
+      // );
+    } else {
       this.loadUserInfo();
     }
   }
 
 }
 
-// TODO 解禁的实现

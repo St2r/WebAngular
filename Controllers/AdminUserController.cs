@@ -40,8 +40,15 @@ namespace WebAngular.Controllers
             return Ok(true);
         }
 
+        /// <summary>
+        /// 封禁用户
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="username"></param>
+        /// <param name="target">0-解禁，1-封禁</param>
+        /// <returns></returns>
         [HttpPost("/api/admin/user/ban")]
-        public ActionResult<bool> BanUser([FromQuery] InterfaceIdentity identity, [FromForm] string username)
+        public ActionResult<bool> BanUser([FromQuery] InterfaceIdentity identity, [FromForm] string username, [FromForm] int target)
         {
             return Ok(true);
         }
