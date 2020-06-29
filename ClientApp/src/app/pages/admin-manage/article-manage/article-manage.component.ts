@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleInfo} from 'src/app/model/article-info';
 import {FetchDataService} from 'src/app/services/fetch-data.service';
 import {AdminService} from '../../../services/admin.service';
-import { ArticleService } from 'src/app/services/article/article.service';
+import {ArticleService} from 'src/app/services/article/article.service';
 
 @Component({
   selector: 'app-article-manage',
@@ -12,9 +12,9 @@ import { ArticleService } from 'src/app/services/article/article.service';
 export class ArticleManageComponent implements OnInit {
   article_list: ArticleInfo[];
 
-  searchContent: string = "";
+  searchContent: string = '';
 
-  constructor(private adminService: AdminService, private articleService:ArticleService, private fetchService:FetchDataService) {
+  constructor(private adminService: AdminService, private articleService: ArticleService, private fetchService: FetchDataService) {
   }
 
   ngOnInit() {
@@ -26,50 +26,46 @@ export class ArticleManageComponent implements OnInit {
     this.article_list = await this.adminService.getAllArticle();
   }
 
-  setAsTop(articleid:number) {
-    let res:boolean;
-    res = this.articleService.setTop(articleid);
+  async setAsTop(articleid: number) {
+    let res: boolean;
+    res = await this.articleService.setTop(articleid,1);
     if (res) {
-      alert("成功设置置顶");
-    }
-    else {
-      alert("已经是置顶状态");
+      alert('成功设置置顶');
+    } else {
+      alert('已经是置顶状态');
     }
   }
 
-  setAsValued(articleid: number) {
-    let res:boolean;
-    res = this.articleService.setValued(articleid);
+  async setAsValued(articleid: number) {
+    let res: boolean;
+    res = await this.articleService.setValued(articleid, 1);
     if (res) {
-      alert("成功设为精华");
-    }
-    else {
-      alert("已经是精华帖子");
+      alert('成功设为精华');
+    } else {
+      alert('已经是精华帖子');
     }
   }
 
-  delete(articleid: number) {
-    let res:boolean;
-    res = this.articleService.deleteTarget(articleid);
+  async delete(articleid: number) {
+    let res: boolean;
+    res = await this.articleService.deleteTarget(articleid);
     if (res) {
-      alert("成功删除");
-    }
-    else {
-      alert("帖子不存在");
+      alert('成功删除');
+    } else {
+      alert('帖子不存在');
     }
   }
 
   cancel() {
-    ;
+    return;
   }
 
   search() {
-    if (this.searchContent!="") {
+    if (this.searchContent !== '') {
       this.fetchService.getArticleByKeyword(this.searchContent).subscribe(
-        res => this.article_list=res
+        res => this.article_list = res
       );
-    }
-    else {
+    } else {
       this.loadArticleInfo();
     }
   }

@@ -16,18 +16,35 @@ namespace WebAngular.Controllers
         {
             this._logger = logger;
         }
-        
+
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         [HttpPost("/api/identity/login")]
-        public IActionResult Login([FromQuery]InterfaceIdentity identity)
+        public IActionResult Login([FromQuery] InterfaceIdentity identity)
         {
+            bool ans;
+            if (identity.Password == null || identity.Username == null)
+                ans = false;
+            else
+                ans = identity.Username.Equals(identity.Password);
+
             return Ok(new
             {
-                result = identity.Username.Equals(identity.Password)
+                result = ans,
+                isAdmin = true
             });
         }
 
+        /// <summary>
+        /// 退出登陆
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         [HttpPost("/api/identity/logout")]
-        public IActionResult Logout([FromQuery]InterfaceIdentity identity)
+        public IActionResult Logout([FromQuery] InterfaceIdentity identity)
         {
             if (identity == null)
                 return BadRequest();
@@ -35,7 +52,7 @@ namespace WebAngular.Controllers
                 return BadRequest();
             return Ok(new
             {
-                result = true
+                result = true,
             });
         }
 

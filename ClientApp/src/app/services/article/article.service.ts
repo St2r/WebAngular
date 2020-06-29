@@ -63,18 +63,29 @@ export class ArticleService {
     (this.baseUrl + 'api/article/view', form, this.identityService.getAuthentication());
   }
 
-  // TODO 设置置顶
-  setTop(articleid: number): boolean {
-    return ;
+  // 设置置顶
+  setTop(articleId: number, target: number): Promise<boolean> {
+    const i = new FormData();
+    i.append('articleId', articleId + '');
+    i.append('target', target + '');
+    return this.http.post<boolean>(this.baseUrl + 'api/article/set-pinned', i,
+      this.identityService.getAuthentication()).toPromise();
   }
 
-  // TODO 设置精华
-  setValued(aeticleid: number): boolean {
-    return;
+  // 设置精华
+  setValued(articleId: number, target: number): Promise<boolean> {
+    const i = new FormData();
+    i.append('articleId', articleId + '');
+    i.append('target', target + '');
+    return this.http.post<boolean>(this.baseUrl + 'api/article/set-pinned', i,
+      this.identityService.getAuthentication()).toPromise();
   }
 
-  // TODO 删除文章
-  deleteTarget(articleid: number): boolean {
-    return;
+  // 删除文章
+  deleteTarget(articleId: number): Promise<boolean> {
+    const i = new FormData();
+    i.append('articleId', articleId + '');
+    return this.http.post<boolean>(this.baseUrl + 'api/article/set-pinned', i,
+      this.identityService.getAuthentication()).toPromise();
   }
 }

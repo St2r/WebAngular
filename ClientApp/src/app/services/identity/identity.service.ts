@@ -11,16 +11,19 @@ export class IdentityService {
   public logged: boolean;
   public username: string;
 
-  // TODO 根据登录用户的实际信息更新 isAdmin, 以及持久化
-  public visitAsAdmin: boolean = false;
-  public isAdmin: boolean = true;
+  // 根据登录用户的实际信息更新 isAdmin, 以及持久化
+  public visitAsAdmin: boolean;
+  public isAdmin: boolean;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private cookie: CookieService) {
     this.baseUrl = baseUrl;
     this.logged = false;
+    this.isAdmin = false;
+    this.visitAsAdmin = false;
 
     if (cookie.check('username')) {
       this.username = cookie.get('username');
+      this.isAdmin = cookie.get('isAdmin') === 'true';
       this.logged = true;
     }
   }
@@ -57,9 +60,8 @@ export class IdentityService {
       resolve => {
         this.requestLogin(username, password).subscribe(
           next => {
-            console.log(next);
             if (next['result']) {
-              this.afterLogin(username, password);
+              this.afterLogin(username, password, next['isAdmin']);
             }
             resolve(next['result']);
           }
@@ -73,7 +75,6 @@ export class IdentityService {
       resolve => {
         this.requestLogout().subscribe(
           result => {
-            console.log(result);
             if (result['result']) {
               this.afterLogout();
             }
@@ -145,12 +146,13 @@ export class IdentityService {
     return this.http.post(this.baseUrl + 'api/identity/check-username', i);
   }
 
-  private afterLogin(username: string, password: string) {
-    console.log(1);
+  private afterLogin(username: string, password: string, isAdmin: boolean) {
     this.username = username;
     this.logged = true;
+    this.isAdmin = isAdmin;
     this.cookie.set('username', username);
     this.cookie.set('password', password);
+    this.cookie.set('isAdmin', isAdmin + '');
   }
 
   private afterLogout() {
@@ -158,5 +160,6 @@ export class IdentityService {
     this.username = '';
     this.cookie.delete('username');
     this.cookie.delete('password');
+    this.cookie.delete('isAdmin');
   }
 }
