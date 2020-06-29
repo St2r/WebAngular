@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AttachmentInfo } from 'src/app/model/attachment';
+import {Component, OnInit} from '@angular/core';
+import {AttachmentInfo} from 'src/app/model/attachment';
 import {AdminService} from '../../../services/admin.service';
-import { AttachmentService } from 'src/app/services/attachment.service';
-import { FetchDataService } from 'src/app/services/fetch-data.service';
+import {FetchDataService} from 'src/app/services/fetch-data.service';
+import {ResourceService} from '../../../services/resource/resource.service';
 
 @Component({
   selector: 'app-attechment-manage',
@@ -12,9 +12,11 @@ import { FetchDataService } from 'src/app/services/fetch-data.service';
 export class AttechmentManageComponent implements OnInit {
   attachment_list: AttachmentInfo[];
 
-  searchContent: string = "";
+  searchContent;
+  '';
 
-  constructor(private adminService: AdminService, private attachService:AttachmentService, private fetchService:FetchDataService) { }
+  constructor(private adminService: AdminService, private resourceService: ResourceService, private fetchService: FetchDataService) {
+  }
 
   ngOnInit() {
     this.loadAttachmentInfo().then();
@@ -24,42 +26,39 @@ export class AttechmentManageComponent implements OnInit {
   async loadAttachmentInfo() {
     this.attachment_list = await this.adminService.getAllAttachment();
     // this.attachment_list = [
-      // new class implements AttachmentInfo {
-      //   filename = "TestName";
-      //   filesize = 100;
-      //   filetype = ".doc";
-      // }
+    // new class implements AttachmentInfo {
+    //   filename = "TestName";
+    //   filesize = 100;
+    //   filetype = ".doc";
+    // }
     // ]
   }
 
   // TODO 下载目标附件 具体待修改
-  download(attachid:number) {
-    this.attachService.getAttachment(attachid);
+  async download(attachid: number) {
+    await this.resourceService.getResource(attachid);
   }
 
-  delete(attachid:number) {
-    let res:boolean;
-    res = this.attachService.deleteAttachment(attachid);
+  async delete(attachid: number) {
+    let res: boolean;
+    res = await this.resourceService.deleteResource(attachid);
     if (res) {
-      alert("资源删除成功");
-    }
-    else {
-      alert("资源不存在")
+      alert('资源删除成功');
+    } else {
+      alert('资源不存在');
     }
 
   }
 
   cancel() {
-    ;
   }
 
   search() {
-    if (this.searchContent!="") {
+    if (this.searchContent !== '') {
       this.fetchService.getAttachmentByKeyword(this.searchContent).subscribe(
-        res => this.attachment_list=res
+        res => this.attachment_list = res
       );
-    }
-    else {
+    } else {
       this.loadAttachmentInfo();
     }
   }

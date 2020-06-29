@@ -10,9 +10,6 @@ import { ResourceLoader } from '@angular/compiler';
 })
 export class AppComponent {
 
-  isAdmin: boolean = true;
-  visitAsAdmin: boolean = false;
-
   Subjects = [
     ['离散数学', 'discrete-math'],
     ['面向对象程序设计', 'oo-programming'],

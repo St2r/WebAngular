@@ -107,17 +107,12 @@ namespace WebAngular.Controllers
         }
 
         // 获取最近访问者
-        public class GetRecentVisitorForm
+        [HttpPost("/api/user/get-recent-visitor")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetRecentVisitor([FromQuery] InterfaceIdentity identity, [FromForm] string username)
         {
-            public string username { get; set; }
-        }
-
-        [HttpPost("/controller/user/get-recent-visitor")]
-        public List<Interface.InterfaceUserBaseInfo> GetRecentVisitor([FromBody] GetRecentVisitorForm form)
-        {
-            var list = new List<Interface.InterfaceUserBaseInfo>();
+            var list = new List<InterfaceUserBaseInfo>();
             
-            return list;
+            return Ok(list);
         }
 
         public class GetFavBlockForm
