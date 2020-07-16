@@ -1,5 +1,11 @@
 .layout {
   min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.admin-layout {
+  min-height: 100vh;
+  background-color: aquamarine;
 }
 
 .logo {
@@ -46,19 +52,11 @@ nz-footer {
 }
 
 .header {
-  height: 64px;
+  height: 56px;
+  background-color: white;
 }
 
-.search-bar {
-  margin: 16px;
-}
-
-.certain-search-item-count {
-  position: absolute;
-  color: #999;
-  right: 16px;
-}
-
-.more-link {
-  float: right;
+nz-select {
+  margin: 0 8px 10px 0;
+  width: 120px;
 }

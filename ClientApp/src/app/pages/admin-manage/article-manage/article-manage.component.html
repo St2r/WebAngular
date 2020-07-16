@@ -1,0 +1,54 @@
+<div class="search-bar">
+  <div style="width: 30%;">
+    <nz-input-group nzSearch [nzSuffix]="suffixIconSearch">
+      <input type="text" [(ngModel)]="searchContent" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon (click)="search()" nzType="search"></i>
+    </ng-template>
+  </div>
+</div>
+
+<div>
+  <nz-table #basicTable [nzData]="article_list">
+    <thead>
+      <tr>
+        <th>帖子名</th>
+        <th>所属板块</th>
+        <th>发帖人</th>
+        <th>最近更新时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.title }}</td>
+        <td>{{ data.block }}</td>
+        <td>{{ data.nickname }}</td>
+        <td>{{ data.lastReviewTime }}</td>
+        <td>
+          <a nz-popconfirm
+          nzPopconfirmTitle="设为置顶?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="setAsTop(data.articleID)"
+          (nzOnCancel)="cancel()"
+          >设为置顶</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-popconfirm
+          nzPopconfirmTitle="设为精华?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="setAsValued(data.articleID)"
+          (nzOnCancel)="cancel()"
+          >设为精华</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a nz-popconfirm
+          nzPopconfirmTitle="删除此帖子?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="delete(data.articleID)"
+          (nzOnCancel)="cancel()"
+          >删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

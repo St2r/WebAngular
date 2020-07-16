@@ -1,20 +1,56 @@
-<nz-list [nzItemLayout]="'horizontal'">
-  <ng-container *ngFor="let item of comments;let i = index">
-    <nz-comment [nzAuthor]="item.AuthorName" [nzDatetime]="getDateDistance(item.CommentTime)">
-      <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="getAvatar(item.AuthorID)" (click)="jumpToPersonPage(item.AuthorID)"></nz-avatar>
-      <nz-comment-content>
-        <p>{{ item.Content }}</p>
-      </nz-comment-content>
-      <nz-comment-action>
-        <i nz-tooltip nz-icon nzType="like" [nzTheme]="item.LikeStatus == 1 ? 'twotone' : 'outline'" (click)="Like(i)"></i>
-        <span class="count like">{{ item.Likes }}</span>
-      </nz-comment-action>
-      <nz-comment-action>
-        <i nz-tooltip nz-icon nzType="dislike" [nzTheme]="item.LikeStatus == -1 ? 'twotone' : 'outline'" (click)="DisLike(i)"></i>
-        <span class="count dislike">{{ item.Dislikes }}</span>
-      </nz-comment-action>
-      <nz-comment-action>Reply to</nz-comment-action>
-    </nz-comment>
-  </ng-container>
-</nz-list>
+<div class="function_part">
+  <nz-row>
+    <nz-col nzSpan="8">
+      <nz-radio-group [(ngModel)]="sort" nzButtonStyle="solid" (ngModelChange)="loadComments()">
+        <label nz-radio-button nzValue="latest">最新评论</label>
+        <label nz-radio-button nzValue="hottest">点赞最多</label>
+      </nz-radio-group>
+    </nz-col>
+    <nz-col nzSpan="8">
+      <nz-select [(ngModel)]="filter" (ngModelChange)="loadComments()">
+        <nz-option nzValue="all" nzLabel="全部评论"></nz-option>
+        <nz-option nzValue="author" nzLabel="只看楼主"></nz-option>
+      </nz-select>
+    </nz-col>
+    <nz-col nzSpan="8">
+      <button nz-button>发布评论</button>
+    </nz-col>
+  </nz-row>
+</div>
+<nz-divider></nz-divider>
+<div class="comment_part">
+  <nz-list [nzItemLayout]="'horizontal'">
+    <ng-container *ngFor="let item of comments;let i = index">
+      <nz-comment [nzAuthor]="item.nickname" [nzDatetime]="getDateDistance(item.commentTime)">
+        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="item.avatarUrl" (click)="jumpToPersonPage(item.username)"></nz-avatar>
+        <nz-comment-content>
+          <p>{{ item.content }}</p>
+        </nz-comment-content>
+        <nz-comment-action>
+          <i nz-tooltip nz-icon nzType="like" [nzTheme]="item.likeStatus == 1 ? 'twotone' : 'outline'" (click)="Like(i)"></i>
+          <span class="count like">{{ item.likes }}</span>
+        </nz-comment-action>
+        <nz-comment-action>
+          <i nz-tooltip nz-icon nzType="dislike" [nzTheme]="item.likeStatus == -1 ? 'twotone' : 'outline'" (click)="DisLike(i)"></i>
+          <span class="count dislike"></span>
+        </nz-comment-action>
+        <nz-comment-action>Reply to</nz-comment-action>
+      </nz-comment>
+    </ng-container>
+  </nz-list>
+</div>
 
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)" *ngIf="!this.identityService.logged">
+  <nz-form-item>
+    <nz-form-control>
+      <editor
+        apiKey="pzsbp1xb6j13dd4aduwebi7815hzj1upr7v42ojpcbc8c7pu"
+        [init]="editParam"
+        formControlName="content"
+        id="tinyMce"
+      ></editor>
+    </nz-form-control>
+  </nz-form-item>
+
+  <button nz-button nzBlock nzType="primary" type="submit" [disabled]="!validateForm.valid">发布</button>
+</form>

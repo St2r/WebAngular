@@ -3,7 +3,9 @@ import {FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from 
 import {Observable, Observer} from 'rxjs';
 import {NzModalService} from 'ng-zorro-antd';
 import {Router} from '@angular/router';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/user/user.service';
+import {CookieService} from 'ngx-cookie-service';
+import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
   selector: 'app-register',
@@ -14,28 +16,19 @@ export class RegisterComponent implements OnInit {
   validateForm: FormGroup;
   registerStatus: number;
 
-  submitForm(value: { userName: string; email: string; password: string; confirm: string }): void {
+  async submitForm(value: { username: string; email: string; password: string; confirm: string }) {
     for (const key of Object.keys(this.validateForm.controls)) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
     // 注册成功之后自动登陆
-    new Observable((observer: Observer<boolean>) => {
-      this.userService.register(value).subscribe(result => {
-        observer.next(result[0]);
-        observer.complete();
-      }, () => {
-        this.fail();
-        observer.complete();
-      });
-    }).subscribe(result => {
-      if (result) {
-        this.registerStatus = 1;
-        this.userService.login({username: value.userName, password: value.password, remember: false});
-      } else {
-        this.fail();
-      }
-    }, error => this.fail());
+    const registerResult = await this.identityService.register(value.username, value.password, value.email);
+    if (registerResult) {
+      await this.identityService.login(value.username, value.password, false);
+      this.router.navigate(['/home']).then();
+    } else {
+      this.fail_register();
+    }
   }
 
   validateConfirmPassword(): void {
@@ -45,7 +38,7 @@ export class RegisterComponent implements OnInit {
   // 向后端请求验证用户名是否已被占用
   userNameAsyncValidator = (control: FormControl) =>
     new Observable((observer: Observer<ValidationErrors | null>) => {
-      this.userService.checkUsername(control.value).subscribe(
+      this.identityService.requestCheckUsername(control.value).subscribe(
         result => {
           if (result[0]) {
             observer.next({error: true, duplicated: true});
@@ -55,12 +48,12 @@ export class RegisterComponent implements OnInit {
           observer.complete();
         }
       );
-    });
+    })
 
   // 向后端请求验证邮箱是否已被占用
   emailAsyncValidator = (control: FormControl) =>
     new Observable((observer: Observer<ValidationErrors | null>) => {
-      this.userService.checkEmail(control.value).subscribe(
+      this.identityService.requestCheckEmail(control.value).subscribe(
         result => {
           if (result[0]) {
             observer.next({error: true, duplicated: true});
@@ -70,7 +63,7 @@ export class RegisterComponent implements OnInit {
           observer.complete();
         }
       );
-    });
+    })
 
   // 判断验证密码和密码是否相同
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
@@ -80,20 +73,29 @@ export class RegisterComponent implements OnInit {
       return {confirm: true, error: true};
     }
     return {};
-  };
+  }
 
   // 注册失败用于弹出modal
-  fail(): void {
+  fail_register(): void {
     this.modal.error({
       nzTitle: '注册失败',
       nzContent: '服务器可能出现了些故障...'
     });
   }
 
+  // 注册成功但是登陆失败
+  fail_login(): void {
+    this.modal.error({
+      nzTitle: '注册成功但登陆失败',
+      nzContent: '服务器可能出现了些故障...'
+    });
+  }
+
   constructor(private fb: FormBuilder, private userService: UserService,
-              private modal: NzModalService, private router: Router) {
+              private modal: NzModalService, private router: Router,
+              private cookie: CookieService, private identityService: IdentityService) {
     this.validateForm = this.fb.group({
-      userName: ['', [Validators.required], [this.userNameAsyncValidator]],
+      username: ['', [Validators.required], [this.userNameAsyncValidator]],
       email: ['', [Validators.email, Validators.required], [this.emailAsyncValidator]],
       password: ['', [Validators.required]],
       confirm: ['', [this.confirmValidator]]
@@ -103,5 +105,4 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerStatus = 0;
   }
-
 }

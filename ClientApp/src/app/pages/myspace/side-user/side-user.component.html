@@ -1,25 +1,25 @@
-<div class="top_part">
+<div class="top_part" *ngIf="ownPage">
   <div class="button_container">
     <button nz-button nzType="primary" nzSize="large">签到</button>
   </div>
   <div class="login_days">
-    <span>累计登录： {{ userInfo.loginCount }}天 </span>
+    <span>累计登录： {{ userDetailInfo.loginCount }}天 </span>
   </div>
 </div>
-<nz-divider></nz-divider>
+<nz-divider *ngIf="ownPage"></nz-divider>
 <nz-row>
   <nz-col nzSpan="8">
-    <a routerLink="/home">关注数<br>{{userInfo.follow}}</a>
+    <a routerLink="/home">关注数<br>{{userDetailInfo.follow}}</a>
   </nz-col>
   <nz-col nzSpan="8">
-    <a routerLink="/home">粉丝数<br>{{userInfo.fans}}</a>
+    <a routerLink="/home">粉丝数<br>{{userDetailInfo.fans}}</a>
   </nz-col>
   <nz-col nzSpan="8">
-    <a routerLink="/home">积分<br>{{userInfo.point}}</a>
+    <a routerLink="/home">积分<br>{{userDetailInfo.point}}</a>
   </nz-col>
 </nz-row>
 <nz-row>
-  <nz-col nzSpan="8">帖子被浏览<br>{{userInfo.browse}}</nz-col>
-  <nz-col nzSpan="8">获赞数<br>{{userInfo.like}}</nz-col>
-  <nz-col nzSpan="8">被收藏<br>{{userInfo.star}}</nz-col>
+  <nz-col nzSpan="8">帖子被浏览<br>{{userDetailInfo.browse}}</nz-col>
+  <nz-col nzSpan="8">获赞数<br>{{userDetailInfo.like}}</nz-col>
+  <nz-col nzSpan="8">被收藏<br>{{userDetailInfo.star}}</nz-col>
 </nz-row>

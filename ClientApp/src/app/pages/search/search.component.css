@@ -1,33 +1,33 @@
 .blank {
-    width: 100%;
-    height: 50px;
+  width: 100%;
+  height: 50px;
 }
 
 .search_pannel {
-    width: 70%;
-    height: auto;
-    margin: auto;
+  width: 70%;
+  height: auto;
+  margin: auto;
 }
 
 .pr_info {
-    width: 50%;
-    height: auto;
-    margin: auto;
+  width: 50%;
+  height: auto;
+  margin: auto;
 }
 
 .hot_search {
-    width: 60%;
-    height: auto;
-    padding: 20px;
-    border: 1px solid black;
-    float: left;
+  width: 60%;
+  height: auto;
+  padding: 20px;
+  /* border: 1px solid black; */
+  float: left;
 }
 
 .history {
-    width: 35%;
-    height: auto;
-    padding: 20px;
-    border: 1px solid black;
-    float: left;
-    margin-left: 20px;
+  width: 35%;
+  height: auto;
+  padding: 20px;
+  /* border: 1px solid black; */
+  float: left;
+  margin-left: 20px;
 }

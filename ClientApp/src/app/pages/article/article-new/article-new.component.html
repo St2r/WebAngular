@@ -1,0 +1,83 @@
+<form nz-form (ngSubmit)="submitForm(validateForm.value)" [formGroup]="validateForm">
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="1">标题</nz-form-label>
+    <nz-form-control [nzSpan]="22" [nzErrorTip]="templateTip">
+      <input nz-input formControlName="title">
+      <ng-template #templateTip let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          请输入文章标题!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="1">作者</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <input nz-input disabled formControlName="author">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="1">标签</nz-form-label>
+    <nz-form-control [nzSpan]="22">
+      <nz-select formControlName="tags" nzMode="multiple" [nzMaxTagCount]="3">
+        <nz-option *ngFor="let tag of this.metaDataService.tags" [nzLabel]="tag" [nzValue]="tag"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="1">权限</nz-form-label>
+    <nz-form-control [nzSpan]="3">
+      <nz-select formControlName="limit">
+        <div *ngFor="let tag of this.metaDataService.levels">
+          <nz-option [nzDisabled]="+tag > this.userLevel"  [nzLabel]="tag" [nzValue]="tag"></nz-option>
+        </div>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <editor
+        apiKey="pzsbp1xb6j13dd4aduwebi7815hzj1upr7v42ojpcbc8c7pu"
+        [init]="editParam"
+        formControlName="content"
+        id="tinyMce"
+      ></editor>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="block=='resource'">
+    <nz-form-label [nzSpan]="1">附件</nz-form-label>
+    <nz-form-control>
+      <input type="file" formControlName="attachment" (change)="attachmentChange($event)">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="1">封面</nz-form-label>
+    <nz-form-control>
+      <input type="file" accept="image/jpeg" (change)="coverChange($event)">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-row nzGutter="16" *ngIf="curCover">
+    <nz-col [nzSpan]="3">
+      封面预览
+    </nz-col>
+    <nz-col>
+      <img [src]="curCover" style="width: 272px">
+    </nz-col>
+  </nz-row>
+
+  <button nz-button nzBlock nzType="primary" type="submit" [disabled]="!validateForm.valid">提交</button>
+</form>
+
+
+<div [innerHTML]="validateForm.value.content | safeHtml"></div>
+
+
+<app-back-top></app-back-top>

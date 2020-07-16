@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {UserInfo} from '../../model/user-info'
+import {Component, Input, OnInit} from '@angular/core';
+import {BlockInfo} from '../../model/block-info';
+import {ActivatedRoute, Params} from '@angular/router';
+import { UserService } from '../../services/user/user.service';
+import {UserBaseInfo} from '../../model/user-base-info';
+import {UserDetailInfo} from '../../model/user-detail-info';
 
 @Component({
   selector: 'app-myspace',
@@ -7,116 +11,73 @@ import {UserInfo} from '../../model/user-info'
   styleUrls: ['./myspace.component.css']
 })
 export class MyspaceComponent implements OnInit {
-  userInfo: UserInfo;
+  @Input()
+  targetName: string;
 
-  recent_visiter: UserInfo[];
+  userBaseInfo: UserBaseInfo;
+  userDetailInfo: UserDetailInfo;
 
-  favor_block: BlockInfo[];
+  recentVisitor: UserBaseInfo[];
 
-  constructor() {
+  favorBlock: BlockInfo[];
+
+  ownPage: boolean;
+
+  loading: boolean;
+
+  constructor(private routerInfo: ActivatedRoute, private userService: UserService) {
+    this.loading = true;
   }
 
   ngOnInit() {
-    this.loadUserInfo();
-    this.modifyGreeting();
-    this.loadVisiterInfo();
-    this.loadFavorBlockInfo();
+    this.routerInfo.params.subscribe((params: Params) => {
+      this.targetName = params['target'];
+      this.init();
+    });
   }
 
-  // todo 请求后端
-  loadUserInfo() {
-    this.userInfo = new class implements UserInfo {
-      nickname = 'test_name';
-      avatarUrl = 'fack url';
-      brief = '';
-      follow = 1;
-      fans = 1000;
-      point = 500;
-      browse = 20000;
-      like = 100;
-      star = 100;
-      loginCount = 2;
-      birthday = '';
-      registerData = '';
-    };
+  init() {
+    this.loadUserInfo().then(
+      () => this.loadVisitorInfo().then(
+        () => this.loadFavorBlockInfo().then(
+          () => {
+            this.modifyBrief();
+            this.setViewMode();
+            if (!this.ownPage) {
+              this.addNewVisit();
+            }
+            this.loading = false;
+          }
+        )
+      )
+    );
   }
 
-  modifyGreeting() {
-    if (this.userInfo.brief=='') {
-      this.userInfo.brief = 'ta 比较懒还没有说明';
+  modifyBrief() {
+    if (this.userBaseInfo.brief === '') {
+      this.userBaseInfo.brief = 'ta 比较懒还没有说明';
     }
   }
 
-  loadVisiterInfo() {
-    this.recent_visiter = [
-      new class implements UserInfo {
-        nickname = 'test_name';
-        avatarUrl = 'fack url';
-        brief = '';
-        follow = 1;
-        fans = 1000;
-        point = 500;
-        browse = 20000;
-        like = 100;
-        star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
-      },
-      new class implements UserInfo {
-        nickname = 'test_name';
-        avatarUrl = 'fack url';
-        brief = '';
-        follow = 1;
-        fans = 1000;
-        point = 500;
-        browse = 20000;
-        like = 100;
-        star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
-      },
-      new class implements UserInfo {
-        nickname = 'test_name';
-        avatarUrl = 'fack url';
-        brief = '';
-        follow = 1;
-        fans = 1000;
-        point = 500;
-        browse = 20000;
-        like = 100;
-        star = 100;
-        loginCount = 2;
-        birthday = '';
-        registerData = '';
-      },
-    ]
+  addNewVisit() {
+    this.userService.requestVisitRecord(this.targetName, this.userBaseInfo.username).subscribe();
   }
 
-  loadFavorBlockInfo() {
-    this.favor_block = [
-      new class implements BlockInfo {
-        image = 'null';
-        name = 'block_1';
-        have_news = true;
-      },
-      new class implements BlockInfo {
-        image = 'null';
-        name = 'block_2';
-        have_news = false;
-      },
-      new class implements BlockInfo {
-        image = 'null';
-        name = 'block_3';
-        have_news = true;
-      },
-    ]
+  async loadUserInfo() {
+    this.userBaseInfo = await this.userService.getBaseInfo(this.targetName);
+    this.userDetailInfo = await this.userService.getDetailInfo(this.targetName);
   }
-}
 
-export interface BlockInfo {
-  image: String;
-  name: String;
-  have_news: boolean;
+  async loadVisitorInfo() {
+    this.recentVisitor = await this.userService.getRecentVisitor(this.targetName);
+    console.log(this.recentVisitor);
+  }
+
+  async loadFavorBlockInfo() {
+    this.favorBlock = await this.userService.getFavBlock(this.targetName);
+  }
+
+  setViewMode() {
+    this.ownPage = this.targetName.localeCompare(this.userBaseInfo.username) === 0;
+  }
 }

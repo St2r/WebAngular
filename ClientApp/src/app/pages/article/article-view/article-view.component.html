@@ -1,0 +1,27 @@
+<nz-layout *ngIf="!loading">
+  <nz-sider nzTheme="light" nzWidth="250px">
+    用户信息
+  </nz-sider>
+  <nz-content>
+    <div class="artice_main">
+      <div class="title_div">
+        <span class="title"> {{ articleContent.title }} </span>
+      </div>
+      <!-- <nz-divider></nz-divider> -->
+      <div class="article_info">
+        <div *ngFor="let item of articleContent.tags">
+          <nz-tag style="float: left"> {{ item }} </nz-tag>
+        </div>
+      </div>
+      <!-- <nz-divider></nz-divider> -->
+      <div class="article_content">
+        <div class="content" [innerHTML]="articleContent.content | safeHtml"></div>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <app-comment [articleId]="articleId"></app-comment>
+  </nz-content>
+</nz-layout>
+<nz-layout *ngIf="loading">
+  <i nz-icon nzType="loading" nzTheme="outline"></i>
+</nz-layout>

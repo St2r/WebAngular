@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserInfo} from '../../../model/user-info';
+import {UserBaseInfo} from '../../../model/user-base-info';
+import {UserDetailInfo} from '../../../model/user-detail-info';
 
 @Component({
   selector: 'app-side-user',
@@ -8,11 +9,17 @@ import {UserInfo} from '../../../model/user-info';
 })
 export class SideUserComponent implements OnInit {
   @Input()
-  userInfo: UserInfo;
+  userBaseInfo: UserBaseInfo;
 
-  constructor() { }
+  @Input()
+  userDetailInfo: UserDetailInfo;
+
+  @Input()
+  ownPage: boolean;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }

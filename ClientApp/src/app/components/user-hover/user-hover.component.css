@@ -1,3 +1,45 @@
 .hover-box {
   width: 300px;
 }
+
+.top_part {
+  width: 100%;
+  min-height: 30px;
+  height: fit-content;
+  margin-top: 10px;
+}
+
+.avatar {
+  height: auto;
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.avatar_inner {
+  height: auto;
+  width: auto;
+}
+
+.name {
+  height: auto;
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top: 10px;
+}
+
+.name_font {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.user_brief {
+  color: grey;
+  text-align: center;
+  height: auto;
+  width: 100%;
+}

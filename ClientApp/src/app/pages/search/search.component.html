@@ -2,11 +2,16 @@
 
 </div>
 <div class="search_pannel">
+  <nz-select [(ngModel)]="search_type" nzSize="large">
+    <nz-option [nzLabel]="'帖子'" [nzValue]="1"></nz-option>
+    <nz-option [nzLabel]="'用户'" [nzValue]="2"></nz-option>
+    <nz-option [nzLabel]="'附件'" [nzValue]="3"></nz-option>
+  </nz-select>
   <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-    <input type="text" nz-input placeholder="input search text" />
+    <input type="text" nz-input placeholder="input search text" [(ngModel)]='search_content' />
   </nz-input-group>
   <ng-template #suffixButton>
-    <button nz-button nzType="primary" nzSize="large" nzSearch>Search</button>
+    <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">搜索</button>
   </ng-template>
 </div>
 <div class="blank">
@@ -15,11 +20,13 @@
 <div class="pr_info">
   <div class="hot_search">
     <h2>热门搜索</h2>
-    <div *ngFor="let item of hot_search">
-      <span> {{ item }} </span>
-    </div>
+    <nz-divider></nz-divider>
+    <p *ngFor="let item of hot_search" (click)="search_content=item" style="cursor: pointer; padding-bottom: 3px; padding-left: 20px;"> {{ item }} </p>
   </div>
   <div class="history">
     <h2>历史搜索</h2>
+    <a nz-button nzType="link" style="float: right;" (click)='clear()'>清空</a>
+    <nz-divider></nz-divider>
+    <p *ngFor="let item of history_search" (click)="search_content=item" style="cursor: pointer; padding-bottom: 3px; padding-left: 20px;"> {{ item }} </p>
   </div>
 </div>

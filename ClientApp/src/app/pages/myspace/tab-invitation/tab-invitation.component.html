@@ -1,6 +1,51 @@
-<h2>抽象表示，格式之后直接套用板块的帖子格式吧</h2>
+<div *ngIf="!loading">
 <div>
-  <ul *ngFor="let item of my_invitation">
-    <li> {{ item.Title }} </li>
-  </ul>
+  <nz-content class="content">
+    <nz-list nzItemLayout="vertical">
+      <nz-list-item *ngFor="let article of myArticle"
+                    [nzActions]="[actionLike, actionReview, actionBrowse, actionStar]"
+                    [nzContent]="templateContent"
+                    [nzExtra]="article.coverUrl?templateExtra:null">
+        <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
+          <ng-template #templateAvatar>
+            <!-- <nz-avatar [nzSrc]="article.avatar" [nz-popover]="userHover" nzPopoverPlacement="bottom"></nz-avatar> -->
+
+            <ng-template #userHover>
+              <app-user-hover [username]="article.username"></app-user-hover>
+            </ng-template>
+
+          </ng-template>
+          <ng-template #templateTitle>
+            <a (click)="viewArticle(article.articleId, article.block)">{{article.title}}</a>
+          </ng-template>
+        </nz-list-item-meta>
+        <ng-template #actionLike>
+          <i nz-icon nzType="like"></i>{{article.like}}
+        </ng-template>
+        <ng-template #actionReview>
+          <i nz-icon nzType="message"></i>{{article.review}}
+        </ng-template>
+        <ng-template #actionBrowse>
+          <i nz-icon nzType="read"></i>{{article.browse}}
+        </ng-template>
+        <ng-template #actionStar>
+          <i nz-icon nzType="star"></i>{{article.star}}
+        </ng-template>
+
+        <ng-template #templateContent>
+          {{article.header}}
+        </ng-template>
+        <ng-template #templateExtra>
+          <!-- <img width="272" [src]="article.coverUrl"> -->
+        </ng-template>
+      </nz-list-item>
+    </nz-list>
+  </nz-content>
+  <!-- <ul *ngFor="let item of myArticle">
+    <li> {{ item.title }} </li>
+  </ul> -->
+</div>
+</div>
+<div *ngIf="loading">
+  <i nz-icon nzType="loading" nzTheme="outline"></i>
 </div>

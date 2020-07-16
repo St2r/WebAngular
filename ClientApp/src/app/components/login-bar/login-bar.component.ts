@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
-import {UserService} from '../../services/user.service';
+import {UserService} from '../../services/user/user.service';
+import {IdentityService} from '../../services/identity/identity.service';
 
 @Component({
   selector: 'app-login-bar',
@@ -9,37 +10,23 @@ import {UserService} from '../../services/user.service';
 })
 export class LoginBarComponent implements OnInit {
 
-  loginStatus = false;
   AvatarSize: 56;
 
-  constructor(public userService: UserService, private router: Router) {
+
+  constructor(public userService: UserService, public router: Router, public identityService: IdentityService) {
   }
 
   ngOnInit() {
-    this.checkLoginStatus();
+
   }
 
-  buttonPost() {
-    // this.userService.login({username: '1', password: '2'});
-    console.log(1);
+  toLogin() {
+    this.router.navigate(['/login']).then();
   }
 
-  checkLoginStatus() {
-    this.loginStatus = this.userService.status;
+  toRegister() {
+    this.router.navigate(['/register']).then();
   }
 
-  TestLogin(): void {
-    console.log(10);
-    // this.loginStatus = true;
-    console.log(11);
-    this.router.navigate(['/login']);
-  }
 
-  TestLogout() {
-    this.loginStatus = false;
-  }
-
-  TestRegister() {
-    this.router.navigate(['/register']);
-  }
 }

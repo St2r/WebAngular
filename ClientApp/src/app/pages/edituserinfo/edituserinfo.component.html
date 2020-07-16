@@ -1,0 +1,44 @@
+<nz-layout style="background-color: white;" *ngIf="!loading">
+  <div style="background-color: white;">
+    <div class="profileWallWrap">
+      <div class="coverWrap">
+        <img class="cover" alt="cover" src="//assets.dxycdn.com/gitrepo/bbs-pc/dist/static/invalid-name@3x.35adc16a.png">
+      </div>
+      <div class="infoWrap">
+        <div class="left">
+          <div class="avatarWrap">
+            <div>
+              <nz-avatar [nzSize]="150" nzIcon="user"></nz-avatar>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="nameWrap">
+            <span class="name"> {{ userInfo.nickname }} </span>
+          </div>
+          <div class="briefWrap">
+            <div class="briefBasic">
+              <span></span>
+            </div>
+            <p class="briefDescription"> {{ userInfo.brief }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nz-layout class="main_part">
+    <nz-content>
+      <nz-tabset>
+        <nz-tab nzTitle="基本信息">
+          <app-editbasicinfo></app-editbasicinfo>
+        </nz-tab>
+        <nz-tab nzTitle="密码设定">
+          <app-editpwd></app-editpwd>
+        </nz-tab>
+        <nz-tab nzTitle="修改头像">
+          <app-edit-avatar></app-edit-avatar>
+        </nz-tab>
+      </nz-tabset>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

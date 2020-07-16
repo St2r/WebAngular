@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Article} from '../../../model/article';
+import { Component, OnInit, Input } from '@angular/core';
+import {ArticleInfo} from '../../../model/article-info';
+import { FetchDataService } from 'src/app/services/fetch-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab-star',
@@ -7,36 +9,29 @@ import {Article} from '../../../model/article';
   styleUrls: ['./tab-star.component.css']
 })
 export class TabStarComponent implements OnInit {
+  @Input() targetName;
 
-  my_invitation:Article[];
+  starArticle: ArticleInfo[];
+  loading: boolean;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.loadMyInvitation();
+  constructor(private fetchService: FetchDataService, private router:Router) {
+    this.loading = true;
   }
 
-  loadMyInvitation() {
-    this.my_invitation = [
-      new class implements Article {
-        Title = 'title 1';
-        Tag = ['tmp'];
-        Author = 'author_tmp';
-        Content = 'tmp content';
-      },
-      new class implements Article {
-        Title = 'title 2';
-        Tag = ['tmp'];
-        Author = 'author_tmp';
-        Content = 'tmp content';
-      },
-      new class implements Article {
-        Title = 'title 3';
-        Tag = ['tmp'];
-        Author = 'author_tmp';
-        Content = 'tmp content';
-      },
-    ]
+  ngOnInit() {
+    this.loadMyInvitation().then(
+      () => this.loading = true
+    );
+  }
+
+  async loadMyInvitation() {
+    this.starArticle = await this.fetchService.getStarArticleByUser(this.targetName);
+  }
+
+  viewArticle(articleId: string, blockname: string) {
+    this.router.navigate(['/article'], {
+      queryParams: {operation: 'view', block: blockname, articleId: articleId}
+    }).then();
   }
 
 }

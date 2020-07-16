@@ -1,16 +1,19 @@
 .userInfo-box-top {
   /*height: 350px;*/
-  border-style: solid;
+  /* border-style: solid; */
+  margin-left: 24px;
 }
 
 .userInfo-box-middle {
   /*height: 350px;*/
-  border-style: solid;
+  /* border-style: solid; */
+  margin-left: 24px;
 }
 
 .userInfo-box-bottom {
   /*height: 350px;*/
-  border-style: solid;
+  /* border-style: solid; */
+  margin-left: 24px;
 }
 
 nz-header {
@@ -84,4 +87,17 @@ nz-header {
 
 .black {
   color: black;
+}
+
+.editbutton {
+  width: auto;
+  height: auto;
+  float: right;
+  position: relative;
+  right: 260px;
+  top: -60px;
+}
+
+.briefWrap {
+  max-width: 60%;
 }

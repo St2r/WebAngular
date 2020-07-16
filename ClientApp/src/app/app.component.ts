@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {UserService} from './services/user.service';
+import {UserService} from './services/user/user.service';
+import {IdentityService} from './services/identity/identity.service';
+import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,6 @@ import {UserService} from './services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public searchContent = '';
 
   Subjects = [
     ['离散数学', 'discrete-math'],
@@ -16,65 +17,17 @@ export class AppComponent {
   ];
 
   SchoolLife = [
-    ['校卡招领', 'campus-card'],
-    ['课程推荐', 'course-recommend']
+    ['课程推荐', 'course-recommend'],
+    ['校园周边', 'around-school']
   ];
 
-  AroundCampus = [
-    ['美食', 'food'],
-    ['游玩', 'amusement']
-  ];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, public identityService: IdentityService) {
   }
 
-  inputValue?: string;
-  optionGroups: any[] = [];
 
   onChange(value: string): void {
     console.log(value);
-  }
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.optionGroups = [
-        {
-          title: '话题',
-          children: [
-            {
-              title: 'AntDesign',
-              count: 10000
-            },
-            {
-              title: 'AntDesign UI',
-              count: 10600
-            }
-          ]
-        },
-        {
-          title: '问题',
-          children: [
-            {
-              title: 'AntDesign UI 有多好',
-              count: 60100
-            },
-            {
-              title: 'AntDesign 是啥',
-              count: 30010
-            }
-          ]
-        },
-        {
-          title: '文章',
-          children: [
-            {
-              title: 'AntDesign 是一个设计语言',
-              count: 100000
-            }
-          ]
-        }
-      ];
-    }, 1000);
   }
 
 }

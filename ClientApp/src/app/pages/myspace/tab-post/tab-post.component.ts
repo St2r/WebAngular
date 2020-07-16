@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Comment } from '../../../model/comment'
-import { Article } from '../../../model/article'
-import {distanceInWords, addDays} from 'date-fns';
+import { Component, OnInit, Input } from '@angular/core';
+import { CommentInfo } from '../../../model/commentInfo';
+import { ArticleInfo } from '../../../model/article-info';
+import {formatDistance, addDays} from 'date-fns';
+import { PostInfo } from '../../../model/post-info';
+import { FetchDataService } from 'src/app/services/fetch-data.service';
 
 @Component({
   selector: 'app-tab-post',
@@ -9,39 +11,23 @@ import {distanceInWords, addDays} from 'date-fns';
   styleUrls: ['./tab-post.component.css']
 })
 export class TabPostComponent implements OnInit {
+  @Input() targetUser;
 
-  my_post: postInfo[];
+  myPost: PostInfo[];
 
-  constructor() { }
+  loading: boolean;
+
+  constructor(private fetchService: FetchDataService) {
+    this.loading = true;
+  }
 
   ngOnInit() {
-    this.loadPostInfo();
+    this.loadPostInfo().then(
+      () => this.loading = false
+    );
   }
 
-  loadPostInfo() {
-    this.my_post = [
-      new class implements postInfo {
-        comment = new class implements Comment {
-          AuthorID = 'comment_author'
-          AuthorName = 'comment author'
-          Content = 'comment content'
-          Likes = 0;
-          Dislikes = 0;
-          LikeStatus = 0;
-          CommentTime = addDays(new Date(), -2);
-        };
-        article = new class implements Article {
-          Title = 'title 1';
-          Tag = ['tmp'];
-          Author = 'article author';
-          Content = 'tmp content';
-        }
-      }
-    ]
+  async loadPostInfo() {
+    this.myPost = await this.fetchService.getPostByUser(this.targetUser);
   }
-}
-
-export interface postInfo {
-  comment: Comment;
-  article: Article;
 }

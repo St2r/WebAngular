@@ -1,0 +1,11 @@
+<div>
+  <ul *ngFor="let item of followBlock">
+    <li>
+      <span> {{ item.blockName }} </span>
+      <nz-divider></nz-divider>
+      <ul *ngFor="let master of item.admins">
+        <li> {{ master.username }} </li>
+      </ul>
+    </li>
+  </ul>
+</div>

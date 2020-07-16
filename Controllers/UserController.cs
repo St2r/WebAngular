@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebAngular.Interface;
 
 namespace WebAngular.Controllers
 {
@@ -17,103 +17,153 @@ namespace WebAngular.Controllers
             this._logger = logger;
         }
 
-        public class LogForm
+        /// <summary>
+        /// 获得username的基本信息
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [HttpPost("/api/user/base-info")]
+        public IActionResult UserBaseInfo([FromQuery] Interface.InterfaceIdentity identity, [FromForm] string username)
         {
-            public string UserName { get; set; }
-            public string Password { get; set; }
-            public bool Remember { get; set; }
-        }
-
-        [HttpPost("/controller/user/login")]
-        public IEnumerable<bool> Login([FromBody] LogForm logForm)
-        {
-            var res = Enumerable.Empty<bool>();
-            return res.Append(logForm.UserName.Equals(logForm.Password)).ToArray();
-        }
-
-        public class RegisterForm
-        {
-            public string Username { get; set; }
-            public string Email { get; set; }
-            public string Password { get; set; }
-            public string Confirm { get; set; }
-        }
-
-        [HttpPost("/controller/user/register")]
-        public IEnumerable<bool> Register([FromBody] RegisterForm registerForm)
-        {
-            var res = Enumerable.Empty<bool>();
-            return res.Append(!registerForm.Username.Equals("s")).ToArray();
-        }
-
-        [HttpPost("/controller/user/get-all-info")]
-        public IEnumerable<UserInfo> LoadUserInfo([FromBody] UsernameModel usernameMode)
-        {
-            var res = new UserInfo
+            return Ok(new Interface.InterfaceUserBaseInfo()
             {
-                Nickname = "nick_" + usernameMode.Username, AvatarUrl = "/avatar.png",
-                Brief = usernameMode.Username + "的个人简介",
-
-                Follow = 6, Fans = 5, Point = 4, Browse = 3, Like = 2, Star = 1,
-                
-                LoginCount = 7,
-
-                Birthday = "2000", RegisterData = "2020"
-            };
-            return Enumerable.Empty<UserInfo>().Append(res).ToArray();
+                Username = identity.Username,
+                Nickname = "Nick_" + identity.Username,
+                AvatarUrl = "/avatar.png",
+                Brief = "hello",
+                IsFan = false,
+                IsFollowed = false
+            });
         }
 
-        [HttpPost("/controller/user/get-base-info")]
-        public IEnumerable<UserItem> GetUserInfo([FromBody] UsernameModel usernameModel)
+        /// <summary>
+        /// 获得username的UserDetailInfo
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [HttpPost("/api/user/detail-info")]
+        public ActionResult<InterfaceUserDetailInfo> UserDetailInfo([FromQuery] Interface.InterfaceIdentity identity,
+            [FromForm] string username)
         {
-            var res = new UserItem() {Nickname = "nick_" + usernameModel.Username, AvatarUrl = "/avatar.png"};
-            return Enumerable.Empty<UserItem>().Append(res).ToArray();
+            return Ok(new InterfaceUserDetailInfo()
+            {
+                Username = username,
+                Articles = 10,
+                Browse = 5,
+                Fans = 6,
+                Follow = 7,
+                Level = 1,
+                Like = 6,
+                Point = 1000,
+                Star = 6
+            });
         }
 
-        [HttpPost("/controller/user/check-username")]
-        public IEnumerable<bool> CheckUsername([FromBody] UsernameModel usernameModel)
+        /// <summary>
+        /// 获得username的关注列表
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [HttpPost("/api/user/get-follow-list")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetFollowList([FromQuery] Interface.InterfaceIdentity identity,
+            [FromForm] string username)
         {
-            return Enumerable.Empty<bool>().Append(usernameModel.Username.ToCharArray()[0] != 's').ToArray();
+            var list = new List<Interface.InterfaceUserBaseInfo>();
+            list.Add(new Interface.InterfaceUserBaseInfo());
+            list.Add(new Interface.InterfaceUserBaseInfo());
+            return Ok(list);
         }
 
-        [HttpPost("/controller/user/check-email")]
-        public IEnumerable<bool> CheckEmail([FromBody] EmailModel emailModel)
+
+        /// <summary>
+        /// 获得username的粉丝列表
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [HttpPost("/api/user/get-fan-list")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetFanList([FromQuery] InterfaceIdentity identity,
+            [FromForm] string username)
         {
-            return Enumerable.Empty<bool>().Append(emailModel.Email.ToCharArray()[0] != 's').ToArray();
+            var list = new List<InterfaceUserBaseInfo>();
+            list.Add(new InterfaceUserBaseInfo()
+            {
+                Username = "Fan_1",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = true,
+                IsFollowed = true,
+                Nickname = "Nick_Fan_1"
+            });
+            list.Add(new InterfaceUserBaseInfo()
+            {
+                Username = "Fan_2",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = true,
+                IsFollowed = false,
+                Nickname = "Nick_Fan_2"
+            });
+            return Ok(list);
         }
 
-        public class UserInfo
+        // 添加访问记录
+        [HttpPost("/controller/user/add-visit-record")]
+        public bool AddVisitRecord([FromQuery] InterfaceIdentity identity)
         {
-            public string Nickname { get; set; }
-            public string AvatarUrl { get; set; }
-            public string Brief { get; set; }
-
-            public int Follow { get; set; }
-            public int Fans { get; set; }
-            public int Point { get; set; }
-            public int Browse { get; set; }
-            public int Like { get; set; }
-            public int Star { get; set; }
-            
-            public int LoginCount { get; set; }
-            public string Birthday { get; set; }
-            public string RegisterData { get; set; }
+            return true;
         }
 
-        public class UserItem
+        // 获取最近访问者
+        [HttpPost("/api/user/get-recent-visitor")]
+        public ActionResult<List<InterfaceUserBaseInfo>> GetRecentVisitor([FromQuery] InterfaceIdentity identity,
+            [FromForm] string username)
         {
-            public string Nickname { get; set; }
-            public string AvatarUrl { get; set; }
+            var list = new List<InterfaceUserBaseInfo>();
+
+            return Ok(list);
         }
 
-        public class UsernameModel
+        [HttpPost("/api/user/get-fav-block")]
+        public ActionResult<List<InterfaceBlockInfo>> GetFavBlock([FromQuery] InterfaceIdentity identity,
+            [FromForm] string username)
         {
-            public string Username { get; set; }
+            var list = new List<InterfaceBlockInfo>();
+            list.Add(new InterfaceBlockInfo()
+            {
+                BlockName = "离散数学",
+            });
+            return Ok(list);
         }
 
-        public class EmailModel
+
+        [HttpPost("/api/user/search")]
+        public ActionResult<List<InterfaceUserBaseInfo>> SearchUser([FromQuery] InterfaceIdentity identity,
+            [FromForm] string search)
         {
-            public string Email { get; set; }
+            var list = new List<InterfaceUserBaseInfo>();
+            list.Add(new InterfaceUserBaseInfo()
+            {
+                Username = "Fan_1",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = false,
+                IsFollowed = true,
+                Nickname = search + "1"
+            });
+            list.Add(new InterfaceUserBaseInfo()
+            {
+                Username = "Fan_2",
+                AvatarUrl = "/avatar.png",
+                Brief = "个人简介",
+                IsFan = true,
+                IsFollowed = false,
+                Nickname = search + "2"
+            });
+            return Ok(list);
         }
     }
 }

@@ -1,0 +1,10 @@
+.search {
+    width: 100%;
+    height: auto;
+  }
+  
+  .search-inner {
+    width: 30%;
+    height: auto;
+    float: right;
+  }

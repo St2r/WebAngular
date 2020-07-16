@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Article} from '../../../model/article';
+import {Component, OnInit, Input} from '@angular/core';
+import {ArticleInfo} from '../../../model/article-info';
+import {FetchDataService} from '../../../services/fetch-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab-invitation',
@@ -7,36 +9,31 @@ import {Article} from '../../../model/article';
   styleUrls: ['./tab-invitation.component.css']
 })
 export class TabInvitationComponent implements OnInit {
+  @Input()
+  targetName: string;
 
-  my_invitation:Article[];
+  myArticle: ArticleInfo[];
 
-  constructor() { }
+  loading: boolean;
 
-  ngOnInit() {
-    this.loadMyInvitation();
+  constructor(private fetchService: FetchDataService, private router:Router) {
+    this.loading = true;
   }
 
-  loadMyInvitation() {
-    this.my_invitation = [
-      new class implements Article {
-        Title = 'title 1';
-        Tag = ['tmp'];
-        Author = 'author_tmp';
-        Content = 'tmp content';
-      },
-      new class implements Article {
-        Title = 'title 2';
-        Tag = ['tmp'];
-        Author = 'author_tmp';
-        Content = 'tmp content';
-      },
-      new class implements Article {
-        Title = 'title 3';
-        Tag = ['tmp'];
-        Author = 'author_tmp';
-        Content = 'tmp content';
-      },
-    ]
+  ngOnInit() {
+    this.loadMyInvitation().then(
+      () => this.loading = false
+    );
+  }
+
+  async loadMyInvitation() {
+    this.myArticle = await this.fetchService.getInvitationByUser(this.targetName);
+  }
+
+  viewArticle(articleId: string, blockname: string) {
+    this.router.navigate(['/article'], {
+      queryParams: {operation: 'view', block: blockname, articleId: articleId}
+    }).then();
   }
 
 }

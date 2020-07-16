@@ -1,0 +1,134 @@
+<div *ngIf="blockInfo!=null">
+  <nz-layout *ngIf="blockInfo.accessRight==2">
+    <nz-sider class="sidebar" nzTheme="light">
+      <nz-row>
+        <nz-col nzSpan="10">
+          <nz-avatar class="avatar" [nzSize]="72" nzShape="square" [nzSrc]="blockInfo.avatarUrl"></nz-avatar>
+        </nz-col>
+        <nz-col nzSpan="14">
+          <button *ngIf="!blockInfo.isFollowed" nz-button nzSize="small" (click)="follow()">+关注</button>
+          <button *ngIf="blockInfo.isFollowed" nz-button nzSize="small" nzType="dashed" (click)="disFollow()">取消关注
+          </button>
+          <br/>
+          <span>{{blockInfo.contentTotal}}内容</span>
+          <br/>
+          <span>{{blockInfo.followTotal}}关注</span>
+          <br/>
+          <span>今日更新：{{blockInfo.todayTotal}}</span>
+        </nz-col>
+      </nz-row>
+      <nz-divider></nz-divider>
+      <nz-row class="right-margin">
+        <span>版主 & 管理员</span>
+        <br/>
+        <nz-row>
+          <nz-col *ngFor="let item of blockInfo.admins" nzSpan="4">
+            <nz-avatar nzSize="default" nzShape="circle" [nzSrc]="item.avatarUrl"
+            nz-popover [nzPopoverContent]="userHover" nzPopoverPlacement="bottom">
+            </nz-avatar>
+            <ng-template #userHover>
+              <app-user-hover [username]="item.username"></app-user-hover>
+            </ng-template>
+          </nz-col>
+        </nz-row>
+      </nz-row>
+      <nz-divider></nz-divider>
+      <nz-row class="right-margin">
+        <div nz-button nzType="primary" nzBlock (click)="newArticle()">发布新帖</div>
+      </nz-row>
+      <nz-divider></nz-divider>
+      <nz-row>
+        <span style="font-size: 18px">热点内容</span>
+      </nz-row>
+      <div *ngFor="let topic of hotTopics, let i = index">
+        <nz-row class="top-item">
+          <i nz-icon nzType="fire" nzTheme="outline"></i>
+          <span>{{i + 1}} {{topic.title}}</span>
+        </nz-row>
+      </div>
+    </nz-sider>
+    <nz-layout>
+      <nz-header class="header">
+        <nz-row>
+          <nz-col nzSpan="12">
+            <nz-radio-group [(ngModel)]="sort" nzButtonStyle="solid" (ngModelChange)="reloadData()">
+              <label nz-radio-button nzValue="latest">最新发帖</label>
+              <label nz-radio-button nzValue="review">最新回帖</label>
+              <label nz-radio-button nzValue="hottest">最热帖子</label>
+            </nz-radio-group>
+          </nz-col>
+          <nz-col nzSpan="12">
+            <nz-select [(ngModel)]="filter" (ngModelChange)="reloadData()">
+              <nz-option nzValue="all" nzLabel="全部帖子"></nz-option>
+              <nz-option nzValue="selected" nzLabel="精华贴"></nz-option>
+              <nz-option nzValue="reward" nzLabel="悬赏贴" nzDisabled></nz-option>
+            </nz-select>
+          </nz-col>
+        </nz-row>
+      </nz-header>
+  
+      <nz-content class="content">
+        <nz-list nzItemLayout="vertical"  [nzPagination]="pagination">
+          <nz-list-item *ngFor="let article of articles"
+                        [nzActions]="[actionLike, actionReview, actionBrowse, actionStar]"
+                        [nzContent]="templateContent"
+                        [nzExtra]="article.coverUrl?templateExtra:null">
+            <nz-list-item-meta [nzAvatar]="templateAvatar" [nzTitle]="templateTitle">
+              <ng-template #templateAvatar>
+                <nz-avatar [nzSrc]="article.avatar" [nz-popover]="userHover" nzPopoverPlacement="bottom"></nz-avatar>
+  
+                <ng-template #userHover>
+                  <app-user-hover [username]="article.username"></app-user-hover>
+                </ng-template>
+  
+              </ng-template>
+              <ng-template #templateTitle>
+                <a (click)="viewArticle(article.articleID)">{{article.title}}</a>
+              </ng-template>
+            </nz-list-item-meta>
+            <ng-template #actionLike>
+              <i nz-icon nzType="like"></i>{{article.like}}
+            </ng-template>
+            <ng-template #actionReview>
+              <i nz-icon nzType="message"></i>{{article.review}}
+            </ng-template>
+            <ng-template #actionBrowse>
+              <i nz-icon nzType="read"></i>{{article.browse}}
+            </ng-template>
+            <ng-template #actionStar>
+              <i nz-icon nzType="star"></i>{{article.star}}
+            </ng-template>
+  
+            <ng-template #templateContent>
+              {{article.header}}
+            </ng-template>
+            <ng-template #templateExtra>
+              <img width="272" [src]="article.coverUrl">
+            </ng-template>
+          </nz-list-item>
+  
+          <ng-template #pagination>
+            <nz-pagination class="my-pagination" nzHideOnSinglePage (nzPageIndexChange)="loadData($event)"
+                            [nzPageSize]="pageSize" [(nzPageIndex)]="page"
+                            [nzTotal]="blockInfo.contentTotal"></nz-pagination>
+          </ng-template>
+        </nz-list>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+  
+  <app-back-top *ngIf="blockInfo.accessRight==2"></app-back-top>
+  
+  <nz-result *ngIf="blockInfo.accessRight==0" nzStatus="warning" nzTitle="你要访问的板块不存在">
+    <div nz-result-extra>
+      <button nz-button nzType="primary">回到首页</button>
+    </div>
+  </nz-result>
+  
+  <nz-result *ngIf="blockInfo.accessRight==1" nzStatus="warning" nzTitle="游客没有权限访问此板块">
+    <div nz-result-extra>
+      <button nz-button nzType="primary">登陆</button>
+    </div>
+  </nz-result>
+</div>
+    
